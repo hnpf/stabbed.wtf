@@ -537,8 +537,8 @@ const WeatherWidget = () => {
           )}
           title={
             isDynamic
-              ? `Showing your local weather (${currentLocation.label}) • Click to switch to Virex's weather (Nederland)`
-              : `Showing Virex's weather (Nederland) • Click to switch to your local weather`
+              ? `Currently showing your local weather (${currentLocation.label}) - click to switch to virex's local weather`
+              : `Currently showing virex's local weather (nederland) - click to switch to your local weather`
           }
         >
           <MaterialIcon
