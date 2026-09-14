@@ -486,8 +486,8 @@ export default function App() {
                   <SideItem highHz={settings.highHz} glyph={M3Settings} text="Settings" onSelect={() => setSettingsOpen(true)} isMini={settings.sidebarCollapsed} isShort={is_short} isFirst isLast isFloating={settings.floatingSidebar} layoutId="settings-expansion" />
                   {!settings.sidebarCollapsed && (
                     <div className="grid grid-cols-2 gap-2 w-full">
-                      <BounceButton icon={Github} label="GitHub" url="https://github.com/hnpf" className="flex items-center justify-center gap-2.5 h-14 rounded-[24px] bg-[var(--surface-variant)]/50 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)] transition-all duration-200 text-sm font-expressive tracking-wide font-black shadow-none" />
-                      <BounceButton icon={M3Chat} label="Discord" url="https://discord.gg/TSZNYbjzF7" className="flex items-center justify-center gap-2.5 h-14 rounded-[24px] bg-[var(--surface-variant)]/50 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)] transition-all duration-200 text-sm font-expressive tracking-wide font-black shadow-none" />
+                      <BounceButton icon={Github} label="GitHub" url="https://github.com/hnpf" className="flex items-center justify-center gap-2.5 h-14 rounded-[24px] bg-[var(--surface-variant)]/50 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)] transition-colors duration-150 text-sm font-expressive tracking-wide font-black shadow-none border-0" />
+                      <BounceButton icon={M3Chat} label="Discord" url="https://discord.gg/TSZNYbjzF7" className="flex items-center justify-center gap-2.5 h-14 rounded-[24px] bg-[var(--surface-variant)]/50 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)] transition-colors duration-150 text-sm font-expressive tracking-wide font-black shadow-none border-0" />
                     </div>
                   )}
                   <div className={cn("w-full flex justify-center", settings.sidebarCollapsed && "px-0")}>
@@ -502,7 +502,7 @@ export default function App() {
                       }}
                       onClick={() => updateSettings({ sidebarCollapsed: !settings.sidebarCollapsed })} 
                       className={cn(
-                        "flex items-center justify-center outline-none cursor-pointer transition-all duration-200",
+                        "flex items-center justify-center outline-none cursor-pointer transition-colors duration-150 border-0 shadow-none",
                         settings.sidebarCollapsed
                           ? "w-14 h-14 rounded-full bg-[var(--surface-variant)] text-[var(--on-surface)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)]"
                           : "w-full h-14 rounded-[24px] bg-[var(--surface-variant)]/50 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)] gap-3 font-expressive text-[15px] tracking-widest font-black"
