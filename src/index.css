@@ -105,8 +105,10 @@ body, .gsf-global {
         direction: ltr;
         -webkit-font-feature-settings: "liga";
         -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: geometricPrecision;
         font-feature-settings: "liga";
-        font-variation-settings: "FILL" 0, "wght" 650, "GRAD" 0, "opsz" 24;
+        font-variation-settings: "FILL" 0, "wght" 450, "GRAD" 0, "opsz" 24;
     }
 
     :root {
@@ -880,8 +882,8 @@ body, .gsf-global {
 /* stops */
 .m3-slider__stop {
     position: absolute;
-    width: 2px;
-    height: calc(var(--track-height) + 6px);
+    width: 3px;
+    height: calc(var(--track-height) - 10px);
     border-radius: 9999px;
     inset-block-start: 50%;
     inset-inline-start: calc(50% + (100% - 1rem) * var(--x));

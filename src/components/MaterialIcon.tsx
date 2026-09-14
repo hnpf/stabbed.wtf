@@ -3,8 +3,9 @@ import type { CSSProperties, HTMLAttributes } from "react";
 type MaterialIconProps = Omit<HTMLAttributes<HTMLSpanElement>, "children"> & {
   name: string;
   size?: number | string;
-  fill?: boolean;
+  fill?: boolean | string | number;
   weight?: number;
+  strokeWidth?: number;
   grade?: number;
 };
 
@@ -13,19 +14,22 @@ export function MaterialIcon({
   name,
   size = 24,
   fill = false,
-  weight = 650,
+  weight,
+  strokeWidth,
   grade = 0,
   className = "",
   style,
   ...props
 }: MaterialIconProps) {
   const sizePx = typeof size === "number" ? `${size}px` : size;
+  const isFilled = fill === true || fill === 1 || fill === "1" || fill === "true";
+  const resolvedWeight = weight ?? (strokeWidth ? (strokeWidth >= 2.5 ? 600 : 450) : 450);
   const iconStyle = {
     fontSize: sizePx,
     width: sizePx,
     height: sizePx,
     lineHeight: 1,
-    fontVariationSettings: `'FILL' ${fill ? 1 : 0}, 'wght' ${weight}, 'GRAD' ${grade}, 'opsz' 24`,
+    fontVariationSettings: `'FILL' ${isFilled ? 1 : 0}, 'wght' ${resolvedWeight}, 'GRAD' ${grade}, 'opsz' 24`,
     ...style,
   } as CSSProperties;
 
@@ -57,9 +61,7 @@ export const Monitor = materialIcon("desktop_windows");
 export const Pipette = materialIcon("colorize");
 export const Check = materialIcon("check");
 export const Layers = materialIcon("layers");
-import { Cpu as LucideCpu } from "lucide-react";
-
-export const Cpu = LucideCpu;
+export const Cpu = materialIcon("memory");
 export const Fingerprint = materialIcon("fingerprint");
 export const ExternalLink = materialIcon("open_in_new");
 export const Download = materialIcon("download");

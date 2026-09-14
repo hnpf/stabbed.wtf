@@ -253,7 +253,7 @@ export const SettingsDialog = memo(({
                 Theme settings
               </h3>
             </div>
-            <div className="grid grid-cols-3 gap-1.5 w-full">
+            <div className="grid grid-cols-3 gap-2 w-full">
               {(["light", "dark", "system"] as const).map((m) => {
                 const isActive = settings.mode === m;
                 let roundedClass = "";
@@ -275,7 +275,6 @@ export const SettingsDialog = memo(({
                     whileTap={{ scale: 0.94 }}
                     animate={{
                       scale: isActive ? 1.04 : 1,
-                      borderColor: isActive ? "var(--outline-variant)" : "var(--outline-variant)",
                       color: isActive ? "var(--on-primary)" : "var(--on-surface-variant)"
                     }}
                     transition={{
@@ -284,9 +283,9 @@ export const SettingsDialog = memo(({
                       damping: 20
                     }}
                     className={cn(
-                      "relative overflow-hidden flex items-center justify-center gap-2.5 py-4 border-[5px] transition-colors capitalize text-sm font-black tracking-wide cursor-pointer select-none",
+                      "relative overflow-hidden flex items-center justify-center gap-2.5 py-4 transition-colors capitalize text-sm font-black tracking-wide cursor-pointer select-none",
                       roundedClass,
-                      !isActive && "bg-[var(--surface-variant)]/30 hover:bg-black/5"
+                      !isActive && "bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/20"
                     )}
                     style={{
                       willChange: "transform, border-color"
@@ -317,28 +316,27 @@ export const SettingsDialog = memo(({
                   </motion.button>
                 );
               })}
-            </div>
-                
+            </div>                
             <motion.div
               initial={false}
               animate={{
                 opacity: (settings.mode === "dark" || settings.mode === "system") ? 1 : 0,
                 height: (settings.mode === "dark" || settings.mode === "system") ? "auto" : 0,
-                marginBottom: (settings.mode === "dark" || settings.mode === "system") ? 24 : 0,
+                marginBottom: (settings.mode === "dark" || settings.mode === "system") ? 20 : 0,
               }}
               transition={settingsSpring}
               className="overflow-hidden"
             >
               <label
                 className={cn(
-                  "flex items-center border-6 border-[var(--outline-variant)] justify-between p-5 transition-all text-left cursor-pointer rounded-[2rem]",
+                  "flex items-center justify-between p-4.5 rounded-2xl transition-all text-left cursor-pointer border-0",
                   settings.amoledMode
                     ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
-                    : "bg-[var(--surface-variant)] hover:bg-[var(--outline-variant)]/30",
+                    : "bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/10 text-[var(--on-surface)]",
                 )}
               >
                 <div>
-                  <div className="font-bold">AMOLED Mode</div>
+                  <div className="font-bold text-[15px]">AMOLED Mode</div>
                   <div className="text-xs opacity-60 font-medium">
                     Total black backgrounds for OLED screens
                   </div>
@@ -356,7 +354,7 @@ export const SettingsDialog = memo(({
               <div className="text-sm font-bold opacity-70 text-[var(--on-surface)]">
                 Theme Presets
               </div>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-3">
                 {(
                   [
                     "orange",
@@ -374,10 +372,10 @@ export const SettingsDialog = memo(({
                       updateSettings({ accent: c });
                     }}
                     className={cn(
-                      "group relative w-12 h-12 rounded-[1rem] overflow-hidden transition-all duration-300 shadow-sm",
+                      "group relative w-12 h-12 rounded-2xl overflow-hidden transition-all duration-200 border-0 shadow-none cursor-pointer",
                       settings.accent === c
-                        ? "ring-2 ring-[var(--on-surface)] ring-offset-4 ring-offset-[var(--surface)] scale-110"
-                        : "hover:scale-105",
+                        ? "ring-2 ring-[var(--primary)] ring-offset-2 ring-offset-[var(--surface)] scale-105"
+                        : "hover:scale-105 opacity-90 hover:opacity-100",
                     )}
                   >
                     {c === "custom" ? (
@@ -424,11 +422,11 @@ export const SettingsDialog = memo(({
                       </div>
                     )}
                     {settings.accent === c && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/10">
-                        <div className="bg-white rounded-full p-0.5 shadow-md w-6 h-6 flex items-center justify-center leading-none">
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/15">
+                        <div className="bg-white rounded-full p-0.5 shadow-sm w-5 h-5 flex items-center justify-center leading-none">
                           <Check
-                            size={14}
-                            className="text-black -translate-y-px"
+                            size={13}
+                            className="text-black"
                             strokeWidth={3}
                           />
                         </div>
@@ -439,7 +437,7 @@ export const SettingsDialog = memo(({
               </div>
               <div className="pt-3 space-y-3">
                 <div className="flex items-baseline justify-between gap-3">
-                  <div className="text-sm font-bold opacity-70 text-[var(--on-surface)] mb-2">
+                  <div className="text-sm font-bold opacity-70 text-[var(--on-surface)] mb-1">
                     Color palette
                   </div>
                 </div>
@@ -461,18 +459,18 @@ export const SettingsDialog = memo(({
                           updateSettings({ palette: id });
                         }}
                         className={cn(
-                          "relative min-h-16 overflow-hidden rounded-[1.35rem] border-4 px-3 py-2 text-left transition-all",
+                          "relative min-h-16 overflow-hidden rounded-2xl border-0 px-4 py-3 text-left transition-all cursor-pointer",
                           selected
-                            ? "border-[var(--on-surface)] scale-[1.02] shadow-md"
-                            : "border-[var(--outline-variant)] hover:border-[var(--primary)] hover:scale-[1.01]",
+                            ? "ring-2 ring-[var(--primary)] ring-offset-1 ring-offset-[var(--surface)] scale-[1.02] shadow-sm"
+                            : "opacity-90 hover:opacity-100 hover:scale-[1.01]",
                         )}
                         style={{ background: preview }}
                         aria-pressed={selected}
                       >
-                        <span className="absolute inset-0 bg-black/20" />
+                        <span className="absolute inset-0 bg-black/25" />
                         <span className="relative flex items-center justify-between gap-2 text-sm font-black text-white drop-shadow-sm">
                           {label}
-                          {selected && <Check size={17} strokeWidth={3} />}
+                          {selected && <Check size={16} strokeWidth={3} />}
                         </span>
                       </button>
                     );
@@ -528,13 +526,13 @@ export const SettingsDialog = memo(({
       case "customization":
         return (
           <section className="space-y-6">
-            <div className="flex items-center gap-4 mb-7">
+            <div className="flex items-center gap-3 mb-6">
               <SettingsIcon size={20} className="text-[var(--primary)]" />
               <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)]">
                 Customization settings
               </h3>
             </div>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-2">
               {[
                 {
                   key: "metricUnits",
@@ -554,12 +552,12 @@ export const SettingsDialog = memo(({
                 {
                   key: "brutalistMode",
                   label: "Brutalist Mode",
-                  desc: "Sharp edges only",
+                  desc: "Sharp edges and raw styling",
                 },
                 {
                   key: "developerFont",
                   label: "Developer Font",
-                  desc: "Use JetBrains Mono",
+                  desc: "Use JetBrains Mono as the primary UI typeface",
                 },
                 {
                   key: "focusMode",
@@ -568,13 +566,13 @@ export const SettingsDialog = memo(({
                 },
                 {
                   key: "highHz",
-                  label: "120Hz Animations",
-                  desc: "Replicates 120hz-level snappiness",
+                  label: "High-Refresh Springs",
+                  desc: "Tighter physics tuned for 120Hz/144Hz displays",
                 },
                 {
                   key: "disableAnimations",
                   label: "Disable Animations",
-                  desc: "Turn off motion & transition effects",
+                  desc: "Turn off motion & transition effects (requires refresh)",
                 },
                 { // desktop-only option
                   key: "bentoTilt",
@@ -586,32 +584,20 @@ export const SettingsDialog = memo(({
                   label: "Lens Dynamic Theming",
                   desc: "Match the theme to an expanded Lens photo",
                 },
-                {
-                  key: "metricUnits",
-                  label: "Metric Units",
-                  desc: "Use metric units (°C, km/h) for weather (off switches to imperial)",
-                },
               ]
                 .filter((tweak) => !(is_mobile && tweak.key === "bentoTilt"))
-                .map((tweak, index, array) => (
+                .map((tweak) => (
                 <label
                   key={tweak.key}
                   className={cn(
-                    "flex items-center border-6 border-[var(--outline-variant)] justify-between p-5 transition-all text-left cursor-pointer",
-                    array.length === 1
-                      ? "rounded-[2rem]"
-                      : index === 0
-                        ? "rounded-t-[2rem] rounded-b-[0.9rem]"
-                        : index === array.length - 1
-                          ? "rounded-b-[2rem] rounded-t-[0.9rem]"
-                          : "rounded-[0.9rem]",
+                    "flex items-center justify-between p-4.5 rounded-2xl transition-all text-left cursor-pointer border-0",
                     settings[tweak.key as keyof typeof settings]
                       ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
-                      : "bg-[var(--surface-variant)] hover:bg-[var(--outline-variant)]/30",
+                      : "bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/10 text-[var(--on-surface)]",
                   )}
                 >
                   <div>
-                    <div className="font-bold">{tweak.label}</div>
+                    <div className="font-bold text-[15px]">{tweak.label}</div>
                     <div className="text-xs opacity-60 font-medium">
                       {tweak.desc}
                     </div>
@@ -634,7 +620,7 @@ export const SettingsDialog = memo(({
                 </label>
               ))}
               {is_mobile && (
-                <div className="mt-3 px-4 py-3 rounded-[1.5rem] bg-[var(--surface-variant)] border-4 border-[var(--outline-variant)] text-[12px] leading-5 opacity-80">
+                <div className="mt-3 px-4 py-3 rounded-2xl bg-[var(--surface-variant)]/60 text-[12px] leading-5 opacity-80 border-0">
                   Some desktop-only customization options are hidden on mobile.
                 </div>
               )}
@@ -646,13 +632,13 @@ export const SettingsDialog = memo(({
         return (
           <div className="space-y-8">
             <section className="space-y-6">
-              <div className="flex items-center gap-3 mb-7">
+              <div className="flex items-center gap-3 mb-6">
                 <Layers size={20} className="text-[var(--primary)]" />
                 <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)]">
-                  Sidebar & Layout Options
+                  Navigation & Layout Options
                 </h3>
               </div>
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-2">
                 {[ // desktop-only option
                   {
                     key: "sidebarFlipped",
@@ -681,25 +667,18 @@ export const SettingsDialog = memo(({
                   },
                 ]
                   .filter((tweak) => !(is_mobile && ["sidebarFlipped", "floatingSidebar", "profileContainer"].includes(tweak.key)))
-                  .map((tweak, index, array) => (
+                  .map((tweak) => (
                   <label
                     key={tweak.key}
                     className={cn(
-                      "flex items-center border-6 border-[var(--outline-variant)] justify-between p-5 transition-all text-left cursor-pointer",
-                      array.length === 1
-                        ? "rounded-[2rem]"
-                        : index === 0
-                          ? "rounded-t-[2rem] rounded-b-[0.9rem]"
-                          : index === array.length - 1
-                            ? "rounded-b-[2rem] rounded-t-[0.9rem]"
-                            : "rounded-[0.9rem]",
+                      "flex items-center justify-between p-4.5 rounded-2xl transition-all text-left cursor-pointer border-0",
                       settings[tweak.key as keyof typeof settings]
                         ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
-                        : "bg-[var(--surface-variant)] hover:bg-[var(--outline-variant)]/30",
+                        : "bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/10 text-[var(--on-surface)]",
                     )}
                   >
                     <div>
-                      <div className="font-bold">{tweak.label}</div>
+                      <div className="font-bold text-[15px]">{tweak.label}</div>
                       <div className="text-xs opacity-60 font-medium">
                         {tweak.desc}
                       </div>
@@ -718,7 +697,7 @@ export const SettingsDialog = memo(({
                 ))}
               </div>
               {is_mobile && (
-                <div className="mt-3 px-4 py-3 rounded-[1.5rem] bg-[var(--surface-variant)] border-4 border-[var(--outline-variant)] text-[12px] leading-5 opacity-80">
+                <div className="mt-3 px-4 py-3 rounded-2xl bg-[var(--surface-variant)]/60 text-[12px] leading-5 opacity-80 border-0">
                   Some desktop-only layout options are hidden on mobile.
                 </div>
               )}
@@ -729,7 +708,7 @@ export const SettingsDialog = memo(({
       case "commandPalette":
         return (
           <section className="space-y-6">
-            <div className="flex items-center gap-3 mb-7">
+            <div className="flex items-center gap-3 mb-6">
               <Monitor size={20} className="text-[var(--primary)]" />
               <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)]">
                 Command palette
@@ -737,9 +716,9 @@ export const SettingsDialog = memo(({
             </div>
 
             <div className="space-y-4">
-              <div className="border-6 border-[var(--outline-variant)] bg-[var(--surface-variant)] rounded-[2rem] p-5">
-                <div className="font-bold">Activation hotkey</div>
-                <div className="text-xs opacity-60 font-medium mt-1 mb-4">
+              <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0">
+                <div className="font-bold text-[15px]">Activation hotkey</div>
+                <div className="text-xs opacity-60 font-medium mt-0.5 mb-3">
                   Choose the shortcut that opens the command palette.
                 </div>
                 <div className="space-y-1.5">
@@ -752,27 +731,27 @@ export const SettingsDialog = memo(({
                     const isFirst = index === 0;
                     const isLast = index === array.length - 1;
                     const roundClass = array.length === 1
-                      ? "rounded-[1.5rem]"
+                      ? "rounded-2xl"
                       : isFirst
-                        ? "rounded-t-[1.5rem] rounded-b-[0.9rem]"
+                        ? "rounded-t-2xl rounded-b-[6px]"
                         : isLast
-                          ? "rounded-b-[1.5rem] rounded-t-[0.9rem]"
-                          : "rounded-[0.9rem]";
+                          ? "rounded-b-2xl rounded-t-[6px]"
+                          : "rounded-[6px]";
                     return (
                       <button
                         key={option.value}
                         type="button"
                         onClick={() => updateSettings({ paletteHotkey: option.value as any })}
                         className={cn(
-                          "flex flex-col gap-2 w-full border-6 px-4 py-4 text-left transition-all",
+                          "flex flex-col gap-1 w-full px-4 py-3 text-left transition-all border-0 cursor-pointer",
                           roundClass,
                           active
-                            ? "border-[var(--primary)] bg-[var(--primary-container)] text-[var(--on-primary-container)]"
-                            : "border-[var(--outline-variant)] bg-[var(--surface)] hover:bg-[var(--surface-variant)]"
+                            ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
+                            : "bg-[var(--surface)] hover:bg-[var(--surface-variant)]/60 text-[var(--on-surface)]"
                         )}
                       >
                         <div className="flex items-center justify-between gap-3">
-                          <span className="text-sm font-semibold">{option.label}</span>
+                          <span className="text-sm font-bold">{option.label}</span>
                           {active && <Check size={16} />}
                         </div>
                         <span className="text-xs opacity-70">{option.desc}</span>
@@ -782,9 +761,9 @@ export const SettingsDialog = memo(({
                 </div>
               </div>
 
-              <div className="border-6 border-[var(--outline-variant)] bg-[var(--surface-variant)] rounded-[2rem] p-5">
-                <div className="font-bold">Default view</div>
-                <div className="text-xs opacity-60 font-medium mt-1 mb-4">
+              <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0">
+                <div className="font-bold text-[15px]">Default view</div>
+                <div className="text-xs opacity-60 font-medium mt-0.5 mb-3">
                   Pick the starting layout when opening the palette.
                 </div>
                 <div className="space-y-1.5">
@@ -796,27 +775,27 @@ export const SettingsDialog = memo(({
                     const isFirst = index === 0;
                     const isLast = index === array.length - 1;
                     const roundClass = array.length === 1
-                      ? "rounded-[1.5rem]"
+                      ? "rounded-2xl"
                       : isFirst
-                        ? "rounded-t-[1.5rem] rounded-b-[0.9rem]"
+                        ? "rounded-t-2xl rounded-b-[6px]"
                         : isLast
-                          ? "rounded-b-[1.5rem] rounded-t-[0.9rem]"
-                          : "rounded-[0.9rem]";
+                          ? "rounded-b-2xl rounded-t-[6px]"
+                          : "rounded-[6px]";
                     return (
                       <button
                         key={option.value}
                         type="button"
                         onClick={() => updateSettings({ paletteDefaultView: option.value as any })}
                         className={cn(
-                          "flex flex-col gap-2 w-full border-6 px-4 py-4 text-left transition-all",
+                          "flex flex-col gap-1 w-full px-4 py-3 text-left transition-all border-0 cursor-pointer",
                           roundClass,
                           active
-                            ? "border-[var(--primary)] bg-[var(--primary-container)] text-[var(--on-primary-container)]"
-                            : "border-[var(--outline-variant)] bg-[var(--surface)] hover:bg-[var(--surface-variant)]"
+                            ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
+                            : "bg-[var(--surface)] hover:bg-[var(--surface-variant)]/60 text-[var(--on-surface)]"
                         )}
                       >
                         <div className="flex items-center justify-between gap-3">
-                          <span className="text-sm font-semibold">{option.label}</span>
+                          <span className="text-sm font-bold">{option.label}</span>
                           {active && <Check size={16} />}
                         </div>
                         <span className="text-xs opacity-70">{option.desc}</span>
@@ -826,9 +805,9 @@ export const SettingsDialog = memo(({
                 </div>
               </div>
 
-              <div className="border-6 border-[var(--outline-variant)] bg-[var(--surface-variant)] rounded-[2rem] p-5">
-                <div className="font-bold">Search scope</div>
-                <div className="text-xs opacity-60 font-medium mt-1 mb-4">
+              <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0">
+                <div className="font-bold text-[15px]">Search scope</div>
+                <div className="text-xs opacity-60 font-medium mt-0.5 mb-3">
                   Limit what the palette searches by default.
                 </div>
                 <div className="space-y-1.5">
@@ -842,27 +821,27 @@ export const SettingsDialog = memo(({
                     const isFirst = index === 0;
                     const isLast = index === array.length - 1;
                     const roundClass = array.length === 1
-                      ? "rounded-[1.5rem]"
+                      ? "rounded-2xl"
                       : isFirst
-                        ? "rounded-t-[1.5rem] rounded-b-[0.9rem]"
+                        ? "rounded-t-2xl rounded-b-[6px]"
                         : isLast
-                          ? "rounded-b-[1.5rem] rounded-t-[0.9rem]"
-                          : "rounded-[0.9rem]";
+                          ? "rounded-b-2xl rounded-t-[6px]"
+                          : "rounded-[6px]";
                     return (
                       <button
                         key={option.value}
                         type="button"
                         onClick={() => updateSettings({ paletteSearchScope: option.value as any })}
                         className={cn(
-                          "flex flex-col gap-2 w-full border-6 px-4 py-4 text-left transition-all",
+                          "flex flex-col gap-1 w-full px-4 py-3 text-left transition-all border-0 cursor-pointer",
                           roundClass,
                           active
-                            ? "border-[var(--primary)] bg-[var(--primary-container)] text-[var(--on-primary-container)]"
-                            : "border-[var(--outline-variant)] bg-[var(--surface)] hover:bg-[var(--surface-variant)]"
+                            ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
+                            : "bg-[var(--surface)] hover:bg-[var(--surface-variant)]/60 text-[var(--on-surface)]"
                         )}
                       >
                         <div className="flex items-center justify-between gap-3">
-                          <span className="text-sm font-semibold">{option.label}</span>
+                          <span className="text-sm font-bold">{option.label}</span>
                           {active && <Check size={16} />}
                         </div>
                         <span className="text-xs opacity-70">{option.desc}</span>
@@ -872,9 +851,9 @@ export const SettingsDialog = memo(({
                 </div>
               </div>
 
-              <div className="border-6 border-[var(--outline-variant)] bg-[var(--surface-variant)] rounded-[2rem] p-5">
-                <div className="font-bold">Results limit</div>
-                <div className="text-xs opacity-60 font-medium mt-1 mb-4">
+              <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0">
+                <div className="font-bold text-[15px]">Results limit</div>
+                <div className="text-xs opacity-60 font-medium mt-0.5 mb-3">
                   Control how many items appear before scrolling.
                 </div>
                 <div className="grid gap-2 sm:grid-cols-4">
@@ -886,13 +865,13 @@ export const SettingsDialog = memo(({
                         type="button"
                         onClick={() => updateSettings({ paletteResultsLimit: limit })}
                         className={cn(
-                          "flex items-center justify-between gap-3 w-full rounded-[1.5rem] border-6 px-4 py-4 text-left transition-all",
+                          "flex items-center justify-between gap-3 w-full rounded-xl px-4 py-3 text-left transition-all border-0 cursor-pointer",
                           active
-                            ? "border-[var(--primary)] bg-[var(--primary-container)] text-[var(--on-primary-container)]"
-                            : "border-[var(--outline-variant)] bg-[var(--surface)] hover:bg-[var(--surface-variant)]"
+                            ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
+                            : "bg-[var(--surface)] hover:bg-[var(--surface-variant)]/60 text-[var(--on-surface)]"
                         )}
                       >
-                        <span className="text-sm font-semibold">{limit}</span>
+                        <span className="text-sm font-bold">{limit}</span>
                         {active && <Check size={16} />}
                       </button>
                     );
@@ -900,15 +879,11 @@ export const SettingsDialog = memo(({
                 </div>
               </div>
 
-              <div className="border-6 border-[var(--outline-variant)] bg-[var(--surface-variant)] rounded-[2rem] p-5">
-                <div className="font-bold">Show recent actions</div>
-                <div className="text-xs opacity-60 font-medium mt-1 mb-4">
-                  Show recently selected commands when the palette opens empty.
-                </div>
-                <label className="flex items-center justify-between gap-4 rounded-[1.5rem] border-6 border-[var(--outline-variant)] bg-[var(--surface)] p-4">
+              <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0">
+                <label className="flex items-center justify-between gap-4 cursor-pointer">
                   <div>
-                    <div className="font-bold">Recent actions</div>
-                    <div className="text-xs opacity-60">Toggle recent command suggestions.</div>
+                    <div className="font-bold text-[15px]">Recent actions</div>
+                    <div className="text-xs opacity-60 mt-0.5">Toggle recent command suggestions when palette is empty.</div>
                   </div>
                   <Switch
                     checked={settings.paletteShowRecentActions}
@@ -917,9 +892,9 @@ export const SettingsDialog = memo(({
                 </label>
               </div>
 
-              <div className="border-6 border-[var(--outline-variant)] bg-[var(--surface-variant)] rounded-[2rem] p-5">
-                <div className="font-bold">Keyboard navigation</div>
-                <div className="text-xs opacity-60 font-medium mt-1 mb-4">
+              <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0">
+                <div className="font-bold text-[15px]">Keyboard navigation</div>
+                <div className="text-xs opacity-60 font-medium mt-0.5 mb-3">
                   Choose how arrow keys move through palette results. Bento view enables left/right navigation.
                 </div>
                 <div className="space-y-1.5">
@@ -932,27 +907,27 @@ export const SettingsDialog = memo(({
                     const isFirst = index === 0;
                     const isLast = index === array.length - 1;
                     const roundClass = array.length === 1
-                      ? "rounded-[1.5rem]"
+                      ? "rounded-2xl"
                       : isFirst
-                        ? "rounded-t-[1.5rem] rounded-b-[0.9rem]"
+                        ? "rounded-t-2xl rounded-b-[6px]"
                         : isLast
-                          ? "rounded-b-[1.5rem] rounded-t-[0.9rem]"
-                          : "rounded-[0.9rem]";
+                          ? "rounded-b-2xl rounded-t-[6px]"
+                          : "rounded-[6px]";
                     return (
                       <button
                         key={option.value}
                         type="button"
                         onClick={() => updateSettings({ paletteKeyboardNavBehavior: option.value as any })}
                         className={cn(
-                          "flex flex-col gap-2 w-full border-6 px-4 py-4 text-left transition-all",
+                          "flex flex-col gap-1 w-full px-4 py-3 text-left transition-all border-0 cursor-pointer",
                           roundClass,
                           active
-                            ? "border-[var(--primary)] bg-[var(--primary-container)] text-[var(--on-primary-container)]"
-                            : "border-[var(--outline-variant)] bg-[var(--surface)] hover:bg-[var(--surface-variant)]"
+                            ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
+                            : "bg-[var(--surface)] hover:bg-[var(--surface-variant)]/60 text-[var(--on-surface)]"
                         )}
                       >
                         <div className="flex items-center justify-between gap-3">
-                          <span className="text-sm font-semibold">{option.label}</span>
+                          <span className="text-sm font-bold">{option.label}</span>
                           {active && <Check size={16} />}
                         </div>
                         <span className="text-xs opacity-70">{option.desc}</span>
@@ -962,15 +937,11 @@ export const SettingsDialog = memo(({
                 </div>
               </div>
 
-              <div className="border-6 border-[var(--outline-variant)] bg-[var(--surface-variant)] rounded-[2rem] p-5">
-                <div className="font-bold">Suppress hover</div>
-                <div className="text-xs opacity-60 font-medium mt-1 mb-4">
-                  Keep keyboard selection fixed while moving your mouse.
-                </div>
-                <label className="flex items-center justify-between gap-4 rounded-[1.5rem] border-6 border-[var(--outline-variant)] bg-[var(--surface)] p-4">
+              <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0">
+                <label className="flex items-center justify-between gap-4 cursor-pointer">
                   <div>
-                    <div className="font-bold">Suppress hover</div>
-                    <div className="text-xs opacity-60">Allow keyboard selection to ignore pointer movement.</div>
+                    <div className="font-bold text-[15px]">Suppress hover</div>
+                    <div className="text-xs opacity-60 mt-0.5">Allow keyboard selection to ignore pointer movement.</div>
                   </div>
                   <Switch
                     checked={settings.paletteSuppressHover}
@@ -985,14 +956,14 @@ export const SettingsDialog = memo(({
       case "backup":
         return (
           <section className="space-y-6">
-            <div className="flex items-center gap-3 mb-7">
+            <div className="flex items-center gap-3 mb-6">
               <Fingerprint size={20} className="text-[var(--primary)]" />
               <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)]">
-                Share & Backup Config
+                Share & Backup
               </h3>
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <button
                 onClick={() => {
                   try {
@@ -1005,17 +976,17 @@ export const SettingsDialog = memo(({
                   }
                   haptic.light();
                 }}
-                className="flex items-center justify-between border-6 border-[var(--outline-variant)] p-5 bg-[var(--surface-variant)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] transition-all text-left rounded-[1.5rem] group cursor-pointer"
+                className="flex items-center justify-between p-5 bg-[var(--surface-variant)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] transition-all text-left rounded-2xl group cursor-pointer border-0"
               >
                 <div>
-                  <div className="font-bold">Copy config link</div>
+                  <div className="font-bold text-[15px]">Copy config link</div>
                   <div className="text-xs opacity-60 font-medium">
                     Get config as link
                   </div>
                 </div>
                 <ExternalLink
                   size={20}
-                  className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                  className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform opacity-60 group-hover:opacity-100"
                 />
               </button>
 
@@ -1035,28 +1006,28 @@ export const SettingsDialog = memo(({
                   }
                   haptic.light();
                 }}
-                className="flex items-center justify-between border-6 border-[var(--outline-variant)] p-5 bg-[var(--surface-variant)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] transition-all text-left rounded-[1.5rem] group cursor-pointer"
+                className="flex items-center justify-between p-5 bg-[var(--surface-variant)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] transition-all text-left rounded-2xl group cursor-pointer border-0"
               >
                 <div>
-                  <div className="font-bold">Export config file</div>
+                  <div className="font-bold text-[15px]">Export config file</div>
                   <div className="text-xs opacity-60 font-medium">
                     Get config as JSON
                   </div>
                 </div>
                 <Download
                   size={20}
-                  className="group-hover:translate-y-0.5 transition-transform"
+                  className="group-hover:translate-y-0.5 transition-transform opacity-60 group-hover:opacity-100"
                 />
               </button>
             </div>
 
-            <div className="border-6 border-[var(--outline-variant)] bg-[var(--surface-variant)] p-5 rounded-[1.5rem] space-y-4">
-              <div className="font-bold text-sm">Importing Your Config</div>
+            <div className="bg-[var(--surface-variant)]/40 p-5 rounded-2xl space-y-3 border-0">
+              <div className="font-bold text-[15px]">Importing Your Config</div>
               <div className="flex gap-2">
                 <input
                   type="text"
                   placeholder="Paste sharing link/code here..."
-                  className="flex-1 min-w-0 truncate bg-[var(--surface)] text-[var(--on-surface)] border-5 border-[var(--outline-variant)] rounded-xl px-4 py-2 text-[13px] font-black focus:outline-none focus:border-[var(--primary)]"
+                  className="flex-1 min-w-0 truncate bg-[var(--surface)] text-[var(--on-surface)] rounded-xl px-4 py-2.5 text-[13px] font-bold border-0 ring-1 ring-[var(--outline-variant)]/30 focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
                       const val = e.currentTarget.value.trim();
@@ -1091,12 +1062,12 @@ export const SettingsDialog = memo(({
                   }}
                 />
                 <motion.label
-                  whileTap={{ scaleX: 1.08, scaleY: 0.88 }}
-                  transition={{ type: "spring", stiffness: 1200, damping: 10, mass: 0.02 }}
+                  whileTap={{ scale: 0.96 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   onClick={() => {
                     haptic.light();
                   }}
-                  className="shrink-0 whitespace-nowrap bg-[var(--primary)] text-[var(--on-primary)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] px-4 py-2 rounded-xl text-[10px] font-bold transition-all flex items-center justify-center cursor-pointer select-none"
+                  className="shrink-0 whitespace-nowrap bg-[var(--primary)] text-[var(--on-primary)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center cursor-pointer select-none border-0"
                 >
                   Upload File
                   <input
@@ -1134,8 +1105,8 @@ export const SettingsDialog = memo(({
                   />
                 </motion.label>
               </div>
-              <div className="text-[13px] opacity-50 font-medium">
-                Press Enter to apply pasted sharing link. Pressing `ENTER` WILL update your theme immediately.
+              <div className="text-[12px] opacity-50 font-medium">
+                Press Enter to apply pasted sharing link. Pressing `ENTER` will update your theme immediately.
               </div>
             </div>
           </section>
@@ -1144,43 +1115,43 @@ export const SettingsDialog = memo(({
       case "debug":
         return (
           <div className="space-y-8">
-          <section className="space-y-6">
-            <div className="flex items-center gap-3 mb-7">
-              <Cpu size={20} className="text-[var(--primary)]" />
-              <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)]">
-                Debug Settings & Info
-              </h3>
-            </div>
-            <div className="flex flex-col gap-1">
-              <label
-                className={cn(
-                  "flex items-center border-6 border-[var(--outline-variant)] justify-between p-5 transition-all text-left cursor-pointer rounded-[2rem]",
-                  settings.debugMode
-                    ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
-                    : "bg-[var(--surface-variant)] hover:bg-[var(--outline-variant)]/30",
-                )}
-              >
-                <div>
-                  <div className="font-bold">Debug Mode</div>
-                  <div className="text-xs opacity-60 font-medium">
-                    Show layout grid and build info
-                  </div>
-                </div>
-                <Switch
-                  checked={settings.debugMode}
-                  onChange={(checked) => {
-                    if (checked) {
-                      setShowDebugConfirm(true);
-                    } else {
-                      updateSettings({ debugMode: false });
-                    }
-                  }}
-                />
-              </label>
-            </div>
-          </section>
             <section className="space-y-6">
-              <div className="flex items-center gap-3 mb-7">
+              <div className="flex items-center gap-3 mb-6">
+                <Cpu size={20} className="text-[var(--primary)]" />
+                <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)]">
+                  Information & Debug settings
+                </h3>
+              </div>
+              <div className="flex flex-col gap-2">
+                <label
+                  className={cn(
+                    "flex items-center justify-between p-4.5 rounded-2xl transition-all text-left cursor-pointer border-0",
+                    settings.debugMode
+                      ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
+                      : "bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/20 text-[var(--on-surface)]",
+                  )}
+                >
+                  <div>
+                    <div className="font-bold text-[15px]">Debug Mode</div>
+                    <div className="text-xs opacity-60 font-medium">
+                      Show layout grid and build info
+                    </div>
+                  </div>
+                  <Switch
+                    checked={settings.debugMode}
+                    onChange={(checked) => {
+                      if (checked) {
+                        setShowDebugConfirm(true);
+                      } else {
+                        updateSettings({ debugMode: false });
+                      }
+                    }}
+                  />
+                </label>
+              </div>
+            </section>
+            <section className="space-y-6">
+              <div className="flex items-center gap-3 mb-6">
                 <Terminal size={20} className="text-[var(--primary)]" />
                 <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)]">
                   Other Info
@@ -1191,52 +1162,51 @@ export const SettingsDialog = memo(({
                   handleClose();
                   goto("changelog");
                 }}
-                className="w-full flex items-center justify-between border-6 border-[var(--outline-variant)]  p-5 bg-[var(--surface-variant)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] transition-all text-left rounded-[2rem] group cursor-pointer"
+                className="w-full flex items-center justify-between p-4.5 bg-[var(--surface-variant)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] transition-all text-left rounded-2xl group cursor-pointer border-0"
               >
                 <div>
-                  <div className="font-bold">View changelog</div>
+                  <div className="font-bold text-[15px]">View changelog</div>
                   <div className="text-xs opacity-60 font-medium">
                     See what's new in 2026.09.14-stable
-                  </div>                </div>
+                  </div>
+                </div>
                 <ChevronRight
                   size={20}
-                  className="group-hover:translate-x-1 transition-transform"
+                  className="group-hover:translate-x-1 transition-transform opacity-60 group-hover:opacity-100"
                 />
               </button>
             </section>
-            </div>
-
+          </div>
         );
 
       case "about":
         return (
           <div className="space-y-8">
-
             <section className="space-y-6">
-              <div className="flex items-center gap-3 mb-7">
+              <div className="flex items-center gap-3 mb-6">
                 <Bug size={20} className="text-[var(--primary)]" />
                 <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)]">
                   Feedback
                 </h3>
               </div>
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-2">
                 <button
                   onClick={() => {
                     handleClose();
                     onReportBug();
                     haptic.light();
                   }}
-                  className="w-full flex items-center justify-between border-6 border-[var(--outline-variant)] p-5 bg-[var(--surface-variant)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] transition-all text-left rounded-t-[2rem] rounded-b-[0.9rem] group cursor-pointer"
+                  className="w-full flex items-center justify-between p-4.5 bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/20 hover:text-[var(--on-primary-container)] transition-all text-left rounded-2xl group cursor-pointer border-0"
                 >
                   <div>
-                    <div className="font-bold">Report a bug</div>
+                    <div className="font-bold text-[15px]">Report a bug</div>
                     <div className="text-xs opacity-60 font-medium">
                       Help us make virex.lol better by reporting issues
                     </div>
                   </div>
                   <ChevronRight
                     size={20}
-                    className="group-hover:translate-x-1 transition-transform"
+                    className="group-hover:translate-x-1 transition-transform opacity-60 group-hover:opacity-100"
                   />
                 </button>
                 <button
@@ -1245,17 +1215,17 @@ export const SettingsDialog = memo(({
                     onOpenKnownIssuess();
                     haptic.light();
                   }}
-                  className="w-full flex items-center justify-between border-6 border-[var(--outline-variant)] p-5 bg-[var(--surface-variant)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] transition-all text-left rounded-b-[2rem] rounded-t-[0.9rem] group cursor-pointer"
+                  className="w-full flex items-center justify-between p-4.5 bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/20 hover:text-[var(--on-primary-container)] transition-all text-left rounded-2xl group cursor-pointer border-0"
                 >
                   <div>
-                    <div className="font-bold">Known issues</div>
+                    <div className="font-bold text-[15px]">Known issues</div>
                     <div className="text-xs opacity-60 font-medium">
                       View bugs that have already been reported
                     </div>
                   </div>
                   <ChevronRight
                     size={20}
-                    className="group-hover:translate-x-1 transition-transform"
+                    className="group-hover:translate-x-1 transition-transform opacity-60 group-hover:opacity-100"
                   />
                 </button>
               </div>
@@ -1418,8 +1388,8 @@ export const SettingsDialog = memo(({
             className={cn(
               "relative bg-[var(--surface)] shadow-2xl overflow-hidden flex flex-col motion-gpu settings-modal-content",
               is_mobile 
-                ? "w-full h-[100dvh] max-w-none max-h-none rounded-t-[2rem] border-none" 
-                : "w-full md:max-w-[700px] md:h-[780px] max-h-[90vh] rounded-[2rem] md:rounded-[2.8rem] border-3 border-[var(--outline-variant)]"
+                ? "w-full h-[100dvh] max-w-none max-h-none rounded-t-[2.2rem] border-none" 
+                : "w-full md:max-w-[720px] md:h-[780px] max-h-[90vh] rounded-[2.5rem] border border-[var(--outline-variant)]/30"
             )}
             style={is_mobile ? { 
               y,
@@ -1442,8 +1412,8 @@ export const SettingsDialog = memo(({
 
               <div 
                 className={cn(
-                  "flex justify-between items-center border-b-3 border-[var(--outline-variant)] bg-[var(--surface)] sticky top-0 z-10 shrink-0",
-                  is_mobile ? "p-4" : "p-6 md:p-8"
+                  "flex justify-between items-center border-b border-[var(--outline-variant)]/30 bg-[var(--surface)] sticky top-0 z-10 shrink-0",
+                  is_mobile ? "p-4" : "p-6 md:p-7"
                 )}
               >
                 <div className="flex items-center gap-3">
@@ -1451,12 +1421,12 @@ export const SettingsDialog = memo(({
                     <button
                       onClick={() => navigateTo("menu")}
                       aria-label="Back to settings menu"
-                      className="group w-10 h-10 rounded-full bg-[var(--surface-variant)]/60 hover:bg-[var(--surface-variant)] border-3 border-[var(--outline-variant)]/50 flex items-center justify-center transition-all cursor-pointer text-[var(--on-surface)] active:scale-95 shrink-0 shadow-sm"
+                      className="group w-10 h-10 rounded-full bg-[var(--surface-variant)]/60 hover:bg-[var(--surface-variant)] border-0 flex items-center justify-center transition-all cursor-pointer text-[var(--on-surface)] active:scale-95 shrink-0 shadow-none"
                     >
                       <ChevronLeft size={20} className="transition-transform duration-300 ease-out group-hover:-translate-x-0.5 group-hover:scale-110" />
                     </button>
                   )}
-                  <div className="w-10 h-10 rounded-full bg-[var(--primary-container)]/60 border-3 border-[var(--primary)]/20 flex items-center justify-center shrink-0 text-[var(--primary)] shadow-sm">
+                  <div className="w-10 h-10 rounded-full bg-[var(--primary-container)] border-0 flex items-center justify-center shrink-0 text-[var(--primary)] shadow-none">
                     <SettingsIcon size={20} />
                   </div>
                   <h2
@@ -1471,7 +1441,7 @@ export const SettingsDialog = memo(({
                         {activePage === "menu" ? "Settings" : currentPageTitle}
                       </span>
                     ) : (
-                      <span>Settings</span>
+                      <span className="font-display italic tracking-tight uppercase font-black">Settings</span>
                     )}
                   </h2>
                 </div>
@@ -1481,7 +1451,7 @@ export const SettingsDialog = memo(({
                     handleClose();
                   }}
                   aria-label="Close settings dialog"
-                  className="group w-10 h-10 rounded-full bg-[var(--surface-variant)]/60 hover:bg-[var(--surface-variant)] border-3 border-[var(--outline-variant)]/50 flex items-center justify-center transition-all cursor-pointer text-[var(--on-surface)] active:scale-95 shrink-0 shadow-sm"
+                  className="group w-10 h-10 rounded-full bg-[var(--surface-variant)]/60 hover:bg-[var(--surface-variant)] border-0 flex items-center justify-center transition-all cursor-pointer text-[var(--on-surface)] active:scale-95 shrink-0 shadow-none"
                 >
                   <X size={20} className="transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-180 group-hover:scale-110" />
                 </button>
@@ -1504,19 +1474,19 @@ export const SettingsDialog = memo(({
                         className="flex flex-col justify-between flex-1"
                       >
                         {/* main pages group */}
-                        <div className="flex flex-col gap-1">
+                        <div className="flex flex-col gap-2">
                           {visibleMainPages.map((page, index, arr) => {
                             const PageIcon = page.icon;
                             const isFirst = index === 0;
                             const isLast = index === arr.length - 1;
                             const isSingle = arr.length === 1;
                             const roundedClass = isSingle
-                              ? "rounded-[2rem]"
+                              ? "rounded-[22px]"
                               : isFirst
-                                ? "rounded-t-[2rem] rounded-b-[0.9rem]"
+                                ? "rounded-t-[22px] rounded-b-[6px]"
                                 : isLast
-                                  ? "rounded-b-[2rem] rounded-t-[0.9rem]"
-                                  : "rounded-[0.9rem]";
+                                  ? "rounded-b-[22px] rounded-t-[6px]"
+                                  : "rounded-[6px]";
                             return (
                               <button
                                 key={page.id}
@@ -1525,13 +1495,13 @@ export const SettingsDialog = memo(({
                                   navigateTo(page.id);
                                 }}
                                 className={cn(
-                                  "w-full flex items-center justify-between border-6 border-[var(--outline-variant)] p-4 bg-[var(--surface-variant)]/50 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] transition-all text-left group cursor-pointer",
+                                  "w-full flex items-center justify-between p-4 bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/20 hover:text-[var(--on-primary-container)] text-[var(--on-surface)] transition-all text-left group cursor-pointer border-0 shadow-none",
                                   roundedClass
                                 )}
                               >
-                                <div className="flex items-center gap-4">
-                                  <div className="w-10 h-10 flex items-center justify-center rounded-full border-[3px] border-[var(--outline-variant)] text-[var(--primary)] bg-[var(--surface)] group-hover:bg-[var(--primary)] group-hover:text-[var(--on-primary)] group-hover:border-[var(--primary)] transition-all shrink-0">
-                                    <PageIcon size={18} className={cn("shrink-0", page.id === "debug" && "-translate-x-[0.9px]")} />
+                                <div className="flex items-center gap-3.5">
+                                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--surface)] text-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-[var(--on-primary)] transition-all shrink-0 border-0 shadow-xs">
+                                    <PageIcon size={20} className={cn("shrink-0", page.id === "debug" && "-translate-x-[0.9px]")} />
                                   </div>
                                   <div>
                                     <div className="font-bold text-[15px]">{page.title}</div>
@@ -1541,20 +1511,20 @@ export const SettingsDialog = memo(({
                                   </div>
                                 </div>
                                 <ChevronRight
-                                  size={20}
-                                  className="group-hover:translate-x-1 transition-transform opacity-50"
+                                  size={18}
+                                  className="group-hover:translate-x-1 transition-transform opacity-40 group-hover:opacity-80 shrink-0"
                                 />
                               </button>
                             );
                           })}
                         </div>
 
-                        {/* divider + bottom pages — wrapped together so they stay anchored as a unit */}
-                        <div className="flex flex-col gap-1">
-                          <div className="flex items-center gap-4 px-1 pt-2 pb-2">
-                            <div className="flex-1 h-px bg-[var(--outline-variant)]/50" />
-                            <span className="text-[14px] font-black tracking-[0.1em] opacity-30">More</span>
-                            <div className="flex-1 h-px bg-[var(--outline-variant)]/50" />
+                        {/* divider + bottom pages wrapped together so they stay anchored */}
+                        <div className="flex flex-col gap-2 mt-4">
+                          <div className="flex items-center gap-4 px-1 pt-1 pb-1">
+                            <div className="flex-1 h-px bg-[var(--outline-variant)]/30" />
+                            <span className="text-[12px] font-black tracking-[0.1em] uppercase opacity-40 font-expressive">More</span>
+                            <div className="flex-1 h-px bg-[var(--outline-variant)]/30" />
                           </div>
                           {BOTTOM_PAGES.map((page, index, arr) => {
                             const PageIcon = page.icon;
@@ -1562,12 +1532,12 @@ export const SettingsDialog = memo(({
                             const isLast = index === arr.length - 1;
                             const isSingle = arr.length === 1;
                             const roundedClass = isSingle
-                              ? "rounded-[2rem]"
+                              ? "rounded-[22px]"
                               : isFirst
-                                ? "rounded-t-[2rem] rounded-b-[0.9rem]"
+                                ? "rounded-t-[22px] rounded-b-[6px]"
                                 : isLast
-                                  ? "rounded-b-[2rem] rounded-t-[0.9rem]"
-                                  : "rounded-[0.9rem]";
+                                  ? "rounded-b-[22px] rounded-t-[6px]"
+                                  : "rounded-[6px]";
                             return (
                               <button
                                 key={page.id}
@@ -1576,13 +1546,13 @@ export const SettingsDialog = memo(({
                                   navigateTo(page.id);
                                 }}
                                 className={cn(
-                                  "w-full flex items-center justify-between border-6 border-[var(--outline-variant)] p-4 bg-[var(--surface-variant)]/30 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] transition-all text-left group cursor-pointer opacity-80 hover:opacity-100",
+                                  "w-full flex items-center justify-between p-4 bg-[var(--surface-variant)]/70 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)] transition-all text-left group cursor-pointer border-0 shadow-none",
                                   roundedClass
                                 )}
                               >
-                                <div className="flex items-center gap-4">
-                                  <div className="w-10 h-10 flex items-center justify-center rounded-full border-[3px] border-[var(--outline-variant)] text-[var(--on-surface-variant)] bg-[var(--surface)] group-hover:bg-[var(--primary)] group-hover:text-[var(--on-primary)] group-hover:border-[var(--primary)] transition-all shrink-0">
-                                    <PageIcon size={18} className={cn("shrink-0", page.id === "debug" && "-translate-x-[0.5px]")} />
+                                <div className="flex items-center gap-3.5">
+                                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--surface)] text-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-[var(--on-primary)] transition-all shrink-0 border-0 shadow-xs">
+                                    <PageIcon size={20} className={cn("shrink-0", page.id === "debug" && "-translate-x-[0.5px]")} />
                                   </div>
                                   <div>
                                     <div className="font-bold text-[15px]">{page.title}</div>
@@ -1592,8 +1562,8 @@ export const SettingsDialog = memo(({
                                   </div>
                                 </div>
                                 <ChevronRight
-                                  size={20}
-                                  className="group-hover:translate-x-1 transition-transform opacity-50"
+                                  size={18}
+                                  className="group-hover:translate-x-1 transition-transform opacity-40 group-hover:opacity-80 shrink-0"
                                 />
                               </button>
                             );
@@ -1616,10 +1586,10 @@ export const SettingsDialog = memo(({
                 </div>
               ) : (
                 <div className="flex flex-row flex-1 overflow-hidden min-h-0">
-                  {/* left nav sidebar — mobile-style card buttons, compact */}
-                  <div className="w-[230px] border-r border-[var(--outline-variant)]/60 bg-[var(--surface-variant)]/20 py-4 px-3 flex flex-col overflow-y-auto shrink-0 select-none">
+                  {/* left nav sidebar — styled identically to sidebar / index.astro link items */}
+                  <div className="w-[240px] border-r border-[var(--outline-variant)]/30 bg-[var(--surface-variant)]/20 py-4 px-3 flex flex-col overflow-y-auto shrink-0 select-none">
                     {/* main nav items */}
-                    <div className="flex flex-col gap-[3px]">
+                    <div className="flex flex-col gap-1">
                       {MAIN_PAGES.map((p, index, arr) => {
                         const PageIcon = p.icon;
                         const isActive = activePage === p.id;
@@ -1627,12 +1597,12 @@ export const SettingsDialog = memo(({
                         const isFirst = index === 0;
                         const isLast = index === arr.length - 1;
                         const roundedClass = isSingle
-                          ? "rounded-[2rem]"
+                          ? "rounded-[22px]"
                           : isFirst
-                            ? "rounded-t-[1.5rem] rounded-b-[0.9rem]"
+                            ? "rounded-t-[22px] rounded-b-[6px]"
                             : isLast
-                              ? "rounded-b-[1.5rem] rounded-t-[0.9rem]"
-                              : "rounded-[0.9rem]";
+                              ? "rounded-b-[22px] rounded-t-[6px]"
+                              : "rounded-[6px]";
                         return (
                           <motion.button
                             key={p.id}
@@ -1640,34 +1610,50 @@ export const SettingsDialog = memo(({
                               haptic.light();
                               navigateTo(p.id);
                             }}
-                            whileHover={!isActive ? { scale: 1.02 } : {}}
-                            whileTap={{ scale: 0.96 }}
-                            animate={{
-                              backgroundColor: isActive ? "var(--primary-container)" : "transparent",
-                              borderColor: isActive ? "var(--primary-container)" : "var(--outline-variant)",
-                            }}
-                            transition={{ type: "spring", stiffness: 350, damping: 22 }}
+                            whileHover={!isActive ? { scale: 1.015, x: 2 } : {}}
+                            whileTap={{ scale: 0.98 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 25 }}
                             className={cn(
-                              "grid grid-cols-[28px_1fr_15px] items-center px-3 py-2.5 border-[5px] cursor-pointer w-full group justify-items-center",
+                              "flex items-center w-full px-3 py-3 gap-3 transition-colors duration-200 border-0 outline-none select-none cursor-pointer group",
                               roundedClass,
                               isActive
-                                ? "text-[var(--on-primary-container)] font-bold"
-                                : "text-[var(--on-surface-variant)] hover:text-[var(--on-surface)]"
+                                ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
+                                : "bg-[var(--surface-variant)] text-[var(--on-surface)] hover:bg-[var(--surface-variant)]/80"
                             )}
                             aria-current={isActive ? "page" : undefined}
                           >
-                            <motion.div
-                              animate={{
-                                backgroundColor: isActive ? "var(--primary)" : "var(--surface)",
-                                borderColor: isActive ? "var(--primary)" : "var(--outline-variant)",
-                                color: isActive ? "var(--on-primary)" : "var(--primary)",
-                              }}
-                              transition={{ type: "spring", stiffness: 350, damping: 22 }}
-                              className="w-7 h-7 flex items-center justify-center rounded-full border-[2px] shrink-0"
+                            {/* left icon circle */}
+                            <div
+                              className={cn(
+                                "w-9 h-9 flex items-center justify-center rounded-full transition-all shrink-0 border-0 shadow-none",
+                                isActive
+                                  ? "bg-[var(--primary)] text-[var(--on-primary)] shadow-sm"
+                                  : "bg-[var(--surface)] text-[var(--primary)] group-hover:scale-105"
+                              )}
                             >
-                              <PageIcon size={14} />
-                            </motion.div>
-                            <span className="text-[13px] font-semibold text-center">{p.title}</span>
+                              <PageIcon size={18} fill={false} weight={isActive ? 600 : 450} />
+                            </div>
+
+                            {/* centered label */}
+                            <span className={cn(
+                              "flex-1 text-center font-display tracking-tight text-md leading-none",
+                              isActive ? "font-black text-[var(--on-primary-container)]" : "font-bold text-[var(--on-surface)]"
+                            )}>
+                              {p.title}
+                            </span>
+
+                            {/* right chevron with no container */}
+                            <div className="shrink-0 flex items-center justify-center w-4">
+                              <ChevronRight
+                                size={16}
+                                className={cn(
+                                  "transition-all duration-200",
+                                  isActive
+                                    ? "text-[var(--on-primary-container)] opacity-60"
+                                    : "text-[var(--on-surface-variant)] opacity-35 group-hover:opacity-80 group-hover:translate-x-0.5"
+                                )}
+                              />
+                            </div>
                           </motion.button>
                         );
                       })}
@@ -1675,10 +1661,8 @@ export const SettingsDialog = memo(({
 
                     {/* spacer + divider */}
                     <div className="mt-auto pt-3">
-                      <div className="flex items-center gap-2 mb-2 px-1">
-                        <div className="flex-1 h-px bg-[var(--outline-variant)]/40" />
-                      </div>
-                      <div className="flex flex-col gap-[3px]">
+                      <div className="mx-2 mb-2.5 h-px bg-[var(--outline-variant)]/30 rounded-full" />
+                      <div className="flex flex-col gap-1">
                         {BOTTOM_PAGES.map((p, index, arr) => {
                           const PageIcon = p.icon;
                           const isActive = activePage === p.id;
@@ -1686,12 +1670,12 @@ export const SettingsDialog = memo(({
                           const isFirst = index === 0;
                           const isLast = index === arr.length - 1;
                           const roundedClass = isSingle
-                            ? "rounded-[1.5rem]"
+                            ? "rounded-[22px]"
                             : isFirst
-                              ? "rounded-t-[1.5rem] rounded-b-[0.6rem]"
+                              ? "rounded-t-[22px] rounded-b-[6px]"
                               : isLast
-                                ? "rounded-b-[1.5rem] rounded-t-[0.6rem]"
-                                : "rounded-[0.6rem]";
+                                ? "rounded-b-[22px] rounded-t-[6px]"
+                                : "rounded-[6px]";
                           return (
                             <motion.button
                               key={p.id}
@@ -1699,34 +1683,44 @@ export const SettingsDialog = memo(({
                                 haptic.light();
                                 navigateTo(p.id);
                               }}
-                              whileHover={!isActive ? { scale: 1.02 } : {}}
-                              whileTap={{ scale: 0.96 }}
-                              animate={{
-                                backgroundColor: isActive ? "var(--primary-container)" : "transparent",
-                                borderColor: isActive ? "var(--primary-container)" : "var(--outline-variant)",
-                                opacity: isActive ? 1 : 0.7,
-                              }}
-                              transition={{ type: "spring", stiffness: 350, damping: 22 }}
+                              whileHover={!isActive ? { scale: 1.015, x: 2 } : {}}
+                              whileTap={{ scale: 0.98 }}
+                              transition={{ type: "spring", stiffness: 400, damping: 25 }}
                               className={cn(
-                                "grid grid-cols-[28px_1fr_15px] items-center px-3 py-2.5 border-[5px] cursor-pointer w-full group hover:opacity-100 justify-items-center",
+                                "flex items-center w-full px-3 py-3 gap-3 transition-colors duration-200 border-0 outline-none select-none cursor-pointer group",
                                 roundedClass,
                                 isActive
-                                  ? "text-[var(--on-primary-container)] font-bold"
-                                  : "text-[var(--on-surface-variant)] hover:text-[var(--on-surface)]"
+                                  ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
+                                  : "bg-[var(--surface-variant)]/60 text-[var(--on-surface)] hover:bg-[var(--surface-variant)]/90"
                               )}
                             >
-                              <motion.div
-                                animate={{
-                                  backgroundColor: isActive ? "var(--primary)" : "var(--surface)",
-                                  borderColor: isActive ? "var(--primary)" : "var(--outline-variant)",
-                                  color: isActive ? "var(--on-primary)" : "var(--on-surface-variant)",
-                                }}
-                                transition={{ type: "spring", stiffness: 350, damping: 22 }}
-                                className="w-7 h-7 flex items-center justify-center rounded-full border-[2px] shrink-0"
+                              <div
+                                className={cn(
+                                  "w-9 h-9 flex items-center justify-center rounded-full transition-all shrink-0 border-0 shadow-none",
+                                  isActive
+                                    ? "bg-[var(--primary)] text-[var(--on-primary)] shadow-sm"
+                                    : "bg-[var(--surface)] text-[var(--primary)] group-hover:scale-105"
+                                )}
                               >
-                                <PageIcon size={14} className={cn("shrink-0", (p.id === "debug" || p.id === "info") && "translate-x-[0.5px]")} />
-                              </motion.div>
-                              <span className="text-[13px] font-semibold text-center">{p.title}</span>
+                                <PageIcon size={18} className={cn("shrink-0", (p.id === "debug" || p.id === "info") && "translate-x-[0.5px]")} fill={false} weight={isActive ? 600 : 450} />
+                              </div>
+                              <span className={cn(
+                                "flex-1 text-center font-display tracking-tight text-md leading-none",
+                                isActive ? "font-black text-[var(--on-primary-container)]" : "font-bold text-[var(--on-surface)] opacity-90 group-hover:opacity-100"
+                              )}>
+                                {p.title}
+                              </span>
+                              <div className="shrink-0 flex items-center justify-center w-4">
+                                <ChevronRight
+                                  size={16}
+                                  className={cn(
+                                    "transition-all duration-200",
+                                    isActive
+                                      ? "text-[var(--on-primary-container)] opacity-60"
+                                      : "text-[var(--on-surface-variant)] opacity-35 group-hover:opacity-80 group-hover:translate-x-0.5"
+                                  )}
+                                />
+                              </div>
                             </motion.button>
                           );
                         })}

@@ -452,7 +452,7 @@ export default function App() {
                 </div>
               )}
               <div className="flex-1 flex flex-col min-h-0 relative group/nav" onMouseMove={(e) => { const rect = e.currentTarget.getBoundingClientRect(); const y = e.clientY - rect.top; setNavHoverSide(y < rect.height / 2 ? "top" : "bottom"); }} onMouseLeave={() => setNavHoverSide(null)}>
-                <nav id="sidebar-nav" className={cn("flex-1 flex flex-col overflow-y-auto min-h-0 py-12 scrollbar-hide", canScrollUp && canScrollDown ? "mask-both" : (canScrollUp ? "mask-top" : (canScrollDown ? "mask-bottom" : "")), "gap-5.5", settings.sidebarCollapsed ? "items-center px-2" : "items-stretch px-4")} data-rail-state={settings.sidebarCollapsed ? "default" : "open"}>
+                <nav id="sidebar-nav" className={cn("flex-1 flex flex-col overflow-y-auto min-h-0 py-2 scrollbar-hide", canScrollUp && canScrollDown ? "mask-both" : (canScrollUp ? "mask-top" : (canScrollDown ? "mask-bottom" : "")), "gap-2", settings.sidebarCollapsed ? "items-center px-2" : "items-stretch px-2")} data-rail-state={settings.sidebarCollapsed ? "default" : "open"}>
                   <M3ScrollBar className="ml-3" scrollEl={navRef} colorful thinOnly />
                   <SideItem highHz={settings.highHz} isFirst glyph={M3Home} text="Home" isSelected={page === "home"} onSelect={() => goto("home")} isMini={settings.sidebarCollapsed} isFloating={settings.floatingSidebar} isShort={is_short} />
                   <SideItem highHz={settings.highHz} glyph={M3Info} text="Info" isSelected={page === "readme"} onSelect={() => goto("readme")} isMini={settings.sidebarCollapsed} isFloating={settings.floatingSidebar} isShort={is_short} />
@@ -476,34 +476,47 @@ export default function App() {
                   )}
                 </AnimatePresence>
               </div>
-              <div className={cn("mt-auto flex flex-col pt-4", settings.sidebarCollapsed ? cn("items-center gap-5.5", is_short ? "pb-4" : "pb-10") : cn("px-2 gap-4", is_short ? "pb-2" : "pb-4"))} data-rail-state={settings.sidebarCollapsed ? "default" : "open"}>
+              <div className={cn("mt-auto flex flex-col pt-3", settings.sidebarCollapsed ? cn("items-center gap-4", is_short ? "pb-3" : "pb-6") : cn("px-2 gap-3", is_short ? "pb-2" : "pb-4"))} data-rail-state={settings.sidebarCollapsed ? "default" : "open"}>
                 {!settings.sidebarCollapsed && (
-                <div className="mx-1 mb-2 h-px border-3 border-[var(--outline-variant)] rounded-md bg-[var(--outline-variant)]" />)}
+                  <div className="mx-2 mb-2 h-px bg-[var(--outline-variant)]/30 rounded-full" />
+                )}
                 
-                <div className={cn("flex flex-col", settings.sidebarCollapsed ? "w-full items-center gap-5.5" : "gap-4")}>
+                <div className={cn("flex flex-col", settings.sidebarCollapsed ? "w-full items-center gap-4" : "gap-2.5")}>
                   
-                  <SideItem highHz={settings.highHz} glyph={M3Settings} text="Settings" onSelect={() => setSettingsOpen(true)} isMini={settings.sidebarCollapsed} isShort={is_short} isFirst isFloating={settings.floatingSidebar} layoutId="settings-expansion" />
+                  <SideItem highHz={settings.highHz} glyph={M3Settings} text="Settings" onSelect={() => setSettingsOpen(true)} isMini={settings.sidebarCollapsed} isShort={is_short} isFirst isLast isFloating={settings.floatingSidebar} layoutId="settings-expansion" />
                   {!settings.sidebarCollapsed && (
-                    <div className="grid grid-cols-2 gap-4 w-full">
-                      <BounceButton icon={Github} label="GitHub" url="https://github.com/hnpf" className="flex items-center justify-center gap-2 border-6 border-[var(--outline-variant)]/40 py-4 px-3 rounded-[20px] bg-[var(--surface-variant)]/30 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface-variant)] transition-colors text-sm font-expressive-bold" />
-                      <BounceButton icon={M3Chat} label="Discord" url="https://discord.gg/TSZNYbjzF7" className="flex items-center justify-center gap-2 border-6 border-[var(--outline-variant)]/40 py-4 px-3 rounded-[20px] bg-[var(--surface-variant)]/30 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface-variant)] transition-colors text-sm font-expressive-bold" />
+                    <div className="grid grid-cols-2 gap-2 w-full">
+                      <BounceButton icon={Github} label="GitHub" url="https://github.com/hnpf" className="flex items-center justify-center gap-2.5 h-14 rounded-[24px] bg-[var(--surface-variant)]/50 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)] transition-all duration-200 text-sm font-expressive tracking-wide font-black shadow-none" />
+                      <BounceButton icon={M3Chat} label="Discord" url="https://discord.gg/TSZNYbjzF7" className="flex items-center justify-center gap-2.5 h-14 rounded-[24px] bg-[var(--surface-variant)]/50 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)] transition-all duration-200 text-sm font-expressive tracking-wide font-black shadow-none" />
                     </div>
                   )}
                   <div className={cn("w-full flex justify-center", settings.sidebarCollapsed && "px-0")}>
                     <motion.button 
                       layout 
-                      whileHover={{ scale: 1.08, y: -3 }}
-                      whileTap={{ scale: 0.9 }}
+                      whileHover={{ scale: 1.03, y: -1 }}
+                      whileTap={{ scale: 0.96 }}
                       transition={{
                         type: "spring",
-                        stiffness: 1000,
-                        damping: 15,
-                        mass: 0
+                        stiffness: 500,
+                        damping: 25,
                       }}
-                  onClick={() => updateSettings({ sidebarCollapsed: !settings.sidebarCollapsed })} 
-
-                      className={cn("flex items-center justify-center ring-6 ring-[var(--outline-variant)]/40 outline-none cursor-pointer transition-colors", settings.sidebarCollapsed ? "w-14 h-14 rounded-[18px] bg-[var(--surface-variant)] text-[var(--on-surface-variant)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)]" : "w-full py-4 rounded-t-[15px] rounded-b-[28px] bg-[var(--surface-variant)]/30 hover:bg-[var(--surface-variant)] text-[var(--on-surface-variant)]")} >
-                      {settings.sidebarCollapsed ? <M3ChevronRight size={22} fill /> : <M3ChevronLeft size={22} fill />}
+                      onClick={() => updateSettings({ sidebarCollapsed: !settings.sidebarCollapsed })} 
+                      className={cn(
+                        "flex items-center justify-center outline-none cursor-pointer transition-all duration-200",
+                        settings.sidebarCollapsed
+                          ? "w-14 h-14 rounded-full bg-[var(--surface-variant)] text-[var(--on-surface)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)]"
+                          : "w-full h-14 rounded-[24px] bg-[var(--surface-variant)]/50 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)] gap-3 font-expressive text-[15px] tracking-widest font-black"
+                      )}
+                      aria-label={settings.sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+                    >
+                      {settings.sidebarCollapsed ? (
+                        <M3ChevronRight size={24} fill />
+                      ) : (
+                        <>
+                          <M3ChevronLeft size={22} fill />
+                          <span>Collapse</span>
+                        </>
+                      )}
                     </motion.button>
                   </div>
                 </div>

@@ -46,7 +46,7 @@ export const ChangelogPage = memo(() => {
               <div className="columns-1 md:columns-2 gap-8 space-y-8 md:space-y-0">
                 {entry.changes.map((group) => (
                   <div key={group.category} className="break-inside-avoid space-y-4 mb-8">
-                    <h4 className="text-[13px] font-black tracking-[0.2em] opacity-40 flex items-center gap-2">
+                    <h4 className="text-[13px] font-black tracking-[0.1em] opacity-40 flex items-center gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-[var(--primary)]" />
                       {group.category}
                     </h4>
