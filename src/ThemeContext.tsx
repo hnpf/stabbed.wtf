@@ -25,6 +25,8 @@ interface ThemeSettings {
   amoledMode: boolean;
   bentoTilt: boolean;
   lensDynamicTheming: boolean;
+  metricUnits: boolean;
+  dynamicWeatherLocation: boolean;
   toTopShape: 'clover' | 'cookie' | 'squircle';
   paletteHotkey: 'ctrl-k' | 'cmd-k' | 'ctrl-shift-p';
   paletteDefaultView: 'cards' | 'bento';
@@ -64,6 +66,8 @@ const DEFAULT_SETTINGS: ThemeSettings = {
   amoledMode: false,
   bentoTilt: false,
   lensDynamicTheming: false,
+  metricUnits: true,
+  dynamicWeatherLocation: false,
   toTopShape: 'clover',
   paletteHotkey: 'ctrl-k',
   paletteDefaultView: 'cards',

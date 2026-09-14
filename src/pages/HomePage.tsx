@@ -283,65 +283,188 @@ type WeatherData = {
   weatherCode: number;
 };
 
-const WEATHER_LOCATION = {
+const VIREX_LOCATION = {
   label: "Nederland",
   latitude: 52.1326,
   longitude: 5.2913,
 };
 
+let cachedUserLocation: { label: string; latitude: number; longitude: number } | null = null;
+
+const detectUserLocation = async (signal?: AbortSignal) => {
+  if (cachedUserLocation) return cachedUserLocation;
+  try {
+    const res = await fetch("https://get.geojs.io/v1/ip/geo.json", { signal });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.latitude && data.longitude) {
+        cachedUserLocation = {
+          label: data.city || data.region || data.country || "Local",
+          latitude: parseFloat(data.latitude),
+          longitude: parseFloat(data.longitude),
+        };
+        return cachedUserLocation;
+      }
+    }
+  } catch {}
+
+  try {
+    const res = await fetch("https://ipwho.is/", { signal });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.success && data.latitude && data.longitude) {
+        cachedUserLocation = {
+          label: data.city || data.region || data.country || "Local",
+          latitude: data.latitude,
+          longitude: data.longitude,
+        };
+        return cachedUserLocation;
+      }
+    }
+  } catch {}
+
+  return VIREX_LOCATION;
+};
+
 const weatherDescription = (code: number) => {
-  if (code === 0) return { title: "Clear", detail: "Skies", icon: "sunny" };
-  if (code <= 3) return { title: "Partly", detail: "Cloudy", icon: "partly_cloudy_day" };
-  if (code <= 48) return { title: "Misty", detail: "Fog", icon: "foggy" };
-  if (code <= 57) return { title: "Light", detail: "Drizzle", icon: "rainy" };
-  if (code <= 67 || code <= 82) return { title: "Rainy", detail: "Weather", icon: "rainy" };
-  if (code <= 86) return { title: "Snowy", detail: "Weather", icon: "weather_snowy" };
-  return { title: "Stormy", detail: "Weather", icon: "thunderstorm" };
+  switch (code) {
+    case 0:
+      return { title: "Clear", detail: "Skies", icon: "sunny" };
+    case 1:
+      return { title: "Mostly", detail: "Clear", icon: "sunny" };
+    case 2:
+      return { title: "Partly", detail: "Cloudy", icon: "partly_cloudy_day" };
+    case 3:
+      return { title: "Overcast", detail: "Clouds", icon: "cloud" };
+    case 45:
+    case 48:
+      return { title: "Misty", detail: "Fog", icon: "foggy" };
+    case 51:
+    case 53:
+    case 55:
+      return { title: "Light", detail: "Drizzle", icon: "rainy" };
+    case 56:
+    case 57:
+      return { title: "Freezing", detail: "Drizzle", icon: "ac_unit" };
+    case 61:
+    case 63:
+      return { title: "Rainy", detail: "Weather", icon: "rainy" };
+    case 65:
+      return { title: "Heavy", detail: "Rain", icon: "rainy" };
+    case 66:
+    case 67:
+      return { title: "Freezing", detail: "Rain", icon: "ac_unit" };
+    case 71:
+    case 73:
+      return { title: "Light", detail: "Snow", icon: "weather_snowy" };
+    case 75:
+      return { title: "Heavy", detail: "Snow", icon: "weather_snowy" };
+    case 77:
+      return { title: "Snow", detail: "Grains", icon: "weather_snowy" };
+    case 80:
+    case 81:
+      return { title: "Passing", detail: "Showers", icon: "rainy" };
+    case 82:
+      return { title: "Heavy", detail: "Showers", icon: "rainy" };
+    case 85:
+    case 86:
+      return { title: "Snow", detail: "Showers", icon: "weather_snowy" };
+    case 95:
+      return { title: "Thunder", detail: "Storm", icon: "thunderstorm" };
+    case 96:
+    case 99:
+      return { title: "Severe", detail: "Storm", icon: "thunderstorm" };
+    default:
+      if (code <= 3) return { title: "Clear", detail: "Skies", icon: "sunny" };
+      if (code <= 48) return { title: "Misty", detail: "Fog", icon: "foggy" };
+      if (code <= 67) return { title: "Rainy", detail: "Weather", icon: "rainy" };
+      if (code <= 86) return { title: "Snowy", detail: "Weather", icon: "weather_snowy" };
+      return { title: "Stormy", detail: "Weather", icon: "thunderstorm" };
+  }
 };
 
 const WeatherWidget = () => {
+  const { settings, updateSettings } = useTheme();
+  const useMetric = settings.metricUnits ?? true;
+  const isDynamic = Boolean(settings.dynamicWeatherLocation);
+
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const [currentLocation, setCurrentLocation] = useState<{ label: string; latitude: number; longitude: number }>(VIREX_LOCATION);
+  const [isDetectingLocation, setIsDetectingLocation] = useState(false);
 
   useEffect(() => {
+    let isMounted = true;
     const controller = new AbortController();
-    const params = new URLSearchParams({
-      latitude: String(WEATHER_LOCATION.latitude),
-      longitude: String(WEATHER_LOCATION.longitude),
-      current: "temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m",
-      temperature_unit: "fahrenheit",
-      wind_speed_unit: "mph",
-      timezone: "auto",
-    });
 
-    fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
-      signal: controller.signal,
-    })
-      .then((response) => {
+    const fetchWeatherAndLocation = async () => {
+      setIsLoading(true);
+      let targetLocation = VIREX_LOCATION;
+
+      if (isDynamic) {
+        setIsDetectingLocation(true);
+        targetLocation = await detectUserLocation(controller.signal);
+        if (!isMounted) return;
+        setIsDetectingLocation(false);
+      }
+
+      if (isMounted) {
+        setCurrentLocation(targetLocation);
+      }
+
+      try {
+        const params = new URLSearchParams({
+          latitude: String(targetLocation.latitude),
+          longitude: String(targetLocation.longitude),
+          current: "temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m",
+          temperature_unit: useMetric ? "celsius" : "fahrenheit",
+          wind_speed_unit: useMetric ? "kmh" : "mph",
+          timezone: "auto",
+        });
+
+        const response = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`, {
+          signal: controller.signal,
+        });
+
         if (!response.ok) throw new Error(`weather request failed: ${response.status}`);
-        return response.json();
-      })
-      .then((data) => {
+        const data = await response.json();
         const current = data.current;
         if (!current) throw new Error("weather response had no current conditions");
-        setWeather({
-          temperature: Math.round(current.temperature_2m),
-          humidity: Math.round(current.relative_humidity_2m),
-          windSpeed: Math.round(current.wind_speed_10m),
-          weatherCode: current.weather_code,
-        });
-        setHasError(false);
-      })
-      .catch((error) => {
-        if (error.name !== "AbortError") setHasError(true);
-      })
-      .finally(() => setIsLoading(false));
 
-    return () => controller.abort();
-  }, []);
+        if (isMounted) {
+          setWeather({
+            temperature: Math.round(current.temperature_2m),
+            humidity: Math.round(current.relative_humidity_2m),
+            windSpeed: Math.round(current.wind_speed_10m),
+            weatherCode: current.weather_code,
+          });
+          setHasError(false);
+          setIsLoading(false);
+        }
+      } catch (error: any) {
+        if (error.name !== "AbortError" && isMounted) {
+          setHasError(true);
+          setIsLoading(false);
+        }
+      }
+    };
 
-  const condition = weatherDescription(weather?.weatherCode ?? 3);
+    fetchWeatherAndLocation();
+
+    // 15 min auto refreshing
+    const interval = setInterval(() => {
+      fetchWeatherAndLocation();
+    }, 15 * 60 * 1000);
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+      clearInterval(interval);
+    };
+  }, [useMetric, isDynamic]);
+
+  const condition = weather !== null ? weatherDescription(weather.weatherCode) : { title: "Current", detail: "Weather", icon: "sunny" };
 
   return (
     <motion.div 
@@ -387,19 +510,57 @@ const WeatherWidget = () => {
         </span>
       </div>
 
-      <div className="mt-8 flex items-center gap-6 relative z-10 pt-6 before:absolute before:top-0 before:left-0 before:right-40 md:before:right-[200px] before:border-t-4 before:border-[var(--outline-variant)]/20">
-        <div className="flex items-baseline gap-1">
+      <div className="mt-8 flex items-center gap-4 sm:gap-6 relative z-10 pt-6 before:absolute before:top-0 before:left-0 before:right-40 md:before:right-[200px] before:border-t-4 before:border-[var(--outline-variant)]/20">
+        <div className="flex items-baseline gap-1 shrink-0">
           <span className="text-1xl md:text-2xl font-display font-black italic">{weather ? weather.humidity : "--"}</span>
           <span className="text-[10px] md:text-[15px] font-black ml-1 italic font-display font-sans opacity-50 tracking-widest">Hum</span>
         </div>
-        <div className="flex items-baseline gap-1">
+        <div className="flex items-baseline gap-1 shrink-0">
           <span className="text-1xl md:text-2xl font-display font-black italic">{weather ? weather.windSpeed : "--"}</span>
-          <span className="text-[10px] md:text-[15px] font-black ml-1 italic font-display font-sans opacity-50 tracking-widest">Mph</span>
+          <span className="text-[10px] md:text-[15px] font-black ml-1 italic font-display font-sans opacity-50 tracking-widest">{useMetric ? "Km/h" : "Mph"}</span>
         </div>
-        <div className="ml-auto flex items-center gap-1 opacity-40" title={WEATHER_LOCATION.label}>
-          <MaterialIcon name="location_on" className="pr-1" size={19} fill />
-          <span className="text-[11px] italic md:text-[15px] font-black tracking-widest">{WEATHER_LOCATION.label}</span>
-        </div>
+        <motion.button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            haptic.light();
+            updateSettings({ dynamicWeatherLocation: !isDynamic });
+          }}
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.94 }}
+          transition={{ type: "spring", stiffness: 400, damping: 25 }}
+          className={cn(
+            "ml-auto flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-transparent transition-all cursor-pointer select-none group",
+            isDynamic
+              ? "bg-[var(--primary-container)]/50 text-[var(--on-primary-container)] border-[var(--primary)]/20 shadow-sm"
+              : "opacity-45 hover:opacity-100 hover:bg-[var(--surface-variant)] hover:border-[var(--outline-variant)]/40"
+          )}
+          title={
+            isDynamic
+              ? `Showing your local weather (${currentLocation.label}) • Click to switch to Virex's weather (Nederland)`
+              : `Showing Virex's weather (Nederland) • Click to switch to your local weather`
+          }
+        >
+          <MaterialIcon
+            name={isDetectingLocation ? "progress_activity" : isDynamic ? "my_location" : "location_on"}
+            className={cn(
+              "transition-transform shrink-0",
+              isDetectingLocation && "animate-spin text-[var(--primary)]",
+              isDynamic && !isDetectingLocation && "text-[var(--primary)] scale-105"
+            )}
+            size={16}
+            fill={!isDetectingLocation}
+          />
+          <span className="text-[11px] italic md:text-[14px] font-black tracking-wider max-w-[85px] sm:max-w-[120px] truncate transition-transform duration-200 group-hover:-translate-x-0.5">
+            {currentLocation.label}
+          </span>
+          <span className="w-0 opacity-0 group-hover:w-3.5 group-hover:opacity-70 transition-all duration-200 ease-out overflow-hidden flex items-center justify-center shrink-0 -translate-x-1 group-hover:translate-x-0">
+            <MaterialIcon
+              name="sync_alt"
+              size={13}
+            />
+          </span>
+        </motion.button>
       </div>
       <a
         href="https://open-meteo.com/"

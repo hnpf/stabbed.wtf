@@ -537,6 +537,16 @@ export const SettingsDialog = memo(({
             <div className="flex flex-col gap-1">
               {[
                 {
+                  key: "metricUnits",
+                  label: "Metric Units",
+                  desc: "Use metric units (°C, km/h) for weather (off switches to imperial)",
+                },
+                {
+                  key: "dynamicWeatherLocation",
+                  label: "Local Weather Detection",
+                  desc: "Autodetect your city for weather widget (off shows virex's weather)",
+                },
+                {
                   key: "helloAnimation",
                   label: "Hello Animation",
                   desc: "Fluent language cycling home hero",
@@ -575,6 +585,11 @@ export const SettingsDialog = memo(({
                   key: "lensDynamicTheming",
                   label: "Lens Dynamic Theming",
                   desc: "Match the theme to an expanded Lens photo",
+                },
+                {
+                  key: "metricUnits",
+                  label: "Metric Units",
+                  desc: "Use metric units (°C, km/h) for weather (off switches to imperial)",
                 },
               ]
                 .filter((tweak) => !(is_mobile && tweak.key === "bentoTilt"))
@@ -1059,7 +1074,7 @@ export const SettingsDialog = memo(({
                           "sidebarCollapsed", "profileContainer", "brutalistMode",
                           "developerFont", "focusMode", "floatingSidebar", "infoFullscreen", "debugMode",
                           "helloAnimation", "disableAnimations", "highHz", "amoledMode",
-                          "bentoTilt"
+                          "bentoTilt", "lensDynamicTheming", "metricUnits", "dynamicWeatherLocation"
                         ];
                         for (const k of keys) {
                           if (decoded[k] !== undefined) {
@@ -1101,7 +1116,7 @@ export const SettingsDialog = memo(({
                             "sidebarCollapsed", "profileContainer", "brutalistMode",
                             "developerFont", "focusMode", "floatingSidebar", "infoFullscreen", "debugMode",
                             "helloAnimation", "disableAnimations", "highHz", "amoledMode",
-                            "bentoTilt"
+                            "bentoTilt", "lensDynamicTheming", "metricUnits", "dynamicWeatherLocation"
                           ];
                           for (const k of keys) {
                             if (decoded[k] !== undefined) {

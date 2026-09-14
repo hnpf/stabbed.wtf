@@ -110,6 +110,8 @@ export const getSettingsSearchItems = (
     { key: "disableAnimations", label: "Disable animations", desc: "Turn off motion & transition effects" },
     { key: "bentoTilt", label: "3D bento tilt", desc: "Cursor tracking parallax tilt effect" },
     { key: "lensDynamicTheming", label: "Lens dynamic theming", desc: "Match theme to expanded Lens photo" },
+    { key: "metricUnits", label: "Metric units", desc: "Use metric units (°C, km/h) for weather (off switches to imperial)" },
+    { key: "dynamicWeatherLocation", label: "Local weather detection", desc: "Auto-detect visitor's city for weather" },
   ];
 
   customizationOptions.forEach((opt) => {
