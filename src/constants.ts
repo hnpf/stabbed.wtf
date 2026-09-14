@@ -48,7 +48,7 @@ export const PROJECTS: Project[] = [
     id: "demarkify",
     title: "Demarkify",
     description:
-      "a fast, non-dependent tool/library to detect, decode, and remove hidden ai watermarks, steganography, invisible characters, homoglyphs, and even byte anomalies from any text.",
+      "a fast, non-dependent tool/library to detect, decode, and remove hidden unicode-based ai tracking markers, steganography, invisible characters, homoglyphs, and even byte anomalies from any text.",
     link: "https://github.com/hnpf/demarkify",
     tags: ["typescript", "unicode"],
   },
