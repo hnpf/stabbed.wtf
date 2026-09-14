@@ -1028,6 +1028,57 @@ it's literally just people helping people for learning (and overall better code 
 
 export const CHANGELOGS: ChangelogEntry[] = [
   {
+    id: "small-touches-update",
+    version: "2026.08.14",
+    title: "small touches update",
+    date: "Sep 14, 2026",
+    changes: [
+      {
+        category: "New projects",
+        items: [
+          "added `torr` and `demarkify` projects to the projects section of the homepage.",
+        ],
+      },
+      {
+        category: "(Major changes) Weather Widget",
+        items: [
+          "redefined condition mapping",
+          "fixed units mismatch",
+          "added a toggle for metric units",
+          "added an automatic background refresh interval (15 min auto-refreshing)",
+          "added switching from virex (my) location, to user local location, along with preferences in settings",
+        ],
+      },
+      {
+        category: "Command Palette changes",
+        items: [
+          "made the search bar more expressive (animations, clear, etc.)",
+        ],
+      },
+      {
+        category: "Mobile mode changes",
+        items: [
+          "imrpoved music-related components and scaling for mobile devices",
+        ],
+      },
+      {
+        category: "Curling virex.lol",
+        items: [
+          "running `curl https://virex.lol` will now output a card in which essentially lets you navigate the site in your terminal. have fun!",
+        ],
+      },
+      {
+        category: "Other changes",
+        items: [
+          "fixed scrollbar positioning",
+          "fixed env issues and fallbacks for LASTFM_CONFIG if runtime env object doesnt have keys set explicitly",
+          "fixed env parsing",
+          "improved bot ssr handling",
+        ],
+      },
+    ],
+  },
+  {
     id: "memory-reduction-overhaul",
     version: "2026.08.17",
     title: "memory reduction overhaul",
