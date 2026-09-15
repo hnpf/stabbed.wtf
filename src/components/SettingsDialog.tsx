@@ -1474,7 +1474,7 @@ export const SettingsDialog = memo(({
                         className="flex flex-col justify-between flex-1"
                       >
                         {/* main pages group */}
-                        <div className="flex flex-col gap-2">
+                        <div className="flex flex-col gap-1">
                           {visibleMainPages.map((page, index, arr) => {
                             const PageIcon = page.icon;
                             const isFirst = index === 0;
@@ -1520,7 +1520,7 @@ export const SettingsDialog = memo(({
                         </div>
 
                         {/* divider + bottom pages wrapped together so they stay anchored */}
-                        <div className="flex flex-col gap-2 mt-4">
+                        <div className="flex flex-col gap-1 mt-4">
                           <div className="flex items-center gap-4 px-1 pt-1 pb-1">
                             <div className="flex-1 h-px bg-[var(--outline-variant)]/30" />
                             <span className="text-[12px] font-black tracking-[0.1em] uppercase opacity-40 font-expressive">More</span>
