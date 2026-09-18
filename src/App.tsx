@@ -492,7 +492,6 @@ export default function App() {
                   )}
                   <div className={cn("w-full flex justify-center", settings.sidebarCollapsed && "px-0")}>
                     <motion.button 
-                      layout="position"
                       whileHover={{ scale: 1.02, y: -1 }}
                       whileTap={{ scale: 0.96 }}
                       transition={{

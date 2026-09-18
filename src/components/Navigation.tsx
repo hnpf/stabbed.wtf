@@ -23,27 +23,11 @@ export const SideItem = memo(
   }: any) => {
     const [isHovered, setIsHovered] = useState(false);
 
-    // squishy spring, better settle
     const squishySpring = {
       type: "spring" as const,
-      stiffness: highHz ? 400 : 350,
-      damping: highHz ? 28 : 25,
-      mass: 0.8,
-    };
-
-    const sideItemSpring = {
-      type: "spring" as const,
-      stiffness: highHz ? 800 : 700,
-      damping: highHz ? 40 : 35,
-      mass: 0.2,
-    };
-
-    const settingsSpring = {
-      type: "spring" as const,
-      stiffness: highHz ? 400 : 300,
-      damping: highHz ? 35 : 30,
-      mass: 1.2,
-      restDelta: 0.001,
+      stiffness: highHz ? 450 : 380,
+      damping: highHz ? 32 : 28,
+      mass: 0.6,
     };
 
     const rd =
@@ -58,19 +42,12 @@ export const SideItem = memo(
     if (isMini) {
       return (
         <motion.button
-          layout="position"
           initial={false}
           animate={{
             opacity: 1,
             scale: 1,
           }}
-          transition={{
-            opacity: { duration: 0.2 },
-            layout: settingsSpring,
-            default: squishySpring,
-            scale: { type: "spring", stiffness: 400, damping: 28 },
-            rotate: { type: "spring", stiffness: 400, damping: 24 },
-          }}
+          transition={squishySpring}
           whileHover={{ scale: 1.08, rotate: 2 }}
           whileTap={{ scale: 0.92, rotate: -4 }}
           onClick={(e) => {
@@ -80,13 +57,13 @@ export const SideItem = memo(
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           className={cn(
-            "relative group outline-none cursor-pointer font-black motion-gpu isolate flex flex-col justify-center items-center w-full shadow-none bg-transparent gap-0 sidebar-item",
+            "relative group outline-none cursor-pointer select-none flex flex-col justify-center items-center w-full shadow-none bg-transparent gap-0 sidebar-item",
             isShort ? "h-12" : "h-16",
             isSelected && "active",
           )}
         >
           {/* icon container */}
-          <div className="relative z-10 shrink-0 flex items-center justify-center transition-all duration-300 h-8 w-14 border-0 shadow-none outline-none ring-0">
+          <div className="relative z-10 shrink-0 flex items-center justify-center h-8 w-14 border-0 shadow-none outline-none ring-0">
             {/* m3 active indicator pill (mini version) */}
             {isSelected && (
               <div
@@ -100,25 +77,22 @@ export const SideItem = memo(
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 0.8, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.15 }}
                 className="absolute inset-0 bg-[var(--surface-variant)] rounded-full -z-10 border-0 shadow-none outline-none ring-0"
               />
             )}
 
             <div
-              style={{
-                color: isSelected
-                  ? "var(--on-primary-container)"
+              className={cn(
+                "relative z-10 flex items-center justify-center transition-transform duration-200 ease-out",
+                isSelected
+                  ? "text-[var(--on-primary-container)] scale-110 -rotate-6"
                   : isHovered
-                    ? "var(--primary)"
-                    : "var(--on-surface-variant)",
-                transform: isSelected
-                  ? "scale(1.1) rotate(-5deg)"
-                  : isHovered
-                    ? (text === "Settings" ? "scale(1.05) rotate(45deg)" : "scale(1.05) rotate(-2deg)")
-                    : "scale(1) rotate(0deg)",
-                transition: "transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.15s ease",
-              }}
-              className="relative z-10 flex items-center justify-center"
+                    ? text === "Settings"
+                      ? "text-[var(--primary)] scale-105 rotate-45"
+                      : "text-[var(--primary)] scale-105 -rotate-3"
+                    : "text-[var(--on-surface-variant)] scale-100 rotate-0"
+              )}
             >
               <Icon size={24} weight={isSelected ? 600 : 450} fill={false} />
             </div>
@@ -146,20 +120,13 @@ export const SideItem = memo(
 
     return (
       <motion.button
-        layout="position"
         initial={false}
         animate={{
           opacity: 1,
           scale: 1,
           x: 0,
         }}
-        transition={{
-          opacity: { duration: 0.2 },
-          layout: settingsSpring,
-          default: squishySpring,
-          scale: { type: "spring", stiffness: 400, damping: 30 },
-          x: { type: "spring", stiffness: 400, damping: 30 },
-        }}
+        transition={squishySpring}
         whileHover={{ scale: 1.015, x: 4 }}
         whileTap={{ scale: 0.98, x: -1 }}
         onClick={(e) => {
@@ -169,7 +136,7 @@ export const SideItem = memo(
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className={cn(
-          "relative group outline-none cursor-pointer motion-gpu isolate flex items-center w-full px-3.5 gap-3.5 transition-colors duration-200 sidebar-item select-none border-0 shadow-none ring-0",
+          "relative group outline-none cursor-pointer flex items-center w-full px-3.5 gap-3.5 transition-colors duration-200 sidebar-item select-none border-0 shadow-none ring-0",
           isFloating ? "py-4" : isShort ? "py-2.5" : "py-3.5",
           rd,
           isSelected
@@ -180,33 +147,30 @@ export const SideItem = memo(
         {/* left icon container */}
         <div
           className={cn(
-            "relative z-10 shrink-0 flex items-center justify-center w-11 h-11 rounded-full transition-all duration-200 border-0 shadow-none outline-none ring-0",
+            "relative z-10 shrink-0 flex items-center justify-center w-11 h-11 rounded-full transition-colors duration-200 border-0 shadow-none outline-none ring-0",
             isSelected
               ? "bg-[var(--primary)] text-[var(--on-primary)]"
-              : "bg-[var(--surface)] text-[var(--primary)] group-hover:scale-105"
+              : "bg-[var(--surface)] text-[var(--primary)]"
           )}
         >
           <div
-            style={{
-              transform: isSelected
-                ? "scale(1.08) rotate(-5deg)"
+            className={cn(
+              "flex items-center justify-center transition-transform duration-200 ease-out",
+              isSelected
+                ? "scale-105 -rotate-6"
                 : isHovered
-                  ? (text === "Settings" ? "scale(1.08) rotate(45deg)" : "scale(1.08) rotate(-2deg)")
-                  : "scale(1) rotate(0deg)",
-              transition: "transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)",
-            }}
-            className="flex items-center justify-center"
+                  ? text === "Settings"
+                    ? "scale-105 rotate-45"
+                    : "scale-105 -rotate-3"
+                  : "scale-100 rotate-0"
+            )}
           >
             <Icon size={24} weight={isSelected ? 600 : 450} fill={false} />
           </div>
         </div>
 
         {/* centered text */}
-        <motion.span
-          animate={{
-            x: isSelected ? 2 : 0,
-          }}
-          transition={{ type: "spring" as const, stiffness: 400, damping: 25 }}
+        <span
           className={cn(
             "flex-1 text-center font-bold tracking-[1.6px] text-[18px] relative z-10 transition-colors duration-200 leading-none",
             isSelected
@@ -215,7 +179,7 @@ export const SideItem = memo(
           )}
         >
           {text}
-        </motion.span>
+        </span>
 
         {/* small semi-opaque chevron right on right with no container */}
         <div className="shrink-0 flex items-center justify-center w-5 relative z-10">
@@ -244,13 +208,12 @@ export const SideAction = memo(({ children, onClick, isMini, tooltip, className 
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={cn(
-        "flex items-center justify-center p-4 rounded-xl group relative outline-none overflow-hidden cursor-pointer motion-gpu sidebar-item",
+        "flex items-center justify-center p-4 rounded-xl group relative outline-none overflow-hidden cursor-pointer sidebar-item select-none",
         !className?.includes("bg-") &&
         "bg-[var(--surface-variant)] text-[var(--on-surface-variant)]",
         isMini ? "w-14 h-14 mx-auto" : "flex-1",
         className,
       )}
-      style={{ transform: "translateZ(0)" }}
     >
       <AnimatePresence>
         {isHovered && (
@@ -266,13 +229,13 @@ export const SideAction = memo(({ children, onClick, isMini, tooltip, className 
 
       <motion.div
         animate={{
-          scale: isHovered ? 1.1 : 1,
+          scale: isHovered ? 1.08 : 1,
         }}
         style={{
           color: isHovered ? "var(--on-primary-container)" : "inherit",
         }}
         transition={{ duration: 0.2 }}
-        className="relative z-10 transition-colors duration-200"
+        className="relative z-10 transition-colors duration-200 flex items-center justify-center"
       >
         {children}
       </motion.div>

@@ -7,6 +7,7 @@ type MaterialIconProps = Omit<HTMLAttributes<HTMLSpanElement>, "children"> & {
   weight?: number;
   strokeWidth?: number;
   grade?: number;
+  opsz?: number;
 };
 
 /** official material symbols rounded, tweaked for virex.lol! */
@@ -17,21 +18,33 @@ export function MaterialIcon({
   weight,
   strokeWidth,
   grade = 0,
+  opsz,
   className = "",
   style,
   ...props
 }: MaterialIconProps) {
   const sizePx = typeof size === "number" ? `${size}px` : size;
+  const numericSize = typeof size === "number" ? size : parseInt(String(size), 10) || 24;
   const isFilled = fill === true || fill === 1 || fill === "1" || fill === "true";
   const resolvedWeight = weight ?? (strokeWidth ? (strokeWidth >= 2.5 ? 600 : 450) : 450);
-  const iconStyle = {
+  const resolvedOpsz = opsz ?? Math.min(48, Math.max(20, Math.round(numericSize)));
+
+  const iconStyle: CSSProperties = {
+    fontFamily: '"Material Symbols Rounded", sans-serif',
     fontSize: sizePx,
     width: sizePx,
     height: sizePx,
     lineHeight: 1,
-    fontVariationSettings: `'FILL' ${isFilled ? 1 : 0}, 'wght' ${resolvedWeight}, 'GRAD' ${grade}, 'opsz' 24`,
+    fontWeight: resolvedWeight,
+    fontStretch: "100%",
+    fontStyle: "normal",
+    letterSpacing: "normal",
+    textTransform: "none",
+    fontVariationSettings: `'FILL' ${isFilled ? 1 : 0}, 'wght' ${resolvedWeight}, 'GRAD' ${grade}, 'opsz' ${resolvedOpsz}`,
+    WebkitFontSmoothing: "antialiased",
+    MozOsxFontSmoothing: "grayscale",
     ...style,
-  } as CSSProperties;
+  };
 
   return (
     <span

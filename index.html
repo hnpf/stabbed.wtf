@@ -57,11 +57,23 @@
         src: url('/fonts/GoogleSansFlex-Variable.woff2') format('woff2');
         unicode-range: U+0000-00FF;
       }
+      @font-face {
+        font-family: 'Material Symbols Rounded';
+        font-style: normal;
+        font-weight: 100 700;
+        font-display: block;
+        src: url('/fonts/MaterialSymbolsRounded.woff2') format('woff2');
+      }
       html, body, #root, .app-root {
-        font-family: 'Google Sans Flex Local', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif !important;
+        font-family: 'Google Sans Flex Local', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
         font-variation-settings: "wght" var(--gsf-wght, 820), "wdth" var(--gsf-wdth, 80), "slnt" var(--gsf-slnt, 0), "GRAD" var(--gsf-grad, 0), "ROND" var(--gsf-rond, 0);
         font-weight: var(--gsf-wght, 820);
         font-stretch: calc(var(--gsf-wdth, 80) * 1%);
+      }
+      .material-symbols-rounded {
+        font-family: 'Material Symbols Rounded', sans-serif !important;
+        font-stretch: 100% !important;
+        font-style: normal !important;
       }
     </style>
   </head>

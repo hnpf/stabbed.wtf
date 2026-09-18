@@ -1551,8 +1551,10 @@ export const SettingsDialog = memo(({
                                 )}
                               >
                                 <div className="flex items-center gap-3.5">
-                                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--surface)] text-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-[var(--on-primary)] transition-all shrink-0 border-0 shadow-xs">
-                                    <PageIcon size={20} className={cn("shrink-0", page.id === "debug" && "-translate-x-[0.5px]")} />
+                                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--surface)] text-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-[var(--on-primary)] transition-colors duration-200 shrink-0 border-0 shadow-xs">
+                                    <div className="flex items-center justify-center transition-transform duration-200 ease-out group-hover:scale-105">
+                                      <PageIcon size={20} className={cn("shrink-0", page.id === "debug" && "-translate-x-[0.5px]")} />
+                                    </div>
                                   </div>
                                   <div>
                                     <div className="font-bold text-[15px]">{page.title}</div>
@@ -1625,13 +1627,15 @@ export const SettingsDialog = memo(({
                             {/* left icon circle */}
                             <div
                               className={cn(
-                                "w-9 h-9 flex items-center justify-center rounded-full transition-all shrink-0 border-0 shadow-none",
+                                "w-9 h-9 flex items-center justify-center rounded-full transition-colors duration-200 shrink-0 border-0 shadow-none",
                                 isActive
                                   ? "bg-[var(--primary)] text-[var(--on-primary)] shadow-sm"
-                                  : "bg-[var(--surface)] text-[var(--primary)] group-hover:scale-105"
+                                  : "bg-[var(--surface)] text-[var(--primary)]"
                               )}
                             >
-                              <PageIcon size={18} fill={false} weight={isActive ? 600 : 450} />
+                              <div className="flex items-center justify-center transition-transform duration-200 ease-out group-hover:scale-105">
+                                <PageIcon size={18} fill={false} weight={isActive ? 600 : 450} />
+                              </div>
                             </div>
 
                             {/* centered label */}
@@ -1696,13 +1700,15 @@ export const SettingsDialog = memo(({
                             >
                               <div
                                 className={cn(
-                                  "w-9 h-9 flex items-center justify-center rounded-full transition-all shrink-0 border-0 shadow-none",
+                                  "w-9 h-9 flex items-center justify-center rounded-full transition-colors duration-200 shrink-0 border-0 shadow-none",
                                   isActive
                                     ? "bg-[var(--primary)] text-[var(--on-primary)] shadow-sm"
-                                    : "bg-[var(--surface)] text-[var(--primary)] group-hover:scale-105"
+                                    : "bg-[var(--surface)] text-[var(--primary)]"
                                 )}
                               >
-                                <PageIcon size={18} className={cn("shrink-0", (p.id === "debug" || p.id === "info") && "translate-x-[0.5px]")} fill={false} weight={isActive ? 600 : 450} />
+                                <div className="flex items-center justify-center transition-transform duration-200 ease-out group-hover:scale-105">
+                                  <PageIcon size={18} className={cn("shrink-0", (p.id === "debug" || p.id === "info") && "translate-x-[0.5px]")} fill={false} weight={isActive ? 600 : 450} />
+                                </div>
                               </div>
                               <span className={cn(
                                 "flex-1 text-center font-display tracking-tight text-md leading-none",

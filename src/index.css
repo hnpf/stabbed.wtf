@@ -91,24 +91,26 @@ body, .gsf-global {
 
 @layer base {
     .material-symbols-rounded {
-        font-family: "Material Symbols Rounded";
-        font-weight: normal;
-        font-style: normal;
+        font-family: "Material Symbols Rounded", sans-serif !important;
+        font-weight: normal !important;
+        font-style: normal !important;
+        font-stretch: 100% !important;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         line-height: 1;
-        letter-spacing: normal;
-        text-transform: none;
+        letter-spacing: normal !important;
+        text-transform: none !important;
         white-space: nowrap;
         word-wrap: normal;
         direction: ltr;
-        -webkit-font-feature-settings: "liga";
+        -webkit-font-feature-settings: "liga" 1;
+        font-feature-settings: "liga" 1;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        text-rendering: geometricPrecision;
-        font-feature-settings: "liga";
+        text-rendering: optimizeLegibility;
         font-variation-settings: "FILL" 0, "wght" 450, "GRAD" 0, "opsz" 24;
+        user-select: none;
     }
 
     :root {
@@ -270,9 +272,7 @@ body, .gsf-global {
     .m3-chip,
     .m3-button-filled,
     .m3-button-tonal,
-    .sidebar-item,
     .bottom-nav-item,
-    .settings-modal-content,
     .m3-switch,
     .m3-slider {
         backface-visibility: hidden;
@@ -1243,7 +1243,7 @@ body, .gsf-global {
 }
 
 html, body, #root, .app-root {
-    font-family: var(--font-sans), system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+    font-family: var(--font-sans), system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     font-variation-settings: "wght" var(--gsf-wght, 820), "wdth" var(--gsf-wdth, 80), "slnt" var(--gsf-slnt, 0), "GRAD" var(--gsf-grad, 0), "ROND" var(--gsf-rond, 0);
     font-weight: var(--gsf-wght, 820);
     font-stretch: calc(var(--gsf-wdth, 80) * 1%);
