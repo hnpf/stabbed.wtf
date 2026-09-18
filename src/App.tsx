@@ -492,31 +492,49 @@ export default function App() {
                   )}
                   <div className={cn("w-full flex justify-center", settings.sidebarCollapsed && "px-0")}>
                     <motion.button 
-                      layout 
-                      whileHover={{ scale: 1.03, y: -1 }}
+                      layout="position"
+                      whileHover={{ scale: 1.02, y: -1 }}
                       whileTap={{ scale: 0.96 }}
                       transition={{
                         type: "spring",
-                        stiffness: 500,
-                        damping: 25,
+                        stiffness: settings.highHz ? 450 : 380,
+                        damping: settings.highHz ? 32 : 28,
                       }}
                       onClick={() => updateSettings({ sidebarCollapsed: !settings.sidebarCollapsed })} 
                       className={cn(
-                        "flex items-center justify-center outline-none cursor-pointer transition-colors duration-150 border-0 shadow-none",
+                        "flex items-center justify-center outline-none cursor-pointer transition-all duration-200 border-0 shadow-none overflow-hidden",
                         settings.sidebarCollapsed
                           ? "w-14 h-14 rounded-full bg-[var(--surface-variant)] text-[var(--on-surface)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)]"
-                          : "w-full h-14 rounded-[24px] bg-[var(--surface-variant)]/50 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)] gap-3 font-expressive text-[15px] tracking-widest font-black"
+                          : "w-full h-14 rounded-[24px] bg-[var(--surface-variant)]/50 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)] gap-3 font-expressive text-[15px] tracking-widest font-black px-4"
                       )}
                       aria-label={settings.sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
                     >
-                      {settings.sidebarCollapsed ? (
-                        <M3ChevronRight size={24} fill />
-                      ) : (
-                        <>
-                          <M3ChevronLeft size={22} fill />
-                          <span>Collapse</span>
-                        </>
-                      )}
+                      <motion.div
+                        animate={{
+                          rotate: (settings.sidebarCollapsed !== settings.sidebarFlipped) ? 0 : 180,
+                        }}
+                        transition={{
+                          type: "spring",
+                          stiffness: settings.highHz ? 450 : 380,
+                          damping: settings.highHz ? 32 : 28,
+                        }}
+                        className="flex items-center justify-center shrink-0"
+                      >
+                        <M3ChevronRight size={22} fill />
+                      </motion.div>
+                      <AnimatePresence initial={false}>
+                        {!settings.sidebarCollapsed && (
+                          <motion.span
+                            initial={{ opacity: 0, width: 0 }}
+                            animate={{ opacity: 1, width: "auto" }}
+                            exit={{ opacity: 0, width: 0 }}
+                            transition={{ duration: 0.15, ease: "easeInOut" }}
+                            className="whitespace-nowrap overflow-hidden"
+                          >
+                            Collapse
+                          </motion.span>
+                        )}
+                      </AnimatePresence>
                     </motion.button>
                   </div>
                 </div>
