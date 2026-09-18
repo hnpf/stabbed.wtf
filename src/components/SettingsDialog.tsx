@@ -20,9 +20,6 @@ import {
   ChevronRight,
   ChevronLeft,
   Bug,
-  Activity,
-  Link as LinkIcon,
-  Compass,
 } from "./MaterialIcon";
 import { cn } from "../constants";
 import Switch from "./M3Switch";

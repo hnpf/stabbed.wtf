@@ -1,6 +1,5 @@
-// 
 import React, { useState, useCallback, useRef, useEffect } from "react";
-import { motion, AnimatePresence, MotionConfig } from "motion/react";
+import { motion, MotionConfig } from "motion/react";
 import { cn } from "../constants";
 import { haptic } from "../haptics";
 import { useTheme } from "../ThemeContext";

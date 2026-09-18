@@ -3,20 +3,15 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useDragControls } from "motion/react";
 import {
   Terminal,
-  Cpu,
-  Check,
   X,
   Palette,
-  Layers,
   Zap,
   Trash2,
-  Database,
   Search,
   MousePointer,
   HelpCircle,
   Wifi,
   CornerDownRight,
-  Minimize2,
 } from "./MaterialIcon";
 import { X as LucideX, Minus as LucideMinus } from "lucide-react";
 import { useTheme } from "../ThemeContext";

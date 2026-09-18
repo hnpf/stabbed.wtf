@@ -29,9 +29,6 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
   const glass_class = "backdrop-blur-sm md:backdrop-blur-md";
 
   useEffect(() => {
-  }, [is_mobile]);
-
-  useEffect(() => {
     if (!swoopDone || is_mobile) return;
     const itv = setInterval(() => {
       if (Math.random() > 0.7) return;
@@ -41,7 +38,7 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
       setTimeout(() => setFlick([]), 60 + Math.random() * 120);
     }, 800 + Math.random() * 1000);
     return () => clearInterval(itv);
-  }, [swoopDone, letters.length]);
+  }, [swoopDone, is_mobile, letters.length]);
 
   return (
     <motion.div
