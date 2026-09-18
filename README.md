@@ -35,13 +35,13 @@ My personal website. Uses a Material 3 Expressive styled shell, photo gallery, b
     <td><img src="github/demo/virex.png" width="220"/></td>
     <td><img src="github/demo/blog.png" width="220"/></td>
     <td><img src="github/demo/settings.png" width="220"/></td>
-    <td><img src="github/demo/readme.png" width="220"/></td>
+    <td><img src="github/demo/info.png" width="220"/></td>
   </tr>
   <tr>
     <td align="center"><sub>home</sub></td>
     <td align="center"><sub>blog</sub></td>
     <td align="center"><sub>settings</sub></td>
-    <td align="center"><sub>readme</sub></td>
+    <td align="center"><sub>info</sub></td>
   </tr>
 </table>
 
@@ -51,13 +51,13 @@ My personal website. Uses a Material 3 Expressive styled shell, photo gallery, b
     <td><img src="github/demo/mobilevirex.png" width="160"/></td>
     <td><img src="github/demo/mobileblog.png" width="160"/></td>
     <td><img src="github/demo/mobilesettings.png" width="160"/></td>
-    <td><img src="github/demo/mobilereadme.png" width="160"/></td>
+    <td><img src="github/demo/mobileinfo.png" width="160"/></td>
   </tr>
   <tr>
     <td align="center"><sub>home</sub></td>
     <td align="center"><sub>blog</sub></td>
     <td align="center"><sub>settings</sub></td>
-    <td align="center"><sub>readme</sub></td>
+    <td align="center"><sub>info</sub></td>
   </tr>
 </table>
 
