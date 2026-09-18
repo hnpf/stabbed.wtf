@@ -372,13 +372,13 @@ export default function App() {
       <AnimatePresence>
         {!settings.focusMode && (page !== "readme" || !settings.infoFullscreen) && !is_mobile && (
           <motion.aside
-            initial={{ x: settings.sidebarFlipped ? 60 : -60, opacity: 0 }}
+            initial={{ x: settings.sidebarFlipped ? 60 : -60, opacity: 0, width: 0, paddingLeft: 0, paddingRight: 0 }}
             animate={{ x: 0, opacity: 1, width: settings.sidebarCollapsed ? (settings.floatingSidebar ? 144 : 96) : (settings.floatingSidebar ? (is_tablet ? 280 : 350) : (is_tablet ? 260 : 320)), paddingTop: settings.floatingSidebar ? "1.5rem" : "12px", paddingBottom: settings.floatingSidebar ? "1.5rem" : "12px", paddingLeft: settings.sidebarFlipped ? (settings.floatingSidebar ? "1.5rem" : "12px") : (settings.floatingSidebar ? "1.5rem" : "0px"), paddingRight: settings.sidebarFlipped ? (settings.floatingSidebar ? "1.5rem" : "0px") : (settings.floatingSidebar ? "1.5rem" : "12px"), borderTopLeftRadius: settings.floatingSidebar || settings.sidebarFlipped ? "3rem" : "0rem", borderBottomLeftRadius: settings.floatingSidebar || settings.sidebarFlipped ? "3rem" : "0rem", borderTopRightRadius: settings.floatingSidebar || !settings.sidebarFlipped ? "3rem" : "0rem", borderBottomRightRadius: settings.floatingSidebar || !settings.sidebarFlipped ? "3rem" : "0rem" }}
             style={{ backgroundColor: settings.floatingSidebar ? "transparent" : "var(--outline-variant)" }}
-            exit={{ x: settings.sidebarFlipped ? 400 : -400, opacity: 0, transition: { type: "spring", stiffness: 300, damping: 30 } }}
+            exit={{ x: settings.sidebarFlipped ? 60 : -60, opacity: 0, width: 0, paddingLeft: 0, paddingRight: 0, transition: springConfig }}
             transition={springConfig}
             layout
-            className="flex-col sticky top-0 h-screen z-40 motion-gpu transition-colors duration-300"
+            className="flex-col sticky top-0 h-screen z-40 motion-gpu transition-colors duration-300 overflow-hidden shrink-0"
           >
             <motion.div
               layout
@@ -521,8 +521,10 @@ export default function App() {
       </AnimatePresence>
 
       <motion.main
+        layout
+        transition={springConfig}
         id="primary-content"
-        className={cn("flex-1 overflow-x-hidden page-container", (page === "readme" && settings.infoFullscreen) ? "p-0" : "p-6 md:p-12 lg:p-16", settings.forceDesktop || viewport.w >= 768 ? "pb-16" : "pb-40")}
+        className={cn("flex-1 overflow-x-hidden page-container transition-[max-width,margin] duration-300 ease-out", (page === "readme" && settings.infoFullscreen) ? "p-0" : "p-6 md:p-12 lg:p-16", settings.forceDesktop || viewport.w >= 768 ? "pb-16" : "pb-40")}
         style={
           !settings.forceDesktop && viewport.w < 768
             ? { paddingBottom: `calc(env(safe-area-inset-bottom, 12px) + 10rem)` }
