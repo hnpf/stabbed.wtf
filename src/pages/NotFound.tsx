@@ -1,7 +1,6 @@
-// @ts-nocheck
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowLeft, AlertTriangle, Terminal, Home } from '../components/MaterialIcon';
+import { ArrowLeft, AlertTriangle, Home } from '../components/MaterialIcon';
 
 // might be worth adding a search box here at some point but maybe useless??
 const NotFound = ({ go }: { go?: (page: string) => void }) => {
@@ -50,7 +49,7 @@ const NotFound = ({ go }: { go?: (page: string) => void }) => {
           className="py-6 md:py-0 space-y-8"
         >
           <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[11rem] font-expressive font-black tracking-tighter mb-8 text-balance leading-[0.8] italic">
-            {missing ? "This link doesn't exist." : "This link doesn't exist."}
+            This link doesn't exist.
           </h2>
           <p className="text-xl md:text-3xl text-[var(--on-surface-variant)] opacity-50 font-medium max-w-2xl mx-auto leading-tight px-6 text-pretty italic">
             {missing 

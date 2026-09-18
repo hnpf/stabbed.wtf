@@ -6,7 +6,6 @@ import { MUSIC_RELEASES, type MusicRelease } from "../constants";
 import { useTheme } from "../ThemeContext";
 import { haptic } from "../haptics";
 import { 
-  Headphones, 
   Disc, 
   Play, 
   X, 
