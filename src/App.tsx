@@ -1,28 +1,7 @@
 // @ts-nocheck
 import React, { useState, useEffect, useRef, memo, lazy, Suspense } from "react";
 import { motion, AnimatePresence, MotionConfig } from "motion/react";
-import {
-  Home,
-  BookText,
-  Camera,
-  Activity,
-  Fingerprint,
-  Settings as SettingsIcon,
-  Cpu,
-  Github,
-  Mail,
-  MessageSquare,
-  ChevronLeft,
-  ChevronRight,
-  X,
-  Terminal,
-  ArrowUpRight,
-  Link as LinkIcon,
-  Layers,
-  EyeOff,
-  Check,
-  Palette,
-} from "lucide-react";
+import { Github } from "lucide-react";
 
 import { useTheme } from "./ThemeContext";
 import { ScrollToTopButton } from "./components/ScrollToTopButton";
@@ -63,8 +42,6 @@ import { BounceButton } from "./components/TechStack";
 import { M3WindowScrollBar, M3ScrollBar } from "./components/M3ScrollBar";
 import { materialIcon } from "./components/MaterialIcon";
 import { BLOG_POSTS } from "./constants";
-
-import "./navigation/navigation-rail.css";
 
 const M3Home = materialIcon("home");
 const M3Info = materialIcon("fingerprint");
