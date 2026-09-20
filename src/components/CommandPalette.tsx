@@ -677,9 +677,9 @@ export function CommandPalette({
                                 )}
                               >
                                 {isLastOdd ? (
-                                  <div className="flex items-center justify-between w-full gap-3.5">
-                                    <div className="flex items-center gap-3.5 min-w-0 flex-1">
-                                      {/* icon container */}
+                                  <div className="relative flex flex-col items-center justify-center w-full py-0.5 text-center">
+                                    {/* icon container on left */}
+                                    <div className="absolute left-0 top-1/2 -translate-y-1/2">
                                       <div
                                         className={cn(
                                           "w-11 h-11 flex items-center justify-center rounded-2xl shrink-0 transition-colors duration-150 overflow-hidden border-2",
@@ -701,30 +701,32 @@ export function CommandPalette({
                                           )}
                                         </div>
                                       </div>
+                                    </div>
 
-                                      {/* text content */}
-                                      <div className="min-w-0 flex-1">
-                                        <div className={cn(
-                                          "text-[15px] sm:text-[16px] tracking-tight leading-snug line-clamp-1",
+                                    {/* text content dead-centered on X axis */}
+                                    <div className="w-full flex flex-col items-center justify-center text-center px-12 sm:px-14">
+                                      <div className="flex items-center justify-center gap-2 max-w-full">
+                                        <span className={cn(
+                                          "text-[15px] sm:text-[16px] tracking-tight leading-snug truncate font-expressive",
                                           isActive ? "font-black text-[var(--on-primary-container)]" : "font-bold text-[var(--on-surface)]"
                                         )}>
                                           {item.label}
-                                        </div>
-                                        {item.description && (
-                                          <p className="text-xs sm:text-[13.5px] opacity-75 font-medium line-clamp-2 mt-0.5 leading-relaxed text-[var(--on-surface-variant)]">
-                                            {item.description}
-                                          </p>
+                                        </span>
+                                        {isRecent && (
+                                          <span className="rounded-full bg-[var(--primary)] text-[var(--on-primary)] px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider shrink-0 shadow-xs">
+                                            Recent
+                                          </span>
                                         )}
                                       </div>
+                                      {item.description && (
+                                        <p className="text-xs sm:text-[13.5px] opacity-75 font-medium line-clamp-2 mt-0.5 leading-relaxed text-[var(--on-surface-variant)] text-center w-full">
+                                          {item.description}
+                                        </p>
+                                      )}
                                     </div>
 
-                                    {/* right badges */}
-                                    <div className="flex items-center gap-1.5 shrink-0 pl-2">
-                                      {isRecent && (
-                                        <span className="rounded-full bg-[var(--primary)] text-[var(--on-primary)] px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider shadow-xs">
-                                          Recent
-                                        </span>
-                                      )}
+                                    {/* right action indicator */}
+                                    <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center shrink-0">
                                       {isActive && (
                                         <span className="inline-flex items-center justify-center h-6 min-w-[26px] px-1.5 rounded-lg bg-[var(--primary)] text-[var(--on-primary)] shadow-xs leading-none select-none">
                                           <CornerDownLeft size={13} strokeWidth={2.5} />
