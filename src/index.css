@@ -1189,6 +1189,7 @@ body, .gsf-global {
 .m3-ripple-target {
     overflow: hidden;
     isolation: isolate;
+    contain: paint;
 }
 
 .m3-ripple-target--positioned {
@@ -1205,7 +1206,7 @@ body, .gsf-global {
     pointer-events: none;
 }
 
-*:hover > .m3-ripple-container > .m3-ripple-hover,
+.m3-ripple-target:hover > .m3-ripple-container > .m3-ripple-hover,
 button:hover > .m3-ripple-container > .m3-ripple-hover,
 a:hover > .m3-ripple-container > .m3-ripple-hover {
     opacity: var(--ripple-hover-opacity, 0.08);

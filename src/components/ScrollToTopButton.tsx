@@ -122,7 +122,7 @@ export const ScrollToTopButton: React.FC<ScrollToTopButtonProps> = ({
         className={cn(
           "fixed z-50 select-none pointer-events-auto",
           isMobile
-            ? (showBottomNav ? "bottom-32" : "bottom-20")
+            ? (showBottomNav ? "bottom-[calc(env(safe-area-inset-bottom,12px)_+_84px)]" : "bottom-20")
             : "bottom-12 lg:bottom-12",
           isFlipped ? "left-6 lg:left-12" : "right-6 lg:right-12"
         )}
@@ -166,7 +166,9 @@ export const ScrollToTopButton: React.FC<ScrollToTopButtonProps> = ({
           className={cn(
             "flex items-center justify-center rounded-full group cursor-pointer outline-none focus:outline-none select-none",
             isExpanded
-              ? "p-1.5 md:p-2 border-6 border-[var(--outline)]/40 bg-[var(--surface-variant)]/95 backdrop-blur-xl shadow-2xl"
+              ? (isMobile
+                ? "p-1 bg-[var(--surface-container)]/95 backdrop-blur-xl shadow-lg"
+                : "p-1.5 md:p-2 border-6 border-[var(--outline)]/40 bg-[var(--surface-variant)]/95 backdrop-blur-xl shadow-2xl")
               : "p-0 bg-transparent shadow-none",
             isFlipped ? "flex-row" : "flex-row-reverse"
           )}
@@ -185,7 +187,7 @@ export const ScrollToTopButton: React.FC<ScrollToTopButtonProps> = ({
             }}
             className={cn(
               "relative flex items-center justify-center shrink-0 p-0",
-              "w-16 h-16 md:w-20 md:h-20"
+              "w-12 h-12 md:w-20 md:h-20"
             )}
           >
             {shape === "squircle" ? (
@@ -207,7 +209,7 @@ export const ScrollToTopButton: React.FC<ScrollToTopButtonProps> = ({
             {/* arrow icon in shape badge */}
             <div className="relative z-10 text-[var(--on-primary)] flex items-center justify-center pointer-events-none w-full h-full">
               <ArrowUp
-                className="text-[var(--on-primary)] w-8 h-8 md:w-10 md:h-10 shrink-0"
+                className="text-[var(--on-primary)] w-6 h-6 md:w-10 md:h-10 shrink-0"
                 strokeWidth={3}
               />
             </div>

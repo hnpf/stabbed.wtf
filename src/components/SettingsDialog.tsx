@@ -577,7 +577,7 @@ export const SettingsDialog = memo(({
               </div>
 
               {/* custom font scaling */}
-              <div className="p-4.5 rounded-2xl bg-[var(--surface-variant)] text-[var(--on-surface)] space-y-3.5 border-0">
+              <div className="px-1 py-2 text-[var(--on-surface)] space-y-3.5">
                 <div className="flex items-center justify-between gap-2">
                   <div>
                     <div className="font-bold text-[15px]">Custom Font Scaling</div>

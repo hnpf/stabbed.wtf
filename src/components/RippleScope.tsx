@@ -12,6 +12,17 @@ import { Ripple } from "./Ripple";
 export function RippleScope({ children }: { children: React.ReactNode }) {
   const scopeRef = useRef<HTMLDivElement>(null);
   const [targets, setTargets] = useState<HTMLElement[]>([]);
+  const targetKeys = useRef(new WeakMap<HTMLElement, string>());
+  const nextTargetKey = useRef(0);
+
+  const getTargetKey = (target: HTMLElement) => {
+    let key = targetKeys.current.get(target);
+    if (!key) {
+      key = `m3-ripple-${nextTargetKey.current++}`;
+      targetKeys.current.set(target, key);
+    }
+    return key;
+  };
 
   useEffect(() => {
     const scope = scopeRef.current;
@@ -20,14 +31,14 @@ export function RippleScope({ children }: { children: React.ReactNode }) {
     const selector = [
       "button:not([disabled])",
       "a[href]",
-      "label:has(.m3-switch)",
       '[role="button"]:not([aria-disabled="true"])',
       "[data-ripple]",
     ].join(",");
 
     const syncTargets = () => {
-      const next = Array.from(scope.querySelectorAll<HTMLElement>(selector)).filter(
-        (target) =>
+      const next = Array.from(scope.querySelectorAll(selector)).filter(
+        (target): target is HTMLElement =>
+          target instanceof HTMLElement &&
           !target.closest(".m3-ripple-container") &&
           !target.closest("[data-ripple-skip]") &&
           !target.hasAttribute("disabled"),
@@ -63,7 +74,7 @@ export function RippleScope({ children }: { children: React.ReactNode }) {
     <div ref={scopeRef} className="contents">
       {children}
       {targets.map((target) =>
-        createPortal(<Ripple enableHaptics={false} />, target, "m3-ripple"),
+        createPortal(<Ripple enableHaptics={false} />, target, getTargetKey(target)),
       )}
     </div>
   );
