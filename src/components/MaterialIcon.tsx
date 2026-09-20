@@ -122,6 +122,7 @@ export const MousePointer = materialIcon("ads_click");
 export const HelpCircle = materialIcon("help");
 export const Wifi = materialIcon("wifi");
 export const CornerDownRight = materialIcon("subdirectory_arrow_right");
+export const CornerDownLeft = materialIcon("keyboard_return");
 export const Minimize2 = materialIcon("minimize");
 export const Tag = materialIcon("sell");
 export const Folder = materialIcon("folder");
