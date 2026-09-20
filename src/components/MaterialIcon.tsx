@@ -78,6 +78,7 @@ export const Cpu = materialIcon("memory");
 export const Fingerprint = materialIcon("fingerprint");
 export const ExternalLink = materialIcon("open_in_new");
 export const Download = materialIcon("download");
+export const Upload = materialIcon("upload");
 export const Terminal = materialIcon("terminal");
 export const ChevronRight = materialIcon("chevron_right");
 export const ChevronLeft = materialIcon("chevron_left");

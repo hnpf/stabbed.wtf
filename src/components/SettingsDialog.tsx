@@ -16,12 +16,15 @@ import {
   Fingerprint,
   ExternalLink,
   Download,
+  Upload,
+  Link,
   Terminal,
   ChevronRight,
   ChevronLeft,
   Bug,
   Sparkles,
 } from "./MaterialIcon";
+import { M3TextField } from "./M3TextField";
 import { cn } from "../constants";
 import Switch from "./M3Switch";
 import Slider from "./M3Slider";
@@ -220,6 +223,43 @@ export const SettingsDialog = memo(({
   const PAGES = [...MAIN_PAGES, ...BOTTOM_PAGES] as const;
 
   const currentPageTitle = PAGES.find(p => p.id === activePage)?.title || "Settings";
+  const [importText, setImportText] = React.useState("");
+  const [shareCopied, setShareCopied] = React.useState(false);
+  const [backupExported, setBackupExported] = React.useState(false);
+
+  const applyImportedSettings = React.useCallback((decoded: unknown) => {
+    if (!decoded || typeof decoded !== "object" || Array.isArray(decoded)) {
+      throw new Error("Config must be an object");
+    }
+
+    const imported = decoded as Record<string, unknown>;
+    const validatedSettings: Record<string, unknown> = {};
+    for (const key of Object.keys(settings)) {
+      if (imported[key] !== undefined) validatedSettings[key] = imported[key];
+    }
+    if (Object.keys(validatedSettings).length === 0) {
+      throw new Error("No supported settings found");
+    }
+    updateSettings(validatedSettings);
+  }, [settings, updateSettings]);
+
+  const importFromLink = React.useCallback(() => {
+    const value = importText.trim();
+    if (!value) return;
+    try {
+      let capsule = value;
+      if (value.includes("theme=")) {
+        const urlParams = new URLSearchParams(value.substring(value.indexOf("?")));
+        capsule = urlParams.get("theme") || value;
+      }
+      applyImportedSettings(JSON.parse(atob(capsule)));
+      setImportText("");
+      setToast("config has been loaded!");
+      haptic.light();
+    } catch {
+      setToast("non valid capsule code or link :(");
+    }
+  }, [applyImportedSettings, importText, setToast]);
 
   const pageVariants = {
     initial: (dir: number) => ({
@@ -1184,33 +1224,52 @@ export const SettingsDialog = memo(({
                 Share & Backup
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <button
+                <motion.button
                   onClick={() => {
                     try {
                       const str = btoa(JSON.stringify(settings));
                       const shareUrl = `${window.location.origin}/?theme=${str}`;
                       navigator.clipboard.writeText(shareUrl);
                       setToast("Sharing link copied to clipboard!");
+                      setShareCopied(true);
+                      window.setTimeout(() => setShareCopied(false), 1800);
                     } catch (e) {
                       setToast("Failed to generate sharing link! :(");
                     }
                     haptic.light();
                   }}
-                  className="flex items-center justify-between p-4.5 bg-[var(--surface-variant)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] transition-all text-left rounded-2xl group cursor-pointer border-0 text-[var(--on-surface)]"
+                  whileHover={settings.disableAnimations ? undefined : { y: -2 }}
+                  whileTap={settings.disableAnimations ? undefined : { scale: 0.98 }}
+                  animate={shareCopied && !settings.disableAnimations ? { scale: [1, 1.025, 0.99, 1] } : { scale: 1 }}
+                  transition={{ type: "spring", stiffness: 480, damping: 25, mass: 0.55 }}
+                  className={cn(
+                    "flex items-center justify-between p-4.5 transition-colors text-left rounded-2xl group cursor-pointer border-0",
+                    shareCopied
+                      ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
+                      : "bg-[var(--surface-variant)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)]",
+                  )}
+                  aria-live="polite"
                 >
                   <div>
-                    <div className="font-bold text-[15px]">Copy config link</div>
+                    <div className="font-bold text-[15px]">{shareCopied ? "Link copied!" : "Copy config link"}</div>
                     <div className="text-xs opacity-60 font-medium">
-                      Get config as link
+                      {shareCopied ? "Ready to share" : "Get config as link"}
                     </div>
                   </div>
-                  <ExternalLink
-                    size={20}
-                    className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform opacity-60 group-hover:opacity-100"
-                  />
-                </button>
+                  <AnimatePresence mode="wait" initial={false}>
+                    {shareCopied ? (
+                      <motion.span key="copied" initial={{ opacity: 0, scale: 0.65, rotate: -35 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} exit={{ opacity: 0, scale: 0.65 }} transition={{ type: "spring", stiffness: 520, damping: 20 }}>
+                        <Check size={20} />
+                      </motion.span>
+                    ) : (
+                      <motion.span key="share" initial={{ opacity: 0, scale: 0.65, rotate: 25 }} animate={{ opacity: 0.6, scale: 1, rotate: 0 }} exit={{ opacity: 0, scale: 0.65 }} transition={{ type: "spring", stiffness: 520, damping: 20 }}>
+                        <ExternalLink size={20} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </motion.button>
 
-                <button
+                <motion.button
                   onClick={() => {
                     try {
                       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(settings, null, 2));
@@ -1220,113 +1279,102 @@ export const SettingsDialog = memo(({
                       downloadAnchor.click();
                       downloadAnchor.remove();
                       setToast("backup downloaded!");
+                      setBackupExported(true);
+                      window.setTimeout(() => setBackupExported(false), 1800);
                     } catch (e) {
                       setToast("failed to download backup :(");
                     }
                     haptic.light();
                   }}
-                  className="flex items-center justify-between p-4.5 bg-[var(--surface-variant)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] transition-all text-left rounded-2xl group cursor-pointer border-0 text-[var(--on-surface)]"
+                  whileHover={settings.disableAnimations ? undefined : { y: -2 }}
+                  whileTap={settings.disableAnimations ? undefined : { scale: 0.98 }}
+                  animate={backupExported && !settings.disableAnimations ? { scale: [1, 1.025, 0.99, 1] } : { scale: 1 }}
+                  transition={{ type: "spring", stiffness: 480, damping: 25, mass: 0.55 }}
+                  className={cn(
+                    "flex items-center justify-between p-4.5 transition-colors text-left rounded-2xl group cursor-pointer border-0",
+                    backupExported
+                      ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
+                      : "bg-[var(--surface-variant)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)]",
+                  )}
+                  aria-live="polite"
                 >
                   <div>
-                    <div className="font-bold text-[15px]">Export config file</div>
+                    <div className="font-bold text-[15px]">{backupExported ? "Backup downloaded!" : "Export config file"}</div>
                     <div className="text-xs opacity-60 font-medium">
-                      Get config as JSON
+                      {backupExported ? "Saved as virex-settings.json" : "Get config as JSON"}
                     </div>
                   </div>
-                  <Download
-                    size={20}
-                    className="group-hover:translate-y-0.5 transition-transform opacity-60 group-hover:opacity-100"
-                  />
-                </button>
+                  <AnimatePresence mode="wait" initial={false}>
+                    {backupExported ? (
+                      <motion.span key="downloaded" initial={{ opacity: 0, scale: 0.65, rotate: -35 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} exit={{ opacity: 0, scale: 0.65 }} transition={{ type: "spring", stiffness: 520, damping: 20 }}>
+                        <Check size={20} />
+                      </motion.span>
+                    ) : (
+                      <motion.span key="download" initial={{ opacity: 0, scale: 0.65, y: -4 }} animate={{ opacity: 0.6, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.65, y: 4 }} transition={{ type: "spring", stiffness: 520, damping: 20 }}>
+                        <Download size={20} className="group-hover:translate-y-0.5 transition-transform" />
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </motion.button>
               </div>
 
-              <div className="p-4.5 bg-[var(--surface-variant)] rounded-2xl space-y-3 border-0">
-                <div className="font-bold text-[15px]">Importing Your Config</div>
-                <div className="flex gap-2">
+              <div className="rounded-2xl bg-[var(--surface-variant)] p-4.5 space-y-3">
+                <div>
+                  <div className="font-bold text-[15px]">Restore a saved setup</div>
+                  <p className="mt-0.5 text-[12px] font-medium opacity-60">
+                    Paste a config link or choose a virex-settings.json backup. Your available settings update right away.
+                  </p>
+                </div>
+                <M3TextField
+                  type="text"
+                  label="Config link or code"
+                  leadingIcon={Link}
+                  value={importText}
+                  onChange={(event) => setImportText(event.target.value)}
+                  onEnter={importFromLink}
+                  trailing={{ icon: ChevronRight, label: "Apply config link", onClick: importFromLink, disabled: !importText.trim() }}
+                  aria-describedby="config-restore-help"
+                />
+                <div className="flex items-center gap-3" aria-hidden="true">
+                  <div className="h-px flex-1 bg-[var(--outline-variant)]/50" />
+                  <span className="text-[11px] font-bold uppercase tracking-[0.12em] opacity-45">or</span>
+                  <div className="h-px flex-1 bg-[var(--outline-variant)]/50" />
+                </div>
+                <label className="group flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border border-dashed border-[var(--outline-variant)]/80 bg-[var(--surface)] px-4 py-2.5 text-[var(--on-surface)] transition-colors hover:border-[var(--primary)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] focus-within:outline focus-within:outline-2 focus-within:outline-[var(--primary)]">
+                  <span className="flex size-9 items-center justify-center rounded-lg bg-[var(--surface-variant)] text-[var(--primary)] transition-colors group-hover:bg-[var(--primary)] group-hover:text-[var(--on-primary)]">
+                    <Upload size={20} />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-[13px] font-bold">Choose a backup file</span>
+                    <span className="block truncate text-[11px] font-medium opacity-60">JSON backup exported from virex.lol</span>
+                  </span>
+                  <ChevronRight size={20} className="opacity-55 transition-transform group-hover:translate-x-0.5" />
                   <input
-                    type="text"
-                    placeholder="Paste sharing link/code here..."
-                    className="flex-1 min-w-0 truncate bg-[var(--surface)] text-[var(--on-surface)] rounded-xl px-4 py-2.5 text-[13px] font-bold border-0 ring-1 ring-[var(--outline-variant)]/30 focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        const val = e.currentTarget.value.trim();
-                        if (!val) return;
+                    type="file"
+                    accept="application/json,.json"
+                    className="sr-only"
+                    onChange={(event) => {
+                      const file = event.target.files?.[0];
+                      if (!file) return;
+                      const reader = new FileReader();
+                      reader.onload = () => {
                         try {
-                          let capsule = val;
-                          if (val.includes("theme=")) {
-                            const urlParams = new URLSearchParams(val.substring(val.indexOf("?")));
-                            capsule = urlParams.get("theme") || val;
-                          }
-                          const decoded = JSON.parse(atob(capsule));
-                          const validatedSettings: Partial<typeof settings> = {};
-                          const keys: (keyof typeof settings)[] = [
-                            "mode", "accent", "hue", "saturation", "sidebarFlipped",
-                            "sidebarCollapsed", "profileContainer", "brutalistMode",
-                            "developerFont", "focusMode", "floatingSidebar", "infoFullscreen", "debugMode",
-                            "helloAnimation", "disableAnimations", "highHz", "amoledMode",
-                            "bentoTilt", "lensDynamicTheming", "metricUnits", "dynamicWeatherLocation"
-                          ];
-                          for (const k of keys) {
-                            if (decoded[k] !== undefined) {
-                              (validatedSettings as any)[k] = decoded[k];
-                            }
-                          }
-                          updateSettings(validatedSettings);
-                          setToast("config has been loaded!");
-                          e.currentTarget.value = "";
-                        } catch (err) {
-                          setToast("non valid capsule code or link :(");
+                          applyImportedSettings(JSON.parse(String(reader.result)));
+                          setToast("settings have been restored from backup!");
+                          haptic.light();
+                        } catch {
+                          setToast("non valid backup JSON file :(");
+                        } finally {
+                          event.target.value = "";
                         }
-                      }
+                      };
+                      reader.readAsText(file);
                     }}
                   />
-                  <motion.label
-                    whileTap={{ scale: 0.96 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                    onClick={() => {
-                      haptic.light();
-                    }}
-                    className="shrink-0 whitespace-nowrap bg-[var(--primary)] text-[var(--on-primary)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center cursor-pointer select-none border-0"
-                  >
-                    Upload File
-                    <input
-                      type="file"
-                      accept=".json"
-                      className="hidden"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (!file) return;
-                        const reader = new FileReader();
-                        reader.onload = (event) => {
-                          try {
-                            const decoded = JSON.parse(event.target?.result as string);
-                            const validatedSettings: Partial<typeof settings> = {};
-                            const keys: (keyof typeof settings)[] = [
-                              "mode", "accent", "hue", "saturation", "sidebarFlipped",
-                              "sidebarCollapsed", "profileContainer", "brutalistMode",
-                              "developerFont", "focusMode", "floatingSidebar", "infoFullscreen", "debugMode",
-                              "helloAnimation", "disableAnimations", "highHz", "amoledMode",
-                              "bentoTilt", "lensDynamicTheming", "metricUnits", "dynamicWeatherLocation"
-                            ];
-                            for (const k of keys) {
-                              if (decoded[k] !== undefined) {
-                                (validatedSettings as any)[k] = decoded[k];
-                              }
-                            }
-                            updateSettings(validatedSettings);
-                            setToast("settings have been restored from backup!");
-                          } catch (err) {
-                            setToast("non valid backup JSON file :(");
-                          }
-                        };
-                        reader.readAsText(file);
-                      }}
-                    />
-                  </motion.label>
-                </div>
-                <div className="text-[12px] opacity-50 font-medium">
-                  Press Enter to apply pasted sharing link. Pressing `ENTER` will update your theme immediately.
-                </div>
+                </label>
+                <p id="config-restore-help" className="text-[11px] font-medium opacity-50">
+                  Restore replaces only settings included in the link or backup; it never uploads your file.
+                </p>
               </div>
             </div>
 
