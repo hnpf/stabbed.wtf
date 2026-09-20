@@ -84,6 +84,8 @@ export const BounceButton = ({
       }
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={_on_click}
+      disabled={disabled || isLoading}
       aria-label={title || (typeof label === "string" ? label : undefined)}
       className={cn(
         "relative cursor-pointer select-none",
