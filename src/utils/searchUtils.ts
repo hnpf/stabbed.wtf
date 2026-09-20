@@ -106,7 +106,6 @@ export const getSettingsSearchItems = (
     { key: "brutalistMode", label: "Brutalist mode", desc: "Sharp edges only" },
     { key: "developerFont", label: "Developer font", desc: "Use JetBrains Mono" },
     { key: "focusMode", label: "Focus mode", desc: "Minimal zen layout" },
-    { key: "highHz", label: "120Hz animations", desc: "Replicates 120hz-level snappiness" },
     { key: "disableAnimations", label: "Disable animations", desc: "Turn off motion & transition effects" },
     { key: "bentoTilt", label: "3D bento tilt", desc: "Cursor tracking parallax tilt effect" },
     { key: "lensDynamicTheming", label: "Lens dynamic theming", desc: "Match theme to expanded Lens photo" },

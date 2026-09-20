@@ -20,6 +20,7 @@ import {
   ChevronRight,
   ChevronLeft,
   Bug,
+  Sparkles,
 } from "./MaterialIcon";
 import { cn } from "../constants";
 import Switch from "./M3Switch";
@@ -172,7 +173,7 @@ export const SettingsDialog = memo(({
   const [direction, setDirection] = React.useState(0);
 
   const navigateTo = React.useCallback((pageId: string) => {
-    const pages = ["menu", "appearance", "customization", "layout", "commandPalette", "backup", "debug", "about"];
+    const pages = ["menu", "appearance", "interface", "motion", "commandPalette", "system"];
     const from = pages.indexOf(prevPageRef.current);
     const to = pages.indexOf(pageId);
     setDirection(to > from ? 1 : -1);
@@ -202,11 +203,10 @@ export const SettingsDialog = memo(({
   }, [activePage]);
 
   const MAIN_PAGES = [
-    { id: "appearance", title: "Appearance", desc: "Theme mode, softer dark colors, palettes", icon: Palette },
-    { id: "customization", title: "Customization", desc: "Interface toggles, animations, brutalist", icon: SettingsIcon },
-    { id: "layout", title: "Nav & Layout", desc: "Sidebar flipped, float profile, navigation", icon: Layers },
+    { id: "appearance", title: "Appearance", desc: "Theme mode, colors, palettes & lens", icon: Palette },
+    { id: "interface", title: "Interface & Layout", desc: "Typography, sidebar dock, zen & layout", icon: Layers },
+    { id: "motion", title: "Motion & Extras", desc: "Hero animation, 3D tilt & widgets", icon: Sparkles },
     { id: "commandPalette", title: "Command Palette", desc: "Palette activation, search scope, and results", icon: Monitor },
-    { id: "backup", title: "Backup & Share", desc: "Export, import, share configs", icon: Fingerprint },
   ] as const;
 
   const visibleMainPages = is_mobile
@@ -214,8 +214,7 @@ export const SettingsDialog = memo(({
     : MAIN_PAGES;
 
   const BOTTOM_PAGES = [
-    { id: "debug", title: "Info & Debug", desc: "DOM tools, inspection, console tools, etc", icon: Cpu },
-    { id: "about", title: "Bugs & Issues", desc: "Changelog, report bugs, known issues", icon: Terminal },
+    { id: "system", title: "Backup & System", desc: "Config backup, changelog, diagnostics & bugs", icon: Fingerprint },
   ] as const;
 
   const PAGES = [...MAIN_PAGES, ...BOTTOM_PAGES] as const;
@@ -244,473 +243,505 @@ export const SettingsDialog = memo(({
       case "appearance":
         return (
           <section className="space-y-6">
-            <div className="flex items-center gap-3 mb-7">
+            <div className="flex items-center gap-3 mb-6">
               <Palette size={20} className="text-[var(--primary)]" />
-              <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)]">
-                Theme settings
+              <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)] font-display">
+                Appearance & Theme
               </h3>
             </div>
-            <div className="grid grid-cols-3 gap-2 w-full">
-              {(["light", "dark", "system"] as const).map((m) => {
-                const isActive = settings.mode === m;
-                let roundedClass = "";
-                if (m === "light") {
-                  roundedClass = "rounded-l-[2rem] rounded-r-[1rem]";
-                } else if (m === "dark") {
-                  roundedClass = "rounded-[1rem]";
-                } else {
-                  roundedClass = "rounded-r-[2rem] rounded-l-[1rem]";
-                }
-                
-                return (
-                  <motion.button
-                    key={m}
-                    onClick={() => {
-                      haptic.light();
-                      updateSettings({ mode: m });
-                    }}
-                    whileTap={{ scale: 0.94 }}
-                    animate={{
-                      scale: isActive ? 1.04 : 1,
-                      color: isActive ? "var(--on-primary)" : "var(--on-surface-variant)"
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 300,
-                      damping: 20
-                    }}
-                    className={cn(
-                      "relative overflow-hidden flex items-center justify-center gap-2.5 py-4 transition-colors capitalize text-sm font-black tracking-wide cursor-pointer select-none",
-                      roundedClass,
-                      !isActive && "bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/20"
-                    )}
-                    style={{
-                      willChange: "transform, border-color"
-                    }}
-                  >
-                    <motion.div
-                      initial={false}
+
+            {/* Theme Mode */}
+            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-4">
+              <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
+                Theme Mode
+              </div>
+              <div className="grid grid-cols-3 gap-2 w-full">
+                {(["light", "dark", "system"] as const).map((m) => {
+                  const isActive = settings.mode === m;
+                  let roundedClass = "";
+                  if (m === "light") {
+                    roundedClass = "rounded-l-[2rem] rounded-r-[1rem]";
+                  } else if (m === "dark") {
+                    roundedClass = "rounded-[1rem]";
+                  } else {
+                    roundedClass = "rounded-r-[2rem] rounded-l-[1rem]";
+                  }
+
+                  return (
+                    <motion.button
+                      key={m}
+                      onClick={() => {
+                        haptic.light();
+                        updateSettings({ mode: m });
+                      }}
+                      whileTap={{ scale: 0.94 }}
                       animate={{
-                        opacity: isActive ? 1 : 0,
-                        scale: isActive ? 1 : 0.85
+                        scale: isActive ? 1.04 : 1,
+                        color: isActive ? "var(--on-primary)" : "var(--on-surface-variant)"
                       }}
                       transition={{
                         type: "spring",
-                        stiffness: 350,
-                        damping: 22
+                        stiffness: 300,
+                        damping: 20
                       }}
                       className={cn(
-                        "absolute -inset-[3px] bg-[var(--primary)] -z-10",
-                        roundedClass
+                        "relative overflow-hidden flex items-center justify-center gap-2.5 py-4 transition-colors capitalize text-sm font-black tracking-wide cursor-pointer select-none",
+                        roundedClass,
+                        !isActive && "bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/20"
                       )}
-                    />
-                    <div className="relative z-10 flex items-center justify-center gap-2">
-                      {m === "light" && <Sun size={18} />}
-                      {m === "dark" && <Moon size={18} />}
-                      {m === "system" && <Monitor size={18} />}
-                      <span className="font-bold">{m}</span>
-                    </div>
-                  </motion.button>
-                );
-              })}
-            </div>                
-            <motion.div
-              initial={false}
-              animate={{
-                opacity: (settings.mode === "dark" || settings.mode === "system") ? 1 : 0,
-                height: (settings.mode === "dark" || settings.mode === "system") ? "auto" : 0,
-                marginBottom: (settings.mode === "dark" || settings.mode === "system") ? 20 : 0,
-              }}
-              transition={settingsSpring}
-              className="overflow-hidden"
-            >
-              <label
-                className={cn(
-                  "flex items-center justify-between p-4.5 rounded-2xl transition-all text-left cursor-pointer border-0",
-                  settings.amoledMode
-                    ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
-                    : "bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/10 text-[var(--on-surface)]",
-                )}
-              >
-                <div>
-                  <div className="font-bold text-[15px]">AMOLED Mode</div>
-                  <div className="text-xs opacity-60 font-medium">
-                    Total black backgrounds for OLED screens
-                  </div>
-                </div>
-                <Switch
-                  checked={settings.amoledMode}
-                  onChange={(checked) =>
-                    updateSettings({ amoledMode: checked })
-                  }
-                />
-              </label>
-            </motion.div>
-            
-            <div className="space-y-4">
-              <div className="text-sm font-bold opacity-70 text-[var(--on-surface)]">
-                Theme Presets
-              </div>
-              <div className="flex flex-wrap gap-3">
-                {(
-                  [
-                    "orange",
-                    "blue",
-                    "green",
-                    "red",
-                    "purple",
-                    "custom",
-                  ] as const
-                ).map((c) => (
-                  <button
-                    key={c}
-                    onClick={() => {
-                      haptic.light();
-                      updateSettings({ accent: c });
-                    }}
-                    className={cn(
-                      "group relative w-12 h-12 rounded-2xl overflow-hidden transition-all duration-200 border-0 shadow-none cursor-pointer",
-                      settings.accent === c
-                        ? "ring-2 ring-[var(--primary)] ring-offset-2 ring-offset-[var(--surface)] scale-105"
-                        : "hover:scale-105 opacity-90 hover:opacity-100",
-                    )}
-                  >
-                    {c === "custom" ? (
-                      <div className="absolute inset-0 bg-[var(--surface-variant)] flex items-center justify-center">
-                        <Pipette
-                          size={20}
-                          className="text-[var(--on-surface-variant)]"
-                        />
-                      </div>
-                    ) : (
-                      <div className="absolute inset-0 flex">
-                        <div
-                          className={cn(
-                            "w-1/2 h-full",
-                            c === "orange" && "bg-orange-500",
-                            c === "blue" && "bg-blue-500",
-                            c === "green" && "bg-emerald-500",
-                            c === "red" && "bg-rose-500",
-                            c === "purple" && "bg-purple-500",
-                          )}
-                        />
-                        <div className="w-1/2 h-full flex flex-col">
-                          <div
-                            className={cn(
-                              "h-1/2 w-full",
-                              c === "orange" && "bg-orange-300",
-                              c === "blue" && "bg-blue-300",
-                              c === "green" && "bg-emerald-300",
-                              c === "red" && "bg-rose-300",
-                              c === "purple" && "bg-purple-300",
-                            )}
-                          />
-                          <div
-                            className={cn(
-                              "h-1/2 w-full",
-                              c === "orange" && "bg-orange-700",
-                              c === "blue" && "bg-blue-700",
-                              c === "green" && "bg-emerald-700",
-                              c === "red" && "bg-rose-700",
-                              c === "purple" && "bg-purple-700",
-                            )}
-                          />
-                        </div>
-                      </div>
-                    )}
-                    {settings.accent === c && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/15">
-                        <div className="bg-white rounded-full p-0.5 shadow-sm w-5 h-5 flex items-center justify-center leading-none">
-                          <Check
-                            size={13}
-                            className="text-black"
-                            strokeWidth={3}
-                          />
-                        </div>
-                      </div>
-                    )}
-                  </button>
-                ))}
-              </div>
-              <div className="pt-3 space-y-3">
-                <div className="flex items-baseline justify-between gap-3">
-                  <div className="text-sm font-bold opacity-70 text-[var(--on-surface)] mb-1">
-                    Color palette
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                  {[
-                    ["tonal-spot", "Tonal spot", "linear-gradient(135deg, #7759d9 0 40%, #d8d1f4 40% 65%, #e7e0ed 65%)"],
-                    ["fidelity", "Fidelity", "linear-gradient(135deg, #d03c74 0 38%, #ed9567 38% 65%, #552544 65%)"],
-                    ["content", "Content", "linear-gradient(135deg, #076f9d 0 38%, #2e9b83 38% 65%, #193b52 65%)"],
-                    ["neutral", "Neutral", "linear-gradient(135deg, #777476 0 42%, #b0aaad 42% 67%, #e6e0e2 67%)"],
-                    ["expressive", "Expressive", "linear-gradient(135deg, #7651d4 0 35%, #d4519a 35% 64%, #ec8f57 64%)"],
-                    ["fruit-salad", "Fruit salad", "linear-gradient(135deg, #47a16a 0 34%, #57a7c6 34% 63%, #b868bd 63%)"],
-                  ].map(([id, label, preview]) => {
-                    const selected = settings.palette === id;
-                    return (
-                      <button
-                        key={id}
-                        onClick={() => {
-                          haptic.light();
-                          updateSettings({ palette: id });
+                      style={{
+                        willChange: "transform, border-color"
+                      }}
+                    >
+                      <motion.div
+                        initial={false}
+                        animate={{
+                          opacity: isActive ? 1 : 0,
+                          scale: isActive ? 1 : 0.85
+                        }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 350,
+                          damping: 22
                         }}
                         className={cn(
-                          "relative min-h-16 overflow-hidden rounded-2xl border-0 px-4 py-3 text-left transition-all cursor-pointer",
-                          selected
-                            ? "ring-2 ring-[var(--primary)] ring-offset-1 ring-offset-[var(--surface)] scale-[1.02] shadow-sm"
-                            : "opacity-90 hover:opacity-100 hover:scale-[1.01]",
+                          "absolute -inset-[3px] bg-[var(--primary)] -z-10",
+                          roundedClass
                         )}
-                        style={{ background: preview }}
-                        aria-pressed={selected}
-                      >
-                        <span className="absolute inset-0 bg-black/25" />
-                        <span className="relative flex items-center justify-between gap-2 text-sm font-black text-white drop-shadow-sm">
-                          {label}
-                          {selected && <Check size={16} strokeWidth={3} />}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-              {settings.accent === "custom" && (
-                <motion.div
-                  initial={false}
-                  animate={{
-                    opacity: 1,
-                    height: "auto",
-                  }}
-                  exit={{
-                    opacity: 0,
-                    height: 0,
-                  }}
-                  className="pt-2 space-y-3"
-                >
-                  <div className="flex justify-between items-center text-[12px] font-black tracking-[0.1em] opacity-50 px-1">
-                    <span>Hue slider</span>
-                  </div>
-                  <Slider
-                    value={settings.hue}
-                    onChange={(v: number) => updateSettings({ hue: v })}
-                    min={0}
-                    max={360}
-                    step={1}
-                    size="s"
-                    leadingIcon={<Pipette size={16} />}
-                    format={(v: number) => `${v.toFixed(0)}°`}
-                  />
-
-                  <div className="flex justify-between items-center text-[12px] font-black tracking-[0.1em] opacity-50 px-1 pt-2">
-                    <span>Saturation slider</span>
-                  </div>
-                  <Slider
-                    value={settings.saturation}
-                    onChange={(v: number) => updateSettings({ saturation: v })}
-                    min={0}
-                    max={100}
-                    step={1}
-                    size="s"
-                    leadingIcon={<Layers size={16} />}
-                    format={(v: number) => `${v.toFixed(0)}%`}
-                  />
-                </motion.div>
-              )}
-            </div>
-          </section>
-        );
-
-      case "customization":
-        return (
-          <section className="space-y-6">
-            <div className="flex items-center gap-3 mb-6">
-              <SettingsIcon size={20} className="text-[var(--primary)]" />
-              <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)]">
-                Customization settings
-              </h3>
-            </div>
-
-            {/* custom font scaling */}
-            <div className="p-4.5 rounded-2xl bg-[var(--surface-variant)] text-[var(--on-surface)] space-y-3.5 border-0">
-              <div className="flex items-center justify-between gap-2">
-                <div>
-                  <div className="font-bold text-[15px]">Custom Font Scaling</div>
-                  <div className="text-xs opacity-60 font-medium">
-                    Scale font size whilst keeping size contrast & hierarchy
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 shrink-0">
-                  <span className="text-xs font-mono font-black px-2.5 py-1 rounded-full bg-[var(--primary-container)] text-[var(--on-primary-container)]">
-                    {(settings.fontScale ?? 100) === 100 ? "100% (Default)" : `${settings.fontScale}%`}
-                  </span>
-                  {(settings.fontScale ?? 100) !== 100 && (
-                    <button
-                      onClick={() => {
-                        updateSettings({ fontScale: 100 });
-                        haptic.light();
-                      }}
-                      className="text-[11px] font-black px-2 py-1 rounded-lg bg-[var(--surface)] hover:bg-[var(--primary-container)] text-[var(--primary)] transition-colors cursor-pointer border-0"
-                      title="Reset font scaling to default"
-                    >
-                      Reset
-                    </button>
-                  )}
-                </div>
+                      />
+                      <div className="relative z-10 flex items-center justify-center gap-2">
+                        {m === "light" && <Sun size={18} />}
+                        {m === "dark" && <Moon size={18} />}
+                        {m === "system" && <Monitor size={18} />}
+                        <span className="font-bold">{m}</span>
+                      </div>
+                    </motion.button>
+                  );
+                })}
               </div>
 
-              <div className="pt-1">
-                <Slider
-                  value={settings.fontScale ?? 100}
-                  onChange={(v: number) => updateSettings({ fontScale: v })}
-                  min={80}
-                  max={125}
-                  step={5}
-                  stops={true}
-                  endStops={true}
-                  size="s"
-                  leadingIcon={<span className="font-bold text-xs select-none">A</span>}
-                  trailingIcon={<span className="font-black text-lg select-none">A</span>}
-                  format={(v: number) => (v === 100 ? "100% (Default)" : `${v}%`)}
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-2">
-              {[
-                {
-                  key: "metricUnits",
-                  label: "Metric Units",
-                  desc: "Use metric units (°C, km/h) for weather (off switches to imperial)",
-                },
-                {
-                  key: "dynamicWeatherLocation",
-                  label: "Local Weather Detection",
-                  desc: "Autodetect your city for weather widget (off shows virex's weather)",
-                },
-                {
-                  key: "helloAnimation",
-                  label: "Hello Animation",
-                  desc: "Fluent language cycling home hero",
-                },
-                {
-                  key: "brutalistMode",
-                  label: "Brutalist Mode",
-                  desc: "Sharp edges and raw styling",
-                },
-                {
-                  key: "developerFont",
-                  label: "Developer Font",
-                  desc: "Use JetBrains Mono as the primary UI typeface",
-                },
-                {
-                  key: "focusMode",
-                  label: "Focus Mode",
-                  desc: "A minimal zen layout",
-                },
-                {
-                  key: "highHz",
-                  label: "High-Refresh Springs",
-                  desc: "Tighter physics tuned for 120Hz/144Hz displays",
-                },
-                {
-                  key: "disableAnimations",
-                  label: "Disable Animations",
-                  desc: "Turn off motion & transition effects (requires refresh)",
-                },
-                { // desktop-only option
-                  key: "bentoTilt",
-                  label: "3D Bento Tilt",
-                  desc: "Cursor tracking parallax tilt effect on cards",
-                },
-                {
-                  key: "lensDynamicTheming",
-                  label: "Lens Dynamic Theming",
-                  desc: "Match the theme to an expanded Lens photo",
-                },
-              ]
-                .filter((tweak) => !(is_mobile && tweak.key === "bentoTilt"))
-                .map((tweak) => (
+              <motion.div
+                initial={false}
+                animate={{
+                  opacity: (settings.mode === "dark" || settings.mode === "system") ? 1 : 0,
+                  height: (settings.mode === "dark" || settings.mode === "system") ? "auto" : 0,
+                }}
+                transition={settingsSpring}
+                className="overflow-hidden"
+              >
                 <label
-                  key={tweak.key}
                   className={cn(
-                    "flex items-center justify-between p-4.5 rounded-2xl transition-all text-left cursor-pointer border-0",
-                    settings[tweak.key as keyof typeof settings]
+                    "flex items-center justify-between p-4.5 rounded-2xl transition-all text-left cursor-pointer border-0 mt-2",
+                    settings.amoledMode
                       ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
                       : "bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/10 text-[var(--on-surface)]",
                   )}
                 >
                   <div>
-                    <div className="font-bold text-[15px]">{tweak.label}</div>
+                    <div className="font-bold text-[15px]">AMOLED Mode</div>
                     <div className="text-xs opacity-60 font-medium">
-                      {tweak.desc}
+                      Total black backgrounds for OLED screens
                     </div>
                   </div>
                   <Switch
-                    checked={
-                      settings[
-                        tweak.key as keyof typeof settings
-                      ] as boolean
+                    checked={settings.amoledMode}
+                    onChange={(checked) =>
+                      updateSettings({ amoledMode: checked })
                     }
-                    onChange={(checked) => {
-                      if (tweak.key === "disableAnimations") {
-                        updateSettings({ disableAnimations: checked });
-                        setShowRefreshConfirm(true);
-                      } else {
-                        updateSettings({ [tweak.key]: checked });
-                      }
-                    }}
                   />
                 </label>
-              ))}
-              {is_mobile && (
-                <div className="mt-3 px-4 py-3 rounded-2xl bg-[var(--surface-variant)]/60 text-[12px] leading-5 opacity-80 border-0">
-                  Some desktop-only customization options are hidden on mobile.
+              </motion.div>
+            </div>
+
+            {/* Color & Palette */}
+            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-4">
+              <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
+                Color & Palette
+              </div>
+              <div className="space-y-3">
+                <div className="text-sm font-bold opacity-70 text-[var(--on-surface)]">
+                  Theme Presets
                 </div>
-              )}
+                <div className="flex flex-wrap gap-3">
+                  {(
+                    [
+                      "orange",
+                      "blue",
+                      "green",
+                      "red",
+                      "purple",
+                      "custom",
+                    ] as const
+                  ).map((c) => (
+                    <button
+                      key={c}
+                      onClick={() => {
+                        haptic.light();
+                        updateSettings({ accent: c });
+                      }}
+                      className={cn(
+                        "group relative w-12 h-12 rounded-2xl overflow-hidden transition-all duration-200 border-0 shadow-none cursor-pointer",
+                        settings.accent === c
+                          ? "ring-2 ring-[var(--primary)] ring-offset-2 ring-offset-[var(--surface)] scale-105"
+                          : "hover:scale-105 opacity-90 hover:opacity-100",
+                      )}
+                    >
+                      {c === "custom" ? (
+                        <div className="absolute inset-0 bg-[var(--surface-variant)] flex items-center justify-center">
+                          <Pipette
+                            size={20}
+                            className="text-[var(--on-surface-variant)]"
+                          />
+                        </div>
+                      ) : (
+                        <div className="absolute inset-0 flex">
+                          <div
+                            className={cn(
+                              "w-1/2 h-full",
+                              c === "orange" && "bg-orange-500",
+                              c === "blue" && "bg-blue-500",
+                              c === "green" && "bg-emerald-500",
+                              c === "red" && "bg-rose-500",
+                              c === "purple" && "bg-purple-500",
+                            )}
+                          />
+                          <div className="w-1/2 h-full flex flex-col">
+                            <div
+                              className={cn(
+                                "h-1/2 w-full",
+                                c === "orange" && "bg-orange-300",
+                                c === "blue" && "bg-blue-300",
+                                c === "green" && "bg-emerald-300",
+                                c === "red" && "bg-rose-300",
+                                c === "purple" && "bg-purple-300",
+                              )}
+                            />
+                            <div
+                              className={cn(
+                                "h-1/2 w-full",
+                                c === "orange" && "bg-orange-700",
+                                c === "blue" && "bg-blue-700",
+                                c === "green" && "bg-emerald-700",
+                                c === "red" && "bg-rose-700",
+                                c === "purple" && "bg-purple-700",
+                              )}
+                            />
+                          </div>
+                        </div>
+                      )}
+                      {settings.accent === c && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/15">
+                          <div className="bg-white rounded-full p-0.5 shadow-sm w-5 h-5 flex items-center justify-center leading-none">
+                            <Check
+                              size={13}
+                              className="text-black"
+                              strokeWidth={3}
+                            />
+                          </div>
+                        </div>
+                      )}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="pt-3 space-y-3">
+                  <div className="text-sm font-bold opacity-70 text-[var(--on-surface)] mb-1">
+                    Color palette
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    {[
+                      ["tonal-spot", "Tonal spot", "linear-gradient(135deg, #7759d9 0 40%, #d8d1f4 40% 65%, #e7e0ed 65%)"],
+                      ["fidelity", "Fidelity", "linear-gradient(135deg, #d03c74 0 38%, #ed9567 38% 65%, #552544 65%)"],
+                      ["content", "Content", "linear-gradient(135deg, #076f9d 0 38%, #2e9b83 38% 65%, #193b52 65%)"],
+                      ["neutral", "Neutral", "linear-gradient(135deg, #777476 0 42%, #b0aaad 42% 67%, #e6e0e2 67%)"],
+                      ["expressive", "Expressive", "linear-gradient(135deg, #7651d4 0 35%, #d4519a 35% 64%, #ec8f57 64%)"],
+                      ["fruit-salad", "Fruit salad", "linear-gradient(135deg, #47a16a 0 34%, #57a7c6 34% 63%, #b868bd 63%)"],
+                    ].map(([id, label, preview]) => {
+                      const selected = settings.palette === id;
+                      return (
+                        <button
+                          key={id}
+                          onClick={() => {
+                            haptic.light();
+                            updateSettings({ palette: id });
+                          }}
+                          className={cn(
+                            "relative min-h-16 overflow-hidden rounded-2xl border-0 px-4 py-3 text-left transition-all cursor-pointer",
+                            selected
+                              ? "ring-2 ring-[var(--primary)] ring-offset-1 ring-offset-[var(--surface)] scale-[1.02] shadow-sm"
+                              : "opacity-90 hover:opacity-100 hover:scale-[1.01]",
+                          )}
+                          style={{ background: preview }}
+                          aria-pressed={selected}
+                        >
+                          <span className="absolute inset-0 bg-black/25" />
+                          <span className="relative flex items-center justify-between gap-2 text-sm font-black text-white drop-shadow-sm">
+                            {label}
+                            {selected && <Check size={16} strokeWidth={3} />}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {settings.accent === "custom" && (
+                  <motion.div
+                    initial={false}
+                    animate={{
+                      opacity: 1,
+                      height: "auto",
+                    }}
+                    exit={{
+                      opacity: 0,
+                      height: 0,
+                    }}
+                    className="pt-2 space-y-3"
+                  >
+                    <div className="flex justify-between items-center text-[12px] font-black tracking-[0.1em] opacity-50 px-1">
+                      <span>Hue slider</span>
+                    </div>
+                    <Slider
+                      value={settings.hue}
+                      onChange={(v: number) => updateSettings({ hue: v })}
+                      min={0}
+                      max={360}
+                      step={1}
+                      size="s"
+                      leadingIcon={<Pipette size={16} />}
+                      format={(v: number) => `${v.toFixed(0)}°`}
+                    />
+
+                    <div className="flex justify-between items-center text-[12px] font-black tracking-[0.1em] opacity-50 px-1 pt-2">
+                      <span>Saturation slider</span>
+                    </div>
+                    <Slider
+                      value={settings.saturation}
+                      onChange={(v: number) => updateSettings({ saturation: v })}
+                      min={0}
+                      max={100}
+                      step={1}
+                      size="s"
+                      leadingIcon={<Layers size={16} />}
+                      format={(v: number) => `${v.toFixed(0)}%`}
+                    />
+                  </motion.div>
+                )}
+              </div>
+            </div>
+
+            {/* Dynamic Theming */}
+            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-3">
+              <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
+                Dynamic Theming
+              </div>
+              <label
+                className={cn(
+                  "flex items-center justify-between p-4.5 rounded-2xl transition-all text-left cursor-pointer border-0",
+                  settings.lensDynamicTheming
+                    ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
+                    : "bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/10 text-[var(--on-surface)]",
+                )}
+              >
+                <div>
+                  <div className="font-bold text-[15px]">Lens Dynamic Theming</div>
+                  <div className="text-xs opacity-60 font-medium">
+                    Match the theme to an expanded Lens photo
+                  </div>
+                </div>
+                <Switch
+                  checked={settings.lensDynamicTheming}
+                  onChange={(checked) =>
+                    updateSettings({ lensDynamicTheming: checked })
+                  }
+                />
+              </label>
             </div>
           </section>
         );
 
-      case "layout":
+      case "interface":
         return (
-          <div className="space-y-8">
-            <section className="space-y-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Layers size={20} className="text-[var(--primary)]" />
-                <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)]">
-                  Navigation & Layout Options
-                </h3>
+          <section className="space-y-6">
+            <div className="flex items-center gap-3 mb-6">
+              <Layers size={20} className="text-[var(--primary)]" />
+              <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)] font-display">
+                Interface & Layout
+              </h3>
+            </div>
+
+            {/* Typography & Styling */}
+            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-3.5">
+              <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
+                Typography & Styling
+              </div>
+
+              {/* custom font scaling */}
+              <div className="p-4.5 rounded-2xl bg-[var(--surface-variant)] text-[var(--on-surface)] space-y-3.5 border-0">
+                <div className="flex items-center justify-between gap-2">
+                  <div>
+                    <div className="font-bold text-[15px]">Custom Font Scaling</div>
+                    <div className="text-xs opacity-60 font-medium">
+                      Scale font size whilst keeping size contrast & hierarchy
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <span className="text-xs font-black px-2.5 py-1 rounded-full bg-[var(--primary-container)] text-[var(--on-primary-container)]">
+                      {(settings.fontScale ?? 100) === 100 ? "100% (Default)" : `${settings.fontScale}%`}
+                    </span>
+                    {(settings.fontScale ?? 100) !== 100 && (
+                      <button
+                        onClick={() => {
+                          updateSettings({ fontScale: 100 });
+                          haptic.light();
+                        }}
+                        className="text-[11px] font-black px-2 py-1 rounded-lg bg-[var(--surface)] hover:bg-[var(--primary-container)] text-[var(--primary)] transition-colors cursor-pointer border-0"
+                        title="Reset font scaling to default"
+                      >
+                        Reset
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                <div className="pt-1">
+                  <Slider
+                    value={settings.fontScale ?? 100}
+                    onChange={(v: number) => updateSettings({ fontScale: v })}
+                    min={80}
+                    max={125}
+                    step={5}
+                    stops={true}
+                    endStops={true}
+                    size="s"
+                    leadingIcon={<span className="font-bold text-xs select-none">A</span>}
+                    trailingIcon={<span className="font-black text-lg select-none">A</span>}
+                    format={(v: number) => (v === 100 ? "100% (Default)" : `${v}%`)}
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                {[
+                  {
+                    key: "developerFont",
+                    label: "Developer Font",
+                    desc: "Use JetBrains Mono as the primary UI typeface",
+                  },
+                  {
+                    key: "brutalistMode",
+                    label: "Brutalist Mode",
+                    desc: "Brutal styling with sharp corners globally",
+                  },
+                ].map((tweak) => (
+                  <label
+                    key={tweak.key}
+                    className={cn(
+                      "flex items-center justify-between p-4.5 rounded-2xl transition-all text-left cursor-pointer border-0",
+                      settings[tweak.key as keyof typeof settings]
+                        ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
+                        : "bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/10 text-[var(--on-surface)]",
+                    )}
+                  >
+                    <div>
+                      <div className="font-bold text-[15px]">{tweak.label}</div>
+                      <div className="text-xs opacity-60 font-medium">
+                        {tweak.desc}
+                      </div>
+                    </div>
+                    <Switch
+                      checked={
+                        settings[
+                          tweak.key as keyof typeof settings
+                        ] as boolean
+                      }
+                      onChange={(checked) => {
+                        updateSettings({ [tweak.key]: checked });
+                      }}
+                    />
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Navigation & Sidebar */}
+            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-3">
+              <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
+                Navigation & Sidebar
               </div>
               <div className="flex flex-col gap-2">
-                {[ // desktop-only option
+                {[
                   {
                     key: "sidebarFlipped",
                     label: "Flip Sidebar",
-                    desc: "Changes desktop sidebar orientation to the right",
+                    desc: "Changes desktop sidebar position to the right",
                   },
-                  { // desktop-only option
+                  {
                     key: "floatingSidebar",
                     label: "Floating Sidebar",
-                    desc: "Undock the sidebar with rounded corners",
+                    desc: "Floating sidebar state with rounded corners",
                   },
-                  { // desktop-only option
+                  {
                     key: "profileContainer",
                     label: "Profile Container",
-                    desc: "Shows a clean background around the profile header",
-                  },
-                  {
-                    key: "forceDesktop",
-                    label: "Force Desktop",
-                    desc: "Prevents switching to mobile layout on small screens",
-                  },
-                  {
-                    key: "infoFullscreen",
-                    label: "Info Page Fullscreen",
-                    desc: "Hides navbars when on the /info page",
+                    desc: "Toggles a clean container around the profile",
                   },
                 ]
                   .filter((tweak) => !(is_mobile && ["sidebarFlipped", "floatingSidebar", "profileContainer"].includes(tweak.key)))
                   .map((tweak) => (
+                    <label
+                      key={tweak.key}
+                      className={cn(
+                        "flex items-center justify-between p-4.5 rounded-2xl transition-all text-left cursor-pointer border-0",
+                        settings[tweak.key as keyof typeof settings]
+                          ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
+                          : "bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/10 text-[var(--on-surface)]",
+                      )}
+                    >
+                      <div>
+                        <div className="font-bold text-[15px]">{tweak.label}</div>
+                        <div className="text-xs opacity-60 font-medium">
+                          {tweak.desc}
+                        </div>
+                      </div>
+                      <Switch
+                        checked={
+                          settings[
+                            tweak.key as keyof typeof settings
+                          ] as boolean
+                        }
+                        onChange={(checked) => {
+                          updateSettings({ [tweak.key]: checked });
+                        }}
+                      />
+                    </label>
+                  ))}
+              </div>
+            </div>
+
+            {/* Layout Modes */}
+            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-3">
+              <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
+                Layout Modes
+              </div>
+              <div className="flex flex-col gap-2">
+                {[
+                  {
+                    key: "focusMode",
+                    label: "Focus Mode",
+                    desc: "A focused, minimal zen layout",
+                  },
+                  {
+                    key: "forceDesktop",
+                    label: "Force Desktop",
+                    desc: "Stops mobile mode switching on small displays",
+                  },
+                  {
+                    key: "infoFullscreen",
+                    label: "Info Page Fullscreen",
+                    desc: "Hides navigation bars when on the /info page",
+                  },
+                ].map((tweak) => (
                   <label
                     key={tweak.key}
                     className={cn(
@@ -740,12 +771,132 @@ export const SettingsDialog = memo(({
                 ))}
               </div>
               {is_mobile && (
-                <div className="mt-3 px-4 py-3 rounded-2xl bg-[var(--surface-variant)]/60 text-[12px] leading-5 opacity-80 border-0">
+                <div className="mt-2 px-4 py-3 rounded-2xl bg-[var(--surface-variant)]/60 text-[12px] leading-5 opacity-80 border-0">
                   Some desktop-only layout options are hidden on mobile.
                 </div>
               )}
-            </section>
-          </div>
+            </div>
+          </section>
+        );
+
+      case "motion":
+        return (
+          <section className="space-y-6">
+            <div className="flex items-center gap-3 mb-6">
+              <Sparkles size={20} className="text-[var(--primary)]" />
+              <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)] font-display">
+                Motion & Extras
+              </h3>
+            </div>
+
+            {/* Animations & Physics */}
+            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-3">
+              <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
+                Animations & Physics
+              </div>
+              <div className="flex flex-col gap-2">
+                {[
+                  {
+                    key: "helloAnimation",
+                    label: "Hello Animation",
+                    desc: "Toggles the hero language cycling animation",
+                  },
+                  {
+                    key: "bentoTilt",
+                    label: "3D Card Tilt",
+                    desc: "Cursor-tracking parallax tilt effect on cards",
+                  },
+                  {
+                    key: "disableAnimations",
+                    label: "Disable Animations",
+                    desc: "Disables motion & transitions (requires refresh!)",
+                  },
+                ]
+                  .filter((tweak) => !(is_mobile && tweak.key === "bentoTilt"))
+                  .map((tweak) => (
+                    <label
+                      key={tweak.key}
+                      className={cn(
+                        "flex items-center justify-between p-4.5 rounded-2xl transition-all text-left cursor-pointer border-0",
+                        settings[tweak.key as keyof typeof settings]
+                          ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
+                          : "bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/10 text-[var(--on-surface)]",
+                      )}
+                    >
+                      <div>
+                        <div className="font-bold text-[15px]">{tweak.label}</div>
+                        <div className="text-xs opacity-60 font-medium">
+                          {tweak.desc}
+                        </div>
+                      </div>
+                      <Switch
+                        checked={
+                          settings[
+                            tweak.key as keyof typeof settings
+                          ] as boolean
+                        }
+                        onChange={(checked) => {
+                          if (tweak.key === "disableAnimations") {
+                            updateSettings({ disableAnimations: checked });
+                            setShowRefreshConfirm(true);
+                          } else {
+                            updateSettings({ [tweak.key]: checked });
+                          }
+                        }}
+                      />
+                    </label>
+                  ))}
+              </div>
+            </div>
+
+            {/* Widgets & Preferences */}
+            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-3">
+              <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
+                Widgets & Preferences
+              </div>
+              <div className="flex flex-col gap-2">
+                {[
+                  {
+                    key: "metricUnits",
+                    label: "Metric Units",
+                    desc: "Use metric (°C, km/h) units. off = imperial",
+                  },
+                  {
+                    key: "dynamicWeatherLocation",
+                    label: "Local Weather Detection",
+                    desc: "Use your city for weatherwidget (off shows virex's)",
+                  },
+                ].map((tweak) => (
+                  <label
+                    key={tweak.key}
+                    className={cn(
+                      "flex items-center justify-between p-4.5 rounded-2xl transition-all text-left cursor-pointer border-0",
+                      settings[tweak.key as keyof typeof settings]
+                        ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
+                        : "bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/10 text-[var(--on-surface)]",
+                    )}
+                  >
+                    <div>
+                      <div className="font-bold text-[15px]">{tweak.label}</div>
+                      <div className="text-xs opacity-60 font-medium">
+                        {tweak.desc}
+                      </div>
+                    </div>
+                    <Switch
+                      checked={
+                        settings[
+                          tweak.key as keyof typeof settings
+                        ] as boolean
+                      }
+                      onChange={(checked) => {
+                        updateSettings({ [tweak.key]: checked });
+                      }}
+                    />
+                  </label>
+                ))}
+              </div>
+            </div>
+          </section>
         );
 
       case "commandPalette":
@@ -753,377 +904,360 @@ export const SettingsDialog = memo(({
           <section className="space-y-6">
             <div className="flex items-center gap-3 mb-6">
               <Monitor size={20} className="text-[var(--primary)]" />
-              <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)]">
+              <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)] font-display">
                 Command palette
               </h3>
             </div>
 
             <div className="space-y-4">
+              {/* Shortcuts & Default View */}
               <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0">
-                <div className="font-bold text-[15px]">Activation hotkey</div>
-                <div className="text-xs opacity-60 font-medium mt-0.5 mb-3">
-                  Choose the shortcut that opens the command palette.
+                <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)] mb-4">
+                  Shortcuts & Default View
                 </div>
-                <div className="space-y-1.5">
-                  {[
-                    { value: "ctrl-k", label: "Ctrl+K", desc: "Standard keyboard shortcut for palette." },
-                    { value: "cmd-k", label: "⌘K", desc: "Mac-style palette shortcut." },
-                    { value: "ctrl-shift-p", label: "Ctrl+Shift+P", desc: "Alternative command palette shortcut." },
-                  ].map((option, index, array) => {
-                    const active = settings.paletteHotkey === option.value;
-                    const isFirst = index === 0;
-                    const isLast = index === array.length - 1;
-                    const roundClass = array.length === 1
-                      ? "rounded-2xl"
-                      : isFirst
-                        ? "rounded-t-2xl rounded-b-[6px]"
-                        : isLast
-                          ? "rounded-b-2xl rounded-t-[6px]"
-                          : "rounded-[6px]";
-                    return (
-                      <button
-                        key={option.value}
-                        type="button"
-                        onClick={() => updateSettings({ paletteHotkey: option.value as any })}
-                        className={cn(
-                          "flex flex-col gap-1 w-full px-4 py-3 text-left transition-all border-0 cursor-pointer",
-                          roundClass,
-                          active
-                            ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
-                            : "bg-[var(--surface)] hover:bg-[var(--surface-variant)]/60 text-[var(--on-surface)]"
-                        )}
-                      >
-                        <div className="flex items-center justify-between gap-3">
-                          <span className="text-sm font-bold">{option.label}</span>
-                          {active && <Check size={16} />}
-                        </div>
-                        <span className="text-xs opacity-70">{option.desc}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0">
-                <div className="font-bold text-[15px]">Default view</div>
-                <div className="text-xs opacity-60 font-medium mt-0.5 mb-3">
-                  Pick the starting layout when opening the palette.
-                </div>
-                <div className="space-y-1.5">
-                  {[
-                    { value: "lists", label: "Lists", desc: "Classic stacked command lists." },
-                    { value: "cards", label: "Cards", desc: "Cards layout with left/right navigation." },
-                  ].map((option, index, array) => {
-                    const active = settings.paletteDefaultView === option.value;
-                    const isFirst = index === 0;
-                    const isLast = index === array.length - 1;
-                    const roundClass = array.length === 1
-                      ? "rounded-2xl"
-                      : isFirst
-                        ? "rounded-t-2xl rounded-b-[6px]"
-                        : isLast
-                          ? "rounded-b-2xl rounded-t-[6px]"
-                          : "rounded-[6px]";
-                    return (
-                      <button
-                        key={option.value}
-                        type="button"
-                        onClick={() => updateSettings({ paletteDefaultView: option.value as any })}
-                        className={cn(
-                          "flex flex-col gap-1 w-full px-4 py-3 text-left transition-all border-0 cursor-pointer",
-                          roundClass,
-                          active
-                            ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
-                            : "bg-[var(--surface)] hover:bg-[var(--surface-variant)]/60 text-[var(--on-surface)]"
-                        )}
-                      >
-                        <div className="flex items-center justify-between gap-3">
-                          <span className="text-sm font-bold">{option.label}</span>
-                          {active && <Check size={16} />}
-                        </div>
-                        <span className="text-xs opacity-70">{option.desc}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0">
-                <div className="font-bold text-[15px]">Search scope</div>
-                <div className="text-xs opacity-60 font-medium mt-0.5 mb-3">
-                  Limit what the palette searches by default.
-                </div>
-                <div className="space-y-1.5">
-                  {[
-                    { value: "everything", label: "Everything", desc: "Search pages, settings, commands, and blog posts." },
-                    { value: "pages", label: "Pages", desc: "Search only site pages and navigation." },
-                    { value: "commands", label: "Commands", desc: "Search only palette actions and tools." },
-                    { value: "blog", label: "Blog posts", desc: "Search only blog posts." },
-                  ].map((option, index, array) => {
-                    const active = settings.paletteSearchScope === option.value;
-                    const isFirst = index === 0;
-                    const isLast = index === array.length - 1;
-                    const roundClass = array.length === 1
-                      ? "rounded-2xl"
-                      : isFirst
-                        ? "rounded-t-2xl rounded-b-[6px]"
-                        : isLast
-                          ? "rounded-b-2xl rounded-t-[6px]"
-                          : "rounded-[6px]";
-                    return (
-                      <button
-                        key={option.value}
-                        type="button"
-                        onClick={() => updateSettings({ paletteSearchScope: option.value as any })}
-                        className={cn(
-                          "flex flex-col gap-1 w-full px-4 py-3 text-left transition-all border-0 cursor-pointer",
-                          roundClass,
-                          active
-                            ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
-                            : "bg-[var(--surface)] hover:bg-[var(--surface-variant)]/60 text-[var(--on-surface)]"
-                        )}
-                      >
-                        <div className="flex items-center justify-between gap-3">
-                          <span className="text-sm font-bold">{option.label}</span>
-                          {active && <Check size={16} />}
-                        </div>
-                        <span className="text-xs opacity-70">{option.desc}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0">
-                <div className="font-bold text-[15px]">Results limit</div>
-                <div className="text-xs opacity-60 font-medium mt-0.5 mb-3">
-                  Control how many items appear before scrolling.
-                </div>
-                <div className="grid gap-2 sm:grid-cols-4">
-                  {[8, 12, 16, 24].map((limit) => {
-                    const active = settings.paletteResultsLimit === limit;
-                    return (
-                      <button
-                        key={limit}
-                        type="button"
-                        onClick={() => updateSettings({ paletteResultsLimit: limit })}
-                        className={cn(
-                          "flex items-center justify-between gap-3 w-full rounded-xl px-4 py-3 text-left transition-all border-0 cursor-pointer",
-                          active
-                            ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
-                            : "bg-[var(--surface)] hover:bg-[var(--surface-variant)]/60 text-[var(--on-surface)]"
-                        )}
-                      >
-                        <span className="text-sm font-bold">{limit}</span>
-                        {active && <Check size={16} />}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0">
-                <label className="flex items-center justify-between gap-4 cursor-pointer">
+                <div className="space-y-4">
                   <div>
-                    <div className="font-bold text-[15px]">Recent actions</div>
-                    <div className="text-xs opacity-60 mt-0.5">Toggle recent command suggestions when palette is empty.</div>
+                    <div className="font-bold text-[15px]">Activation hotkey</div>
+                    <div className="text-xs opacity-60 font-medium mt-0.5 mb-3">
+                      Choose the shortcut that opens the command palette.
+                    </div>
+                    <div className="space-y-1.5">
+                      {[
+                        { value: "ctrl-k", label: "Ctrl+K", desc: "Standard keyboard shortcut for palette." },
+                        { value: "cmd-k", label: "⌘K", desc: "Mac-style palette shortcut." },
+                        { value: "ctrl-shift-p", label: "Ctrl+Shift+P", desc: "Alternative command palette shortcut." },
+                      ].map((option, index, array) => {
+                        const active = settings.paletteHotkey === option.value;
+                        const isFirst = index === 0;
+                        const isLast = index === array.length - 1;
+                        const roundClass = array.length === 1
+                          ? "rounded-2xl"
+                          : isFirst
+                            ? "rounded-t-2xl rounded-b-[6px]"
+                            : isLast
+                              ? "rounded-b-2xl rounded-t-[6px]"
+                              : "rounded-[6px]";
+                        return (
+                          <button
+                            key={option.value}
+                            type="button"
+                            onClick={() => updateSettings({ paletteHotkey: option.value as any })}
+                            className={cn(
+                              "flex flex-col gap-1 w-full px-4 py-3 text-left transition-all border-0 cursor-pointer",
+                              roundClass,
+                              active
+                                ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
+                                : "bg-[var(--surface)] hover:bg-[var(--surface-variant)]/60 text-[var(--on-surface)]"
+                            )}
+                          >
+                            <div className="flex items-center justify-between gap-3">
+                              <span className="text-sm font-bold">{option.label}</span>
+                              {active && <Check size={16} />}
+                            </div>
+                            <span className="text-xs opacity-70">{option.desc}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
-                  <Switch
-                    checked={settings.paletteShowRecentActions}
-                    onChange={(checked) => updateSettings({ paletteShowRecentActions: checked })}
-                  />
-                </label>
-              </div>
 
-              <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0">
-                <div className="font-bold text-[15px]">Keyboard navigation</div>
-                <div className="text-xs opacity-60 font-medium mt-0.5 mb-3">
-                  Choose how arrow keys move through palette results. Bento view enables left/right navigation.
-                </div>
-                <div className="space-y-1.5">
-                  {[
-                    { value: "standard", label: "Standard", desc: "Arrow keys move up/down through the list." },
-                    { value: "wrap", label: "Wrap", desc: "Continue from bottom to top and vice versa." },
-                    { value: "grid", label: "2D grid", desc: "In Bento view, left/right move across columns." },
-                  ].map((option, index, array) => {
-                    const active = settings.paletteKeyboardNavBehavior === option.value;
-                    const isFirst = index === 0;
-                    const isLast = index === array.length - 1;
-                    const roundClass = array.length === 1
-                      ? "rounded-2xl"
-                      : isFirst
-                        ? "rounded-t-2xl rounded-b-[6px]"
-                        : isLast
-                          ? "rounded-b-2xl rounded-t-[6px]"
-                          : "rounded-[6px]";
-                    return (
-                      <button
-                        key={option.value}
-                        type="button"
-                        onClick={() => updateSettings({ paletteKeyboardNavBehavior: option.value as any })}
-                        className={cn(
-                          "flex flex-col gap-1 w-full px-4 py-3 text-left transition-all border-0 cursor-pointer",
-                          roundClass,
-                          active
-                            ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
-                            : "bg-[var(--surface)] hover:bg-[var(--surface-variant)]/60 text-[var(--on-surface)]"
-                        )}
-                      >
-                        <div className="flex items-center justify-between gap-3">
-                          <span className="text-sm font-bold">{option.label}</span>
-                          {active && <Check size={16} />}
-                        </div>
-                        <span className="text-xs opacity-70">{option.desc}</span>
-                      </button>
-                    );
-                  })}
+                  <div className="pt-2 border-t border-[var(--outline-variant)]/20">
+                    <div className="font-bold text-[15px]">Default view</div>
+                    <div className="text-xs opacity-60 font-medium mt-0.5 mb-3">
+                      Pick the starting layout when opening the palette.
+                    </div>
+                    <div className="space-y-1.5">
+                      {[
+                        { value: "lists", label: "Lists", desc: "Classic stacked command lists." },
+                        { value: "cards", label: "Cards", desc: "Cards layout with left/right navigation." },
+                      ].map((option, index, array) => {
+                        const active = settings.paletteDefaultView === option.value;
+                        const isFirst = index === 0;
+                        const isLast = index === array.length - 1;
+                        const roundClass = array.length === 1
+                          ? "rounded-2xl"
+                          : isFirst
+                            ? "rounded-t-2xl rounded-b-[6px]"
+                            : isLast
+                              ? "rounded-b-2xl rounded-t-[6px]"
+                              : "rounded-[6px]";
+                        return (
+                          <button
+                            key={option.value}
+                            type="button"
+                            onClick={() => updateSettings({ paletteDefaultView: option.value as any })}
+                            className={cn(
+                              "flex flex-col gap-1 w-full px-4 py-3 text-left transition-all border-0 cursor-pointer",
+                              roundClass,
+                              active
+                                ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
+                                : "bg-[var(--surface)] hover:bg-[var(--surface-variant)]/60 text-[var(--on-surface)]"
+                            )}
+                          >
+                            <div className="flex items-center justify-between gap-3">
+                              <span className="text-sm font-bold">{option.label}</span>
+                              {active && <Check size={16} />}
+                            </div>
+                            <span className="text-xs opacity-70">{option.desc}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
               </div>
 
+              {/* Search Scope & Limit */}
               <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0">
-                <label className="flex items-center justify-between gap-4 cursor-pointer">
+                <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)] mb-4">
+                  Search Scope & Limit
+                </div>
+                <div className="space-y-4">
                   <div>
-                    <div className="font-bold text-[15px]">Suppress hover</div>
-                    <div className="text-xs opacity-60 mt-0.5">Allow keyboard selection to ignore pointer movement.</div>
+                    <div className="font-bold text-[15px]">Search scope</div>
+                    <div className="text-xs opacity-60 font-medium mt-0.5 mb-3">
+                      Limit what the palette searches by default.
+                    </div>
+                    <div className="space-y-1.5">
+                      {[
+                        { value: "everything", label: "Everything", desc: "Search pages, settings, commands, and blog posts." },
+                        { value: "pages", label: "Pages", desc: "Search only site pages and navigation." },
+                        { value: "commands", label: "Commands", desc: "Search only palette actions and tools." },
+                        { value: "blog", label: "Blog posts", desc: "Search only blog posts." },
+                      ].map((option, index, array) => {
+                        const active = settings.paletteSearchScope === option.value;
+                        const isFirst = index === 0;
+                        const isLast = index === array.length - 1;
+                        const roundClass = array.length === 1
+                          ? "rounded-2xl"
+                          : isFirst
+                            ? "rounded-t-2xl rounded-b-[6px]"
+                            : isLast
+                              ? "rounded-b-2xl rounded-t-[6px]"
+                              : "rounded-[6px]";
+                        return (
+                          <button
+                            key={option.value}
+                            type="button"
+                            onClick={() => updateSettings({ paletteSearchScope: option.value as any })}
+                            className={cn(
+                              "flex flex-col gap-1 w-full px-4 py-3 text-left transition-all border-0 cursor-pointer",
+                              roundClass,
+                              active
+                                ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
+                                : "bg-[var(--surface)] hover:bg-[var(--surface-variant)]/60 text-[var(--on-surface)]"
+                            )}
+                          >
+                            <div className="flex items-center justify-between gap-3">
+                              <span className="text-sm font-bold">{option.label}</span>
+                              {active && <Check size={16} />}
+                            </div>
+                            <span className="text-xs opacity-70">{option.desc}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
-                  <Switch
-                    checked={settings.paletteSuppressHover}
-                    onChange={(checked) => updateSettings({ paletteSuppressHover: checked })}
-                  />
-                </label>
+
+                  <div className="pt-2 border-t border-[var(--outline-variant)]/20">
+                    <div className="font-bold text-[15px]">Results limit</div>
+                    <div className="text-xs opacity-60 font-medium mt-0.5 mb-3">
+                      Control how many items appear before scrolling.
+                    </div>
+                    <div className="grid gap-2 sm:grid-cols-4">
+                      {[8, 12, 16, 24].map((limit) => {
+                        const active = settings.paletteResultsLimit === limit;
+                        return (
+                          <button
+                            key={limit}
+                            type="button"
+                            onClick={() => updateSettings({ paletteResultsLimit: limit })}
+                            className={cn(
+                              "flex items-center justify-between gap-3 w-full rounded-xl px-4 py-3 text-left transition-all border-0 cursor-pointer",
+                              active
+                                ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
+                                : "bg-[var(--surface)] hover:bg-[var(--surface-variant)]/60 text-[var(--on-surface)]"
+                            )}
+                          >
+                            <span className="text-sm font-bold">{limit}</span>
+                            {active && <Check size={16} />}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Interaction & Behavior */}
+              <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-4">
+                <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)] mb-4">
+                  Interaction & Behavior
+                </div>
+
+                <div>
+                  <div className="font-bold text-[15px]">Keyboard navigation</div>
+                  <div className="text-xs opacity-60 font-medium mt-0.5 mb-3">
+                    Choose how arrow keys move through palette results. Bento view enables left/right navigation.
+                  </div>
+                  <div className="space-y-1.5">
+                    {[
+                      { value: "standard", label: "Standard", desc: "Arrow keys move up/down through the list." },
+                      { value: "wrap", label: "Wrap", desc: "Continue from bottom to top and vice versa." },
+                      { value: "grid", label: "2D grid", desc: "In Bento view, left/right move across columns." },
+                    ].map((option, index, array) => {
+                      const active = settings.paletteKeyboardNavBehavior === option.value;
+                      const isFirst = index === 0;
+                      const isLast = index === array.length - 1;
+                      const roundClass = array.length === 1
+                        ? "rounded-2xl"
+                        : isFirst
+                          ? "rounded-t-2xl rounded-b-[6px]"
+                          : isLast
+                            ? "rounded-b-2xl rounded-t-[6px]"
+                            : "rounded-[6px]";
+                      return (
+                        <button
+                          key={option.value}
+                          type="button"
+                          onClick={() => updateSettings({ paletteKeyboardNavBehavior: option.value as any })}
+                          className={cn(
+                            "flex flex-col gap-1 w-full px-4 py-3 text-left transition-all border-0 cursor-pointer",
+                            roundClass,
+                            active
+                              ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
+                              : "bg-[var(--surface)] hover:bg-[var(--surface-variant)]/60 text-[var(--on-surface)]"
+                          )}
+                        >
+                          <div className="flex items-center justify-between gap-3">
+                            <span className="text-sm font-bold">{option.label}</span>
+                            {active && <Check size={16} />}
+                          </div>
+                          <span className="text-xs opacity-70">{option.desc}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="pt-2 border-t border-[var(--outline-variant)]/20 space-y-2">
+                  <label className="flex items-center justify-between gap-4 p-4.5 rounded-2xl bg-[var(--surface)] hover:bg-[var(--surface-variant)]/60 text-[var(--on-surface)] transition-all cursor-pointer">
+                    <div>
+                      <div className="font-bold text-[15px]">Recent actions</div>
+                      <div className="text-xs opacity-60 font-medium mt-0.5">Toggle recent command suggestions when palette is empty.</div>
+                    </div>
+                    <Switch
+                      checked={settings.paletteShowRecentActions}
+                      onChange={(checked) => updateSettings({ paletteShowRecentActions: checked })}
+                    />
+                  </label>
+
+                  <label className="flex items-center justify-between gap-4 p-4.5 rounded-2xl bg-[var(--surface)] hover:bg-[var(--surface-variant)]/60 text-[var(--on-surface)] transition-all cursor-pointer">
+                    <div>
+                      <div className="font-bold text-[15px]">Suppress hover</div>
+                      <div className="text-xs opacity-60 font-medium mt-0.5">Allow keyboard selection to ignore pointer movement.</div>
+                    </div>
+                    <Switch
+                      checked={settings.paletteSuppressHover}
+                      onChange={(checked) => updateSettings({ paletteSuppressHover: checked })}
+                    />
+                  </label>
+                </div>
               </div>
             </div>
           </section>
         );
 
-      case "backup":
+      case "system":
         return (
           <section className="space-y-6">
             <div className="flex items-center gap-3 mb-6">
               <Fingerprint size={20} className="text-[var(--primary)]" />
-              <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)]">
-                Share & Backup
+              <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)] font-display">
+                Backup & System
               </h3>
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <button
-                onClick={() => {
-                  try {
-                    const str = btoa(JSON.stringify(settings));
-                    const shareUrl = `${window.location.origin}/?theme=${str}`;
-                    navigator.clipboard.writeText(shareUrl);
-                    setToast("Sharing link copied to clipboard!");
-                  } catch (e) {
-                    setToast("Failed to generate sharing link! :(");
-                  }
-                  haptic.light();
-                }}
-                className="flex items-center justify-between p-5 bg-[var(--surface-variant)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] transition-all text-left rounded-2xl group cursor-pointer border-0"
-              >
-                <div>
-                  <div className="font-bold text-[15px]">Copy config link</div>
-                  <div className="text-xs opacity-60 font-medium">
-                    Get config as link
-                  </div>
-                </div>
-                <ExternalLink
-                  size={20}
-                  className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform opacity-60 group-hover:opacity-100"
-                />
-              </button>
-
-              <button
-                onClick={() => {
-                  try {
-                    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(settings, null, 2));
-                    const downloadAnchor = document.createElement('a');
-                    downloadAnchor.setAttribute("href", dataStr);
-                    downloadAnchor.setAttribute("download", "virex-settings.json");
-                    document.body.appendChild(downloadAnchor);
-                    downloadAnchor.click();
-                    downloadAnchor.remove();
-                    setToast("backup downloaded!");
-                  } catch (e) {
-                    setToast("failed to download backup :(");
-                  }
-                  haptic.light();
-                }}
-                className="flex items-center justify-between p-5 bg-[var(--surface-variant)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] transition-all text-left rounded-2xl group cursor-pointer border-0"
-              >
-                <div>
-                  <div className="font-bold text-[15px]">Export config file</div>
-                  <div className="text-xs opacity-60 font-medium">
-                    Get config as JSON
-                  </div>
-                </div>
-                <Download
-                  size={20}
-                  className="group-hover:translate-y-0.5 transition-transform opacity-60 group-hover:opacity-100"
-                />
-              </button>
-            </div>
-
-            <div className="bg-[var(--surface-variant)]/40 p-5 rounded-2xl space-y-3 border-0">
-              <div className="font-bold text-[15px]">Importing Your Config</div>
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  placeholder="Paste sharing link/code here..."
-                  className="flex-1 min-w-0 truncate bg-[var(--surface)] text-[var(--on-surface)] rounded-xl px-4 py-2.5 text-[13px] font-bold border-0 ring-1 ring-[var(--outline-variant)]/30 focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      const val = e.currentTarget.value.trim();
-                      if (!val) return;
-                      try {
-                        let capsule = val;
-                        if (val.includes("theme=")) {
-                          const urlParams = new URLSearchParams(val.substring(val.indexOf("?")));
-                          capsule = urlParams.get("theme") || val;
-                        }
-                        const decoded = JSON.parse(atob(capsule));
-                        const validatedSettings: Partial<typeof settings> = {};
-                        const keys: (keyof typeof settings)[] = [
-                          "mode", "accent", "hue", "saturation", "sidebarFlipped",
-                          "sidebarCollapsed", "profileContainer", "brutalistMode",
-                          "developerFont", "focusMode", "floatingSidebar", "infoFullscreen", "debugMode",
-                          "helloAnimation", "disableAnimations", "highHz", "amoledMode",
-                          "bentoTilt", "lensDynamicTheming", "metricUnits", "dynamicWeatherLocation"
-                        ];
-                        for (const k of keys) {
-                          if (decoded[k] !== undefined) {
-                            (validatedSettings as any)[k] = decoded[k];
-                          }
-                        }
-                        updateSettings(validatedSettings);
-                        setToast("config has been loaded!");
-                        e.currentTarget.value = "";
-                      } catch (err) {
-                        setToast("non valid capsule code or link :(");
-                      }
-                    }
-                  }}
-                />
-                <motion.label
-                  whileTap={{ scale: 0.96 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+            {/* Share & Backup */}
+            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-4">
+              <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
+                Share & Backup
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button
                   onClick={() => {
+                    try {
+                      const str = btoa(JSON.stringify(settings));
+                      const shareUrl = `${window.location.origin}/?theme=${str}`;
+                      navigator.clipboard.writeText(shareUrl);
+                      setToast("Sharing link copied to clipboard!");
+                    } catch (e) {
+                      setToast("Failed to generate sharing link! :(");
+                    }
                     haptic.light();
                   }}
-                  className="shrink-0 whitespace-nowrap bg-[var(--primary)] text-[var(--on-primary)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center cursor-pointer select-none border-0"
+                  className="flex items-center justify-between p-4.5 bg-[var(--surface-variant)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] transition-all text-left rounded-2xl group cursor-pointer border-0 text-[var(--on-surface)]"
                 >
-                  Upload File
+                  <div>
+                    <div className="font-bold text-[15px]">Copy config link</div>
+                    <div className="text-xs opacity-60 font-medium">
+                      Get config as link
+                    </div>
+                  </div>
+                  <ExternalLink
+                    size={20}
+                    className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform opacity-60 group-hover:opacity-100"
+                  />
+                </button>
+
+                <button
+                  onClick={() => {
+                    try {
+                      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(settings, null, 2));
+                      const downloadAnchor = document.createElement('a');
+                      downloadAnchor.setAttribute("href", dataStr);
+                      downloadAnchor.setAttribute("download", "virex-settings.json");
+                      downloadAnchor.click();
+                      downloadAnchor.remove();
+                      setToast("backup downloaded!");
+                    } catch (e) {
+                      setToast("failed to download backup :(");
+                    }
+                    haptic.light();
+                  }}
+                  className="flex items-center justify-between p-4.5 bg-[var(--surface-variant)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] transition-all text-left rounded-2xl group cursor-pointer border-0 text-[var(--on-surface)]"
+                >
+                  <div>
+                    <div className="font-bold text-[15px]">Export config file</div>
+                    <div className="text-xs opacity-60 font-medium">
+                      Get config as JSON
+                    </div>
+                  </div>
+                  <Download
+                    size={20}
+                    className="group-hover:translate-y-0.5 transition-transform opacity-60 group-hover:opacity-100"
+                  />
+                </button>
+              </div>
+
+              <div className="p-4.5 bg-[var(--surface-variant)] rounded-2xl space-y-3 border-0">
+                <div className="font-bold text-[15px]">Importing Your Config</div>
+                <div className="flex gap-2">
                   <input
-                    type="file"
-                    accept=".json"
-                    className="hidden"
-                    onChange={(e) => {
-                      const file = e.target.files?.[0];
-                      if (!file) return;
-                      const reader = new FileReader();
-                      reader.onload = (event) => {
+                    type="text"
+                    placeholder="Paste sharing link/code here..."
+                    className="flex-1 min-w-0 truncate bg-[var(--surface)] text-[var(--on-surface)] rounded-xl px-4 py-2.5 text-[13px] font-bold border-0 ring-1 ring-[var(--outline-variant)]/30 focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        const val = e.currentTarget.value.trim();
+                        if (!val) return;
                         try {
-                          const decoded = JSON.parse(event.target?.result as string);
+                          let capsule = val;
+                          if (val.includes("theme=")) {
+                            const urlParams = new URLSearchParams(val.substring(val.indexOf("?")));
+                            capsule = urlParams.get("theme") || val;
+                          }
+                          const decoded = JSON.parse(atob(capsule));
                           const validatedSettings: Partial<typeof settings> = {};
                           const keys: (keyof typeof settings)[] = [
                             "mode", "accent", "hue", "saturation", "sidebarFlipped",
@@ -1138,32 +1272,68 @@ export const SettingsDialog = memo(({
                             }
                           }
                           updateSettings(validatedSettings);
-                          setToast("settings have been restored from backup!");
+                          setToast("config has been loaded!");
+                          e.currentTarget.value = "";
                         } catch (err) {
-                          setToast("non valid backup JSON file :(");
+                          setToast("non valid capsule code or link :(");
                         }
-                      };
-                      reader.readAsText(file);
+                      }
                     }}
                   />
-                </motion.label>
-              </div>
-              <div className="text-[12px] opacity-50 font-medium">
-                Press Enter to apply pasted sharing link. Pressing `ENTER` will update your theme immediately.
+                  <motion.label
+                    whileTap={{ scale: 0.96 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                    onClick={() => {
+                      haptic.light();
+                    }}
+                    className="shrink-0 whitespace-nowrap bg-[var(--primary)] text-[var(--on-primary)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center cursor-pointer select-none border-0"
+                  >
+                    Upload File
+                    <input
+                      type="file"
+                      accept=".json"
+                      className="hidden"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (!file) return;
+                        const reader = new FileReader();
+                        reader.onload = (event) => {
+                          try {
+                            const decoded = JSON.parse(event.target?.result as string);
+                            const validatedSettings: Partial<typeof settings> = {};
+                            const keys: (keyof typeof settings)[] = [
+                              "mode", "accent", "hue", "saturation", "sidebarFlipped",
+                              "sidebarCollapsed", "profileContainer", "brutalistMode",
+                              "developerFont", "focusMode", "floatingSidebar", "infoFullscreen", "debugMode",
+                              "helloAnimation", "disableAnimations", "highHz", "amoledMode",
+                              "bentoTilt", "lensDynamicTheming", "metricUnits", "dynamicWeatherLocation"
+                            ];
+                            for (const k of keys) {
+                              if (decoded[k] !== undefined) {
+                                (validatedSettings as any)[k] = decoded[k];
+                              }
+                            }
+                            updateSettings(validatedSettings);
+                            setToast("settings have been restored from backup!");
+                          } catch (err) {
+                            setToast("non valid backup JSON file :(");
+                          }
+                        };
+                        reader.readAsText(file);
+                      }}
+                    />
+                  </motion.label>
+                </div>
+                <div className="text-[12px] opacity-50 font-medium">
+                  Press Enter to apply pasted sharing link. Pressing `ENTER` will update your theme immediately.
+                </div>
               </div>
             </div>
-          </section>
-        );
 
-      case "debug":
-        return (
-          <div className="space-y-8">
-            <section className="space-y-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Cpu size={20} className="text-[var(--primary)]" />
-                <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)]">
-                  Information & Debug settings
-                </h3>
+            {/* Support & Diagnostics */}
+            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-3">
+              <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
+                Support & Diagnostics
               </div>
               <div className="flex flex-col gap-2">
                 <label
@@ -1191,55 +1361,33 @@ export const SettingsDialog = memo(({
                     }}
                   />
                 </label>
-              </div>
-            </section>
-            <section className="space-y-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Terminal size={20} className="text-[var(--primary)]" />
-                <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)]">
-                  Other Info
-                </h3>
-              </div>
-              <button
-                onClick={() => {
-                  handleClose();
-                  goto("changelog");
-                }}
-                className="w-full flex items-center justify-between p-4.5 bg-[var(--surface-variant)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] transition-all text-left rounded-2xl group cursor-pointer border-0"
-              >
-                <div>
-                  <div className="font-bold text-[15px]">View changelog</div>
-                  <div className="text-xs opacity-60 font-medium">
-                    See what's new in 2026.09.14-stable
-                  </div>
-                </div>
-                <ChevronRight
-                  size={20}
-                  className="group-hover:translate-x-1 transition-transform opacity-60 group-hover:opacity-100"
-                />
-              </button>
-            </section>
-          </div>
-        );
 
-      case "about":
-        return (
-          <div className="space-y-8">
-            <section className="space-y-6">
-              <div className="flex items-center gap-3 mb-6">
-                <Bug size={20} className="text-[var(--primary)]" />
-                <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)]">
-                  Feedback
-                </h3>
-              </div>
-              <div className="flex flex-col gap-2">
+                <button
+                  onClick={() => {
+                    handleClose();
+                    goto("changelog");
+                  }}
+                  className="w-full flex items-center justify-between p-4.5 bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/20 hover:text-[var(--on-primary-container)] transition-all text-left rounded-2xl group cursor-pointer border-0 text-[var(--on-surface)]"
+                >
+                  <div>
+                    <div className="font-bold text-[15px]">View changelog</div>
+                    <div className="text-xs opacity-60 font-medium">
+                      See what's new in 2026.09.14-stable
+                    </div>
+                  </div>
+                  <ChevronRight
+                    size={20}
+                    className="group-hover:translate-x-1 transition-transform opacity-60 group-hover:opacity-100"
+                  />
+                </button>
+
                 <button
                   onClick={() => {
                     handleClose();
                     onReportBug();
                     haptic.light();
                   }}
-                  className="w-full flex items-center justify-between p-4.5 bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/20 hover:text-[var(--on-primary-container)] transition-all text-left rounded-2xl group cursor-pointer border-0"
+                  className="w-full flex items-center justify-between p-4.5 bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/20 hover:text-[var(--on-primary-container)] transition-all text-left rounded-2xl group cursor-pointer border-0 text-[var(--on-surface)]"
                 >
                   <div>
                     <div className="font-bold text-[15px]">Report a bug</div>
@@ -1252,13 +1400,14 @@ export const SettingsDialog = memo(({
                     className="group-hover:translate-x-1 transition-transform opacity-60 group-hover:opacity-100"
                   />
                 </button>
+
                 <button
                   onClick={() => {
                     handleClose();
                     onOpenKnownIssuess();
                     haptic.light();
                   }}
-                  className="w-full flex items-center justify-between p-4.5 bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/20 hover:text-[var(--on-primary-container)] transition-all text-left rounded-2xl group cursor-pointer border-0"
+                  className="w-full flex items-center justify-between p-4.5 bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/20 hover:text-[var(--on-primary-container)] transition-all text-left rounded-2xl group cursor-pointer border-0 text-[var(--on-surface)]"
                 >
                   <div>
                     <div className="font-bold text-[15px]">Known issues</div>
@@ -1272,8 +1421,8 @@ export const SettingsDialog = memo(({
                   />
                 </button>
               </div>
-            </section>
-          </div>
+            </div>
+          </section>
         );
       default:
         return null;
@@ -1544,7 +1693,7 @@ export const SettingsDialog = memo(({
                               >
                                 <div className="flex items-center gap-3.5">
                                   <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--surface)] text-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-[var(--on-primary)] transition-all shrink-0 border-0 shadow-xs">
-                                    <PageIcon size={20} className={cn("shrink-0", page.id === "debug" && "-translate-x-[0.9px]")} />
+                                    <PageIcon size={20} className="shrink-0" />
                                   </div>
                                   <div>
                                     <div className="font-bold text-[15px]">{page.title}</div>
@@ -1566,7 +1715,7 @@ export const SettingsDialog = memo(({
                         <div className="flex flex-col gap-1 mt-4">
                           <div className="flex items-center gap-4 px-1 pt-1 pb-1">
                             <div className="flex-1 h-px bg-[var(--outline-variant)]/30" />
-                            <span className="text-[12px] font-black tracking-[0.1em] uppercase opacity-40 font-expressive">More</span>
+                            <span className="text-[12px] font-black tracking-[0.1em] uppercase opacity-40 font-expressive">System & Support</span>
                             <div className="flex-1 h-px bg-[var(--outline-variant)]/30" />
                           </div>
                           {BOTTOM_PAGES.map((page, index, arr) => {
@@ -1596,7 +1745,7 @@ export const SettingsDialog = memo(({
                                 <div className="flex items-center gap-3.5">
                                   <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[var(--surface)] text-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-[var(--on-primary)] transition-colors duration-200 shrink-0 border-0 shadow-xs">
                                     <div className="flex items-center justify-center transition-transform duration-200 ease-out group-hover:scale-105">
-                                      <PageIcon size={20} className={cn("shrink-0", page.id === "debug" && "-translate-x-[0.5px]")} />
+                                      <PageIcon size={20} className="shrink-0" />
                                     </div>
                                   </div>
                                   <div>
@@ -1631,7 +1780,7 @@ export const SettingsDialog = memo(({
                 </div>
               ) : (
                 <div className="flex flex-row flex-1 overflow-hidden min-h-0">
-                  {/* left nav sidebar — styled identically to sidebar / index.astro link items */}
+                  {/* left nav sidebar */}
                   <div className="w-[240px] border-r border-[var(--outline-variant)]/30 bg-[var(--surface-variant)]/20 py-4 px-3 flex flex-col overflow-y-auto shrink-0 select-none">
                     {/* main nav items */}
                     <div className="flex flex-col gap-1">
@@ -1672,8 +1821,8 @@ export const SettingsDialog = memo(({
                               className={cn(
                                 "w-9 h-9 flex items-center justify-center rounded-full transition-colors duration-200 shrink-0 border-0 shadow-none",
                                 isActive
-                                  ? "bg-[var(--primary)] text-[var(--on-primary)] shadow-sm"
-                                  : "bg-[var(--surface)] text-[var(--primary)]"
+                                    ? "bg-[var(--primary)] text-[var(--on-primary)] shadow-sm"
+                                    : "bg-[var(--surface)] text-[var(--primary)]"
                               )}
                             >
                               <div className="flex items-center justify-center transition-transform duration-200 ease-out group-hover:scale-105">
@@ -1689,7 +1838,7 @@ export const SettingsDialog = memo(({
                               {p.title}
                             </span>
 
-                            {/* right chevron with no container */}
+                            {/* right chevron */}
                             <div className="shrink-0 flex items-center justify-center w-4">
                               <ChevronRight
                                 size={16}
@@ -1706,7 +1855,7 @@ export const SettingsDialog = memo(({
                       })}
                     </div>
 
-                    {/* spacer + divider */}
+                    {/* spacer + bottom pages (Backup & System) */}
                     <div className="mt-auto pt-3">
                       <div className="mx-2 mb-2.5 h-px bg-[var(--outline-variant)]/30 rounded-full" />
                       <div className="flex flex-col gap-1">
@@ -1750,7 +1899,7 @@ export const SettingsDialog = memo(({
                                 )}
                               >
                                 <div className="flex items-center justify-center transition-transform duration-200 ease-out group-hover:scale-105">
-                                  <PageIcon size={18} className={cn("shrink-0", (p.id === "debug" || p.id === "info") && "translate-x-[0.5px]")} fill={false} weight={isActive ? 600 : 450} />
+                                  <PageIcon size={18} fill={false} weight={isActive ? 600 : 450} />
                                 </div>
                               </div>
                               <span className={cn(
@@ -1776,6 +1925,7 @@ export const SettingsDialog = memo(({
                       </div>
                     </div>
                   </div>
+
                   {/* right content with animated page transitions */}
                   <div
                     ref={scrollRef}
