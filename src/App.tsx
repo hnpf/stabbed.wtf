@@ -444,7 +444,7 @@ export default function App() {
                   <div className="flex flex-col gap-2">
                     <h3 className="text-2xl font-expressive italic font-black mb-2 tracking-[0.03em] text-[var(--on-surface-variant)] uppercase leading-none">Navigation</h3>
                     <div className="text-[11px] ml-3 font-bold tracking-[0.15em] text-[var(--on-surface-variant)] opacity-70">
-                      <span className="font-black">{paletteHotkeyLabel}</span> to search
+                      <kbd className="bg-[var(--surface-variant)] px-1.5 py-0.5 rounded-md border border-[var(--outline-variant)]/40 font-mono text-[10px]">{paletteHotkeyLabel}</kbd> to search
                     </div>
                   </div>
                 </div>
