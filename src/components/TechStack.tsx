@@ -17,6 +17,7 @@ export const BounceButton = ({
   layout = false,
   layoutId,
   isMini = false,
+  transition,
 }: {
   icon?: any;
   label?: React.ReactNode;
@@ -30,6 +31,7 @@ export const BounceButton = ({
   layout?: boolean | "position" | "size";
   layoutId?: string;
   isMini?: boolean;
+  transition?: any;
 }) => {
   const [internalLoading, set_loading] = useState(false);
   const isLoading = externalLoading ?? internalLoading;
@@ -54,6 +56,8 @@ export const BounceButton = ({
 
   return (
     <motion.button
+      layout={layout}
+      layoutId={layoutId}
       whileHover={
         disabled || isLoading
           ? undefined
@@ -63,15 +67,18 @@ export const BounceButton = ({
             }
       }
       whileTap={disabled || isLoading ? undefined : { scale: 0.98, rotate: -0.5 }}
-      transition={{
-        type: "spring",
-        stiffness: 400,
-        damping: 15,
-        mass: 1,
-      }}
+      transition={
+        transition || {
+          type: "spring",
+          stiffness: 450,
+          damping: 28,
+          mass: 0.6,
+        }
+      }
       onClick={_on_click}
       disabled={disabled || isLoading}
-      title={title}
+      title={title || (typeof label === "string" ? label : undefined)}
+      aria-label={title || (typeof label === "string" ? label : undefined)}
       className={cn(
         "relative overflow-hidden cursor-pointer select-none",
         (disabled || isLoading) && "cursor-not-allowed opacity-60 pointer-events-none",
@@ -95,10 +102,46 @@ export const BounceButton = ({
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            className="flex items-center gap-2 w-full justify-center"
+            className="flex items-center justify-center w-full h-full"
           >
-            {Icon && <Icon size={18} className={cn("shrink-0", iconClassName)} />}
-            {typeof label === "string" ? <span className="font-bold">{label}</span> : label}
+            {Icon && (
+              <div className="flex items-center justify-center shrink-0">
+                <Icon size={isMini ? 22 : 18} className={cn("shrink-0", iconClassName)} />
+              </div>
+            )}
+            {label && (
+              <motion.span
+                initial={false}
+                animate={{
+                  opacity: isMini ? 0 : 1,
+                  maxWidth: isMini ? 0 : 140,
+                  marginLeft: isMini ? 0 : 8,
+                }}
+                transition={{
+                  opacity: {
+                    duration: isMini ? 0.1 : 0.2,
+                    delay: isMini ? 0 : 0.08,
+                    ease: "easeInOut",
+                  },
+                  maxWidth: transition || {
+                    type: "spring",
+                    stiffness: 450,
+                    damping: 28,
+                    mass: 0.6,
+                  },
+                  marginLeft: transition || {
+                    type: "spring",
+                    stiffness: 450,
+                    damping: 28,
+                    mass: 0.6,
+                  },
+                }}
+                className="whitespace-nowrap overflow-hidden inline-flex items-center"
+                style={{ pointerEvents: isMini ? "none" : "auto" }}
+              >
+                {typeof label === "string" ? <span className="font-bold">{label}</span> : label}
+              </motion.span>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

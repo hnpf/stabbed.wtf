@@ -465,17 +465,51 @@ export default function App() {
                   <div className="mx-2 mb-2 h-px bg-[var(--outline-variant)]/30 rounded-full" />
                 )}
                 
-                <div className={cn("flex flex-col", settings.sidebarCollapsed ? "w-full items-center gap-4" : "gap-2.5")}>
+                <div className={cn("flex flex-col", settings.sidebarCollapsed ? (is_short ? "w-full items-center gap-2" : "w-full items-center gap-3") : "gap-2.5")}>
                   
                   <SideItem highHz={settings.highHz} glyph={M3Settings} text="Settings" onSelect={() => setSettingsOpen(true)} isMini={settings.sidebarCollapsed} isShort={is_short} isFirst isLast isFloating={settings.floatingSidebar} layoutId="settings-expansion" />
-                  {!settings.sidebarCollapsed && (
-                    <div className="grid grid-cols-2 gap-2 w-full">
-                      <BounceButton icon={Github} label="GitHub" url="https://github.com/hnpf" className="flex items-center justify-center gap-2.5 h-14 rounded-[24px] bg-[var(--surface-variant)]/50 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)] transition-colors duration-150 text-sm font-expressive tracking-wide font-black shadow-none border-0" />
-                      <BounceButton icon={M3Chat} label="Discord" url="https://discord.gg/TSZNYbjzF7" className="flex items-center justify-center gap-2.5 h-14 rounded-[24px] bg-[var(--surface-variant)]/50 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)] transition-colors duration-150 text-sm font-expressive tracking-wide font-black shadow-none border-0" />
-                    </div>
-                  )}
+                  <div
+                    className={cn(
+                      "w-full",
+                      settings.sidebarCollapsed
+                        ? (is_short ? "flex flex-col items-center gap-2" : "flex flex-col items-center gap-3")
+                        : "grid grid-cols-2 gap-2"
+                    )}
+                  >
+                    <BounceButton
+                      layout="position"
+                      transition={springConfig}
+                      isMini={settings.sidebarCollapsed}
+                      icon={Github}
+                      label="GitHub"
+                      title="GitHub"
+                      url="https://github.com/hnpf"
+                      className={cn(
+                        "flex items-center justify-center transition-colors duration-150 text-sm font-expressive tracking-wide font-black shadow-none border-0",
+                        settings.sidebarCollapsed
+                          ? (is_short ? "w-12 h-12 rounded-full" : "w-14 h-14 rounded-full") + " bg-[var(--surface-variant)]/50 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)]"
+                          : "h-14 rounded-[24px] bg-[var(--surface-variant)]/50 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)]"
+                      )}
+                    />
+                    <BounceButton
+                      layout="position"
+                      transition={springConfig}
+                      isMini={settings.sidebarCollapsed}
+                      icon={M3Chat}
+                      label="Discord"
+                      title="Discord"
+                      url="https://discord.gg/TSZNYbjzF7"
+                      className={cn(
+                        "flex items-center justify-center transition-colors duration-150 text-sm font-expressive tracking-wide font-black shadow-none border-0",
+                        settings.sidebarCollapsed
+                          ? (is_short ? "w-12 h-12 rounded-full" : "w-14 h-14 rounded-full") + " bg-[var(--surface-variant)]/50 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)]"
+                          : "h-14 rounded-[24px] bg-[var(--surface-variant)]/50 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)]"
+                      )}
+                    />
+                  </div>
                   <div className={cn("w-full flex justify-center", settings.sidebarCollapsed && "px-0")}>
                     <motion.button 
+                      layout
                       whileHover={{ scale: 1.02, y: -1 }}
                       whileTap={{ scale: 0.96 }}
                       transition={{
@@ -487,8 +521,8 @@ export default function App() {
                       className={cn(
                         "flex items-center justify-center outline-none cursor-pointer transition-all duration-200 border-0 shadow-none overflow-hidden",
                         settings.sidebarCollapsed
-                          ? "w-14 h-14 rounded-full bg-[var(--surface-variant)] text-[var(--on-surface)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)]"
-                          : "w-full h-14 rounded-[24px] bg-[var(--surface-variant)]/50 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)] gap-3 font-expressive text-[15px] tracking-widest font-black px-4"
+                          ? (is_short ? "w-12 h-12 rounded-full" : "w-14 h-14 rounded-full") + " bg-[var(--surface-variant)] text-[var(--on-surface)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)]"
+                          : "w-full h-14 rounded-[24px] bg-[var(--surface-variant)]/50 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)] font-expressive text-[15px] tracking-widest font-black px-4"
                       )}
                       aria-label={settings.sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
                     >
@@ -505,19 +539,27 @@ export default function App() {
                       >
                         <M3ChevronRight size={22} fill />
                       </motion.div>
-                      <AnimatePresence initial={false}>
-                        {!settings.sidebarCollapsed && (
-                          <motion.span
-                            initial={{ opacity: 0, width: 0 }}
-                            animate={{ opacity: 1, width: "auto" }}
-                            exit={{ opacity: 0, width: 0 }}
-                            transition={{ duration: 0.15, ease: "easeInOut" }}
-                            className="whitespace-nowrap overflow-hidden"
-                          >
-                            Collapse
-                          </motion.span>
-                        )}
-                      </AnimatePresence>
+                      <motion.span
+                        initial={false}
+                        animate={{
+                          opacity: settings.sidebarCollapsed ? 0 : 1,
+                          maxWidth: settings.sidebarCollapsed ? 0 : 140,
+                          marginLeft: settings.sidebarCollapsed ? 0 : 12,
+                        }}
+                        transition={{
+                          opacity: {
+                            duration: settings.sidebarCollapsed ? 0.1 : 0.2,
+                            delay: settings.sidebarCollapsed ? 0 : 0.08,
+                            ease: "easeInOut",
+                          },
+                          maxWidth: springConfig,
+                          marginLeft: springConfig,
+                        }}
+                        className="whitespace-nowrap overflow-hidden inline-flex items-center"
+                        style={{ pointerEvents: settings.sidebarCollapsed ? "none" : "auto" }}
+                      >
+                        Collapse
+                      </motion.span>
                     </motion.button>
                   </div>
                 </div>
