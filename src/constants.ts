@@ -1028,6 +1028,68 @@ it's literally just people helping people for learning (and overall better code 
 
 export const CHANGELOGS: ChangelogEntry[] = [
   {
+    id: "site-m3e-accurate-overhaul",
+    version: "2026.09.19",
+    title: "site m3e-accurate overhaul",
+    date: "Sep 19, 2026",
+    changes: [
+      {
+        category: "sidebar",
+        items: [
+          "got rid of inaccurate borders, and replaced sidebar styling with borderless sideitem m3e-accurate styling.",
+          "improved footer actions, added more microanimations (virex sidebar hero text fadein/out)",
+          "socials now show in collapsed sidebar which animates really fluently",
+          "introduced expressive tooltip for collapsed sidebar mode",
+          "completely re-styled the collapse button",
+          "introduced much cleaner active indicator pill switch animations",
+          "wrapped paletteHotkeyLabel sidebar hint into kbd keycap style",
+        ],
+      },
+      {
+        category: "features",
+        items: [
+          "global user-configurated font scaling slider!",
+          "removed highhz (since it's already baked in and no longer needed as an option)",
+          "drastically improved focusmode for actual use",
+        ],
+      },
+      {
+        category: "settings",
+        items: [
+          "completely overhauled settings (sorting, naming, context, etc.)",
+          "improved styling and put everything into containers.",
+          "[mobile] add a rubber band curve for a more native feel of overdragging",
+        ],
+      },
+      {
+        category: "command palette",
+        items: [
+          "overhauled most of it's stling with better typography, dynamic spanning, positioning, improved animations, and much more.",
+        ],
+      },
+      {
+        category: "ripple",
+        items: [
+          "added a ripple component (which is now used throughout most of the site) which expands a circle throughout a whole button depending where you click (directly inspired from m3)",
+          "applied ripple throughout almost every button on the site",
+        ],
+      },
+      {
+        category: "technical",
+        items: [
+          "improved material icon rendering",
+          "fixed collapsed sideitems hovering bug",
+          "fixed inheritance issues",
+          "fixed font stretch icon issues",
+          "fixed reverse overshoot curves",
+          "fixed sibling layout projections",
+          "reduced ~927 lines of dead/useless code throughout the codebase",
+          "fixed firefox-exclusive rendering/artifacting issues using more corner clipping and mask properties",
+        ],
+      },
+    ],
+  },
+  {
     id: "small-touches-update",
     version: "2026.08.14",
     title: "small touches update",
