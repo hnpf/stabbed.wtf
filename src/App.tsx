@@ -43,6 +43,7 @@ import { ExpressiveTooltip } from "./components/ExpressiveTooltip";
 import { M3WindowScrollBar, M3ScrollBar } from "./components/M3ScrollBar";
 import { materialIcon } from "./components/MaterialIcon";
 import { BLOG_POSTS } from "./constants";
+import { RippleScope } from "./components/RippleScope";
 
 const M3Home = materialIcon("home");
 const M3Info = materialIcon("fingerprint");
@@ -327,6 +328,7 @@ export default function App() {
   };
 
   return (
+    <RippleScope>
     <div
       className={cn(
         "min-h-screen flex font-sans relative",
@@ -723,5 +725,6 @@ export default function App() {
       <RefreshConfirmDialog showRefreshConfirm={showRefreshConfirm} setShowRefreshConfirm={setShowRefreshConfirm} />
       </MotionConfig>
     </div>
+    </RippleScope>
   );
 }

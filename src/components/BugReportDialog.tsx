@@ -481,6 +481,7 @@ export const BugReportDialog = ({
                           onDragLeave={handleDrag}
                           onDrop={handleDrop}
                           onClick={() => fileInputRef.current?.click()}
+                          data-ripple
                           className={cn(
                             "border-4 border-dashed rounded-2xl p-6 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-200",
                             dragActive

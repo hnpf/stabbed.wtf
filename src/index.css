@@ -1184,6 +1184,14 @@ body, .gsf-global {
     z-index: 0;
 }
 
+/* Added by RippleScope. Each control owns its clipping boundary, so a state
+   layer can never become a shared container around neighbouring nav pills. */
+.m3-ripple-target {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
 .m3-ripple-hover {
     position: absolute;
     inset: 0;
@@ -1294,4 +1302,3 @@ html, body, #root, .app-root {
 .text-\[28px\] { font-size: calc(28px * var(--font-scale, 1)) !important; }
 .text-\[36px\] { font-size: calc(36px * var(--font-scale, 1)) !important; }
 .text-\[110px\] { font-size: calc(110px * var(--font-scale, 1)) !important; }
-

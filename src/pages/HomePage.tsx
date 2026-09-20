@@ -608,6 +608,7 @@ const AncBar = ({ setPage, settings }: { setPage: (page: string, postId: string 
       
       whileTap={settings.disableAnimations ? {} : { scale: 0.98 }}
       onClick={() => setPage("blog", latestPost.id)}
+      data-ripple
       className="flex flex-col sm:flex-row items-stretch justify-between gap-4 p-5 sm:p-6 border-6 border-[var(--outline-variant)] rounded-[2.5rem] bg-[var(--surface-variant)] hover:border-[var(--primary)] hover:shadow-2xl transition-[border-color,box-shadow] duration-200 relative overflow-hidden group cursor-pointer select-none"
     >
       {/* left: badges, title, + snippet filling desktop wid */}

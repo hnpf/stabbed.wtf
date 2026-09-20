@@ -323,6 +323,7 @@ export const KnownIssuesDialog = ({
                       <div
                         key={bug.id}
                         onClick={() => toggleExpand(bug.id)}
+                        data-ripple
                         className={cn(
                           "border-6 border-[var(--outline-variant)] bg-[var(--surface-variant)]/40 hover:bg-[var(--surface-variant)]/70 transition-all rounded-[1.5rem] overflow-hidden cursor-pointer",
                           isExpanded && "bg-[var(--surface-variant)]/80 ring-1 ring-[var(--primary)]/20"

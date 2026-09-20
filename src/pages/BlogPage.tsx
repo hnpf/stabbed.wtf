@@ -468,6 +468,7 @@ export const BlogPage = memo(({ targetId, navigateTo }: any) => {
                 scale: 1,
               }}
               className="relative rounded-[3.5rem] overflow-hidden bg-[var(--primary-container)] text-[var(--on-primary-container)] border-6 border-[var(--outline-variant)] shadow-2xl group cursor-pointer hover:border-[var(--primary)] transition-colors"
+              data-ripple
               onClick={() => {
                 haptic.medium();
                 navigateTo("blog", featured.link);
