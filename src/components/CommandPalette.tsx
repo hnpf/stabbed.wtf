@@ -643,11 +643,12 @@ export function CommandPalette({
                       ) : (
                         /* highly contrast card view */
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 px-0.5">
-                          {group.items.map((item) => {
+                          {group.items.map((item, index, arr) => {
                             const globalIndex = itemIndexMap.get(item.id) ?? 0;
                             const Icon = item.icon;
                             const isActive = globalIndex === cursor;
                             const isRecent = isRecentItem(item.id);
+                            const isLastOdd = arr.length % 2 === 1 && index === arr.length - 1;
 
                             return (
                               <motion.button
@@ -669,6 +670,7 @@ export function CommandPalette({
                                 transition={{ type: "spring", stiffness: 450, damping: 26, mass: 0.6 }}
                                 className={cn(
                                   "relative flex flex-col justify-between p-4.5 rounded-[22px] text-left group cursor-pointer select-none transition-colors duration-150 outline-none min-h-[115px] gap-3 border",
+                                  isLastOdd && "sm:col-span-2",
                                   isActive
                                     ? "bg-[var(--primary-container)] border-3 border-[var(--primary)] text-[var(--on-primary-container)] shadow-md"
                                     : "bg-[var(--surface-variant)]/60 hover:bg-[var(--surface-variant)] border-3 border-[var(--outline-variant)]/30 hover:border-[var(--outline-variant)]/60 text-[var(--on-surface)] shadow-xs"
