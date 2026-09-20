@@ -429,8 +429,14 @@ export function CommandPalette({
                 </motion.button>
 
                 <div
+                  style={{
+                    WebkitBackfaceVisibility: "hidden",
+                    backfaceVisibility: "hidden",
+                    WebkitMaskImage: "-webkit-radial-gradient(white, black)",
+                    maskImage: "radial-gradient(white, black)",
+                  }}
                   className={cn(
-                    "flex h-16 flex-1 items-center rounded-full border-3 bg-[var(--surface)] pl-5 pr-2 transition-[border-color,box-shadow] duration-200",
+                    "flex h-16 flex-1 items-center rounded-full border-3 bg-[var(--surface)] pl-5 pr-2 transition-[box-shadow] duration-200 overflow-hidden bg-clip-padding",
                     searchFocus
                       ? "border-[var(--primary)] shadow-[0_0_0_3px_color-mix(in_srgb,var(--primary)_18%,transparent)]"
                       : "border-[var(--outline-variant)]/40"
@@ -519,21 +525,18 @@ export function CommandPalette({
                                   if (!ignoreMouseHover) setCursor(globalIndex);
                                 }}
                                 data-command-active={isActive}
-                                style={{ transformOrigin: "left center" }}
-                                whileHover={
-                                  ignoreMouseHover
-                                    ? undefined
-                                    : {
-                                        y: -3,
-                                        scale: 1.01,
-                                        transition: { type: "spring", stiffness: 550, damping: 58, mass: 0.7 },
-                                      }
-                                }
+                                style={{
+                                  transformOrigin: "left center",
+                                  WebkitBackfaceVisibility: "hidden",
+                                  backfaceVisibility: "hidden",
+                                  WebkitMaskImage: "-webkit-radial-gradient(white, black)",
+                                  maskImage: "radial-gradient(white, black)",
+                                }}
                                 whileTap={{ scale: 0.98, transition: { type: "spring", stiffness: 900, damping: 40, mass: 0.5 } }}
-                                animate={isActive ? { scale: 1.01 } : { scale: 1 }}
+                                animate={isActive ? { scale: 1.01, y: -2 } : { scale: 1, y: 0 }}
                                 transition={{ type: "spring", stiffness: 620, damping: 30, mass: 0.65 }}
                                 className={cn(
-                                  "group relative w-full text-left transition-colors duration-150",
+                                  "group relative w-full text-left transition-[background-color,color] duration-150 overflow-hidden bg-clip-padding",
                                   viewMode === "lists"
                                     ? cn(
                                         "grid grid-cols-[auto_1fr] items-center gap-4 border-6 bg-[var(--surface)] px-5 py-5 ",
