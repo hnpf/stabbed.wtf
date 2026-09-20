@@ -115,7 +115,7 @@ export const DebugView = ({ page, blogPostId, viewport }: any) => {
     initConsoleHijack();
   }, []);
 
-  const BUILD_VERSION = "v3.5.0-stable (2026.09.19)";
+  const BUILD_VERSION = "v3.5.2-stable (2026.09.20)";
   const dragControls = useDragControls();
 
   // local debug console state

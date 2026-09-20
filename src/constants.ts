@@ -1028,6 +1028,39 @@ it's literally just people helping people for learning (and overall better code 
 
 export const CHANGELOGS: ChangelogEntry[] = [
   {
+    id: "saverestore-touches-and-bug-fixes",
+    version: "2026.09.20",
+    title: "Save/restore touches and bug fixes",
+    date: "Sep 20, 2026",
+    changes: [
+      {
+        category: "Input field component",
+        items: [
+          "implemented new m3-inspired input field component",
+        ],
+      },
+      {
+        category: "Restore config",
+        items: [
+          "overhauled layout, styling, and made the whole restoring config section more intuitive and expected",
+        ],
+      },
+      {
+        category: "Copy config link + Export as JSON buttons touches",
+        items: [
+          "(copied from copylink used in blog) now has hover animations, checkmarks, and text variety.",
+        ],
+      },
+      {
+        category: "Technical",
+        items: [
+          "fixed blog filter items exploding",
+          "fixed command palette search ripple",
+        ],
+      },
+    ],
+  },
+  {
     id: "site-m3e-accurate-overhaul",
     version: "2026.09.19",
     title: "site m3e-accurate overhaul",
