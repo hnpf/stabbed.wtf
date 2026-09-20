@@ -670,63 +670,123 @@ export function CommandPalette({
                                 transition={{ type: "spring", stiffness: 450, damping: 26, mass: 0.6 }}
                                 className={cn(
                                   "relative flex flex-col justify-between p-4.5 rounded-[22px] text-left group cursor-pointer select-none transition-colors duration-150 outline-none min-h-[115px] gap-3 border",
-                                  isLastOdd && "sm:col-span-2",
+                                  isLastOdd && "sm:col-span-2 min-h-[84px] justify-center p-4 sm:px-5",
                                   isActive
                                     ? "bg-[var(--primary-container)] border-3 border-[var(--primary)] text-[var(--on-primary-container)] shadow-md"
                                     : "bg-[var(--surface-variant)]/60 hover:bg-[var(--surface-variant)] border-3 border-[var(--outline-variant)]/30 hover:border-[var(--outline-variant)]/60 text-[var(--on-surface)] shadow-xs"
                                 )}
                               >
-                                <div className="flex items-center justify-between w-full gap-2">
-                                  {/* icon container */}
-                                  <div
-                                    className={cn(
-                                      "w-11 h-11 flex items-center justify-center rounded-2xl shrink-0 transition-colors duration-150 overflow-hidden border-2",
-                                      isActive
-                                        ? "bg-[var(--primary)] border-[var(--primary)] text-[var(--on-primary)] shadow-sm"
-                                        : "bg-[var(--surface)] border-[var(--outline-variant)]/30 text-[var(--primary)]"
-                                    )}
-                                  >
-                                    <div className="flex items-center justify-center transition-transform duration-200 ease-out group-hover:scale-105">
-                                      {item.previewUrl ? (
-                                        <img
-                                          src={item.previewUrl}
-                                          alt={item.previewAlt || item.label}
-                                          className="h-full w-full object-cover object-center"
-                                          loading="lazy"
-                                        />
-                                      ) : (
-                                        <Icon size={20} />
+                                {isLastOdd ? (
+                                  <div className="flex items-center justify-between w-full gap-3.5">
+                                    <div className="flex items-center gap-3.5 min-w-0 flex-1">
+                                      {/* icon container */}
+                                      <div
+                                        className={cn(
+                                          "w-11 h-11 flex items-center justify-center rounded-2xl shrink-0 transition-colors duration-150 overflow-hidden border-2",
+                                          isActive
+                                            ? "bg-[var(--primary)] border-[var(--primary)] text-[var(--on-primary)] shadow-sm"
+                                            : "bg-[var(--surface)] border-[var(--outline-variant)]/30 text-[var(--primary)]"
+                                        )}
+                                      >
+                                        <div className="flex items-center justify-center transition-transform duration-200 ease-out group-hover:scale-105">
+                                          {item.previewUrl ? (
+                                            <img
+                                              src={item.previewUrl}
+                                              alt={item.previewAlt || item.label}
+                                              className="h-full w-full object-cover object-center"
+                                              loading="lazy"
+                                            />
+                                          ) : (
+                                            <Icon size={20} />
+                                          )}
+                                        </div>
+                                      </div>
+
+                                      {/* text content */}
+                                      <div className="min-w-0 flex-1">
+                                        <div className={cn(
+                                          "text-[15px] sm:text-[16px] tracking-tight leading-snug line-clamp-1",
+                                          isActive ? "font-black text-[var(--on-primary-container)]" : "font-bold text-[var(--on-surface)]"
+                                        )}>
+                                          {item.label}
+                                        </div>
+                                        {item.description && (
+                                          <p className="text-xs sm:text-[13.5px] opacity-75 font-medium line-clamp-2 mt-0.5 leading-relaxed text-[var(--on-surface-variant)]">
+                                            {item.description}
+                                          </p>
+                                        )}
+                                      </div>
+                                    </div>
+
+                                    {/* right badges */}
+                                    <div className="flex items-center gap-1.5 shrink-0 pl-2">
+                                      {isRecent && (
+                                        <span className="rounded-full bg-[var(--primary)] text-[var(--on-primary)] px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider shadow-xs">
+                                          Recent
+                                        </span>
+                                      )}
+                                      {isActive && (
+                                        <span className="inline-flex items-center justify-center h-6 min-w-[26px] px-1.5 rounded-lg bg-[var(--primary)] text-[var(--on-primary)] shadow-xs leading-none select-none">
+                                          <CornerDownLeft size={13} strokeWidth={2.5} />
+                                        </span>
                                       )}
                                     </div>
                                   </div>
+                                ) : (
+                                  <>
+                                    <div className="flex items-center justify-between w-full gap-2">
+                                      {/* icon container */}
+                                      <div
+                                        className={cn(
+                                          "w-11 h-11 flex items-center justify-center rounded-2xl shrink-0 transition-colors duration-150 overflow-hidden border-2",
+                                          isActive
+                                            ? "bg-[var(--primary)] border-[var(--primary)] text-[var(--on-primary)] shadow-sm"
+                                            : "bg-[var(--surface)] border-[var(--outline-variant)]/30 text-[var(--primary)]"
+                                        )}
+                                      >
+                                        <div className="flex items-center justify-center transition-transform duration-200 ease-out group-hover:scale-105">
+                                          {item.previewUrl ? (
+                                            <img
+                                              src={item.previewUrl}
+                                              alt={item.previewAlt || item.label}
+                                              className="h-full w-full object-cover object-center"
+                                              loading="lazy"
+                                            />
+                                          ) : (
+                                            <Icon size={20} />
+                                          )}
+                                        </div>
+                                      </div>
 
-                                  <div className="flex items-center gap-1.5">
-                                    {isRecent && (
-                                      <span className="rounded-full bg-[var(--primary)] text-[var(--on-primary)] px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider shadow-xs">
-                                        Recent
-                                      </span>
-                                    )}
-                                    {isActive && (
-                                      <span className="inline-flex items-center justify-center h-6 min-w-[26px] px-1.5 rounded-lg bg-[var(--primary)] text-[var(--on-primary)] shadow-xs leading-none select-none">
-                                        <CornerDownLeft size={13} strokeWidth={2.5} />
-                                      </span>
-                                    )}
-                                  </div>
-                                </div>
+                                      <div className="flex items-center gap-1.5">
+                                        {isRecent && (
+                                          <span className="rounded-full bg-[var(--primary)] text-[var(--on-primary)] px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider shadow-xs">
+                                            Recent
+                                          </span>
+                                        )}
+                                        {isActive && (
+                                          <span className="inline-flex items-center justify-center h-6 min-w-[26px] px-1.5 rounded-lg bg-[var(--primary)] text-[var(--on-primary)] shadow-xs leading-none select-none">
+                                            <CornerDownLeft size={13} strokeWidth={2.5} />
+                                          </span>
+                                        )}
+                                      </div>
+                                    </div>
 
-                                <div className="min-w-0">
-                                  <div className={cn(
-                                    "text-[15px] tracking-tight leading-snug line-clamp-1",
-                                    isActive ? "font-black text-[var(--on-primary-container)]" : "font-bold text-[var(--on-surface)]"
-                                  )}>
-                                    {item.label}
-                                  </div>
-                                  {item.description && (
-                                    <p className="text-xs opacity-70 font-medium line-clamp-2 mt-1 leading-relaxed text-[var(--on-surface-variant)]">
-                                      {item.description}
-                                    </p>
-                                  )}
-                                </div>
+                                    <div className="min-w-0">
+                                      <div className={cn(
+                                        "text-[15px] tracking-tight leading-snug line-clamp-1",
+                                        isActive ? "font-black text-[var(--on-primary-container)]" : "font-bold text-[var(--on-surface)]"
+                                      )}>
+                                        {item.label}
+                                      </div>
+                                      {item.description && (
+                                        <p className="text-xs opacity-70 font-medium line-clamp-2 mt-1 leading-relaxed text-[var(--on-surface-variant)]">
+                                          {item.description}
+                                        </p>
+                                      )}
+                                    </div>
+                                  </>
+                                )}
                               </motion.button>
                             );
                           })}
