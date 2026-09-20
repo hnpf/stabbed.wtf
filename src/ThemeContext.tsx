@@ -35,6 +35,7 @@ interface ThemeSettings {
   paletteShowRecentActions: boolean;
   paletteSuppressHover: boolean;
   paletteKeyboardNavBehavior: 'standard' | 'wrap' | 'grid';
+  fontScale: number;
 }
 
 interface ThemeContextType {
@@ -76,6 +77,7 @@ const DEFAULT_SETTINGS: ThemeSettings = {
   paletteShowRecentActions: true,
   paletteSuppressHover: true,
   paletteKeyboardNavBehavior: 'standard',
+  fontScale: 100,
 };
 
 // lookup is cleaner than a ternary chain here
@@ -176,6 +178,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     root.style.setProperty('--tertiary-chroma', (chroma * palette.tertiaryChroma).toFixed(3));
     root.style.setProperty('--neutral-hue', h.toString());
     root.style.setProperty('--neutral-chroma', (chroma * palette.neutralChroma).toFixed(3));
+    root.style.setProperty('--font-scale', ((settings.fontScale ?? 100) / 100).toString());
 
     root.classList.toggle('brutalist-mode', settings.brutalistMode);
     root.classList.toggle('developer-font', settings.developerFont);

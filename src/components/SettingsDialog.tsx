@@ -529,6 +529,52 @@ export const SettingsDialog = memo(({
                 Customization settings
               </h3>
             </div>
+
+            {/* custom font scaling */}
+            <div className="p-4.5 rounded-2xl bg-[var(--surface-variant)] text-[var(--on-surface)] space-y-3.5 border-0">
+              <div className="flex items-center justify-between gap-2">
+                <div>
+                  <div className="font-bold text-[15px]">Custom Font Scaling</div>
+                  <div className="text-xs opacity-60 font-medium">
+                    Scale font size whilst keeping size contrast & hierarchy
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="text-xs font-mono font-black px-2.5 py-1 rounded-full bg-[var(--primary-container)] text-[var(--on-primary-container)]">
+                    {(settings.fontScale ?? 100) === 100 ? "100% (Default)" : `${settings.fontScale}%`}
+                  </span>
+                  {(settings.fontScale ?? 100) !== 100 && (
+                    <button
+                      onClick={() => {
+                        updateSettings({ fontScale: 100 });
+                        haptic.light();
+                      }}
+                      className="text-[11px] font-black px-2 py-1 rounded-lg bg-[var(--surface)] hover:bg-[var(--primary-container)] text-[var(--primary)] transition-colors cursor-pointer border-0"
+                      title="Reset font scaling to default"
+                    >
+                      Reset
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              <div className="pt-1">
+                <Slider
+                  value={settings.fontScale ?? 100}
+                  onChange={(v: number) => updateSettings({ fontScale: v })}
+                  min={80}
+                  max={125}
+                  step={5}
+                  stops={true}
+                  endStops={true}
+                  size="s"
+                  leadingIcon={<span className="font-bold text-xs select-none">A</span>}
+                  trailingIcon={<span className="font-black text-lg select-none">A</span>}
+                  format={(v: number) => (v === 100 ? "100% (Default)" : `${v}%`)}
+                />
+              </div>
+            </div>
+
             <div className="flex flex-col gap-2">
               {[
                 {

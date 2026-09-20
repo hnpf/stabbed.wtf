@@ -211,7 +211,7 @@ export default function Slider({
             height: iconSize,
             color: inlineSize * _getHandle(value) < iconThreshold
               ? "var(--primary)"
-              : "var(--primary-container)",
+              : "var(--on-primary)",
           }}
         >
           {leadingIcon}
@@ -225,7 +225,7 @@ export default function Slider({
             width: iconSize,
             height: iconSize,
             color: inlineSize * (1 - _getHandle(value)) < iconThreshold
-              ? "var(--primary-container)"
+              ? "var(--on-primary)"
               : "var(--primary)",
           }}
         >

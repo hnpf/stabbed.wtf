@@ -114,7 +114,8 @@ body, .gsf-global {
     }
 
     :root {
-        font-size: 90%;
+        --font-scale: 1;
+        font-size: calc(90% * var(--font-scale, 1));
         /* safe area insets for Samsung/notched phones */
         --safe-area-inset-top: env(safe-area-inset-top, 0px);
         --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
@@ -862,41 +863,38 @@ body, .gsf-global {
 /* stops */
 .m3-slider__stop {
     position: absolute;
-    width: 3px;
-    height: calc(var(--track-height) - 10px);
+    width: 4px;
+    height: 4px;
     border-radius: 9999px;
     inset-block-start: 50%;
-    inset-inline-start: calc(50% + (100% - 1rem) * var(--x));
+    inset-inline-start: calc(50% + var(--functional-width) * var(--x));
     translate: -50% -50%;
     pointer-events: none;
-    transition: height 200ms ease;
+    transition: transform 200ms ease, opacity 200ms ease;
 }
 
 .m3-slider--vertical .m3-slider__stop {
-    width: calc(var(--track-height) + 6px);
-    height: 2px;
     translate: -50% 50%;
-}
-
-.m3-slider input[type="range"]:active~.m3-slider__track-1 .m3-slider__stop,
-.m3-slider input[type="range"]:active~.m3-slider__track-2 .m3-slider__stop {
-    height: calc(var(--track-height) - 4px);
-}
-
-.m3-slider--vertical input[type="range"]:active~.m3-slider__track-1 .m3-slider__stop,
-.m3-slider--vertical input[type="range"]:active~.m3-slider__track-2 .m3-slider__stop {
-    width: calc(var(--track-height) - 4px);
-    height: 2px;
 }
 
 .m3-slider__track-1>.m3-slider__stop {
     background-color: var(--on-primary);
-    opacity: 0.3;
+    opacity: 0.65;
 }
 
 .m3-slider__track-2>.m3-slider__stop {
     background-color: var(--primary);
-    opacity: 0.15;
+    opacity: 0.35;
+}
+
+.m3-slider input[type="range"]:disabled~.m3-slider__track-container .m3-slider__track-1>.m3-slider__stop {
+    background-color: var(--on-surface);
+    opacity: 0.38;
+}
+
+.m3-slider input[type="range"]:disabled~.m3-slider__track-container .m3-slider__track-2>.m3-slider__stop {
+    background-color: var(--on-surface);
+    opacity: 0.2;
 }
 
 /* icons */
@@ -1228,3 +1226,22 @@ html, body, #root, .app-root {
     font-weight: var(--gsf-wght, 820);
     font-stretch: calc(var(--gsf-wdth, 80) * 1%);
 }
+
+/* user-set custom font scaling */
+.text-\[9px\] { font-size: calc(9px * var(--font-scale, 1)) !important; }
+.text-\[10px\] { font-size: calc(10px * var(--font-scale, 1)) !important; }
+.text-\[11px\] { font-size: calc(11px * var(--font-scale, 1)) !important; }
+.text-\[12px\] { font-size: calc(12px * var(--font-scale, 1)) !important; }
+.text-\[13px\] { font-size: calc(13px * var(--font-scale, 1)) !important; }
+.text-\[14px\] { font-size: calc(14px * var(--font-scale, 1)) !important; }
+.text-\[15px\] { font-size: calc(15px * var(--font-scale, 1)) !important; }
+.text-\[16px\] { font-size: calc(16px * var(--font-scale, 1)) !important; }
+.text-\[17px\] { font-size: calc(17px * var(--font-scale, 1)) !important; }
+.text-\[18px\] { font-size: calc(18px * var(--font-scale, 1)) !important; }
+.text-\[19px\] { font-size: calc(19px * var(--font-scale, 1)) !important; }
+.text-\[20px\] { font-size: calc(20px * var(--font-scale, 1)) !important; }
+.text-\[22px\] { font-size: calc(22px * var(--font-scale, 1)) !important; }
+.text-\[28px\] { font-size: calc(28px * var(--font-scale, 1)) !important; }
+.text-\[36px\] { font-size: calc(36px * var(--font-scale, 1)) !important; }
+.text-\[110px\] { font-size: calc(110px * var(--font-scale, 1)) !important; }
+
