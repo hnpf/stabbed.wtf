@@ -1437,19 +1437,7 @@ export const SettingsDialog = memo(({
       const touch = e.touches[0];
       dragStartY.current = touch.clientY;
       dragStartModalY.current = y.get();
-      
-      const isInsideScroll = scrollRef.current && scrollRef.current.contains(e.target as Node);
-      const scrollTop = scrollRef.current ? scrollRef.current.scrollTop : 0;
-      
-      if (!isInsideScroll) {
-        isDraggingSheet.current = true;
-      } else if (dragStartModalY.current > 0) {
-        isDraggingSheet.current = true;
-      } else if (scrollTop <= 0) {
-        isDraggingSheet.current = false;
-      } else {
-        isDraggingSheet.current = false;
-      }
+      isDraggingSheet.current = false;
       
       touchTimes.current = [{ y: touch.clientY, t: Date.now() }];
     };
@@ -1458,6 +1446,7 @@ export const SettingsDialog = memo(({
       const touch = e.touches[0];
       const clientY = touch.clientY;
       const deltaY = clientY - dragStartY.current;
+      const isInsideScroll = scrollRef.current?.contains(e.target as Node) ?? false;
       const scrollTop = scrollRef.current ? scrollRef.current.scrollTop : 0;
       
       touchTimes.current.push({ y: clientY, t: Date.now() });
@@ -1465,18 +1454,16 @@ export const SettingsDialog = memo(({
         touchTimes.current.shift();
       }
 
-      if (dragStartModalY.current === 0 && scrollTop <= 0 && !isDraggingSheet.current) {
-        if (deltaY > 0) {
-          isDraggingSheet.current = true;
-          dragStartY.current = clientY;
-          dragStartModalY.current = 0;
-        }
-      }
+      if (!isDraggingSheet.current) {
+        const sheetDragThreshold = 8;
+        const hasDraggedFarEnough = Math.abs(deltaY) >= sheetDragThreshold;
+        const canDragSheet = !isInsideScroll || dragStartModalY.current > 0 || (scrollTop <= 0 && deltaY > 0);
 
-      if (!isDraggingSheet.current && scrollTop <= 0 && deltaY > 0) {
+        if (!hasDraggedFarEnough || !canDragSheet) {
+          return;
+        }
+
         isDraggingSheet.current = true;
-        dragStartY.current = clientY;
-        dragStartModalY.current = 0;
       }
 
       if (isDraggingSheet.current) {
@@ -1484,10 +1471,11 @@ export const SettingsDialog = memo(({
           e.preventDefault();
         }
         
-        let newY = dragStartModalY.current + deltaY;
-        if (newY < 0) {
-          newY = newY * 0.2; // pull resistance
-        }
+        const proposedY = dragStartModalY.current + deltaY;
+        const topRubberBandDistance = 96;
+        const newY = proposedY < 0
+          ? -(((-proposedY) * topRubberBandDistance) / ((-proposedY) + topRubberBandDistance))
+          : proposedY;
         y.set(newY);
       }
     };
