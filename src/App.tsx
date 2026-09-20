@@ -411,12 +411,20 @@ export default function App() {
                     <img src="/photography/pfp/main.webp" alt="virex" className="w-full h-full object-cover rounded-[inherit] group-hover/pfp:scale-105 backface-hidden transform-3d transition-transform duration-250 group-hover/pfp:scale-105" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const svg = document.createElement("img"); svg.src = "/favicon.svg"; svg.className = "w-10 h-10 p-1 transition-transform group-hover/pfp:scale-110"; svg.style.color = "var(--on-primary)"; (e.target as HTMLImageElement).parentElement!.appendChild(svg); }} referrerPolicy="no-referrer" />
                   </div>
                 </motion.div>
-                {!settings.sidebarCollapsed && (
-                  <div className="overflow-hidden whitespace-nowrap">
-                    <div className="font-black font-expressive text-2xl tracking-tight italic uppercase leading-none">virex.</div>
-                    <div className="text-[12px] capitalize tracking-[0.03em] opacity-60 font-black mt-1">independent dev</div>
-                  </div>
-                )}
+                <AnimatePresence initial={false}>
+                  {!settings.sidebarCollapsed && (
+                    <motion.div
+                      initial={{ opacity: 0, width: 0 }}
+                      animate={{ opacity: 1, width: "auto" }}
+                      exit={{ opacity: 0, width: 0 }}
+                      transition={springConfig}
+                      className="overflow-hidden whitespace-nowrap"
+                    >
+                      <div className="font-black font-expressive text-2xl tracking-tight italic uppercase leading-none">virex.</div>
+                      <div className="text-[12px] capitalize tracking-[0.03em] opacity-60 font-black mt-1">independent dev</div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
               {!settings.sidebarCollapsed && !is_tiny && !is_short && (
                 <div className="flex flex-col mb-6 px-4 gap-3">
