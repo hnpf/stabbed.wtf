@@ -31,6 +31,7 @@ export function RippleScope({ children }: { children: React.ReactNode }) {
     const selector = [
       "button:not([disabled])",
       "a[href]",
+      "label:has(.m3-switch)",
       '[role="button"]:not([aria-disabled="true"])',
       "[data-ripple]",
     ].join(",");
@@ -44,17 +45,21 @@ export function RippleScope({ children }: { children: React.ReactNode }) {
           !target.hasAttribute("disabled"),
       );
       next.forEach((target) => {
-        target.classList.add("m3-ripple-target");
-        target.classList.toggle(
-          "m3-ripple-target--positioned",
-          window.getComputedStyle(target).position === "static",
-        );
+        target.setAttribute("data-m3-ripple-target", "");
+        if (window.getComputedStyle(target).position === "static") {
+          target.setAttribute("data-m3-ripple-positioned", "");
+        } else {
+          target.removeAttribute("data-m3-ripple-positioned");
+        }
       });
       setTargets((current) => {
         const nextSet = new Set(next);
         current
           .filter((target) => !nextSet.has(target))
-          .forEach((target) => target.classList.remove("m3-ripple-target", "m3-ripple-target--positioned"));
+          .forEach((target) => {
+            target.removeAttribute("data-m3-ripple-target");
+            target.removeAttribute("data-m3-ripple-positioned");
+          });
         return current.length === next.length && current.every((target, index) => target === next[index])
           ? current
           : next;
@@ -66,7 +71,10 @@ export function RippleScope({ children }: { children: React.ReactNode }) {
     observer.observe(scope, { childList: true, subtree: true, attributes: true, attributeFilter: ["disabled", "role", "href", "data-ripple", "data-ripple-skip"] });
     return () => {
       observer.disconnect();
-      targets.forEach((target) => target.classList.remove("m3-ripple-target", "m3-ripple-target--positioned"));
+      targets.forEach((target) => {
+        target.removeAttribute("data-m3-ripple-target");
+        target.removeAttribute("data-m3-ripple-positioned");
+      });
     };
   }, []);
 
@@ -74,7 +82,7 @@ export function RippleScope({ children }: { children: React.ReactNode }) {
     <div ref={scopeRef} className="contents">
       {children}
       {targets.map((target) =>
-        createPortal(<Ripple enableHaptics={false} />, target, getTargetKey(target)),
+        createPortal(<Ripple target={target} enableHaptics={false} />, target, getTargetKey(target)),
       )}
     </div>
   );

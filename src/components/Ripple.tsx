@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { haptic } from "../haptics";
 
 export interface RippleProps {
+  target?: HTMLElement;
   color?: string;
   opacity?: number;
   hoverOpacity?: number;
@@ -26,6 +27,7 @@ interface RippleWave {
  * note 2: be sure parent container uses `relative` and `overflow-hidden` (or `m3-button-*` classes)!!
  */
 export const Ripple: React.FC<RippleProps> = ({
+  target,
   color = "currentColor",
   opacity = 0.14,
   hoverOpacity = 0.08,
@@ -42,10 +44,10 @@ export const Ripple: React.FC<RippleProps> = ({
   const createRipple = useCallback(
     (clientX?: number, clientY?: number) => {
       if (disabled) return;
-      const parent = containerRef.current?.parentElement;
-      if (!parent) return;
+      const owner = target ?? containerRef.current?.parentElement;
+      if (!owner) return;
 
-      const rect = parent.getBoundingClientRect();
+      const rect = owner.getBoundingClientRect();
       let x: number;
       let y: number;
 
@@ -76,7 +78,7 @@ export const Ripple: React.FC<RippleProps> = ({
         haptic.ripple();
       }
     },
-    [disabled, enableHaptics]
+    [disabled, enableHaptics, target]
   );
 
   const releaseRipples = useCallback(() => {
@@ -88,11 +90,13 @@ export const Ripple: React.FC<RippleProps> = ({
   }, []);
 
   useEffect(() => {
-    const parent = containerRef.current?.parentElement;
-    if (!parent) return;
+    const owner = target ?? containerRef.current?.parentElement;
+    if (!owner) return;
 
     const handlePointerDown = (e: PointerEvent) => {
       if (e.button !== 0 && e.pointerType === "mouse") return; // primary click only
+      const eventTarget = e.target instanceof Element ? e.target : null;
+      if (target && eventTarget?.closest("[data-m3-ripple-target]") !== owner) return;
       createRipple(e.clientX, e.clientY);
     };
 
@@ -122,21 +126,21 @@ export const Ripple: React.FC<RippleProps> = ({
       }
     };
 
-    parent.addEventListener("pointerdown", handlePointerDown);
-    parent.addEventListener("pointerup", handlePointerUp);
-    parent.addEventListener("pointercancel", handlePointerCancel);
-    parent.addEventListener("pointerleave", handlePointerLeave);
-    parent.addEventListener("keydown", handleKeyDown);
-    parent.addEventListener("keyup", handleKeyUp);
+    owner.addEventListener("pointerdown", handlePointerDown);
+    owner.addEventListener("pointerup", handlePointerUp);
+    owner.addEventListener("pointercancel", handlePointerCancel);
+    owner.addEventListener("pointerleave", handlePointerLeave);
+    owner.addEventListener("keydown", handleKeyDown);
+    owner.addEventListener("keyup", handleKeyUp);
     return () => {
-      parent.removeEventListener("pointerdown", handlePointerDown);
-      parent.removeEventListener("pointerup", handlePointerUp);
-      parent.removeEventListener("pointercancel", handlePointerCancel);
-      parent.removeEventListener("pointerleave", handlePointerLeave);
-      parent.removeEventListener("keydown", handleKeyDown);
-      parent.removeEventListener("keyup", handleKeyUp);
+      owner.removeEventListener("pointerdown", handlePointerDown);
+      owner.removeEventListener("pointerup", handlePointerUp);
+      owner.removeEventListener("pointercancel", handlePointerCancel);
+      owner.removeEventListener("pointerleave", handlePointerLeave);
+      owner.removeEventListener("keydown", handleKeyDown);
+      owner.removeEventListener("keyup", handleKeyUp);
     };
-  }, [createRipple, releaseRipples]);
+  }, [createRipple, releaseRipples, target]);
 
   const removeRipple = (id: number) => {
     setRipples((prev) => prev.filter((r) => r.id !== id));
