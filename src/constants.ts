@@ -127,6 +127,40 @@ export const PROJECTS: Project[] = [
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+      id: 'internet-useless-info',
+      title: 'THE INTERNET IS MAKING ME ODDLY GOOD AT KNOWING RANDOM USELESS BS',
+      snippet: 'how random yt videos and bullshit geography studying can quite literally build a highway of hyper specific trivia',
+      content: `
+  # ACCIDENTALLY MASTERING USELESS TRIVIA (fuck)
+  
+  yeah nobody SETS OUT to learn the difference between init unit types or how to ID a country by a cropped version of its flag. why does this even happen?! you'd simply open one tab for a definition for god knows WHAT and boom its like 2 am and you know too fucking much about mid-20th century proxy wars and why C lets you shoot yourself in the foot. lmao. lmaooo
+  
+  alsoo, modern internet doesnt even give you any true education. at BEST it gives you random hyperspecific facts and just no context attached.
+  
+  ## the result??
+  
+  your memory now contains..
+  
+  * **geography & flags, obviously:** you can tell two nearly identical flags apart at a glance, like romania and chad (WHICH I DO KNOW THE DIFFERENCE, chad is slighty darker or even indonesia/monaco.. and monaco is slightly shorter. don't ask). why. WHO CARES. seterra did this to meee 💔
+  * **tech & linux:** dumb bash commands which can prolly fix a bug exactly 3 other people have EVER had. one of them being me. i didnt learn anything from it btw.
+  * **random history & security:** proxy conflicts, writeups, threat actors. i could NOT tell you my own schedule tomorrow but damn, ask me about a 2014 cve and i will SPIT
+  
+  ## is it REALLY useless tho?? (yes. but also no. but mostly yes..)
+  
+  | category | value in practice | trivial value |
+  |---|---|---|
+  | geography | uhh.. finding the store/? | knowing which side of the road cars drive on in some countries i'll never visit |
+  | tech | basic troubleshooting | this one's useful. until it's rewriting shell configs for 4 HOURS instead of sleeping |
+  | history | general awareness idfk | knowing that ancient romans used stale urine as mouthwash because the high amounts of ammonia actually helped is very useful! |
+  
+  anyway. none of this was planned. not even on tests. nobody paying me for it. buuut i can talk for MINUTES straight about the most weird topic imaginable...
+  `,
+      date: 'Sep 20, 2026',
+      category: 'reflecting',
+      readTime: '2 min read',
+      link: 'internet-useless-info'
+  },
+  {
     id: '2slimey-changed-how-i-listen',
     title: '2slimey changed the way I listen to music.',
     snippet: 'Yes, a genuine opinion of mine. If this title made you roll your eyes, you are exactly who this is for! :)',

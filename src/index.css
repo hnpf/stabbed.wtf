@@ -452,7 +452,7 @@ body, .gsf-global {
     }
 
     .markdown-body th {
-        @apply bg-[var(--primary-container)] text-[var(--on-primary-container)] font-black uppercase tracking-widest text-xs border-b-4 border-[var(--outline-variant)];
+        @apply bg-[var(--primary-container)] text-[var(--on-primary-container)] font-black tracking-widest text-sm border-b-4 border-[var(--outline-variant)];
     }
 
     .markdown-body tr:last-child td {
