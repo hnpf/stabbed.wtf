@@ -1227,6 +1227,11 @@ a:hover > .m3-ripple-container > .m3-ripple-hover {
     opacity: 0 !important;
 }
 
+/* The command-palette search control is a custom SVG shape, not a square. */
+[data-ripple-shape="command-palette-search"] > .m3-ripple-container {
+    clip-path: url("#command-palette-search-button-clip");
+}
+
 @keyframes m3-ripple-expand {
     0% {
         transform: scale(0);

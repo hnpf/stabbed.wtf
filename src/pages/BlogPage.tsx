@@ -429,7 +429,6 @@ export const BlogPage = memo(({ targetId, navigateTo }: any) => {
           variant={active_cat ? "filled" : "tonal"}
           icon={<Filter size={16} className="pt-3"  />}
           label={<span className="block pt-0.5">{active_cat ? `Topic: ${active_cat}` : "Topics"}</span>}
-          onClick={() => {}}
           menu={categories.map((cat) => (
             <button
               key={cat}
@@ -438,7 +437,7 @@ export const BlogPage = memo(({ targetId, navigateTo }: any) => {
                 setActiveCat(cat);
               }}
               className={cn(
-                "w-full text-left px-5 py-3 text-[13px] font-black tracking-[0.03em] rounded-xl transition-all duration-200",
+                "w-full min-h-12 text-left px-5 py-3 text-[13px] font-black tracking-[0.03em] rounded-xl transition-all duration-200",
                 active_cat === cat
                   ? "bg-[var(--primary)] text-[var(--on-primary)] shadow-md"
                   : "hover:bg-[var(--primary-container)] text-[var(--on-surface-variant)]"

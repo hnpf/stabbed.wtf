@@ -46,6 +46,8 @@ export const SplitButton: React.FC<SplitButtonProps> = ({
     outlined: "bg-transparent border-2 border-[var(--outline-variant)] text-[var(--on-surface-variant)] hover:bg-[var(--surface-variant)]/50",
   };
 
+  const toggleMenu = () => setIsOpen((open) => !open);
+
   return (
     <div
       ref={containerRef}
@@ -53,7 +55,13 @@ export const SplitButton: React.FC<SplitButtonProps> = ({
     >
       <button
         type="button"
-        onClick={onClick}
+        onClick={() => {
+          if (onClick) {
+            onClick();
+            return;
+          }
+          toggleMenu();
+        }}
         className={cn("m3-split-button-main", variantStyles[variant])}
       >
         <Ripple />
@@ -65,7 +73,7 @@ export const SplitButton: React.FC<SplitButtonProps> = ({
           type="button"
           aria-haspopup="true"
           aria-expanded={isOpen}
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={toggleMenu}
           className={cn(
             "m3-split-button-menu-toggle",
             variantStyles[variant],
@@ -93,19 +101,18 @@ export const SplitButton: React.FC<SplitButtonProps> = ({
                 damping: 25,
               }}
               className="absolute right-0 top-full mt-2 min-w-[17rem] bg-[var(--surface-variant)] rounded-[1.5rem] shadow-2xl border-4 border-[var(--outline-variant)] overflow-hidden z-50 p-2"
-              style={{ maxHeight: "min(60vh, 28rem)" }}
+              style={{ height: "min(23rem, calc(100dvh - 10rem))" }}
             >
               {/* scroll container, native bar hidden, M3ScrollBar overlaid */}
-              <div className="relative">
+              <div className="relative h-full min-h-0">
                 <div
                   ref={scrollRef}
                   onClick={() => setIsOpen(false)}
-                  className="flex flex-col gap-1 overflow-y-auto overscroll-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-                  style={{ maxHeight: "min(calc(60vh - 2rem), 26rem)" }}
+                  className="flex h-full min-h-0 flex-col gap-1 overflow-y-auto overscroll-contain pr-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
                 >
                   {menu}
                 </div>
-                <M3ScrollBar scrollEl={scrollRef} thinOnly colorful />
+                <M3ScrollBar scrollEl={scrollRef} thinOnly colorful alwaysVisible />
               </div>
             </motion.div>
           )}

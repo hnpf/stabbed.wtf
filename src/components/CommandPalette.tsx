@@ -435,6 +435,7 @@ export function CommandPalette({
                 key={wobbleKey}
                 type="button"
                 className="relative flex shrink-0 cursor-pointer items-center justify-center select-none"
+                data-ripple-shape="command-palette-search"
                 style={{ width: 54, height: 54 }}
                 initial={wobbleKey === 0 ? false : { rotate: -90 }}
                 animate={{ rotate: 0 }}
@@ -451,6 +452,15 @@ export function CommandPalette({
                 aria-label={query ? "Clear search" : "Search"}
               >
                 <svg className="absolute inset-0 h-full w-full" viewBox="0 0 54 54" fill="none">
+                  <defs>
+                    <clipPath id="command-palette-search-button-clip" clipPathUnits="userSpaceOnUse">
+                      <circle cx="27" cy="15" r="14" />
+                      <circle cx="27" cy="39" r="14" />
+                      <circle cx="15" cy="27" r="14" />
+                      <circle cx="39" cy="27" r="14" />
+                      <rect x="13" y="13" width="28" height="28" />
+                    </clipPath>
+                  </defs>
                   <circle cx="27" cy="15" r="14" fill="var(--primary)" />
                   <circle cx="27" cy="39" r="14" fill="var(--primary)" />
                   <circle cx="15" cy="27" r="14" fill="var(--primary)" />
