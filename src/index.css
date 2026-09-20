@@ -1187,9 +1187,12 @@ body, .gsf-global {
 /* Added by RippleScope. Each control owns its clipping boundary, so a state
    layer can never become a shared container around neighbouring nav pills. */
 .m3-ripple-target {
-    position: relative;
     overflow: hidden;
     isolation: isolate;
+}
+
+.m3-ripple-target--positioned {
+    position: relative;
 }
 
 .m3-ripple-hover {

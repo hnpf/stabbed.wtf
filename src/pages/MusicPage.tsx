@@ -5,6 +5,7 @@ import { Card } from "../components/Card";
 import { MUSIC_RELEASES, type MusicRelease } from "../constants";
 import { useTheme } from "../ThemeContext";
 import { haptic } from "../haptics";
+import { Ripple } from "../components/Ripple";
 import { 
   Disc, 
   Play, 
@@ -127,6 +128,7 @@ const ReleaseModal = ({ release, onClose }: { release: MusicRelease | null; onCl
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.94, y: 20 }}
           transition={{ type: "spring", stiffness: 450, damping: 30 }}
+          data-ripple-skip
           className="relative z-10 w-full max-w-2xl bg-[var(--surface)] text-[var(--on-surface)] rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3.5rem] border-4 sm:border-6 border-[var(--outline-variant)] shadow-2xl overflow-hidden max-h-[85dvh] sm:max-h-[90vh] flex flex-col my-auto"
         >
           <button
@@ -134,10 +136,11 @@ const ReleaseModal = ({ release, onClose }: { release: MusicRelease | null; onCl
               haptic.light();
               onClose();
             }}
-            className="absolute top-3.5 right-3.5 sm:top-6 sm:right-6 p-2 sm:p-3 rounded-full bg-[var(--surface-variant)] text-[var(--on-surface-variant)] hover:bg-[var(--primary)] hover:text-[var(--on-primary)] transition-colors cursor-pointer shadow-md z-20"
+            className="group absolute top-3.5 right-3.5 sm:top-6 sm:right-6 p-2 sm:p-3 rounded-full bg-[var(--surface-variant)] text-[var(--on-surface-variant)] hover:bg-[var(--primary)] hover:text-[var(--on-primary)] transition-colors cursor-pointer shadow-md z-20 overflow-hidden"
             aria-label="Close"
           >
-            <X size={18} className="sm:w-5 sm:h-5" />
+            <Ripple enableHaptics={false} />
+            <X size={18} className="relative z-[1] sm:w-5 sm:h-5 transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-180 group-hover:scale-110" />
           </button>
 
           {/* scrollable modal content */}
@@ -181,13 +184,17 @@ const ReleaseModal = ({ release, onClose }: { release: MusicRelease | null; onCl
                 <span className="text-[11px] sm:text-[12px] font-black tracking-[0.1em] opacity-85 uppercase">
                   Streaming Platforms
                 </span>
-                <button
+                <motion.button
                   onClick={handleShare}
-                  className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-[var(--primary)]/10 text-[var(--primary)] text-[11px] sm:text-xs font-expressive-bold italic font-black uppercase tracking-wider hover:bg-[var(--primary)] hover:text-[var(--on-primary)] transition-all cursor-pointer"
+                  whileHover={{ scale: 1.04, y: -1 }}
+                  whileTap={{ scale: 0.96 }}
+                  transition={{ type: "spring", stiffness: 500, damping: 22, mass: 0.55 }}
+                  className="relative overflow-hidden flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-[var(--primary)]/10 text-[var(--primary)] text-[11px] sm:text-xs font-expressive-bold italic font-black uppercase tracking-wider hover:bg-[var(--primary)] hover:text-[var(--on-primary)] transition-colors cursor-pointer"
                 >
-                  {copied ? <Check size={13} /> : <Share2 size={13} />}
-                  <span>{copied ? "Link Copied!" : "Share Release"}</span>
-                </button>
+                  <Ripple enableHaptics={false} />
+                  {copied ? <Check size={13} className="relative z-[1]" /> : <Share2 size={13} className="relative z-[1]" />}
+                  <span className="relative z-[1]">{copied ? "Link Copied!" : "Share Release"}</span>
+                </motion.button>
               </div>
 
               {/* platform grid */}
@@ -204,13 +211,14 @@ const ReleaseModal = ({ release, onClose }: { release: MusicRelease | null; onCl
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => haptic.light()}
-                      className="flex items-center justify-between p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[var(--surface-variant)]/60 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] border-2 sm:border-3 border-[var(--outline-variant)]/60 transition-all group font-expressive font-black italic tracking-wide cursor-pointer text-xs sm:text-sm"
+                      className="relative overflow-hidden flex items-center justify-between p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[var(--surface-variant)]/60 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] border-2 sm:border-3 border-[var(--outline-variant)]/60 transition-all group font-expressive font-black italic tracking-wide cursor-pointer text-xs sm:text-sm"
                     >
-                      <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                      <Ripple enableHaptics={false} />
+                      <div className="relative z-[1] flex items-center gap-2.5 sm:gap-3 min-w-0">
                         <IconComp size={20} className="text-[var(--primary)] group-hover:text-[var(--on-primary-container)] shrink-0" />
                         <span className="truncate">{platform.label}</span>
                       </div>
-                      <ExternalLink size={14} className="opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
+                      <ExternalLink size={14} className="relative z-[1] opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" />
                     </a>
                   );
                 })}

@@ -32,12 +32,18 @@ export function RippleScope({ children }: { children: React.ReactNode }) {
           !target.closest("[data-ripple-skip]") &&
           !target.hasAttribute("disabled"),
       );
-      next.forEach((target) => target.classList.add("m3-ripple-target"));
+      next.forEach((target) => {
+        target.classList.add("m3-ripple-target");
+        target.classList.toggle(
+          "m3-ripple-target--positioned",
+          window.getComputedStyle(target).position === "static",
+        );
+      });
       setTargets((current) => {
         const nextSet = new Set(next);
         current
           .filter((target) => !nextSet.has(target))
-          .forEach((target) => target.classList.remove("m3-ripple-target"));
+          .forEach((target) => target.classList.remove("m3-ripple-target", "m3-ripple-target--positioned"));
         return current.length === next.length && current.every((target, index) => target === next[index])
           ? current
           : next;
@@ -49,7 +55,7 @@ export function RippleScope({ children }: { children: React.ReactNode }) {
     observer.observe(scope, { childList: true, subtree: true, attributes: true, attributeFilter: ["disabled", "role", "href", "data-ripple", "data-ripple-skip"] });
     return () => {
       observer.disconnect();
-      targets.forEach((target) => target.classList.remove("m3-ripple-target"));
+      targets.forEach((target) => target.classList.remove("m3-ripple-target", "m3-ripple-target--positioned"));
     };
   }, []);
 
