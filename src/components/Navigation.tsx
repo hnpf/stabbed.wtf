@@ -40,6 +40,11 @@ export const SideItem = memo(
             : "rounded-[6px]";
 
     if (isMini) {
+      const handleMiniSelect = (e: React.MouseEvent<HTMLButtonElement>) => {
+        haptic.light();
+        window.setTimeout(() => onSelect(e), 90);
+      };
+
       return (
         <motion.button
           initial={false}
@@ -48,23 +53,22 @@ export const SideItem = memo(
             scale: 1,
           }}
           transition={squishySpring}
-          whileHover={{ scale: 1.08, rotate: 2 }}
-          whileTap={{ scale: 0.92, rotate: -4 }}
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.92 }}
           onClick={(e) => {
-            haptic.light();
-            onSelect(e);
+            handleMiniSelect(e);
           }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           className={cn(
-            "relative group outline-none cursor-pointer select-none flex flex-col justify-center items-center w-full shadow-none bg-transparent gap-0 sidebar-item rounded-2xl overflow-hidden",
+            "relative group outline-none cursor-pointer select-none flex flex-col justify-center items-center w-full shadow-none bg-transparent gap-0 sidebar-item rounded-2xl",
             isShort ? "h-12" : "h-16",
             isSelected && "active",
           )}
+          data-ripple-skip
         >
-          <Ripple enableHaptics={false} />
           {/* icon container */}
-          <div className="relative z-10 shrink-0 flex items-center justify-center h-8 w-14 border-0 shadow-none outline-none ring-0">
+          <div className="relative z-10 shrink-0 flex items-center justify-center h-8 w-14 overflow-hidden rounded-full border-0 shadow-none outline-none ring-0">
             {/* m3 active indicator pill (mini version) */}
             {isSelected && (
               <motion.div
@@ -81,9 +85,11 @@ export const SideItem = memo(
                 animate={{ opacity: 0.8, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
                 transition={{ duration: 0.15 }}
-                className="absolute inset-0 bg-[var(--surface-variant)] rounded-full -z-10 border-0 shadow-none outline-none ring-0"
+                className="absolute inset-0 bg-[var(--primary-container)]/55 rounded-full z-0 border-0 shadow-none outline-none ring-0"
               />
             )}
+
+            <Ripple enableHaptics={false} className="z-[1]" />
 
             <div
               className={cn(
@@ -190,4 +196,3 @@ export const SideItem = memo(
     );
   },
 );
-

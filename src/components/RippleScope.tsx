@@ -27,19 +27,26 @@ export function RippleScope({ children }: { children: React.ReactNode }) {
 
     const syncTargets = () => {
       const next = Array.from(scope.querySelectorAll<HTMLElement>(selector)).filter(
-        (target) => !target.closest(".m3-ripple-container") && !target.hasAttribute("disabled"),
+        (target) =>
+          !target.closest(".m3-ripple-container") &&
+          !target.closest("[data-ripple-skip]") &&
+          !target.hasAttribute("disabled"),
       );
       next.forEach((target) => target.classList.add("m3-ripple-target"));
-      setTargets((current) =>
-        current.length === next.length && current.every((target, index) => target === next[index])
+      setTargets((current) => {
+        const nextSet = new Set(next);
+        current
+          .filter((target) => !nextSet.has(target))
+          .forEach((target) => target.classList.remove("m3-ripple-target"));
+        return current.length === next.length && current.every((target, index) => target === next[index])
           ? current
-          : next,
-      );
+          : next;
+      });
     };
 
     syncTargets();
     const observer = new MutationObserver(syncTargets);
-    observer.observe(scope, { childList: true, subtree: true, attributes: true, attributeFilter: ["disabled", "role", "href", "data-ripple"] });
+    observer.observe(scope, { childList: true, subtree: true, attributes: true, attributeFilter: ["disabled", "role", "href", "data-ripple", "data-ripple-skip"] });
     return () => {
       observer.disconnect();
       targets.forEach((target) => target.classList.remove("m3-ripple-target"));
