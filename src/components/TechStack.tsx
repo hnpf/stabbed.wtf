@@ -14,6 +14,9 @@ export const BounceButton = ({
   loading: externalLoading,
   title,
   iconClassName = "",
+  layout = false,
+  layoutId,
+  isMini = false,
 }: {
   icon?: any;
   label?: React.ReactNode;
@@ -24,6 +27,9 @@ export const BounceButton = ({
   loading?: boolean;
   title?: string;
   iconClassName?: string;
+  layout?: boolean | "position" | "size";
+  layoutId?: string;
+  isMini?: boolean;
 }) => {
   const [internalLoading, set_loading] = useState(false);
   const isLoading = externalLoading ?? internalLoading;
