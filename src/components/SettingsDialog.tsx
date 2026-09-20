@@ -1225,11 +1225,11 @@ export const SettingsDialog = memo(({
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <motion.button
-                  onClick={() => {
+                  onClick={async () => {
                     try {
                       const str = btoa(JSON.stringify(settings));
                       const shareUrl = `${window.location.origin}/?theme=${str}`;
-                      navigator.clipboard.writeText(shareUrl);
+                      await navigator.clipboard.writeText(shareUrl);
                       setToast("Sharing link copied to clipboard!");
                       setShareCopied(true);
                       window.setTimeout(() => setShareCopied(false), 1800);
@@ -1275,7 +1275,7 @@ export const SettingsDialog = memo(({
                       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(settings, null, 2));
                       const downloadAnchor = document.createElement('a');
                       downloadAnchor.setAttribute("href", dataStr);
-                      downloadAnchor.setAttribute("download", "virex-settings.json");
+                      downloadAnchor.setAttribute("download", "virexconf.json");
                       downloadAnchor.click();
                       downloadAnchor.remove();
                       setToast("backup downloaded!");
@@ -1299,9 +1299,9 @@ export const SettingsDialog = memo(({
                   aria-live="polite"
                 >
                   <div>
-                    <div className="font-bold text-[15px]">{backupExported ? "Backup downloaded!" : "Export config file"}</div>
+                    <div className="font-bold text-[15px]">{backupExported ? "Downloaded!" : "Export config file"}</div>
                     <div className="text-xs opacity-60 font-medium">
-                      {backupExported ? "Saved as virex-settings.json" : "Get config as JSON"}
+                      {backupExported ? "Saved virexconf.json" : "Get config as JSON"}
                     </div>
                   </div>
                   <AnimatePresence mode="wait" initial={false}>
@@ -1322,7 +1322,7 @@ export const SettingsDialog = memo(({
                 <div>
                   <div className="font-bold text-[15px]">Restore a saved setup</div>
                   <p className="mt-0.5 text-[12px] font-medium opacity-60">
-                    Paste a config link or choose a virex-settings.json backup. Your available settings update right away.
+                    Paste a config link or choose a virexconf.json backup. Your available settings update right away.
                   </p>
                 </div>
                 <M3TextField
