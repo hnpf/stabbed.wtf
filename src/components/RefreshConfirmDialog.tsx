@@ -1,6 +1,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { RefreshCw } from "./MaterialIcon";
+import { Ripple } from "./Ripple";
 
 export const RefreshConfirmDialog = ({ showRefreshConfirm, setShowRefreshConfirm }: any) => {
   return (
@@ -42,13 +43,15 @@ export const RefreshConfirmDialog = ({ showRefreshConfirm, setShowRefreshConfirm
                 }}
                 className="m3-button-filled w-full h-16 !rounded-2xl text-[16px] font-black cursor-pointer"
               >
-                yes, refresh now!
+                <Ripple />
+                <span className="relative z-[1]">yes, refresh now!</span>
               </button>
               <button
                 onClick={() => setShowRefreshConfirm(false)}
                 className="m3-button-tonal w-full h-16 !rounded-2xl text-[15px] font-bold opacity-60 hover:opacity-100 cursor-pointer"
               >
-                no, later
+                <Ripple />
+                <span className="relative z-[1]">no, later</span>
               </button>
             </div>
           </motion.div>

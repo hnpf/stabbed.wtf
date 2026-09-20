@@ -9,6 +9,7 @@ import { useTheme } from "../ThemeContext";
 import { Card } from "../components/Card";
 import { BounceButton, TechChip } from "../components/TechStack";
 import { haptic } from "../haptics";
+import { Ripple } from "../components/Ripple";
 
 const Badge = ({ icon: Icon, children, className }: any) => (
   <span className={cn(
@@ -384,10 +385,11 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
               onBack();
               haptic.light();
             }}
-            className="m3-button-filled ring-6 ring-[var(--primary)]/10 !bg-[var(--on-surface)] !text-[var(--surface)] h-18 px-12 rounded-[28px] tracking-[0.12em] text-2xl font-expressive font-sans font-black flex items-center gap-4 transition-colors "
+            className="m3-button-filled ring-6 ring-[var(--primary)]/10 !bg-[var(--on-surface)] !text-[var(--surface)] h-18 px-12 rounded-[28px] tracking-[0.12em] text-2xl font-expressive font-sans font-black flex items-center gap-4 transition-colors relative overflow-hidden"
           >
-            <Home size={28} />
-            Go home
+            <Ripple />
+            <Home size={28} className="relative z-[1]" />
+            <span className="relative z-[1]">Go home</span>
           </motion.button>
           
           {/* spacer for when not fullscreen */}

@@ -4,6 +4,7 @@ import { cn } from "../constants";
 import { haptic } from "../haptics";
 import { ChevronRight } from "./MaterialIcon";
 import { ExpressiveTooltip } from "./ExpressiveTooltip";
+import { Ripple } from "./Ripple";
 
 export const SideItem = memo(
   ({
@@ -56,11 +57,12 @@ export const SideItem = memo(
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           className={cn(
-            "relative group outline-none cursor-pointer select-none flex flex-col justify-center items-center w-full shadow-none bg-transparent gap-0 sidebar-item",
+            "relative group outline-none cursor-pointer select-none flex flex-col justify-center items-center w-full shadow-none bg-transparent gap-0 sidebar-item rounded-2xl overflow-hidden",
             isShort ? "h-12" : "h-16",
             isSelected && "active",
           )}
         >
+          <Ripple enableHaptics={false} />
           {/* icon container */}
           <div className="relative z-10 shrink-0 flex items-center justify-center h-8 w-14 border-0 shadow-none outline-none ring-0">
             {/* m3 active indicator pill (mini version) */}
@@ -126,7 +128,7 @@ export const SideItem = memo(
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className={cn(
-          "relative group outline-none cursor-pointer flex items-center w-full px-3.5 gap-3.5 transition-colors duration-200 sidebar-item select-none border-0 shadow-none ring-0",
+          "relative group outline-none cursor-pointer flex items-center w-full px-3.5 gap-3.5 transition-colors duration-200 sidebar-item select-none border-0 shadow-none ring-0 overflow-hidden",
           isFloating ? "py-4" : isShort ? "py-2.5" : "py-3.5",
           rd,
           isSelected
@@ -134,6 +136,7 @@ export const SideItem = memo(
             : "bg-[var(--surface-variant)]/40 text-[var(--on-surface)] hover:bg-[var(--surface-variant)]/80"
         )}
       >
+        <Ripple enableHaptics={false} />
         {/* left icon container */}
         <div
           className={cn(

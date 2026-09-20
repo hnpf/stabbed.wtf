@@ -7,6 +7,7 @@ import { Card } from "../components/Card";
 import { BounceButton } from "../components/TechStack";
 import WavyProgress from "../components/WavyProgress";
 import { haptic } from "../haptics";
+import { Ripple } from "../components/Ripple";
 
 const IS_APR = (() => {
   const now = new Date();
@@ -761,12 +762,13 @@ export const HomePage = memo(({ setPage, settings, onOpenGuestbook }: any) => {
                 setPage("readme")
                 haptic.light();
               }}
-              className="m3-button-filled ring-6 ring-[var(--on-primary-container)] !transition-none bg-white text-black text-[18px] sm:text-[20px] font-expressive-bold italic font-black tracking-tight h-16 sm:h-18 px-8 sm:px-12 rounded-[24px] flex items-center gap-3 group shrink-0 w-full md:w-auto justify-center whitespace-nowrap"
+              className="m3-button-filled ring-6 ring-[var(--on-primary-container)] !transition-none bg-white text-black text-[18px] sm:text-[20px] font-expressive-bold italic font-black tracking-tight h-16 sm:h-18 px-8 sm:px-12 rounded-[24px] flex items-center gap-3 group shrink-0 w-full md:w-auto justify-center whitespace-nowrap relative overflow-hidden"
             >
-              Read more!
+              <Ripple color="var(--primary)" />
+              <span className="relative z-[1]">Read more!</span>
               <ChevronRight
                 size={28}
-                className="group-hover:translate-x-1 transition-transform"
+                className="group-hover:translate-x-1 transition-transform relative z-[1]"
               />
             </motion.button>
           </div>

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { Loader2 } from "./MaterialIcon";
 import { cn } from "../constants";
 import { ExpressiveTooltip } from "./ExpressiveTooltip";
+import { Ripple } from "./Ripple";
 
 export const BounceButton = ({
   icon: Icon,
@@ -91,6 +92,7 @@ export const BounceButton = ({
         className,
       )}
     >
+      <Ripple enableHaptics={false} />
       <AnimatePresence mode="wait">
         {internalLoading && !onClick && externalLoading === undefined ? (
           <motion.div

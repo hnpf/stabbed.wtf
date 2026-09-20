@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { ChevronDown } from "./MaterialIcon";
 import { cn } from "../constants";
 import { M3ScrollBar } from "./M3ScrollBar";
+import { Ripple } from "./Ripple";
 
 interface SplitButtonProps {
   variant?: "elevated" | "filled" | "tonal" | "outlined";
@@ -55,8 +56,9 @@ export const SplitButton: React.FC<SplitButtonProps> = ({
         onClick={onClick}
         className={cn("m3-split-button-main", variantStyles[variant])}
       >
-        {icon && <span className="mr-2">{icon}</span>}
-        {label}
+        <Ripple />
+        {icon && <span className="mr-2 relative z-[1]">{icon}</span>}
+        <span className="relative z-[1]">{label}</span>
       </button>
       <div className="relative">
         <button
@@ -70,10 +72,11 @@ export const SplitButton: React.FC<SplitButtonProps> = ({
             isOpen && "open"
           )}
         >
+          <Ripple />
           <ChevronDown
             size={18}
             className={cn(
-              "transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]",
+              "relative z-[1] transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]",
               isOpen && "rotate-180"
             )}
           />

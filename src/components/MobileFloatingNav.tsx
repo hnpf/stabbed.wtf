@@ -3,6 +3,7 @@ import { motion, MotionConfig } from "motion/react";
 import { cn } from "../constants";
 import { haptic } from "../haptics";
 import { useTheme } from "../ThemeContext";
+import { Ripple } from "./Ripple";
 
 /* types*/
 interface NavItem {
@@ -104,12 +105,13 @@ const NavPillItem = React.memo(
         animate={pressed ? { scale: 0.92, y: 1 } : { scale: 1, y: 0 }}
         transition={pressed ? { duration: 0.08 } : spring}
         className={cn(
-          "relative flex items-center justify-center outline-none cursor-pointer shrink-0 select-none",
+          "relative flex items-center justify-center outline-none cursor-pointer shrink-0 select-none overflow-hidden",
           isActive ? "gap-2 px-4 py-2.5 rounded-full" : "w-10 h-10 rounded-full",
         )}
         aria-label={item.label}
         aria-pressed={isActive}
       >
+        <Ripple enableHaptics={false} />
         {isActive && (
           <motion.div
             layout
@@ -213,7 +215,7 @@ const SettingsSquircle = React.memo(
         }
         transition={spring}
         aria-label="Settings"
-        className="relative flex items-center justify-center outline-none cursor-pointer shrink-0"
+        className="relative flex items-center justify-center outline-none cursor-pointer shrink-0 overflow-hidden"
         style={{
           width: size,
           height: size,
@@ -222,11 +224,12 @@ const SettingsSquircle = React.memo(
           boxShadow: "0 4px 16px -2px rgba(0,0,0,0.18), 0 1px 4px -1px rgba(0,0,0,0.1)",
         }}
       >
+        <Ripple enableHaptics={false} />
         {/* settings icon shared element w/ desktop */}
         <motion.div
           layoutId={layoutId}
           style={{ color: "var(--on-surface)" }}
-          className="flex items-center justify-center"
+          className="relative z-[1] flex items-center justify-center"
         >
           <Icon size={Math.round(size * 0.48)} strokeWidth={2} />
         </motion.div>

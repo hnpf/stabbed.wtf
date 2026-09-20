@@ -393,11 +393,11 @@ body, .gsf-global {
     }
 
     .m3-button-filled {
-        @apply bg-[var(--primary)] text-[var(--on-primary)] px-6 py-3 rounded-full font-semibold transition-[background-color,box-shadow] duration-150 hover:shadow-lg active:scale-95 flex items-center justify-center gap-2;
+        @apply bg-[var(--primary)] text-[var(--on-primary)] px-6 py-3 rounded-full font-semibold transition-[background-color,box-shadow] duration-150 hover:shadow-lg active:scale-95 flex items-center justify-center gap-2 relative overflow-hidden;
     }
 
     .m3-button-tonal {
-        @apply bg-[var(--primary-container)] text-[var(--on-primary-container)] px-6 py-3 rounded-full font-semibold transition-[background-color,box-shadow] duration-150 hover:shadow-md active:scale-95 flex items-center justify-center gap-2;
+        @apply bg-[var(--primary-container)] text-[var(--on-primary-container)] px-6 py-3 rounded-full font-semibold transition-[background-color,box-shadow] duration-150 hover:shadow-md active:scale-95 flex items-center justify-center gap-2 relative overflow-hidden;
     }
 
     .m3-chip {
@@ -1172,6 +1172,56 @@ body, .gsf-global {
 
 .m3-switch--disabled .m3-switch__hover {
     display: none;
+}
+
+/* ── ripple component / state layer ── */
+.m3-ripple-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.m3-ripple-hover {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-color: var(--ripple-color, currentColor);
+    opacity: 0;
+    transition: opacity 150ms cubic-bezier(0.2, 0, 0, 1);
+    pointer-events: none;
+}
+
+*:hover > .m3-ripple-container > .m3-ripple-hover,
+button:hover > .m3-ripple-container > .m3-ripple-hover,
+a:hover > .m3-ripple-container > .m3-ripple-hover {
+    opacity: var(--ripple-hover-opacity, 0.08);
+}
+
+.m3-ripple-wave {
+    position: absolute;
+    border-radius: 50%;
+    background-color: var(--ripple-color, currentColor);
+    opacity: var(--ripple-opacity, 0.14);
+    transform: scale(0);
+    animation: m3-ripple-expand 400ms cubic-bezier(0.2, 0, 0, 1) forwards;
+    pointer-events: none;
+    transition: opacity 250ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.m3-ripple-wave--exiting {
+    opacity: 0 !important;
+}
+
+@keyframes m3-ripple-expand {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 /* hide scrollbars but keep functionality */
