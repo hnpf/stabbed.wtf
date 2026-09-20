@@ -63,7 +63,9 @@ export const SideItem = memo(
           <div className="relative z-10 shrink-0 flex items-center justify-center h-8 w-14 border-0 shadow-none outline-none ring-0">
             {/* m3 active indicator pill (mini version) */}
             {isSelected && (
-              <div
+              <motion.div
+                layoutId="sidebar-active-indicator"
+                transition={squishySpring}
                 className="absolute inset-0 bg-[var(--primary-container)] rounded-full z-0 sidebar-pill border-0 shadow-none outline-none ring-0"
               />
             )}
