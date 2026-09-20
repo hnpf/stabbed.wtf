@@ -546,7 +546,7 @@ export const DebugView = ({ page, blogPostId, viewport }: any) => {
               <div className="flex items-center gap-2">
                 <Terminal size={14} className="text-[var(--primary)]" />
                 <span className="font-black text-[13px] tracking-[0.04em] text-[var(--on-surface)]">
-                  virex debug view & tools
+                  virex debug tools
                 </span>
                 <span className="text-[9px] bg-[var(--primary-container)] text-[var(--on-primary-container)] px-2 py-0.5 rounded-full font-black font-mono">
                   {BUILD_VERSION.split("-")[0]}
