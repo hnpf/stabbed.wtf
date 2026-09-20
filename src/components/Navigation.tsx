@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { cn } from "../constants";
 import { haptic } from "../haptics";
 import { ChevronRight } from "./MaterialIcon";
+import { ExpressiveTooltip } from "./ExpressiveTooltip";
 
 export const SideItem = memo(
   ({
@@ -17,6 +18,7 @@ export const SideItem = memo(
     isShort,
     layoutId,
     highHz,
+    isFlipped,
   }: any) => {
     const [isHovered, setIsHovered] = useState(false);
 
@@ -101,18 +103,7 @@ export const SideItem = memo(
             {text}
           </span>
 
-          <AnimatePresence>
-            {isHovered && (
-              <motion.div
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -10 }}
-                className="absolute left-full ml-6 px-3 py-1.5 bg-[var(--on-surface)] text-[var(--surface)] text-xs font-bold rounded-xl z-50 whitespace-nowrap shadow-xl pointer-events-none"
-              >
-                {text}
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <ExpressiveTooltip text={text} show={isHovered} isFlipped={isFlipped} />
         </motion.button>
       );
     }

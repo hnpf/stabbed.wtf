@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Loader2 } from "./MaterialIcon";
 import { cn } from "../constants";
+import { ExpressiveTooltip } from "./ExpressiveTooltip";
 
 export const BounceButton = ({
   icon: Icon,
@@ -13,10 +14,12 @@ export const BounceButton = ({
   disabled = false,
   loading: externalLoading,
   title,
+  tooltip,
   iconClassName = "",
   layout = false,
   layoutId,
   isMini = false,
+  isFlipped,
   transition,
 }: {
   icon?: any;
@@ -27,13 +30,16 @@ export const BounceButton = ({
   disabled?: boolean;
   loading?: boolean;
   title?: string;
+  tooltip?: React.ReactNode;
   iconClassName?: string;
   layout?: boolean | "position" | "size";
   layoutId?: string;
   isMini?: boolean;
+  isFlipped?: boolean;
   transition?: any;
 }) => {
   const [internalLoading, set_loading] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const isLoading = externalLoading ?? internalLoading;
 
   const _on_click = (e: React.MouseEvent) => {
@@ -75,12 +81,12 @@ export const BounceButton = ({
           mass: 0.6,
         }
       }
-      onClick={_on_click}
-      disabled={disabled || isLoading}
-      title={title || (typeof label === "string" ? label : undefined)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       aria-label={title || (typeof label === "string" ? label : undefined)}
       className={cn(
-        "relative overflow-hidden cursor-pointer select-none",
+        "relative cursor-pointer select-none",
+        isMini ? "overflow-visible" : "overflow-hidden",
         (disabled || isLoading) && "cursor-not-allowed opacity-60 pointer-events-none",
         className,
       )}
@@ -145,6 +151,11 @@ export const BounceButton = ({
           </motion.div>
         )}
       </AnimatePresence>
+      <ExpressiveTooltip
+        text={tooltip || title || (typeof label === "string" ? label : undefined)}
+        show={isHovered && isMini}
+        isFlipped={isFlipped}
+      />
     </motion.button>
   );
 };

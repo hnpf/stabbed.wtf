@@ -39,6 +39,7 @@ import { CapsuleConfirmDialog } from "./components/CapsuleConfirmDialog";
 import { RefreshConfirmDialog } from "./components/RefreshConfirmDialog";
 import { FoolsPopup } from "./components/FoolsPopup";
 import { BounceButton } from "./components/TechStack";
+import { ExpressiveTooltip } from "./components/ExpressiveTooltip";
 import { M3WindowScrollBar, M3ScrollBar } from "./components/M3ScrollBar";
 import { materialIcon } from "./components/MaterialIcon";
 import { BLOG_POSTS } from "./constants";
@@ -83,8 +84,21 @@ export default function App() {
   const [navHoverSide, setNavHoverSide] = useState<"top" | "bottom" | null>(null);
   const [canScrollUp, setCanScrollUp] = useState(false);
   const [canScrollDown, setCanScrollDown] = useState(false);
+  const [collapseHovered, setCollapseHovered] = useState(false);
+  const [canShowExpandTooltip, setCanShowExpandTooltip] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
   const sidebarScrollEnabled = false;
+
+  useEffect(() => {
+    if (!settings.sidebarCollapsed) {
+      setCanShowExpandTooltip(false);
+      return;
+    }
+    const timer = setTimeout(() => {
+      setCanShowExpandTooltip(true);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [settings.sidebarCollapsed]);
 
   // modular logic hooks
   useSettingsSync(setPendingCapsule);
@@ -482,7 +496,6 @@ export default function App() {
                       isMini={settings.sidebarCollapsed}
                       icon={Github}
                       label="GitHub"
-                      title="GitHub"
                       url="https://github.com/hnpf"
                       className={cn(
                         "flex items-center justify-center transition-colors duration-150 text-sm font-expressive tracking-wide font-black shadow-none border-0",
@@ -497,7 +510,6 @@ export default function App() {
                       isMini={settings.sidebarCollapsed}
                       icon={M3Chat}
                       label="Discord"
-                      title="Discord"
                       url="https://discord.gg/TSZNYbjzF7"
                       className={cn(
                         "flex items-center justify-center transition-colors duration-150 text-sm font-expressive tracking-wide font-black shadow-none border-0",
@@ -517,12 +529,17 @@ export default function App() {
                         stiffness: settings.highHz ? 450 : 380,
                         damping: settings.highHz ? 32 : 28,
                       }}
-                      onClick={() => updateSettings({ sidebarCollapsed: !settings.sidebarCollapsed })} 
+                      onClick={() => {
+                        setCanShowExpandTooltip(false);
+                        updateSettings({ sidebarCollapsed: !settings.sidebarCollapsed });
+                      }} 
+                      onMouseEnter={() => setCollapseHovered(true)}
+                      onMouseLeave={() => setCollapseHovered(false)}
                       className={cn(
-                        "flex items-center justify-center outline-none cursor-pointer transition-all duration-200 border-0 shadow-none overflow-hidden",
+                        "relative flex items-center justify-center outline-none cursor-pointer transition-all duration-200 border-0 shadow-none",
                         settings.sidebarCollapsed
-                          ? (is_short ? "w-12 h-12 rounded-full" : "w-14 h-14 rounded-full") + " bg-[var(--surface-variant)] text-[var(--on-surface)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)]"
-                          : "w-full h-14 rounded-[24px] bg-[var(--surface-variant)]/50 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)] font-expressive text-[15px] tracking-widest font-black px-4"
+                          ? (is_short ? "w-12 h-12 rounded-full overflow-visible" : "w-14 h-14 rounded-full overflow-visible") + " bg-[var(--surface-variant)] text-[var(--on-surface)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)]"
+                          : "w-full h-14 rounded-[24px] bg-[var(--surface-variant)]/50 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] text-[var(--on-surface)] font-expressive text-[15px] tracking-widest font-black px-4 overflow-hidden"
                       )}
                       aria-label={settings.sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
                     >
@@ -560,6 +577,11 @@ export default function App() {
                       >
                         Collapse
                       </motion.span>
+                      <ExpressiveTooltip
+                        text="Expand"
+                        show={collapseHovered && settings.sidebarCollapsed && canShowExpandTooltip}
+                        isFlipped={settings.sidebarFlipped}
+                      />
                     </motion.button>
                   </div>
                 </div>
