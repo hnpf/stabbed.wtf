@@ -118,7 +118,7 @@ export function renderHome() {
   const rightValWidth = 32;
 
   // box drawing top
-  const topRow = `${C.border}┌─${C.cream}About${C.border}${'─'.repeat(leftWidth - 5)}┐ ┌─${C.cream}Socials${C.border}${'─'.repeat(rightLabelWidth - 7)}┬${'─'.repeat(rightValWidth + 2)}┐${C.reset}`;
+  const topRow = `${C.border}┌─${C.cream}About${C.border}${'─'.repeat(leftWidth - 4)}┐ ┌─${C.cream}Socials${C.border}${'─'.repeat(rightLabelWidth - 6)}┬${'─'.repeat(rightValWidth + 2)}┐${C.reset}`;
 
   const numRows = Math.max(aboutLines.length, socials.length);
   const middleRows = [];
