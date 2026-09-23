@@ -126,10 +126,10 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
             <div className="-ml-2 h-px w-22 bg-[var(--primary)] opacity-30" />
           </div>
           <h2 className="text-4xl md:text-6xl font-display font-black tracking-tighter leading-[1.05] max-w-4xl mx-auto italic">
-            I am a <span className="text-[var(--primary)]">full-stack developer</span>, <span className="text-[var(--primary)]">cybersecurity student</span>, and <span className="text-[var(--primary)]">music producer.</span> <br></br> <br></br> <span className="text-[var(--primary)]">I design</span> sexy, straightforward, and beautiful <span className="text-[var(--primary)]">user experiences</span> & soundscapes.
+            I am a <span className="text-[var(--primary)]">full-stack developer</span>, <span className="text-[var(--primary)]">cybersecurity student</span>, and <span className="text-[var(--primary)]">music producer.</span> <br></br> <br></br> <span className="text-[var(--primary)]">I design</span> pleasing, straightforward, and beautiful <span className="text-[var(--primary)]">user experiences.</span>
           </h2>
           <p className="text-xl md:text-2xl opacity-60 font-medium max-w-4xl mx-auto leading-relaxed">
-            Running on Arch + Hyprland + Quickshell, lots of caffeine, and audio workflows! <br></br>
+            Running on Arch + GNOME (or Hyprland + Quickshell), and lots of caffeine! <br></br>
 
             <span className="relative inline-block mt-4 md:mt-0">
               <span className="text-[var(--primary)] font-bold relative z-10">
@@ -139,7 +139,7 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
             </span>{" "}
             <span className="relative inline-block">
               <span className="text-[var(--primary)] font-bold relative z-10">
-                rewriting it all tomorrow.
+                to rewrite it all tomorrow.
               </span>
               <span className="absolute bottom-1 left-0 w-full h-1.5 bg-[var(--primary)]/20 rotate-1" />
             </span>{" "}
@@ -218,7 +218,7 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
                   Rage, trap & aggressive sound design
                 </h4>
                 <p className="text-base md:text-lg opacity-70 font-medium max-w-2xl leading-relaxed">
-                  Independent producer & artist. Overusing 808s, distortion, and layered sound design. Mixing rage, trap, and hip-hop into music that's loud and unfinished.
+                  I am rxvirex. An independent producer & artist. Over-tuning 808s, fast distortion, and lots of layered sound design. I mix rage, trap, and hip-hop into music that's loud and feels different.
                 </p>
               </div>
               <BounceButton
@@ -349,7 +349,7 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
 
         {/* foooootters */}
         <div className="flex flex-col items-center gap-12 w-full max-w-2xl">
-          <div className="h-1 w-20 bg-[var(--primary)] rounded-full opacity-40" />
+          <div className="h-1.5 w-48 opacity-60 bg-[var(--primary)] mt-2 mb-4 rounded-full" />
           <div 
             onClick={(e) => { 
               if ((e.target as HTMLElement).closest('button, a')) {
