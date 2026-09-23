@@ -21,6 +21,15 @@ const Badge = ({ icon: Icon, children, className }: any) => (
   </span>
 );
 
+const InfoCardHeading = ({ icon: Icon, children, className }: any) => (
+  <div className={cn("flex items-center gap-3", className)}>
+    <Icon aria-hidden="true" className="size-6 shrink-0 text-[var(--primary)] md:size-7" strokeWidth={2.25} />
+    <h3 className="min-w-0 text-xl leading-tight font-display font-black tracking-tight italic transition-colors md:text-2xl">
+      {children}
+    </h3>
+  </div>
+);
+
 const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; setPage: (p: string) => void, is_mobile: boolean }) => {
   const letters = "virex".split("");
   const [flickering, setFlick] = useState<number[]>([]);
@@ -146,9 +155,9 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
             className="col-span-2 md:col-span-8"
             innerClassName={cn("px-6 py-8 md:p-12 bg-[var(--surface-variant)]/60 rounded-[3.5rem] border-6 border-[var(--outline-variant)]/40 relative overflow-hidden group transition-colors duration-200", glass_class)}
           >
-            <h3 className="text-2xl md:text-4xl font-display font-black mb-8 md:mb-10 tracking-tight transition-colors group-hover:text-[var(--primary)] flex items-center gap-3 italic">
-              <History className="text-[var(--primary)] w-6 h-6 md:w-8 md:h-8" /> stabbed.wtf backstory...
-            </h3>
+            <InfoCardHeading className="mb-8 md:mb-10 group-hover:text-[var(--primary)]" icon={History}>
+              Stabbed.wtf backstory...
+            </InfoCardHeading>
             <div className="space-y-6 text-[15px] md:text-xl opacity-80 leading-relaxed font-medium">
               <p>
                 I started my journey with <span className="text-[var(--primary)] font-black">scripting</span>. around 2023, I was hooked on windows batch scripting. I would spend hours making stupid multitools and that's when I hit a barrier.
@@ -175,10 +184,9 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
             innerClassName={cn("px-8 py-10 bg-[var(--primary-container)]/90 text-[var(--on-primary-container)] rounded-[3.5rem] border-6 border-[var(--primary)]/30 flex flex-col justify-between gap-8 group transition-colors duration-200 relative overflow-hidden", glass_class)}
           >
             <div className="space-y-6 relative z-10">
-              <div className="flex items-center gap-3">
-                <Target className="text-[var(--primary)] w-8 h-8" strokeWidth={2.5} />
-                <span className="text-[19px] font-black font-expressive-bold opacity-60 uppercase">philosophy</span>
-              </div>
+              <InfoCardHeading className="group-hover:text-[var(--primary)]" icon={Target}>
+                Philosophy
+              </InfoCardHeading>
               <p className="text-2xl md:text-4xl leading-[0.95] tracking-tighter font-expressive font-black italic text-balance">
                 "Code can be used as a form of <span className="text-[var(--primary)]">protest.</span>"
               </p>
@@ -203,9 +211,9 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
 
             <div className="relative z-10 px-6 py-8 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
               <div className="space-y-4 flex-1 min-w-0">
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-[var(--primary)]/15 text-[var(--primary)] rounded-full text-[11px] font-black uppercase italic tracking-widest border border-[var(--primary)]/25">
-                  <Headphones size={12} /> Music Production
-                </div>
+                <InfoCardHeading className="group-hover:text-[var(--primary)]" icon={Headphones}>
+                  Music Production
+                </InfoCardHeading>
                 <h4 className="text-3xl md:text-4xl font-display font-black tracking-tight italic leading-tight">
                   Rage, trap & aggressive sound design
                 </h4>
@@ -256,10 +264,9 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
             className="col-span-2 md:col-span-12 lg:col-span-6"
             innerClassName={cn("px-6 py-8 md:p-12 bg-[var(--surface-variant)]/60 rounded-[3.5rem] border-6 border-[var(--outline-variant)]/40 transition-colors duration-200 group flex flex-col gap-8", glass_class)}
           >
-            <div className="flex items-center gap-3">
-              <Code2 className="text-[var(--primary)] w-5 h-5 md:w-6 md:h-6" />
-              <h4 className="text-xl md:text-2xl font-display font-black transition-colors group-hover:text-[var(--primary)] italic">My stack..</h4>
-            </div>
+            <InfoCardHeading className="group-hover:text-[var(--primary)]" icon={Code2}>
+              Tech stack
+            </InfoCardHeading>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
               <div className="space-y-4">
                 <div className="text-[14px] font-black tracking-[0.1em] opacity-70">Web & Programming</div>
@@ -287,9 +294,9 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
             innerClassName={cn("px-6 py-8 md:p-12 bg-[var(--surface-variant)]/60 rounded-[3.5rem] border-6 border-[var(--outline-variant)]/40 border-dashed flex flex-col md:flex-row justify-between items-center gap-8 group hover:border-[var(--primary)]/50 transition-colors duration-200", glass_class)}
           >
             <div className="space-y-4 text-center md:text-left">
-              <h4 className="text-2xl md:text-3xl font-display font-black tracking-tight flex items-center justify-center md:justify-start gap-3 transition-colors group-hover:text-[var(--primary)] italic">
-                <Archive className="text-[var(--primary)] w-6 h-6 md:w-8 md:h-8" /> Archival
-              </h4>
+              <InfoCardHeading className="justify-center md:justify-start group-hover:text-[var(--primary)]" icon={Archive}>
+                Archival
+              </InfoCardHeading>
               <p className="text-xl opacity-50 font-medium max-w-2xl group-hover:opacity-100 transition-opacity italic">
                 Hands down one of my most peculiar hobbies. I enjoy archiving old software, audio plug-ins, old manuals and docs, and keeping backups of everything of interest that I find.
               </p>
@@ -308,12 +315,9 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
             className="col-span-2 md:col-span-12"
             innerClassName={cn("px-6 py-8 md:p-12 bg-[var(--surface-variant)]/60 rounded-[3.5rem] border-6 border-[var(--outline-variant)]/40 flex flex-col gap-8 group transition-colors duration-200 overflow-hidden", glass_class)}
           >
-            <div className="flex items-center gap-3">
-              <Github className="text-[var(--primary)] w-6 h-6 md:w-8 md:h-8" />
-              <h4 className="text-2xl md:text-3xl font-display font-black tracking-tight flex items-center transition-colors group-hover:text-[var(--primary)] italic">
-                GitHub activity
-              </h4>
-            </div>
+            <InfoCardHeading className="group-hover:text-[var(--primary)]" icon={Github}>
+              GitHub activity
+            </InfoCardHeading>
             <div className="w-full font-display text-sm opacity-80 mt-2">
               <GitHubCalendar 
                 username="hnpf" 
