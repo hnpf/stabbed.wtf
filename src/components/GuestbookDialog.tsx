@@ -437,7 +437,7 @@ export const GuestbookDialog = ({
                       </div>
                     </div>
 
-                    <div className="pt-4 pb-2 border-t-3 border-[var(--outline-variant)]/20 flex gap-3">
+                    <div className="pt-4 pb-2 md:pb-0 border-t-3 border-[var(--outline-variant)]/20 flex gap-3">
                       <button
                         type="button"
                         onClick={() => {
