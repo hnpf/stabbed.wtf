@@ -21,6 +21,12 @@ interface RippleWave {
   isExiting: boolean;
 }
 
+interface GesturePointer {
+  clientX: number;
+  clientY: number;
+  canceled: boolean;
+}
+
 /**
  * M3 guideline-compliant state layer and ripple overlay
  * 
@@ -43,6 +49,8 @@ export const Ripple: React.FC<RippleProps> = ({
   const [ripples, setRipples] = useState<RippleWave[]>([]);
   const nextId = useRef(0);
   const activeRipplesCount = useRef(0);
+  const gesturePointer = useRef<GesturePointer | null>(null);
+  const touchRippleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const createRipple = useCallback(
     (clientX?: number, clientY?: number) => {
@@ -101,18 +109,78 @@ export const Ripple: React.FC<RippleProps> = ({
       if (e.button !== 0 && e.pointerType === "mouse") return; // primary click only
       const eventTarget = e.target instanceof Element ? e.target : null;
       if (target && eventTarget?.closest("[data-m3-ripple-target]") !== owner) return;
+
+      if (e.pointerType !== "mouse") {
+        gesturePointer.current = {
+          clientX: e.clientX,
+          clientY: e.clientY,
+          canceled: false,
+        };
+        touchRippleTimer.current = setTimeout(() => {
+          if (gesturePointer.current && !gesturePointer.current.canceled) {
+            createRipple(e.clientX, e.clientY);
+          }
+          touchRippleTimer.current = null;
+        }, 60);
+        return;
+      }
+
       createRipple(e.clientX, e.clientY);
     };
 
+    const cancelIfMoved = (clientX: number, clientY: number) => {
+      const gesture = gesturePointer.current;
+      if (!gesture || gesture.canceled) return;
+
+      const movedX = clientX - gesture.clientX;
+      const movedY = clientY - gesture.clientY;
+      if (Math.hypot(movedX, movedY) > 8) {
+        gesture.canceled = true;
+        if (touchRippleTimer.current) {
+          clearTimeout(touchRippleTimer.current);
+          touchRippleTimer.current = null;
+        }
+        releaseRipples();
+      }
+    };
+
+    const handlePointerMove = (e: PointerEvent) => {
+      cancelIfMoved(e.clientX, e.clientY);
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      if (touch) cancelIfMoved(touch.clientX, touch.clientY);
+    };
+
     const handlePointerUp = () => {
+      if (touchRippleTimer.current) {
+        clearTimeout(touchRippleTimer.current);
+        touchRippleTimer.current = null;
+        const gesture = gesturePointer.current;
+        if (gesture && !gesture.canceled) {
+          createRipple(gesture.clientX, gesture.clientY);
+        }
+      }
+      gesturePointer.current = null;
       releaseRipples();
     };
 
     const handlePointerCancel = () => {
+      if (touchRippleTimer.current) {
+        clearTimeout(touchRippleTimer.current);
+        touchRippleTimer.current = null;
+      }
+      gesturePointer.current = null;
       releaseRipples();
     };
 
     const handlePointerLeave = () => {
+      if (touchRippleTimer.current) {
+        clearTimeout(touchRippleTimer.current);
+        touchRippleTimer.current = null;
+      }
+      gesturePointer.current = null;
       releaseRipples();
     };
 
@@ -131,18 +199,24 @@ export const Ripple: React.FC<RippleProps> = ({
     };
 
     owner.addEventListener("pointerdown", handlePointerDown);
+    owner.addEventListener("pointermove", handlePointerMove);
     owner.addEventListener("pointerup", handlePointerUp);
     owner.addEventListener("pointercancel", handlePointerCancel);
     owner.addEventListener("pointerleave", handlePointerLeave);
     owner.addEventListener("keydown", handleKeyDown);
     owner.addEventListener("keyup", handleKeyUp);
+    window.addEventListener("pointermove", handlePointerMove, true);
+    window.addEventListener("touchmove", handleTouchMove, { capture: true, passive: true });
     return () => {
       owner.removeEventListener("pointerdown", handlePointerDown);
+      owner.removeEventListener("pointermove", handlePointerMove);
       owner.removeEventListener("pointerup", handlePointerUp);
       owner.removeEventListener("pointercancel", handlePointerCancel);
       owner.removeEventListener("pointerleave", handlePointerLeave);
       owner.removeEventListener("keydown", handleKeyDown);
       owner.removeEventListener("keyup", handleKeyUp);
+      window.removeEventListener("pointermove", handlePointerMove, true);
+      window.removeEventListener("touchmove", handleTouchMove, true);
     };
   }, [createRipple, releaseRipples, target, isEnabled]);
 
