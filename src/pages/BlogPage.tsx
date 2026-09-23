@@ -570,7 +570,7 @@ export const BlogPage = memo(({ targetId, navigateTo }: any) => {
                 <div className="space-y-6 h-full flex flex-col justify-between">
                   <div className="space-y-6">
                     <div className="flex justify-between items-start gap-3">
-                      <div className="flex items-center gap-2 min-w-0 flex-1">
+                      <div className="flex items-center pt-1.5 gap-2 min-w-0 flex-1">
                         <span className="text-[10px] pl-2.5 font-black uppercase tracking-widest text-[var(--primary)] px-2 py-1 bg-[var(--primary-container)]/30 rounded-[2rem] border-3 border-[var(--primary)]/20 whitespace-nowrap shrink-0">
                           {p.category}
                         </span>
