@@ -329,14 +329,14 @@ export const MusicPage = memo(({ setPage }: { setPage: (p: string) => void }) =>
                   </div>
                 </div>
 
-                <p className="text-xs sm:text-base opacity-70 font-medium italic leading-relaxed line-clamp-3">
+                <p className="text-xs sm:text-base opacity-70 font-medium italic leading-relaxed md:pb-1.5 pb-0.5 line-clamp-3">
                   "{release.description}"
                 </p>
               </div>
 
               {/* action bar */}
               <div className="pt-3.5 sm:pt-5 border-t-2 border-[var(--outline-variant)]/30 flex items-center justify-between relative z-10">
-                <span className="text-[11px] sm:text-xs font-expressive-bold italic font-black text-[var(--primary)] flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                <span className="text-[11px] sm:text-xs font-expressive-bold italic font-black text-[var(--primary)] flex items-center  group-hover:translate-x-1 transition-transform">
                   Listen / Stream
                 </span>
               </div>
@@ -385,14 +385,15 @@ export const MusicPage = memo(({ setPage }: { setPage: (p: string) => void }) =>
           ].map((platform) => {
             const IconComp = platform.icon;
             return (
-              <a
-                key={platform.name}
-                href={platform.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => haptic.light()}
-                className="p-5 sm:p-7 bg-[var(--surface-variant)]/60 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] border-3 sm:border-4 border-[var(--outline-variant)]/40 rounded-2xl sm:rounded-3xl flex flex-col justify-between gap-4 sm:gap-5 transition-all duration-300 group cursor-pointer hover:shadow-xl hover:border-[var(--primary)]/60 active:scale-[0.99] relative overflow-hidden"
-              >
+            <a
+              key={platform.name}
+              href={platform.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              draggable={false}
+              onClick={() => haptic.light()}
+              className="select-none p-5 sm:p-7 bg-[var(--surface-variant)]/60 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] border-3 sm:border-4 border-[var(--outline-variant)]/40 rounded-[2rem] sm:rounded-[2.5rem] flex flex-col justify-between gap-4 sm:gap-5 transition-all duration-300 group cursor-pointer hover:shadow-xl hover:border-[var(--primary)]/60 active:scale-[0.99] relative overflow-hidden"
+            >
                 <div className="space-y-2.5 sm:space-y-3 relative z-10">
                   <div className="flex items-start gap-3 sm:gap-4">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[var(--surface)] text-[var(--primary)] group-hover:bg-[var(--primary)] group-hover:text-[var(--on-primary)] flex items-center justify-center shadow-sm transition-colors duration-300 shrink-0">
@@ -407,16 +408,16 @@ export const MusicPage = memo(({ setPage }: { setPage: (p: string) => void }) =>
                       </span>
                     </div>
                   </div>
-                  <p className="text-xs sm:text-sm opacity-60 font-sans leading-relaxed">
+                  <p className="text-xs ml-1 sm:text-sm opacity-60 font-sans leading-relaxed">
                     {platform.desc}
                   </p>
                 </div>
 
                 <div className="pt-3.5 sm:pt-4 border-t border-[var(--outline-variant)]/30 flex items-center justify-between relative z-10">
-                  <span className="text-[11px] sm:text-xs font-expressive-bold italic font-black uppercase tracking-wider text-[var(--primary)] group-hover:text-[var(--on-primary-container)]">
+                  <span className="text-[11px] sm:text-xs ml-1 font-expressive-bold italic font-black uppercase tracking-wider text-[var(--primary)] group-hover:text-[var(--on-primary-container)]">
                     {platform.btnLabel}
                   </span>
-                  <ExternalLink size={14} className="text-[var(--primary)] group-hover:text-[var(--on-primary-container)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0" />
+                  <ExternalLink size={16} className="text-[var(--primary)] mr-2 group-hover:text-[var(--on-primary-container)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform shrink-0" />
                 </div>
               </a>
             );
