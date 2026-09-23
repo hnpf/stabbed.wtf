@@ -41,6 +41,9 @@ export function RippleScope({ children }: { children: React.ReactNode }) {
         (target): target is HTMLElement =>
           target instanceof HTMLElement &&
           !target.closest(".m3-ripple-container") &&
+          !target.querySelector(
+            '.m3-ripple-container:not([data-m3-ripple-scope])',
+          ) &&
           !target.closest("[data-ripple-skip]") &&
           !target.hasAttribute("disabled"),
       );

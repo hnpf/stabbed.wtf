@@ -150,6 +150,7 @@ export const Ripple: React.FC<RippleProps> = ({
     <div
       ref={containerRef}
       aria-hidden="true"
+      data-m3-ripple-scope={target ? "" : undefined}
       className={`m3-ripple-container pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit] select-none z-0 ${className}`}
       style={
         {
