@@ -225,7 +225,7 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
                 icon={Music}
                 label="Explore Releases"
                 onClick={() => { setPage("music"); haptic.light(); }}
-                className="m3-button-filled shrink-0 h-14 px-8 rounded-4xl font-black italic ring-6 ring-[var(--outline-variant)]/70 text-sm uppercase tracking-wider"
+                className="m3-button-filled w-full shrink-0 justify-center md:w-auto h-14 px-8 rounded-4xl font-black italic ring-6 ring-[var(--outline-variant)]/70 text-sm uppercase tracking-wider"
               />
             </div>
           </Card>
