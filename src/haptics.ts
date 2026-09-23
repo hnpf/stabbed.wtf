@@ -35,4 +35,10 @@ export const haptic = {
       if (enabled && typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate([8, 40, 8]);
     } catch (e) {}
   },
+  /** long ripple */
+  longRipple: () => {
+    try {
+      if (enabled && typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate([18, 65, 18, 90, 18, 120, 28]);
+    } catch (e) {}
+  },
 };

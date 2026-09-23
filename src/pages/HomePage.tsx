@@ -89,6 +89,90 @@ const AdCard = () => {
   );
 };
 
+
+const HelloBalloonBurst = () => {
+  const [items, setItems] = useState<Array<{
+    id: number;
+    x: number;
+    y: number;
+    rot: number;
+    scale: number;
+    delay: number;
+    dur: number;
+  }>>([]);
+
+  useEffect(() => {
+    const handle = () => {
+      // 12-16 items 
+      const next = Array.from({ length: 14 }, (_, i) => ({
+        id: Date.now() + i,
+        // spread outward 
+        x: (Math.random() - 0.5) * 320, 
+        // float up 
+        y: -250 - Math.random() * 200, 
+        rot: (Math.random() - 0.5) * 60,
+        scale: 0.7 + Math.random() * 0.5,
+        delay: Math.random() * 120, // random delay
+        dur: 2200 + Math.random() * 600,
+      }));
+
+      setItems(next);
+      const timer = setTimeout(() => setItems([]), 3500);
+      return () => clearTimeout(timer);
+    };
+
+    window.addEventListener("virex-hello-burst", handle);
+    return () => window.removeEventListener("virex-hello-burst", handle);
+  }, []);
+
+  return (
+    <>
+      <style>{`
+        @keyframes float-up-gstyle {
+          0% {
+            opacity: 0;
+            transform: translate3d(-50%, 0, 0) scale(0) rotate(0deg);
+          }
+          15% {
+            opacity: 1;
+            transform: translate3d(calc(-50% + var(--x) * 0.3), calc(var(--y) * 0.3), 0) scale(var(--s)) rotate(calc(var(--r) * 0.3));
+          }
+          75% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0;
+            /* smooth deceleration path using simple CSS easing instead of hardcoded waypoints */
+            transform: translate3d(calc(-50% + var(--x)), var(--y), 0) scale(calc(var(--s) * 0.8)) rotate(var(--r));
+          }
+        }
+      `}</style>
+
+      {items.length > 0 && (
+        <div className="pointer-events-none fixed inset-0 z-[120] overflow-hidden" aria-hidden="true">
+          {items.map((it) => (
+            <span
+              key={it.id}
+              className="absolute bottom-10 left-1/2 text-3xl select-none"
+              style={{
+                animation: `float-up-gstyle ${it.dur}ms cubic-bezier(0.1, 0.8, 0.3, 1) forwards`,
+                animationDelay: `${it.delay}ms`,
+                opacity: 0,
+                ["--x" as any]: `${it.x}px`,
+                ["--y" as any]: `${it.y}px`,
+                ["--r" as any]: `${it.rot}deg`,
+                ["--s" as any]: it.scale,
+              }}
+            >
+              🫪
+            </span>
+          ))}
+        </div>
+      )}
+    </>
+  );
+};
+
 const HelloVirex = ({ tickIndex }: { tickIndex: number }) => {
   const words = [
     "virex",         // Global / English 
@@ -687,6 +771,7 @@ export const HomePage = memo(({ setPage, settings, onOpenGuestbook }: any) => {
   const IS_JUNE = new Date().getMonth() === 5;
   return (
     <div className="space-y-16 max-w-6xl mx-auto px-4 md:px-0 relative">
+      <HelloBalloonBurst />
       <header className="page-header space-y-12">
         {settings.helloAnimation ? (
           <HelloVirex tickIndex={tickIndex} />

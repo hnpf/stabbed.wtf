@@ -107,6 +107,18 @@ export const SettingsDialog = memo(({
     setSettingsOpen(false);
   }, [setSettingsOpen]);
 
+  const rapidSettingsClickRef = React.useRef({ count: 0, lastClick: 0 });
+
+  const triggerHelloBurst = React.useCallback(() => {
+    const isMobile = typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
+    if (isMobile && settings.hapticsEnabled) {
+      haptic.longRipple();
+    }
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("virex-hello-burst"));
+    }
+  }, [settings.hapticsEnabled]);
+
   const handleDialogKeyDown = React.useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
       if (event.key === "Escape") {
@@ -880,6 +892,20 @@ export const SettingsDialog = memo(({
                             updateSettings({ disableAnimations: checked });
                             setShowRefreshConfirm(true);
                           } else {
+                            const now = Date.now();
+                            if (tweak.key === "helloAnimation") {
+                              if (now - rapidSettingsClickRef.current.lastClick < 900) {
+                                rapidSettingsClickRef.current.count += 1;
+                              } else {
+                                rapidSettingsClickRef.current.count = 1;
+                              }
+                              rapidSettingsClickRef.current.lastClick = now;
+
+                              if (rapidSettingsClickRef.current.count >= 6) {
+                                rapidSettingsClickRef.current.count = 0;
+                                triggerHelloBurst();
+                              }
+                            }
                             updateSettings({ [tweak.key]: checked });
                           }
                         }}
