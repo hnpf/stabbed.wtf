@@ -475,7 +475,7 @@ export const BlogPage = memo(({ targetId, navigateTo }: any) => {
             >
               <div className="p-8 md:p-16 space-y-8 relative z-10">
                 <div className="flex items-center gap-4 flex-nowrap">
-                  <span className="shrink-0 px-4 py-1.5 bg-[var(--primary)] text-[var(--on-primary)] rounded-full text-[12px] font-black tracking-widest shadow-lg">
+                  <span className="shrink-0 px-4 py-1.5 bg-[var(--primary)] text-[var(--on-primary)] rounded-[3.5rem] text-[12px] font-black tracking-widest shadow-lg">
                     Featured post!
                   </span>
                   <span className="min-w-0 text-sm font-bold opacity-60 flex gap-2">
@@ -515,7 +515,7 @@ export const BlogPage = memo(({ targetId, navigateTo }: any) => {
                       damping: 20,
                       mass: 0.5,
                     }}
-                    className="m3-button-filled ring-6 ring-[var(--on-primary-container)] !transition-none bg-white font-expressive-bold tracking-[0.05em] text-black text-md italic md:text-2xl h-14 md:h-18 px-8 md:px-14 rounded-[24px] flex items-center gap-3 group/btn whitespace-nowrap"
+                    className="m3-button-filled ring-6 ring-[var(--on-primary-container)] !transition-none bg-white font-expressive-bold tracking-[0.05em] text-black text-md italic md:text-2xl h-14 md:h-18 px-8 md:px-14 rounded-[3.5rem] flex items-center gap-3 group/btn whitespace-nowrap"
                   >
                     Read entry
                     <motion.span

@@ -281,7 +281,7 @@ app.get('*', async (req, res, next) => {
       return res.send('pong\n');
     }
     if (pathname === '/ip') {
-      res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+      res.setHeader('Content-Type', 'text/plain; charset=utf-8');c
       return res.send(`${req.ip || '127.0.0.1'}\n`);
     }
     if (pathname === '/fsh' || pathname === '/fish') {

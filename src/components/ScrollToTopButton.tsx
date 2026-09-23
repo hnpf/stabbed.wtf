@@ -124,7 +124,7 @@ export const ScrollToTopButton: React.FC<ScrollToTopButtonProps> = ({
           isMobile
             ? (showBottomNav ? "bottom-[calc(env(safe-area-inset-bottom,12px)_+_84px)]" : "bottom-20")
             : "bottom-12 lg:bottom-12",
-          isFlipped ? "left-6 lg:left-12" : "right-6 lg:right-12"
+          isFlipped ? "left-6 lg:left-12" : "right-9.5 lg:right-12"
         )}
       >
         {/* tuff context hint! */}
