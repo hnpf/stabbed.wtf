@@ -879,7 +879,7 @@ export const HomePage = memo(({ setPage, settings, onOpenGuestbook }: any) => {
         <h3 className="text-4xl md:text-6xl font-expressive-bold italic font-black tracking-[-0.05em] uppercase text-center">
           The Guestbook
         </h3>
-        <div className="h-1 w-24 bg-[var(--primary)] mt-2 mb-4" />
+        <div className="h-1.5 w-48 opacity-60 bg-[var(--primary)] mt-2 mb-4 rounded-full" />
         <Card
           delay={0.8}
           onClick={onOpenGuestbook}
