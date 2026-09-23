@@ -66,7 +66,6 @@ export const NowPage = memo(() => {
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 px-4 md:px-0">
-        {/* SECTION 1: BUILDING */}
         <Card
           delay={0.1}
           innerClassName="p-5 sm:p-8 md:p-12 border-4 sm:border-6 border-[var(--outline-variant)]/90 transition-colors flex flex-col justify-between min-h-[280px] sm:min-h-[360px] md:min-h-[450px] group/now rounded-[2rem] sm:rounded-[2.5rem]"
@@ -96,8 +95,6 @@ export const NowPage = memo(() => {
             </div>
           </div>
         </Card>
-
-        {/* SECTION 2: LEARNING */}
         <Card
           delay={0.2}
           innerClassName="p-5 sm:p-8 md:p-12 border-4 sm:border-6 border-[var(--outline-variant)]/90 transition-colors flex flex-col justify-between min-h-[280px] sm:min-h-[360px] md:min-h-[450px] group/now rounded-[2rem] sm:rounded-[2.5rem]"
@@ -127,8 +124,6 @@ export const NowPage = memo(() => {
             </div>
           </div>
         </Card>
-
-        {/* SECTION 3: LISTENING */}
         <Card
           delay={0.4}
           className="md:col-span-2"
@@ -165,7 +160,6 @@ const LastFmNowPlayingCard = () => {
   const [now, setNow] = useState(() => Date.now());
   const [imageError, setImageError] = useState(false);
 
-  // Restore active session synchronously on component creation
   const sessionRef = useRef<{ trackKey: string; startedAt: number } | null>(null);
 
   if (sessionRef.current === null && typeof window !== "undefined") {
@@ -331,7 +325,7 @@ const LastFmNowPlayingCard = () => {
 
     if (fetchedTrack.isNowPlaying) {
       if (sessionRef.current && sessionRef.current.trackKey === key) {
-        // Keep active track start timestamp untouched
+        // keep active track start timestamp untouched
       } else {
         updateSessionStart(Date.now(), key);
       }
@@ -366,7 +360,7 @@ const LastFmNowPlayingCard = () => {
     };
   }, [fetchTrack]);
 
-  // Live timer tick every 100ms when track is actively playing
+  // timer for every 100ms when track is actively playing
   useEffect(() => {
     if (!track?.isNowPlaying) return;
 
@@ -412,7 +406,7 @@ const LastFmNowPlayingCard = () => {
 
   return (
     <div className="space-y-5 sm:space-y-8">
-      {/* Header line with Refresh action */}
+      {/* header + refresh button */}
       <div className="flex items-center justify-between gap-3">
         <h3 className="flex items-center gap-2.5 sm:gap-4 text-2xl sm:text-4xl md:text-5xl font-display font-black tracking-tighter italic group-hover/now:translate-x-1 transition-transform duration-300">
           <ListenIcon size={32} fill className="text-[var(--on-primary)] shrink-0 sm:w-9 sm:h-9" />
@@ -426,13 +420,12 @@ const LastFmNowPlayingCard = () => {
           title="Refresh Last.fm status"
           icon={RefreshIcon}
           iconClassName={isRefreshing ? "animate-spin" : ""}
-          label={<span className="hidden sm:inline">Force sync</span>}
-          className="inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-full border-2 sm:border-4 border-[var(--on-primary)]/30 bg-[rgba(255,255,255,0.12)] p-2 sm:px-4 sm:py-2 text-xs sm:text-sm font-bold tracking-wider text-[var(--on-primary)] hover:bg-[rgba(255,255,255,0.22)] shrink-0 cursor-pointer"
+          label={<span className="hidden sm:inline sm:ml-2">Force sync</span>}
+          className="inline-flex items-center justify-center rounded-full border-2 sm:border-4 border-[var(--on-primary)]/30 bg-[rgba(255,255,255,0.12)] p-2 sm:px-4 sm:py-2 text-xs sm:text-sm pl-3 font-bold tracking-wider text-[var(--on-primary)] hover:bg-[rgba(255,255,255,0.22)] shrink-0 cursor-pointer"
         />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_0.9fr] items-stretch gap-5 sm:gap-6 md:gap-10 border-t-2 sm:border-t-3 border-[var(--on-primary)]/20 pt-5 sm:pt-6 md:pt-8">
-        {/* Cover Art / Visualizer Section: Placed first on mobile (< lg) for clean native mobile layout */}
         {track && (
           <div className="order-first lg:order-last relative overflow-hidden rounded-2xl sm:rounded-[2.5rem] lg:rounded-[3rem] border-3 sm:border-6 border-[var(--on-primary)]/20 bg-[var(--on-primary)]/10 shadow-xl group/cover w-full max-w-[200px] sm:max-w-[280px] lg:max-w-none mx-auto lg:mx-0 aspect-square lg:aspect-auto min-h-[180px] sm:min-h-[260px] lg:min-h-[320px] max-h-[220px] sm:max-h-[320px] lg:max-h-[440px] flex items-center justify-center">
             {track.image && !imageError ? (
@@ -443,7 +436,6 @@ const LastFmNowPlayingCard = () => {
                   onError={() => setImageError(true)}
                   className="h-full w-full object-cover aspect-square lg:aspect-auto transition-transform duration-700 group-hover/cover:scale-105"
                 />
-                {/* Text overlay only on desktop (lg:) so mobile layout avoids duplicate text */}
                 <div className="hidden lg:flex absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent p-8 flex-col justify-end">
                   <p className="text-xs font-bold uppercase tracking-[0.1em] text-white/70">{track.artist}</p>
                   <h4 className="mt-1 text-2xl font-display font-black tracking-tight text-white drop-shadow-md">{track.name}</h4>
@@ -452,7 +444,7 @@ const LastFmNowPlayingCard = () => {
               </>
             ) : (
               <div className="relative flex flex-col items-center justify-center w-full h-full p-4 sm:p-8 text-center shadow-inner overflow-hidden">
-                {/* Vinyl record disc */}
+                {/* disc, needs reworked. */}
                 <div className="relative w-28 h-28 sm:w-44 sm:h-44 md:w-56 md:h-56 rounded-full shadow-[0_15px_35px_rgba(0,0,0,0.5)]">
                   <div
                     className={`w-full h-full rounded-full bg-neutral-950 border-3 sm:border-4 border-neutral-800/80 flex items-center justify-center transition-transform duration-1000 ${
@@ -506,7 +498,7 @@ const LastFmNowPlayingCard = () => {
           {!isLoading && !isError && track && (
             <div className="flex h-full flex-col justify-between space-y-4 sm:space-y-6">
               <div className="space-y-3 sm:space-y-6">
-                {/* Status badge */}
+                {/* status */}
                 <div className="flex items-center justify-between gap-3">
                   {isCurrentlyPlaying ? (
                     <div className="inline-flex items-center gap-2 sm:gap-2.5 rounded-full border-2 sm:border-3 border-[var(--on-primary)]/20 bg-[var(--on-primary)]/10 px-3 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm font-extrabold tracking-widest text-[var(--on-primary)]/90">
@@ -524,7 +516,7 @@ const LastFmNowPlayingCard = () => {
                   )}
                 </div>
 
-                {/* Track Details */}
+                {/* details */}
                 <div className="space-y-1 sm:space-y-2">
                   <h4 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-black tracking-tight leading-tight text-[var(--on-primary)] drop-shadow-sm line-clamp-2">
                     {track.name}
@@ -538,7 +530,7 @@ const LastFmNowPlayingCard = () => {
                 </div>
               </div>
 
-              {/* Progress & Actions */}
+              {/* actions/progress */}
               <div className="mt-3 sm:mt-6 space-y-4 sm:space-y-6">
                 <div className="space-y-2 sm:space-y-3">
                   <div
