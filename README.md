@@ -2,7 +2,7 @@
 
 <img src="public/favicon.svg" width="72" height="72" alt="virex logo" />
 
-### stabbed.wtf
+### Stabbed.wtf
 
 <img src="https://img.shields.io/badge/stabbed.wtf-live-6750A4?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0tMSAxNy45M1Y0LjA3YzMuOTQuNDkgNyAzLjg1IDcgNy45M3MtMy4wNiA3LjQ0LTcgNy45M3oiLz48L3N2Zz4=&labelColor=1C1B1F" alt="live site" />
 <img src="https://img.shields.io/badge/react_19-61DAFB?style=for-the-badge&logo=react&logoColor=black&labelColor=1C1B1F" />
