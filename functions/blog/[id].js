@@ -4,7 +4,7 @@ import { BLOG_POSTS } from "../_generated/og-data.js";
 const DEFAULT_TITLE = "Virex | Blog";
 const DEFAULT_DESC =
   "thoughts on code, systems, music production, and whatever else is on my mind.";
-const DEFAULT_IMAGE = "https://virex.lol/photography/pfp/main.png";
+const DEFAULT_IMAGE = "https://stabbed.wtf/photography/pfp/main.png";
 
 const BOT_AGENTS = [
   "Twitterbot",
@@ -82,14 +82,14 @@ export async function onRequest({ request, params, next }) {
   let title = DEFAULT_TITLE;
   let desc = DEFAULT_DESC;
   const image = DEFAULT_IMAGE;
-  let pageUrl = `https://virex.lol/blog`;
+  let pageUrl = `https://stabbed.wtf/blog`;
 
   if (postId) {
     const post = BLOG_POSTS.find((p) => p.id === postId || p.link === postId);
     if (post) {
       title = `Virex Blog | ${post.title}`;
       desc = post.snippet;
-      pageUrl = `https://virex.lol/blog/${postId}`;
+      pageUrl = `https://stabbed.wtf/blog/${postId}`;
     }
   }
 

@@ -295,7 +295,7 @@ app.get('*', async (req, res, next) => {
 
     res.status(404);
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-    return res.send(`\n  \x1b[38;5;212m404 Not Found: "${pathname}"\x1b[0m\n  \x1b[38;5;246mType\x1b[0m \x1b[38;5;120mcurl virex.lol/help\x1b[0m \x1b[38;5;246mto see all available terminal endpoints.\x1b[0m\n\n`);
+    return res.send(`\n  \x1b[38;5;212m404 Not Found: "${pathname}"\x1b[0m\n  \x1b[38;5;246mType\x1b[0m \x1b[38;5;120mcurl stabbed.wtf/help\x1b[0m \x1b[38;5;246mto see all available terminal endpoints.\x1b[0m\n\n`);
   } catch (err: any) {
     console.error('Terminal CLI API error:', err);
     return next();

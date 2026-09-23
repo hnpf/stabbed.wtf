@@ -1,4 +1,4 @@
-# virex.lol
+# stabbed.wtf
 
 virex; independent software researcher, 4+ years (started ~2021).
 focused on systems programming, UI/UX, and vulnerability research.
@@ -16,7 +16,7 @@ React 19, Vite, Tailwind CSS 4, TypeScript, Rust, Python, GoLang, Node.js, Expre
 
 ## contact
 
-- email: deprecated@virex.lol
+- email: deprecated@stabbed.wtf
 - discord: https://discord.gg/TSZNYbjzF7
 - github: https://github.com/hnpf
 

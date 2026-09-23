@@ -4,7 +4,7 @@ import { MUSIC_RELEASES } from "./_generated/og-data.js";
 const DEFAULT_TITLE = "rxvirex";
 const DEFAULT_DESC =
   "music by virex (rxvirex) - producer, software dev, linux enthusiast. releases, music, and sound design.";
-const DEFAULT_IMAGE = "https://virex.lol/photography/pfp/main.png";
+const DEFAULT_IMAGE = "https://stabbed.wtf/photography/pfp/main.png";
 
 const BOT_AGENTS = [
   "Twitterbot",
@@ -90,7 +90,7 @@ export async function onRequest({ request, next }) {
   let title = DEFAULT_TITLE;
   let desc = DEFAULT_DESC;
   let image = DEFAULT_IMAGE;
-  let pageUrl = `https://virex.lol/music`;
+  let pageUrl = `https://stabbed.wtf/music`;
 
   if (releaseId) {
     const release = MUSIC_RELEASES.find(
@@ -100,7 +100,7 @@ export async function onRequest({ request, next }) {
       title = `rxvirex | ${release.title}`;
       desc = release.description;
       image = release.ogImage;
-      pageUrl = `https://virex.lol/music?release=${encodeURIComponent(release.id)}`;
+      pageUrl = `https://stabbed.wtf/music?release=${encodeURIComponent(release.id)}`;
     }
   }
 

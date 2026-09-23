@@ -3,6 +3,14 @@
 
 export const BLOG_POSTS = [
   {
+    "id": "internet-useless-info",
+    "title": "THE INTERNET IS MAKING ME ODDLY GOOD AT KNOWING RANDOM USELESS THINGS",
+    "snippet": "how random yt videos and bullshit geography studying can quite literally build a highway of hyper specific trivia",
+    "link": "internet-useless-info",
+    "date": "Sep 20, 2026",
+    "category": "reflecting"
+  },
+  {
     "id": "2slimey-changed-how-i-listen",
     "title": "2slimey changed the way I listen to music.",
     "snippet": "Yes, a genuine opinion of mine. If this title made you roll your eyes, you are exactly who this is for! :)",
@@ -29,7 +37,7 @@ export const BLOG_POSTS = [
   {
     "id": "return-of-the-old-blogs",
     "title": "the old blogs are back. all of them.",
-    "snippet": "i dug up every old post from the old virex.lol, going all the way back to the very beginning of the \"project inception\". they're all here again now, preserved exactly as they were back when i wrote them.",
+    "snippet": "i dug up every old post from the old stabbed.wtf, going all the way back to the very beginning of the \"project inception\". they're all here again now, preserved exactly as they were back when i wrote them.",
     "link": "return-of-the-old-blogs",
     "date": "Jul 6, 2026",
     "category": "update"
@@ -300,7 +308,7 @@ export const MUSIC_RELEASES = [
     "description": "HATEWARE consists of three radio eq dropouts, harsh 808s, and zero breathing room. single dropped aug 13, 2026. written, produced, and mixed by rxvirex",
     "genre": "Rage/Trap",
     "releaseDate": "2026",
-    "ogImage": "https://virex.lol/albums/HATEWARE.png"
+    "ogImage": "https://stabbed.wtf/albums/HATEWARE.png"
   },
   {
     "id": "FIRSTATTEMPT",
@@ -309,6 +317,6 @@ export const MUSIC_RELEASES = [
     "description": "FIRST ATTEMPT is a debut full length release album. loud and grainy 808s, blown out distortion, seriously fucked up sound design, along with whatever else ended up in the mix. written, produced, and mixed by rxvirex (virex).",
     "genre": "Rage/Trap",
     "releaseDate": "2026",
-    "ogImage": "https://virex.lol/albums/FIRSTATTEMPT.png"
+    "ogImage": "https://stabbed.wtf/albums/FIRSTATTEMPT.png"
   }
 ];

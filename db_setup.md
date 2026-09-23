@@ -1,4 +1,4 @@
-# Virex.lol D1 Setup
+# Stabbed.wtf D1 Setup
 
 Run these commands to initialize the database:
 

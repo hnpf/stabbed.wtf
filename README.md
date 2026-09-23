@@ -2,9 +2,9 @@
 
 <img src="public/favicon.svg" width="72" height="72" alt="virex logo" />
 
-### virex.lol
+### stabbed.wtf
 
-<img src="https://img.shields.io/badge/virex.lol-live-6750A4?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0tMSAxNy45M1Y0LjA3YzMuOTQuNDkgNyAzLjg1IDcgNy45M3MtMy4wNiA3LjQ0LTcgNy45M3oiLz48L3N2Zz4=&labelColor=1C1B1F" alt="live site" />
+<img src="https://img.shields.io/badge/stabbed.wtf-live-6750A4?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0tMSAxNy45M1Y0LjA3YzMuOTQuNDkgNyAzLjg1IDcgNy45M3MtMy4wNiA3LjQ0LTcgNy45M3oiLz48L3N2Zz4=&labelColor=1C1B1F" alt="live site" />
 <img src="https://img.shields.io/badge/react_19-61DAFB?style=for-the-badge&logo=react&logoColor=black&labelColor=1C1B1F" />
 <img src="https://img.shields.io/badge/vite_6-646CFF?style=for-the-badge&logo=vite&logoColor=white&labelColor=1C1B1F" />
 <img src="https://img.shields.io/badge/tailwind_4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white&labelColor=1C1B1F" />
@@ -23,7 +23,7 @@ My personal website. Uses a Material 3 Expressive styled shell, photo gallery, b
 
 - [Aug 9, 2026]  command palette feature
 
-> last updated: Aug 9, 2026 — [full commit history](https://github.com/hnpf/virex.lol/commits/main)
+> last updated: Aug 9, 2026 — [full commit history](https://github.com/hnpf/stabbed.wtf/commits/main)
 
 ---
 
@@ -91,8 +91,8 @@ My personal website. Uses a Material 3 Expressive styled shell, photo gallery, b
 
 ```bash
 # clone + install
-git clone https://github.com/hnpf/virex.lol
-cd virex.lol
+git clone https://github.com/hnpf/stabbed.wtf
+cd stabbed.wtf
 npm install        # or pnpm install
 
 # dev
@@ -146,6 +146,6 @@ src/
 
 <div align="center">
 
-[virex.lol](https://virex.lol) · [github.com/hnpf](https://github.com/hnpf) · GPL-3.0
+[stabbed.wtf](https://stabbed.wtf) · [github.com/hnpf](https://github.com/hnpf) · GPL-3.0
 
 </div>

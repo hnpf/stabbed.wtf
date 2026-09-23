@@ -2,8 +2,10 @@
 # requires pnpm + wrangler obv
 
 BUILD_DIR="./dist"
-PROJ="virex-lol"
-PROD=false
+PROJ="stabbed-wtf"
+#PROJ="virex-lol" --- IGNORE ---
+
+PROD=false # -p / --prod otherwise
 
 for arg in "$@"; do
     case $arg in

@@ -1,16 +1,16 @@
 {
-  "name": "virex.lol",
+  "name": "stabbed.wtf",
   "private": true,
   "version": "1.6.3",
   "description": "Personal website, blog, photo gallery, and portfolio built with React 19, Vite 6, Tailwind 4, Cloudflare, and SQLite.",
   "type": "module",
-  "homepage": "https://virex.lol",
+  "homepage": "https://stabbed.wtf/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hnpf/virex.lol.git"
+    "url": "git+https://github.com/hnpf/stabbed.wtf.git"
   },
   "bugs": {
-    "url": "https://github.com/hnpf/virex.lol/issues"
+    "url": "https://github.com/hnpf/stabbed.wtf/issues"
   },
   "author": "hnpf",
   "license": "GPL-3.0",

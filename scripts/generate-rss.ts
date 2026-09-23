@@ -7,7 +7,7 @@ import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 import { BLOG_POSTS } from "../src/constants.ts";
 
-const SITE_URL = "https://virex.lol";
+const SITE_URL = "https://stabbed.wtf";
 const outputPath = path.join(process.cwd(), "public", "rss.xml");
 
 function formatRfc2822(date: Date) {

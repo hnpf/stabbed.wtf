@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://virex.lol/sitemap.xml
+Sitemap: https://stabbed.wtf/sitemap.xml

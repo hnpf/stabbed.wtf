@@ -128,10 +128,10 @@ export const PROJECTS: Project[] = [
 export const BLOG_POSTS: BlogPost[] = [
   {
       id: 'internet-useless-info',
-      title: 'THE INTERNET IS MAKING ME ODDLY GOOD AT KNOWING RANDOM USELESS BS',
+      title: 'THE INTERNET IS MAKING ME ODDLY GOOD AT KNOWING RANDOM USELESS THINGS',
       snippet: 'how random yt videos and bullshit geography studying can quite literally build a highway of hyper specific trivia',
       content: `
-  # ACCIDENTALLY MASTERING USELESS TRIVIA (fuck)
+  # ACCIDENTALLY MASTERING USELESS TRIVIA (yo omfg)
   
   yeah nobody SETS OUT to learn the difference between init unit types or how to ID a country by a cropped version of its flag. why does this even happen?! you'd simply open one tab for a definition for god knows WHAT and boom its like 2 am and you know too fucking much about mid-20th century proxy wars and why C lets you shoot yourself in the foot. lmao. lmaooo
   
@@ -335,7 +335,7 @@ const greet = (user: User) => {
 ## horizontal rule above
 
 ### testing inline styles
-this is \`inline code\`, this is **bold**, this is *italic*, and this is [a link](https://virex.lol).
+this is \`inline code\`, this is **bold**, this is *italic*, and this is [a link](https://stabbed.wtf).
 
 ### testing images
 ![nekofetch official screenshot](https://raw.githubusercontent.com/hnpf/nekofetch/refs/heads/main/screenshot.png)
@@ -351,11 +351,11 @@ ok thats it bye
   {
     id: 'return-of-the-old-blogs',
     title: 'the old blogs are back. all of them.',
-    snippet: 'i dug up every old post from the old virex.lol, going all the way back to the very beginning of the "project inception". they\'re all here again now, preserved exactly as they were back when i wrote them.',
+    snippet: 'i dug up every old post from the old stabbed.wtf, going all the way back to the very beginning of the "project inception". they\'re all here again now, preserved exactly as they were back when i wrote them.',
     content: `
 # the old blogs are back. all 14 of them.
 
-soooo, i was poking around some old snapshots of virex.lol recently, and found a bunch of my old blog posts sitting there! completely forgotten! some of them are from the very first version of this site, back when i was just figuring things out and writing about whatever.
+soooo, i was poking around some old snapshots of stabbed.wtf recently, and found a bunch of my old blog posts sitting there! completely forgotten! some of them are from the very first version of this site, back when i was just figuring things out and writing about whatever.
 
 i could have left them buried. but i felt way different, they're more of a part of this project's history, and i think that's now worth keeping to the public, as well.
 
@@ -420,7 +420,7 @@ one toggle, no latency, none of that. have fun, my motion sick people :)
   content: `
 # leaving vercel; migrating my project to cloudflare
 
-hi! after dealing with constant config headaches and growing distrust over vercel's hosting infrastructure, i finally did it. **virex.lol is officially 100% free from vercel.** i migrated the entire site infrastructure over to **cloudflare pages**, and i'll be honest, it is a flex!.
+hi! after dealing with constant config headaches and growing distrust over vercel's hosting infrastructure, i finally did it. **stabbed.wtf is officially 100% free from vercel.** i migrated the entire site infrastructure over to **cloudflare pages**, and i'll be honest, it is a flex!.
 
 ## why did i dump vercel?
 vercel is great for getting a basic site up in two clicks, but they love vendor lock-in. their serverless wrappers are entirely proprietary, configuring non-standard routes is a nightmare, and quite frankly, the bandwidth billing traps are terrifying. i don't want dumb corpo constraints on my own stuff. 
@@ -662,14 +662,14 @@ stay tuned for more unsolicited opinions!
     content: `
 # search is for bad sites anyway
 
-i recently removed the search engine on virex.lol because... let's be real, nobody was using it. instead, i updated the whole site and added **the hardware** pane that actually shows my specs.
+i recently removed the search engine on stabbed.wtf because... let's be real, nobody was using it. instead, i updated the whole site and added **the hardware** pane that actually shows my specs.
 
 if you want to find something, just click the sidebar. it's not that insane.
 
 ## why the tracker?
 i added a **protocols/tracker** page to track my progress in cybersecurity. it looks cool and makes me feel like i'm in a movie while i study. waiting for those progress bars to hit 87% on vulnerability analysis is the only dopamine i need right now.
 
-> "if it works on my machine, it's production ready." - me, every time i push to virex.lol >_<
+> "if it works on my machine, it's production ready." - me, every time i push to stabbed.wtf >_<
 
 anyways, stay tuned for more unsolicited opinions. bye, my zero viewers!
     `,
@@ -1191,9 +1191,9 @@ export const CHANGELOGS: ChangelogEntry[] = [
         ],
       },
       {
-        category: "Curling virex.lol",
+        category: "Curling stabbed.wtf",
         items: [
-          "running `curl https://virex.lol` will now output a card in which essentially lets you navigate the site in your terminal. have fun!",
+          "running `curl https://stabbed.wtf` will now output a card in which essentially lets you navigate the site in your terminal. have fun!",
         ],
       },
       {
@@ -1403,7 +1403,7 @@ export const CHANGELOGS: ChangelogEntry[] = [
       {
         category: "Update info",
         items: [
-          "Hi! This isn't really normal for me to put a info section, but I have to warn; this update is HUGE. Virex.lol 3.0.0 is here and it's brining quite a bit to the site :)",
+          "Hi! This isn't really normal for me to put a info section, but I have to warn; this update is HUGE. stabbed.wtf 3.0.0 is here and it's brining quite a bit to the site :)",
         ],
       },
       {
@@ -2034,7 +2034,7 @@ export const CHANGELOGS: ChangelogEntry[] = [
         items: [
           "codebase: separated the codebase into many multiple files, finding and managing code is way cleaner.",
           "lens: fixed some lag that occured when scrolling on lag. - note, this bug is still happening BUT i managed to trim it down.",
-          "redirects: fixed readme page from showing background hue saturation insanely bright when jumping stright to virex.lol/readme",
+          "redirects: fixed readme page from showing background hue saturation insanely bright when jumping stright to stabbed.wtf/readme",
           "favicon: added fallback for crawlers that don't like the dynamic favicon.",
         ],
       },
@@ -2605,7 +2605,7 @@ export const CHANGELOGS: ChangelogEntry[] = [
         items: [
           "lens optimization: reduced image assets from ~200MB to ~40MB (WebP conversion)",
           "PWA support: fully installable via custom manifest",
-          "RSS feed: official support (https://virex.lol/rss.xml)",
+          "RSS feed: official support (https://stabbed.wtf/rss.xml)",
           "deep SEO: added OpenGraph and JSON-LD structured data",
         ],
       },

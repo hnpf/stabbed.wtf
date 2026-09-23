@@ -12,7 +12,7 @@ const lastfmUsername = process.env.LASTFM_USERNAME || process.env.VITE_LASTFM_US
 const outputDir = path.join(process.cwd(), "functions", "_generated");
 const outputPath = path.join(outputDir, "og-data.js");
 const albumsDir = path.join(process.cwd(), "public", "albums");
-const SITE_URL = "https://virex.lol";
+const SITE_URL = "https://stabbed.wtf";
 
 /** resolve the actual album cover URL for a release at build time. */
 function resolveAlbumCoverUrl(releaseId: string, coverUrl?: string | null): string {
@@ -79,11 +79,11 @@ export const PROFILE = {
   alias: "rxvirex / hnpf",
   tagline: "code can be used as a form of protest :)",
   bio: "semi-fullstack dev, linux enthusiast, music prod, and open-source contributor.",
-  site: "https://virex.lol",
+  site: "https://stabbed.wtf",
   github: "https://github.com/hnpf",
   discord: "https://discord.gg/TSZNYbjzF7",
-  source: "https://github.com/hnpf/virex.lol",
-  rss: "https://virex.lol/rss.xml",
+  source: "https://github.com/hnpf/stabbed.wtf",
+  rss: "https://stabbed.wtf/rss.xml",
   bandcamp: "https://rxvirex.bandcamp.com"
 };
 

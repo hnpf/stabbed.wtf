@@ -134,7 +134,7 @@ export async function onRequest(context) {
     const notFoundText = [
       '',
       `  ${C.pink}404 Not Found: "${pathname}"${C.reset}`,
-      `  ${C.gray}Type${C.reset} ${C.green}curl virex.lol/help${C.reset} ${C.gray}to see all available terminal endpoints.${C.reset}`,
+      `  ${C.gray}Type${C.reset} ${C.green}curl stabbed.wtf/help${C.reset} ${C.gray}to see all available terminal endpoints.${C.reset}`,
       '',
     ].join('\n');
 

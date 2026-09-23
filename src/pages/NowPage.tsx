@@ -90,7 +90,7 @@ export const NowPage = memo(() => {
                 </li>
                 <li className="flex gap-2.5 sm:gap-3 text-sm sm:text-[17px] opacity-80 leading-relaxed group/tip">
                   <ListIcon size={16} fill className="text-[var(--primary)] mt-1 shrink-0 group-hover/tip:translate-x-1 transition-transform duration-200" />
-                  Frequently updating and reworking virex.lol for the best user experience i can possibly make
+                  Frequently updating and reworking stabbed.wtf for the best user experience i can possibly make
                 </li>
               </ul>
             </div>

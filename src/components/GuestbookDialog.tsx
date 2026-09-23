@@ -444,8 +444,8 @@ export const GuestbookDialog = ({
                           const shareUrl = `${window.location.origin}/guestbook`;
                           if (navigator.share) {
                             navigator.share({
-                              title: "virex.lol guestbook",
-                              text: "Sign the virex.lol guestbook!",
+                              title: "stabbed.wtf guestbook",
+                              text: "Sign the stabbed.wtf guestbook!",
                               url: shareUrl
                             }).catch(() => {});
                           } else {

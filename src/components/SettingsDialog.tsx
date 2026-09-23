@@ -1346,7 +1346,7 @@ export const SettingsDialog = memo(({
                   </span>
                   <span className="min-w-0 flex-1">
                     <span className="block text-[13px] font-bold">Choose a backup file</span>
-                    <span className="block truncate text-[11px] font-medium opacity-60">JSON backup exported from virex.lol</span>
+                    <span className="block truncate text-[11px] font-medium opacity-60">JSON backup exported from stabbed.wtf</span>
                   </span>
                   <ChevronRight size={20} className="opacity-55 transition-transform group-hover:translate-x-0.5" />
                   <input
@@ -1440,7 +1440,7 @@ export const SettingsDialog = memo(({
                   <div>
                     <div className="font-bold text-[15px]">Report a bug</div>
                     <div className="text-xs opacity-60 font-medium">
-                      Help us make virex.lol better by reporting issues
+                      Help us make stabbed.wtf better by reporting issues
                     </div>
                   </div>
                   <ChevronRight

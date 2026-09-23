@@ -1,0 +1,8 @@
+name = "stabbed-wtf"
+compatibility_date = "2026-09-23"
+pages_build_output_dir = "."
+
+[[d1_databases]]
+binding = "DB"
+database_name = "virex-db"
+database_id = "8c81aaa7-45b5-496f-a08d-d1d2a667b09b"

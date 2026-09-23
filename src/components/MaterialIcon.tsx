@@ -10,7 +10,7 @@ type MaterialIconProps = Omit<HTMLAttributes<HTMLSpanElement>, "children"> & {
   opsz?: number;
 };
 
-/** official material symbols rounded, tweaked for virex.lol! */
+/** official material symbols rounded, tweaked for stabbed.wtf! */
 export function MaterialIcon({
   name,
   size = 24,

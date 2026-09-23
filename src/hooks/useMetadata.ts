@@ -34,8 +34,8 @@ export const useMetadata = (page: string, blogPostId: string | null, isApr: bool
         : page === "music" && musicReleaseId
           ? `rxvirex | ${MUSIC_RELEASES.find((r) => r.id.toLowerCase() === musicReleaseId.toLowerCase())?.title || musicReleaseId}`
           : page === "home"
-            ? "Virex | Portfolio"
-            : `Virex | ${name}`;
+            ? "Stabbed.wtf | Portfolio"
+            : `Stabbed.wtf | ${name}`;
     document.title = title;
 
     let desc =
@@ -43,15 +43,15 @@ export const useMetadata = (page: string, blogPostId: string | null, isApr: bool
         ? "virex portfolio: an independent software developer and systems researcher showcasing projects, UI/UX, security research, and photography."
         : "virex software researcher and problem solver, who explores systems and programming, UI/UX, and security research.";
     let og_title = title;
-    let og_img = "https://virex.lol/photography/pfp/main.png";
+    let og_img = "https://stabbed.wtf/photography/pfp/main.png";
     const pageUrl =
       page === "home"
-        ? "https://virex.lol"
+        ? "https://stabbed.wtf"
         : page === "blog" && blogPostId
-        ? `https://virex.lol/blog/${blogPostId}`
+        ? `https://stabbed.wtf/blog/${blogPostId}`
         : page === "music" && musicReleaseId
-        ? `https://virex.lol/music?release=${encodeURIComponent(musicReleaseId)}`
-        : `https://virex.lol/${page}`;
+        ? `https://stabbed.wtf/music?release=${encodeURIComponent(musicReleaseId)}`
+        : `https://stabbed.wtf/${page}`;
     const og_type = page === "blog" && blogPostId ? "article" : "website";
 
     if (page === "blog" && blogPostId) {
@@ -71,8 +71,8 @@ export const useMetadata = (page: string, blogPostId: string | null, isApr: bool
         og_title = `Virex Music | ${r.title}`;
         // prefer explicit coverUrl, then check common extensions. .webp first for perf
         og_img = r.coverUrl
-          ? `https://virex.lol${r.coverUrl.startsWith('/') ? '' : '/'}${r.coverUrl}`
-          : `https://virex.lol/albums/${r.id}.png`;
+          ? `https://stabbed.wtf${r.coverUrl.startsWith('/') ? '' : '/'}${r.coverUrl}`
+          : `https://stabbed.wtf/albums/${r.id}.png`;
       }
     } else if (page === "readme") {
       desc =
@@ -127,7 +127,7 @@ export const useMetadata = (page: string, blogPostId: string | null, isApr: bool
       "@context": "https://schema.org",
       "@type": "WebSite",
       name: "Virex",
-      url: "https://virex.lol",
+      url: "https://stabbed.wtf",
       author: {
         "@type": "Person",
         name: "virex",

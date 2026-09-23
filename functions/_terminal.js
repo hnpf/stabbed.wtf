@@ -65,10 +65,10 @@ export function renderBanner() {
   ];
 
   const sideInfo = [
-    `     ${C.bold}${C.cream}virex.lol${C.reset}`,
+    `     ${C.bold}${C.cream}stabbed.wtf${C.reset}`,
     `     ${C.gray}"code can be used as a form of protest :)"${C.reset}`,
-    `     ${C.cyan}https://virex.lol${C.reset}`,
-    `     ${C.border}src: ${C.cyan}https://github.com/hnpf/virex.lol${C.reset}`,
+    `     ${C.cyan}https://stabbed.wtf${C.reset}`,
+    `     ${C.border}src: ${C.cyan}https://github.com/hnpf/stabbed.wtf${C.reset}`,
     ``,
     ``,
   ];
@@ -78,7 +78,7 @@ export function renderBanner() {
 
 export function renderHome() {
   const latestPost = BLOG_POSTS[0] || {
-    title: 'hello, from virex.lol!',
+    title: 'hello, from stabbed.wtf!',
     date: '2026',
     snippet: 'thoughts on code, recent events, etc..',
     link: 'welcome',
@@ -91,7 +91,7 @@ export function renderHome() {
     ` ${C.border}─────────────────────────────────────────────────────────────────────────────${C.reset}`,
     `   ${C.purple}${latestPost.date}${C.reset}  ${C.bold}${C.yellow}${latestPost.title}${C.reset}`,
     `   ${C.gray}"${latestPost.snippet.slice(0, 72)}..."${C.reset}`,
-    `   ${C.cyan}https://virex.lol/blog/${latestPost.link || latestPost.id}${C.reset}`,
+    `   ${C.cyan}https://stabbed.wtf/blog/${latestPost.link || latestPost.id}${C.reset}`,
   ].join('\n');
 
   // about (left)
@@ -107,10 +107,10 @@ export function renderHome() {
   const socials = [
     { label: 'GitHub', val: 'https://github.com/hnpf' },
     { label: 'Discord', val: 'https://discord.gg/TSZNYbjzF7' },
-    { label: 'Site', val: 'https://virex.lol' },
+    { label: 'Site', val: 'https://stabbed.wtf' },
     { label: 'Bandcamp', val: 'https://rxvirex.bandcamp.com' },
-    { label: 'RSS feed', val: 'https://virex.lol/rss.xml' },
-    { label: 'Guestbook', val: 'https://virex.lol/guestbook' },
+    { label: 'RSS feed', val: 'https://stabbed.wtf/rss.xml' },
+    { label: 'Guestbook', val: 'https://stabbed.wtf/guestbook' },
   ];
 
   const leftWidth = 28;
@@ -140,12 +140,12 @@ export function renderHome() {
 
   const legend = [
     `  ${C.cream}Legend${C.reset}`,
-    `  ${C.green}$ curl${C.reset} ${C.cream}virex.lol${C.reset}             ${C.gray}# get this card${C.reset}`,
-    `  ${C.green}$ curl${C.reset} ${C.cream}virex.lol/help${C.reset}        ${C.gray}# list all available endpoints${C.reset}`,
-    `  ${C.green}$ curl${C.reset} ${C.cream}virex.lol/blog${C.reset}        ${C.gray}# read recent blog posts${C.reset}`,
-    `  ${C.green}$ curl${C.reset} ${C.cream}virex.lol/projects${C.reset}    ${C.gray}# check out my open source projects${C.reset}`,
-    `  ${C.green}$ curl${C.reset} ${C.cream}virex.lol/music${C.reset}       ${C.gray}# music releases & discography${C.reset}`,
-    `  ${C.green}$ curl${C.reset} ${C.cream}virex.lol/now-playing${C.reset} ${C.gray}# live last.fm track scrobble${C.reset}`,
+    `  ${C.green}$ curl${C.reset} ${C.cream}stabbed.wtf${C.reset}             ${C.gray}# get this card${C.reset}`,
+    `  ${C.green}$ curl${C.reset} ${C.cream}stabbed.wtf/help${C.reset}        ${C.gray}# list all available endpoints${C.reset}`,
+    `  ${C.green}$ curl${C.reset} ${C.cream}stabbed.wtf/blog${C.reset}        ${C.gray}# read recent blog posts${C.reset}`,
+    `  ${C.green}$ curl${C.reset} ${C.cream}stabbed.wtf/projects${C.reset}    ${C.gray}# check out my open source projects${C.reset}`,
+    `  ${C.green}$ curl${C.reset} ${C.cream}stabbed.wtf/music${C.reset}       ${C.gray}# music releases & discography${C.reset}`,
+    `  ${C.green}$ curl${C.reset} ${C.cream}stabbed.wtf/now-playing${C.reset} ${C.gray}# live last.fm track scrobble${C.reset}`,
   ].join('\n');
 
   return [
@@ -171,29 +171,29 @@ export function renderHelp() {
     banner,
     '',
     `  ${C.bold}${C.cream}legend & navigation${C.reset}`,
-    `  ${C.green}$ curl${C.reset} ${C.cream}virex.lol${C.reset}                 ${C.gray}# main overview card${C.reset}`,
-    `  ${C.green}$ curl${C.reset} ${C.cream}virex.lol/help${C.reset}            ${C.gray}# full list of available endpoints (this menu)${C.reset}`,
-    `  ${C.green}$ curl${C.reset} ${C.cream}virex.lol/about${C.reset}           ${C.gray}# bio & philosophy${C.reset}`,
-    `  ${C.green}$ curl${C.reset} ${C.cream}virex.lol/socials${C.reset}         ${C.gray}# direct links to all socials & channels${C.reset}`,
+    `  ${C.green}$ curl${C.reset} ${C.cream}stabbed.wtf${C.reset}                 ${C.gray}# main overview card${C.reset}`,
+    `  ${C.green}$ curl${C.reset} ${C.cream}stabbed.wtf/help${C.reset}            ${C.gray}# full list of available endpoints (this menu)${C.reset}`,
+    `  ${C.green}$ curl${C.reset} ${C.cream}stabbed.wtf/about${C.reset}           ${C.gray}# bio & philosophy${C.reset}`,
+    `  ${C.green}$ curl${C.reset} ${C.cream}stabbed.wtf/socials${C.reset}         ${C.gray}# direct links to all socials & channels${C.reset}`,
     '',
     `  ${C.bold}${C.cream}Content & Posts${C.reset}`,
-    `  ${C.green}$ curl${C.reset} ${C.cream}virex.lol/blog${C.reset}            ${C.gray}# list all published blog articles${C.reset}`,
-    `  ${C.green}$ curl${C.reset} ${C.cream}virex.lol/blog/<slug>${C.reset}     ${C.gray}# read full article in terminal markdown${C.reset}`,
-    `  ${C.green}$ curl${C.reset} ${C.cream}virex.lol/projects${C.reset}        ${C.gray}# browse open source software & repositories${C.reset}`,
-    `  ${C.green}$ curl${C.reset} ${C.cream}virex.lol/music${C.reset}           ${C.gray}# discography (HATEWARE, FIRST ATTEMPT)${C.reset}`,
-    `  ${C.green}$ curl${C.reset} ${C.cream}virex.lol/now-playing${C.reset}     ${C.gray}# live Last.fm scrobble & track status${C.reset}`,
+    `  ${C.green}$ curl${C.reset} ${C.cream}stabbed.wtf/blog${C.reset}            ${C.gray}# list all published blog articles${C.reset}`,
+    `  ${C.green}$ curl${C.reset} ${C.cream}stabbed.wtf/blog/<slug>${C.reset}     ${C.gray}# read full article in terminal markdown${C.reset}`,
+    `  ${C.green}$ curl${C.reset} ${C.cream}stabbed.wtf/projects${C.reset}        ${C.gray}# browse open source software & repositories${C.reset}`,
+    `  ${C.green}$ curl${C.reset} ${C.cream}stabbed.wtf/music${C.reset}           ${C.gray}# discography (HATEWARE, FIRST ATTEMPT)${C.reset}`,
+    `  ${C.green}$ curl${C.reset} ${C.cream}stabbed.wtf/now-playing${C.reset}     ${C.gray}# live Last.fm scrobble & track status${C.reset}`,
     '',
     `  ${C.bold}${C.cream}Interactive & Guestbook${C.reset}`,
-    `  ${C.green}$ curl${C.reset} ${C.cream}virex.lol/guestbook${C.reset}       ${C.gray}# read recent guestbook entries${C.reset}`,
-    `  ${C.green}$ curl${C.reset} ${C.cream}-X POST virex.lol/api/guestbook \\${C.reset}`,
+    `  ${C.green}$ curl${C.reset} ${C.cream}stabbed.wtf/guestbook${C.reset}       ${C.gray}# read recent guestbook entries${C.reset}`,
+    `  ${C.green}$ curl${C.reset} ${C.cream}-X POST stabbed.wtf/api/guestbook \\${C.reset}`,
     `       ${C.green}-H "Content-Type: application/json" \\${C.reset}`,
     `       ${C.green}-d '{"name":"you","message":"hello!"}'${C.reset}  ${C.gray}# sign the guestbook from terminal!!${C.reset}`,
     '',
     `  ${C.bold}${C.cream}Utilities & Extras${C.reset}`,
-    `  ${C.green}$ curl${C.reset} ${C.cream}virex.lol/ping${C.reset}            ${C.gray}# health check (returns pong)${C.reset}`,
-    `  ${C.green}$ curl${C.reset} ${C.cream}[-46] virex.lol/ip${C.reset}        ${C.gray}# get public IP address${C.reset}`,
-    `  ${C.green}$ curl${C.reset} ${C.cream}virex.lol/json${C.reset}            ${C.gray}# profile, posts, & projects JSON${C.reset}`,
-    `  ${C.green}$ curl${C.reset} ${C.cream}virex.lol/fsh${C.reset}             ${C.gray}# fih (dont find out for the love of god)${C.reset}`,
+    `  ${C.green}$ curl${C.reset} ${C.cream}stabbed.wtf/ping${C.reset}            ${C.gray}# health check (returns pong)${C.reset}`,
+    `  ${C.green}$ curl${C.reset} ${C.cream}[-46] stabbed.wtf/ip${C.reset}        ${C.gray}# get public IP address${C.reset}`,
+    `  ${C.green}$ curl${C.reset} ${C.cream}stabbed.wtf/json${C.reset}            ${C.gray}# profile, posts, & projects JSON${C.reset}`,
+    `  ${C.green}$ curl${C.reset} ${C.cream}stabbed.wtf/fsh${C.reset}             ${C.gray}# fih (dont find out for the love of god)${C.reset}`,
     '',
   ].join('\n');
 }
@@ -203,7 +203,7 @@ export function renderBlogList() {
     '',
     `  ${C.bold}${C.purple}VIREX BLOG POSTS${C.reset}  ${C.gray}(${BLOG_POSTS.length} posts published)${C.reset}`,
     ` ${C.border}─────────────────────────────────────────────────────────────────────────────${C.reset}`,
-    `  ${C.gray}Read any post with:${C.reset} ${C.green}curl virex.lol/blog/<slug>${C.reset}`,
+    `  ${C.gray}Read any post with:${C.reset} ${C.green}curl stabbed.wtf/blog/<slug>${C.reset}`,
     '',
   ];
 
@@ -213,7 +213,7 @@ export function renderBlogList() {
     const read = post.readTime ? `(${post.readTime})` : '';
     return [
       `  ${C.purple}${post.date}${C.reset}  ${C.bold}${C.yellow}${post.title}${C.reset}  ${C.pink}${cat}${C.reset} ${C.gray}${read}${C.reset}`,
-      `  ${C.border}↳${C.reset} ${C.cyan}curl virex.lol/blog/${slug}${C.reset}`,
+      `  ${C.border}↳${C.reset} ${C.cyan}curl stabbed.wtf/blog/${slug}${C.reset}`,
       `    ${C.gray}"${post.snippet}"${C.reset}`,
       '',
     ].join('\n');
@@ -317,7 +317,7 @@ export function renderBlogPost(slug) {
     return [
       '',
       `  ${C.pink}Error: Post "${slug}" not found!${C.reset}`,
-      `  ${C.gray}Type${C.reset} ${C.green}curl virex.lol/blog${C.reset} ${C.gray}to see all available posts.${C.reset}`,
+      `  ${C.gray}Type${C.reset} ${C.green}curl stabbed.wtf/blog${C.reset} ${C.gray}to see all available posts.${C.reset}`,
       '',
     ].join('\n');
   }
@@ -326,7 +326,7 @@ export function renderBlogPost(slug) {
     '',
     `  ${C.bold}${C.yellow}${post.title}${C.reset}`,
     `  ${C.purple}${post.date}${C.reset}  ${C.pink}[${post.category || 'general'}]${C.reset}  ${C.gray}${post.readTime || ''}${C.reset}`,
-    `  ${C.cyan}https://virex.lol/blog/${post.link || post.id}${C.reset}`,
+    `  ${C.cyan}https://stabbed.wtf/blog/${post.link || post.id}${C.reset}`,
     ` ${C.border}═════════════════════════════════════════════════════════════════════════════${C.reset}`,
     '',
   ].join('\n');
@@ -335,7 +335,7 @@ export function renderBlogPost(slug) {
   const footer = [
     '',
     ` ${C.border}─────────────────────────────────────────────────────────────────────────────${C.reset}`,
-    `  ${C.gray}Back to post list:${C.reset} ${C.green}curl virex.lol/blog${C.reset}  ${C.border}•${C.reset}  ${C.gray}Home:${C.reset} ${C.green}curl virex.lol${C.reset}`,
+    `  ${C.gray}Back to post list:${C.reset} ${C.green}curl stabbed.wtf/blog${C.reset}  ${C.border}•${C.reset}  ${C.gray}Home:${C.reset} ${C.green}curl stabbed.wtf${C.reset}`,
     '',
   ].join('\n');
 
@@ -469,7 +469,7 @@ export function renderAbout() {
     '',
     renderBanner(),
     '',
-    `  ${C.bold}${C.cream}About virex.lol${C.reset}`,
+    `  ${C.bold}${C.cream}About stabbed.wtf${C.reset}`,
     ` ${C.border}─────────────────────────────────────────────────────────────────────────────${C.reset}`,
     `  ${C.white}${PROFILE.bio}${C.reset}`,
     '',
@@ -482,7 +482,7 @@ export function renderAbout() {
     `  ${C.cream}• Music prod and my flavors:${C.reset} ${C.gray}Rage, Trap, Noise, DSBM${C.reset}`,
     `  ${C.cream}• Cybersec:${C.reset} ${C.gray}Honeypots, malware inspection, reverse engineering, data sovereignty & offline preservation, if that even counts.${C.reset}`,
     '',
-    `  ${C.peach}Socials:${C.reset} ${C.cyan}curl virex.lol/socials${C.reset}  ${C.border}•${C.reset}  ${C.peach}Help:${C.reset} ${C.cyan}curl virex.lol/help${C.reset}`,
+    `  ${C.peach}Socials:${C.reset} ${C.cyan}curl stabbed.wtf/socials${C.reset}  ${C.border}•${C.reset}  ${C.peach}Help:${C.reset} ${C.cyan}curl stabbed.wtf/help${C.reset}`,
     '',
   ].join('\n');
 }

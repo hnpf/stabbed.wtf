@@ -1,75 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://virex.lol/</loc>
+    <loc>https://stabbed.wtf/</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://virex.lol/blog</loc>
+    <loc>https://stabbed.wtf/blog</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://virex.lol/lens</loc>
+    <loc>https://stabbed.wtf/lens</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://virex.lol/now</loc>
+    <loc>https://stabbed.wtf/now</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://virex.lol/readme</loc>
+    <loc>https://stabbed.wtf/readme</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://virex.lol/changelog</loc>
+    <loc>https://stabbed.wtf/changelog</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://virex.lol/blog/leaving-vercel</loc>
+    <loc>https://stabbed.wtf/blog/leaving-vercel</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://virex.lol/blog/data-sovereignty</loc>
+    <loc>https://stabbed.wtf/blog/data-sovereignty</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://virex.lol/blog/bladeandbathpeak</loc>
+    <loc>https://stabbed.wtf/blog/bladeandbathpeak</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://virex.lol/blog/ewaste-supremacy</loc>
+    <loc>https://stabbed.wtf/blog/ewaste-supremacy</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://virex.lol/blog/ewaste-1-fr</loc>
+    <loc>https://stabbed.wtf/blog/ewaste-1-fr</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://virex.lol/blog/sysdupd</loc>
+    <loc>https://stabbed.wtf/blog/sysdupd</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://virex.lol/blog/pixel-10-review</loc>
+    <loc>https://stabbed.wtf/blog/pixel-10-review</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://virex.lol/blog/cloud-is-someone-elses-computer</loc>
+    <loc>https://stabbed.wtf/blog/cloud-is-someone-elses-computer</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://virex.lol/blog/why-i-actually-use-arch</loc>
+    <loc>https://stabbed.wtf/blog/why-i-actually-use-arch</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://virex.lol/blog/the-internet-is-dead</loc>
+    <loc>https://stabbed.wtf/blog/the-internet-is-dead</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://virex.lol/blog/epstein-files-is-a-joke</loc>
+    <loc>https://stabbed.wtf/blog/epstein-files-is-a-joke</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://virex.lol/blog/why-love-open-source</loc>
+    <loc>https://stabbed.wtf/blog/why-love-open-source</loc>
     <priority>0.8</priority>
   </url>
 </urlset>

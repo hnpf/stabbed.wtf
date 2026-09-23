@@ -147,7 +147,7 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
             innerClassName={cn("px-6 py-8 md:p-12 bg-[var(--surface-variant)]/60 rounded-[3.5rem] border-6 border-[var(--outline-variant)]/40 relative overflow-hidden group transition-colors duration-200", glass_class)}
           >
             <h3 className="text-2xl md:text-4xl font-display font-black mb-8 md:mb-10 tracking-tight transition-colors group-hover:text-[var(--primary)] flex items-center gap-3 italic">
-              <History className="text-[var(--primary)] w-6 h-6 md:w-8 md:h-8" /> Virex.lol backstory...
+              <History className="text-[var(--primary)] w-6 h-6 md:w-8 md:h-8" /> stabbed.wtf backstory...
             </h3>
             <div className="space-y-6 text-[15px] md:text-xl opacity-80 leading-relaxed font-medium">
               <p>
@@ -160,7 +160,7 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
                 so, I skipped the easy stuff and went straight to <span className="text-[var(--primary)] font-black">C and Visual Studio</span>. from there, I moved into <span className="text-[var(--primary)] font-black">rust</span>, and eventually found my way to web development and <span className="text-[var(--primary)] font-black">UI design</span>.
               </p>
               <p>
-              that's when virex.lol became my focus. it started as a basic light/dark material 3 test in <span className="text-[var(--primary)] font-black">HTML/CSS</span>, went through a neobrutalist phase, stripped back into a colorful adwaita-inspired theme and finally experimented with <span className="text-[var(--primary)] font-black">react</span>, and that's when I landed on the material 3 expressive style you're looking at right now.
+              that's when stabbed.wtf became my focus. it started as a basic light/dark material 3 test in <span className="text-[var(--primary)] font-black">HTML/CSS</span>, went through a neobrutalist phase, stripped back into a colorful adwaita-inspired theme and finally experimented with <span className="text-[var(--primary)] font-black">react</span>, and that's when I landed on the material 3 expressive style you're looking at right now.
               </p>
             </div>
             <div className="absolute -right-8 -bottom-8 opacity-[0.03] group-hover:scale-110 group-hover:opacity-[0.05] transition-all duration-700">

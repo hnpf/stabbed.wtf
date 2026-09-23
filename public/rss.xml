@@ -2,13 +2,58 @@
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
 <channel>
   <title>Virex Log</title>
-  <link>https://virex.lol/blog</link>
+  <link>https://stabbed.wtf/blog</link>
   <description>Research, development, and systems exploration by Virex.</description>
   <language>en-us</language>
-  <lastBuildDate>Sun, 20 Sep 2026 20:58:57 GMT</lastBuildDate>
+  <lastBuildDate>Wed, 23 Sep 2026 21:14:01 GMT</lastBuildDate>
     <item>
+    <title>THE INTERNET IS MAKING ME ODDLY GOOD AT KNOWING RANDOM USELESS THINGS</title>
+    <link>https://stabbed.wtf/blog/internet-useless-info</link>
+    <description><![CDATA[how random yt videos and bullshit geography studying can quite literally build a highway of hyper specific trivia]]></description>
+    <content:encoded><![CDATA[<h1>ACCIDENTALLY MASTERING USELESS TRIVIA (yo omfg)</h1>
+<p>yeah nobody SETS OUT to learn the difference between init unit types or how to ID a country by a cropped version of its flag. why does this even happen?! you'd simply open one tab for a definition for god knows WHAT and boom its like 2 am and you know too fucking much about mid-20th century proxy wars and why C lets you shoot yourself in the foot. lmao. lmaooo</p>
+<p>alsoo, modern internet doesnt even give you any true education. at BEST it gives you random hyperspecific facts and just no context attached.</p>
+<h2>the result??</h2>
+<p>your memory now contains..</p>
+<ul>
+<li><strong>geography &#x26; flags, obviously:</strong> you can tell two nearly identical flags apart at a glance, like romania and chad (WHICH I DO KNOW THE DIFFERENCE, chad is slighty darker or even indonesia/monaco.. and monaco is slightly shorter. don't ask). why. WHO CARES. seterra did this to meee 💔</li>
+<li><strong>tech &#x26; linux:</strong> dumb bash commands which can prolly fix a bug exactly 3 other people have EVER had. one of them being me. i didnt learn anything from it btw.</li>
+<li><strong>random history &#x26; security:</strong> proxy conflicts, writeups, threat actors. i could NOT tell you my own schedule tomorrow but damn, ask me about a 2014 cve and i will SPIT</li>
+</ul>
+<h2>is it REALLY useless tho?? (yes. but also no. but mostly yes..)</h2>
+<table>
+<thead>
+<tr>
+<th>category</th>
+<th>value in practice</th>
+<th>trivial value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>geography</td>
+<td>uhh.. finding the store/?</td>
+<td>knowing which side of the road cars drive on in some countries i'll never visit</td>
+</tr>
+<tr>
+<td>tech</td>
+<td>basic troubleshooting</td>
+<td>this one's useful. until it's rewriting shell configs for 4 HOURS instead of sleeping</td>
+</tr>
+<tr>
+<td>history</td>
+<td>general awareness idfk</td>
+<td>knowing that ancient romans used stale urine as mouthwash because the high amounts of ammonia actually helped is very useful!</td>
+</tr>
+</tbody>
+</table>
+<p>anyway. none of this was planned. not even on tests. nobody paying me for it. buuut i can talk for MINUTES straight about the most weird topic imaginable...</p>]]></content:encoded>
+    <pubDate>Sun, 20 Sep 2026 05:00:00 GMT</pubDate>
+  </item>
+
+  <item>
     <title>2slimey changed the way I listen to music.</title>
-    <link>https://virex.lol/blog/2slimey-changed-how-i-listen</link>
+    <link>https://stabbed.wtf/blog/2slimey-changed-how-i-listen</link>
     <description><![CDATA[Yes, a genuine opinion of mine. If this title made you roll your eyes, you are exactly who this is for! :)]]></description>
     <content:encoded><![CDATA[<h1>2slimey changed the way I listen to music.</h1>
 <p>i know, i know. "the shrimp guy?"</p>
@@ -46,7 +91,7 @@
 
   <item>
     <title>even more history! part 2 of restoring the early blogs</title>
-    <link>https://virex.lol/blog/more-old-blogs-restored</link>
+    <link>https://stabbed.wtf/blog/more-old-blogs-restored</link>
     <description><![CDATA[restored a few more gems from the early 2026 snapshots, including some of my favorite rants and the revamped markdown stress test.]]></description>
     <content:encoded><![CDATA[<h1>even more history! part 2 of restoring the early blogs</h1>
 <p>i'm on a roll again! after digging up the 2025 posts, i decided to go a bit further and bring back some of the early 2026 archives that i missed as well. these are from a time when the site's style and identity was really starting to solidify around the current aesthetic, but was still before this style.</p>
@@ -68,7 +113,7 @@
 
   <item>
     <title>markdown stress test, testing the parser</title>
-    <link>https://virex.lol/blog/markdown-test</link>
+    <link>https://stabbed.wtf/blog/markdown-test</link>
     <description><![CDATA[checking if the new react-markdown setup can handle me.]]></description>
     <content:encoded><![CDATA[<h1>header 1 looks like this</h1>
 <h2>and header 2 looks like this</h2>
@@ -158,7 +203,7 @@ const greet = (user: User) => {
 <hr>
 <h2>horizontal rule above</h2>
 <h3>testing inline styles</h3>
-<p>this is <code>inline code</code>, this is <strong>bold</strong>, this is <em>italic</em>, and this is <a href="https://virex.lol">a link</a>.</p>
+<p>this is <code>inline code</code>, this is <strong>bold</strong>, this is <em>italic</em>, and this is <a href="https://stabbed.wtf">a link</a>.</p>
 <h3>testing images</h3>
 <p><img src="https://raw.githubusercontent.com/hnpf/nekofetch/refs/heads/main/screenshot.png" alt="nekofetch official screenshot"></p>
 <p>ok thats it bye</p>]]></content:encoded>
@@ -167,7 +212,7 @@ const greet = (user: User) => {
 
   <item>
     <title>stop making it easy to pwn you</title>
-    <link>https://virex.lol/blog/cybersec-101</link>
+    <link>https://stabbed.wtf/blog/cybersec-101</link>
     <description><![CDATA[the absolute bare minimum to not get wiped out online.]]></description>
     <content:encoded><![CDATA[<p>the internet is hostile, mostly because corporations treat your data like public property and security is treated as an afterthought. you don't need a degree to protect yourself, you just need to stop doing the dumbest things.</p>
 <h2>credentials are broken by design</h2>
@@ -222,10 +267,10 @@ const greet = (user: User) => {
 
   <item>
     <title>the old blogs are back. all of them.</title>
-    <link>https://virex.lol/blog/return-of-the-old-blogs</link>
-    <description><![CDATA[i dug up every old post from the old virex.lol, going all the way back to the very beginning of the "project inception". they're all here again now, preserved exactly as they were back when i wrote them.]]></description>
+    <link>https://stabbed.wtf/blog/return-of-the-old-blogs</link>
+    <description><![CDATA[i dug up every old post from the old stabbed.wtf, going all the way back to the very beginning of the "project inception". they're all here again now, preserved exactly as they were back when i wrote them.]]></description>
     <content:encoded><![CDATA[<h1>the old blogs are back. all 14 of them.</h1>
-<p>soooo, i was poking around some old snapshots of virex.lol recently, and found a bunch of my old blog posts sitting there! completely forgotten! some of them are from the very first version of this site, back when i was just figuring things out and writing about whatever.</p>
+<p>soooo, i was poking around some old snapshots of stabbed.wtf recently, and found a bunch of my old blog posts sitting there! completely forgotten! some of them are from the very first version of this site, back when i was just figuring things out and writing about whatever.</p>
 <p>i could have left them buried. but i felt way different, they're more of a part of this project's history, and i think that's now worth keeping to the public, as well.</p>
 <h2>what's back?</h2>
 <p>everything from <strong>june 2025</strong> through <strong>november 2025</strong> is now restored and live in the blog feed. that also includes some of these titles:</p>
@@ -245,7 +290,7 @@ const greet = (user: User) => {
 
   <item>
     <title>stop moving my screen! this is why modern web design is a motion sickness hazard...</title>
-    <link>https://virex.lol/blog/stop-moving-my-screen</link>
+    <link>https://stabbed.wtf/blog/stop-moving-my-screen</link>
     <description><![CDATA[let's talk about how modern web designers went insane with motion, and why i finally finished my global toggle to turn off the damned thing!]]></description>
     <content:encoded><![CDATA[<h1>stop moving my screen! this is why modern web design is a motion sickness hazard...</h1>
 <p>hi there! if you've browsed the modern web lately, you probably know what i'm talking about.. you open a site, and before you can even read a single thing, three different animations fade in, the background rotates on a 3d tilt axis, and the header does a double twist thing with weird animations!</p>
@@ -266,10 +311,10 @@ const greet = (user: User) => {
 
   <item>
     <title>leaving vercel; migrating my project to cloudflare!</title>
-    <link>https://virex.lol/blog/leaving-vercel</link>
+    <link>https://stabbed.wtf/blog/leaving-vercel</link>
     <description><![CDATA[here is why i finally dropped vercel's proprietary ecosystem, swapped to cloudflare pages, and built my own localized deployment helper.]]></description>
     <content:encoded><![CDATA[<h1>leaving vercel; migrating my project to cloudflare</h1>
-<p>hi! after dealing with constant config headaches and growing distrust over vercel's hosting infrastructure, i finally did it. <strong>virex.lol is officially 100% free from vercel.</strong> i migrated the entire site infrastructure over to <strong>cloudflare pages</strong>, and i'll be honest, it is a flex!.</p>
+<p>hi! after dealing with constant config headaches and growing distrust over vercel's hosting infrastructure, i finally did it. <strong>stabbed.wtf is officially 100% free from vercel.</strong> i migrated the entire site infrastructure over to <strong>cloudflare pages</strong>, and i'll be honest, it is a flex!.</p>
 <h2>why did i dump vercel?</h2>
 <p>vercel is great for getting a basic site up in two clicks, but they love vendor lock-in. their serverless wrappers are entirely proprietary, configuring non-standard routes is a nightmare, and quite frankly, the bandwidth billing traps are terrifying. i don't want dumb corpo constraints on my own stuff.</p>
 <h2>entering cloudflare pages</h2>
@@ -320,7 +365,7 @@ it compiles via vite, verifies the build outputs, maps the custom apex domain re
 
   <item>
     <title>Why i refuse to trust the majority of the cloud..</title>
-    <link>https://virex.lol/blog/data-sovereignty</link>
+    <link>https://stabbed.wtf/blog/data-sovereignty</link>
     <description><![CDATA[Hoarding data is a radical act of self-preservation in a world of corporate greed tech giants.]]></description>
     <content:encoded><![CDATA[<p>I'll just get straight to it.. EVERYTHING is a subscription now. You don't own your games, you don't own your music, and you definitely don't own your OS environment if you're stuck on Windows or such. They want you to rent your life until you die.</p>
 <h3>Again, this is why i hoard!</h3>
@@ -341,7 +386,7 @@ it compiles via vite, verifies the build outputs, maps the custom apex domain re
 
   <item>
     <title>brutal fantasies is literally the peak of human existence</title>
-    <link>https://virex.lol/blog/bladeandbathpeak</link>
+    <link>https://stabbed.wtf/blog/bladeandbathpeak</link>
     <description><![CDATA[ok.. i'm coming back from the dead again to talk about the only album that matters right now, and i know its late talking about it. sorry not sorry.]]></description>
     <content:encoded><![CDATA[<h2>why im back (again)</h2>
 <p>it has been almost a week since i last posted but i literally dont care because i took like a month long break before that so i have energy again. the urge called and i answered with a blog post :)</p>
@@ -392,7 +437,7 @@ it compiles via vite, verifies the build outputs, maps the custom apex domain re
 
   <item>
     <title>ricing supremacy and why ricing makes you an actually better dev</title>
-    <link>https://virex.lol/blog/ewaste-supremacy</link>
+    <link>https://stabbed.wtf/blog/ewaste-supremacy</link>
     <description><![CDATA[PLEASE stop staring at ugly default themes. your environment is a reflection of your work.]]></description>
     <content:encoded><![CDATA[<h1>aesthetic is actual efficiency (dont @ me!)</h1>
 <p>if you're still on any default terminal theme, i'm praying for you. making things look good isn't just a "ricer on reddit" thing but more about building a comfortable space where you actually <em>want</em> to suffer through merge conflicts!</p>
@@ -408,7 +453,7 @@ it compiles via vite, verifies the build outputs, maps the custom apex domain re
 
   <item>
     <title>turning ewaste into a small dev rig</title>
-    <link>https://virex.lol/blog/ewaste-1-fr</link>
+    <link>https://stabbed.wtf/blog/ewaste-1-fr</link>
     <description><![CDATA[this is why I decided to torture myself by putting debian on a snappy chromebook and how it actually kinda works!]]></description>
     <content:encoded><![CDATA[<h2>why do i do this to myself?</h2>
 <p>honestly, there is something so satisfying about taking a "dead" chromebook and making it run a real OS. my old hp x360 (aka snappy) was basically a paperweight, but now it's a dedicated debian 13 box.</p>
@@ -428,7 +473,7 @@ it compiles via vite, verifies the build outputs, maps the custom apex domain re
 
   <item>
     <title>mobile magic &amp; hardware redesign</title>
-    <link>https://virex.lol/blog/more-hardware-updates-feb-2026</link>
+    <link>https://stabbed.wtf/blog/more-hardware-updates-feb-2026</link>
     <description><![CDATA[the new mobile "more" menu and the revamped hardware section.]]></description>
     <content:encoded><![CDATA[<h1>touching up the mobile experience</h1>
 <p>wrapped up some updates that make navigating the site smoother, especially on mobile, and gave some love to the hardware display.</p>
@@ -452,7 +497,7 @@ it compiles via vite, verifies the build outputs, maps the custom apex domain re
 
   <item>
     <title>de-sanitizing the site</title>
-    <link>https://virex.lol/blog/feb-11-update</link>
+    <link>https://stabbed.wtf/blog/feb-11-update</link>
     <description><![CDATA[a deep dive into why i gutted the old design, added new tweaks, and gave you keys to customization.]]></description>
     <content:encoded><![CDATA[<h2>de-sanitizing the site</h2>
 <p>my philosophy has always been "high specs, low standards :)".
@@ -490,15 +535,15 @@ after a solid run, it was time for another overhaul to push the boundaries again
 
   <item>
     <title>this is why search bars are e-waste</title>
-    <link>https://virex.lol/blog/search-is-mid</link>
+    <link>https://stabbed.wtf/blog/search-is-mid</link>
     <description><![CDATA[let's be honest.. if you needed a search bar to find content on a site, you are trying too hard.]]></description>
     <content:encoded><![CDATA[<h1>search is for bad sites anyway</h1>
-<p>i recently removed the search engine on virex.lol because... let's be real, nobody was using it. instead, i updated the whole site and added <strong>the hardware</strong> pane that actually shows my specs.</p>
+<p>i recently removed the search engine on stabbed.wtf because... let's be real, nobody was using it. instead, i updated the whole site and added <strong>the hardware</strong> pane that actually shows my specs.</p>
 <p>if you want to find something, just click the sidebar. it's not that insane.</p>
 <h2>why the tracker?</h2>
 <p>i added a <strong>protocols/tracker</strong> page to track my progress in cybersecurity. it looks cool and makes me feel like i'm in a movie while i study. waiting for those progress bars to hit 87% on vulnerability analysis is the only dopamine i need right now.</p>
 <blockquote>
-<p>"if it works on my machine, it's production ready." - me, every time i push to virex.lol >_&#x3C;</p>
+<p>"if it works on my machine, it's production ready." - me, every time i push to stabbed.wtf >_&#x3C;</p>
 </blockquote>
 <p>anyways, stay tuned for more unsolicited opinions. bye, my zero viewers!</p>]]></content:encoded>
     <pubDate>Tue, 10 Feb 2026 06:00:00 GMT</pubDate>
@@ -506,7 +551,7 @@ after a solid run, it was time for another overhaul to push the boundaries again
 
   <item>
     <title>my networking wiki just got a full reinstallation</title>
-    <link>https://virex.lol/blog/unw-upw-is-a-bible-lol</link>
+    <link>https://stabbed.wtf/blog/unw-upw-is-a-bible-lol</link>
     <description><![CDATA[after a whole year of rotting, the wiki is finally a 300k character monster.]]></description>
     <content:encoded><![CDATA[<h2>the networking wiki update</h2>
 <p>it's been a <strong>whole year</strong>. the old wiki was basically brain dumps and it was mid at best.</p>
@@ -529,7 +574,7 @@ after a solid run, it was time for another overhaul to push the boundaries again
 
   <item>
     <title>sysdupd: arch updates without the headache</title>
-    <link>https://virex.lol/blog/sysdupd</link>
+    <link>https://stabbed.wtf/blog/sysdupd</link>
     <description><![CDATA[i finally got tired of manual pacman runs, so i built a libadwaita manager for my personal use]]></description>
     <content:encoded><![CDATA[<h1>it finally works.</h1>
 <h2>i built a custom update manager using python, gtk4, and libadwaita.</h2>
@@ -550,7 +595,7 @@ after a solid run, it was time for another overhaul to push the boundaries again
 
   <item>
     <title>long term pixel 10 pro use: my review of the tensor G5</title>
-    <link>https://virex.lol/blog/pixel-10-review</link>
+    <link>https://stabbed.wtf/blog/pixel-10-review</link>
     <description><![CDATA[the 3nm transition, on device ai, and why the pixel 10 pro is finally a consistent daily driver.]]></description>
     <content:encoded><![CDATA[<h2>architectural maturity (the TSMC shift)</h2>
 <ul>
@@ -582,7 +627,7 @@ after a solid run, it was time for another overhaul to push the boundaries again
 
   <item>
     <title>your cloud is just someone elses computer.</title>
-    <link>https://virex.lol/blog/cloud-is-someone-elses-computer</link>
+    <link>https://stabbed.wtf/blog/cloud-is-someone-elses-computer</link>
     <description><![CDATA[this is why i hoard data (and you probably should too)]]></description>
     <content:encoded><![CDATA[<h1>stop trusting corporations to keep your data safe.</h1>
 <p>i have massive amounts of storage for a reason. people think im crazy for archiving games, software, and gallery backups, but have you even seen the state of the internet lately?
@@ -597,7 +642,7 @@ people call me crazy until it actually comes useful and you lose stuff forever. 
 
   <item>
     <title>why I actually use arch.. (and it’s not a joke)</title>
-    <link>https://virex.lol/blog/why-i-actually-use-arch</link>
+    <link>https://stabbed.wtf/blog/why-i-actually-use-arch</link>
     <description><![CDATA[everyone thinks arch users just want to flex their fastfetch, but i actually just want a system that doesnt hand bs over to me...]]></description>
     <content:encoded><![CDATA[<h1>why arch? (unironically)</h1>
 <p>honestly if i were to see one more person say "i use arch btw" as a joke i might actually lose it. on a serious note, i use it because i dont want some random distro maintainer deciding what packages i need to have installed.</p>
@@ -610,7 +655,7 @@ people call me crazy until it actually comes useful and you lose stuff forever. 
 
   <item>
     <title>the internet is dead.</title>
-    <link>https://virex.lol/blog/the-internet-is-dead</link>
+    <link>https://stabbed.wtf/blog/the-internet-is-dead</link>
     <description><![CDATA[if you think youre still talking to real people on big platforms, i have a bridge to sell you.]]></description>
     <content:encoded><![CDATA[<p>i've been looking at the traffic patterns on the major socials and it's literally just bots talking to bots.
 it's now just a loop of ai-generated slop being consumed by ai-generated scrapers. dystopian right?</p>
@@ -624,7 +669,7 @@ it's now just a loop of ai-generated slop being consumed by ai-generated scraper
 
   <item>
     <title>the epstein "files" are a joke</title>
-    <link>https://virex.lol/blog/epstein-files-is-a-joke</link>
+    <link>https://stabbed.wtf/blog/epstein-files-is-a-joke</link>
     <description><![CDATA[so the DOJ finally dropped the files and... surprise! it’s basically just 50 pages of blacked out text...]]></description>
     <content:encoded><![CDATA[<h1>the most transparent administration I guess?</h1>
 <p>the DOJ literally just dropped a bunch of documents that are so redacted they look like modern art.</p>
@@ -634,7 +679,7 @@ it's now just a loop of ai-generated slop being consumed by ai-generated scraper
 
   <item>
     <title>My take on ai</title>
-    <link>https://virex.lol/blog/my-take-on-ai</link>
+    <link>https://stabbed.wtf/blog/my-take-on-ai</link>
     <description><![CDATA[My take on ai; ai is a companion, not a replacement. an assistant, and nothing more]]></description>
     <content:encoded><![CDATA[<p>AI is perfect as a LOCAL ONLY dev companion for spotting bugs, refactoring, and testing in your environment, but never let it touch security and never let it run your project. its a helper, nothing more. dont ever use ai to build your codebase. at that point, youre the consumer. not the creator. use it to see, to catch, to polish. not to replace, not to take control. AI is your TOOL, its <em>not your brain</em>. you are. so go learn new things, devs! ai is not replacing you any time soon. dont let it take your crown!</p>]]></content:encoded>
     <pubDate>Sun, 16 Nov 2025 06:00:00 GMT</pubDate>
@@ -642,7 +687,7 @@ it's now just a loop of ai-generated slop being consumed by ai-generated scraper
 
   <item>
     <title>The VIREX portfolio is UPDATED</title>
-    <link>https://virex.lol/blog/keeping-it-live</link>
+    <link>https://stabbed.wtf/blog/keeping-it-live</link>
     <description><![CDATA[I've completely revamped and fixed + polished the code on ALL pages]]></description>
     <content:encoded><![CDATA[<p>Hello world! The VIREX portfolio is UPDATED!  I've completely revamped and fixed + polished the code on ALL pages!  I've optimized everything to oblivion, and added 2 new pages: FAQ and tutorials. Wordly has been revamped as well! Have fun, VIREX world! Love u all.</p>]]></content:encoded>
     <pubDate>Sun, 16 Nov 2025 06:00:00 GMT</pubDate>
@@ -650,7 +695,7 @@ it's now just a loop of ai-generated slop being consumed by ai-generated scraper
 
   <item>
     <title>heres why i love open source - 2</title>
-    <link>https://virex.lol/blog/why-love-open-source</link>
+    <link>https://stabbed.wtf/blog/why-love-open-source</link>
     <description><![CDATA[honestly, open source is just better. it’s all about the community and...]]></description>
     <content:encoded><![CDATA[<h1>why open source is absolutely goated</h1>
 <p>it's literally just people helping people for learning (and overall better code because contributors duh).</p>
@@ -665,7 +710,7 @@ it's now just a loop of ai-generated slop being consumed by ai-generated scraper
 
   <item>
     <title>Project Update 2025-11-12</title>
-    <link>https://virex.lol/blog/project-update-2025-11-12</link>
+    <link>https://stabbed.wtf/blog/project-update-2025-11-12</link>
     <description><![CDATA[Major fixes and improvements across the site.]]></description>
     <content:encoded><![CDATA[<p>Major fixes and improvements across the site. Improved SEO, fixed broken links, and MUCH BETTER performance. Always striving to make the site better for you and me!</p>]]></content:encoded>
     <pubDate>Wed, 12 Nov 2025 06:00:00 GMT</pubDate>
@@ -673,7 +718,7 @@ it's now just a loop of ai-generated slop being consumed by ai-generated scraper
 
   <item>
     <title>Project Update 2025-11-08</title>
-    <link>https://virex.lol/blog/project-update-2025-11-08</link>
+    <link>https://stabbed.wtf/blog/project-update-2025-11-08</link>
     <description><![CDATA[Updated multiple things on the site for better UX...]]></description>
     <content:encoded><![CDATA[<p>Yep, it's that time again! I've updated multiple things on the site for better UX, including blog fixes, portfolio stuff, and a new photography section! this update also brings things like privacy info, sitemap, and other elements like robots.txt and llms.txt. I hope to bring more fixes and improvements over time. thanks for being along with this project!</p>]]></content:encoded>
     <pubDate>Sat, 08 Nov 2025 06:00:00 GMT</pubDate>
@@ -681,7 +726,7 @@ it's now just a loop of ai-generated slop being consumed by ai-generated scraper
 
   <item>
     <title>Future Plans and Goals</title>
-    <link>https://virex.lol/blog/future-plans-and-goals</link>
+    <link>https://stabbed.wtf/blog/future-plans-and-goals</link>
     <description><![CDATA[I'm really looking forward to new projects and even more learning opportunities]]></description>
     <content:encoded><![CDATA[<p>Looking ahead, I'm really looking forward to new projects and even more learning opportunities. I wish to contribute to more open source projects, expand my photography skills, and even cybersecurity studying. My way of continuous learning never ends! :)</p>]]></content:encoded>
     <pubDate>Fri, 07 Nov 2025 06:00:00 GMT</pubDate>
@@ -689,7 +734,7 @@ it's now just a loop of ai-generated slop being consumed by ai-generated scraper
 
   <item>
     <title>Ah shi, here we go again.</title>
-    <link>https://virex.lol/blog/ah-shi-here-we-go-again</link>
+    <link>https://stabbed.wtf/blog/ah-shi-here-we-go-again</link>
     <description><![CDATA[Rockstar has JUST announced that GTA 6 will be delayed to November 19th, 2026]]></description>
     <content:encoded><![CDATA[<p>Rockstar has JUST announced that GTA 6 will be delayed to November 19th, 2026. I personally don't even want the game anymore, Rockstar can KEEP it 😭</p>]]></content:encoded>
     <pubDate>Thu, 06 Nov 2025 06:00:00 GMT</pubDate>
@@ -697,7 +742,7 @@ it's now just a loop of ai-generated slop being consumed by ai-generated scraper
 
   <item>
     <title>The Importance of Cybersecurity, especially in Development</title>
-    <link>https://virex.lol/blog/importance-of-cybersecurity</link>
+    <link>https://stabbed.wtf/blog/importance-of-cybersecurity</link>
     <description><![CDATA[understanding cybersecurity is a no brainer]]></description>
     <content:encoded><![CDATA[<p>As a developer, understanding cybersecurity is a no brainer. Having secure authentication or protecting user data, security should be a MUST have consideration in every single project, especially on the web. My search engine project emphasizes privacy and security at its core.</p>]]></content:encoded>
     <pubDate>Thu, 06 Nov 2025 06:00:00 GMT</pubDate>
@@ -705,7 +750,7 @@ it's now just a loop of ai-generated slop being consumed by ai-generated scraper
 
   <item>
     <title>Why I Love Open Source</title>
-    <link>https://virex.lol/blog/why-i-love-open-source-og</link>
+    <link>https://stabbed.wtf/blog/why-i-love-open-source-og</link>
     <description><![CDATA[Open source software has always been so important in my development journey]]></description>
     <content:encoded><![CDATA[<p>Open source software has always been so important in my development journey. Especially learning from others' code to contributing back to the community, it's a cycle of knowledge sharing that benefits literally anyone and everyone. My projects like NekoFetch and MTCLI are open source because I heavily believe in collaborative development!</p>]]></content:encoded>
     <pubDate>Wed, 05 Nov 2025 06:00:00 GMT</pubDate>
@@ -713,7 +758,7 @@ it's now just a loop of ai-generated slop being consumed by ai-generated scraper
 
   <item>
     <title>Welcome to the Blog!</title>
-    <link>https://virex.lol/blog/welcome-to-the-blog</link>
+    <link>https://stabbed.wtf/blog/welcome-to-the-blog</link>
     <description><![CDATA[This is the first blog post!]]></description>
     <content:encoded><![CDATA[<p>This is the first blog post! I'm happy to share updates on my projects and thoughts on development and other topics! As a self-taught full-stack developer, I believe in sharing knowledge and experiences. This blog will cover everything from coding tutorials to personal insights on the tech industry. Stay tuned for more content!</p>]]></content:encoded>
     <pubDate>Tue, 04 Nov 2025 06:00:00 GMT</pubDate>
@@ -721,7 +766,7 @@ it's now just a loop of ai-generated slop being consumed by ai-generated scraper
 
   <item>
     <title>Project Update 2025-11-04</title>
-    <link>https://virex.lol/blog/project-update-2025-11-04</link>
+    <link>https://stabbed.wtf/blog/project-update-2025-11-04</link>
     <description><![CDATA[I've been working on a LOT of updates and features for my portfolio.]]></description>
     <content:encoded><![CDATA[<p>I've been working on a LOT of updates and features for my portfolio! I'll post updates here as I go! The latest changes include improved navigation, better SEO optimization, and enhanced user experience. I'm constantly iterating on my work to make it better for visitors.</p>]]></content:encoded>
     <pubDate>Tue, 04 Nov 2025 06:00:00 GMT</pubDate>
@@ -729,7 +774,7 @@ it's now just a loop of ai-generated slop being consumed by ai-generated scraper
 
   <item>
     <title>Project Update 2025-11-03</title>
-    <link>https://virex.lol/blog/project-update-2025-11-03</link>
+    <link>https://stabbed.wtf/blog/project-update-2025-11-03</link>
     <description><![CDATA[Fully overhauled and recoded search wrapper &amp; portfolio from scratch]]></description>
     <content:encoded><![CDATA[<p>Fully overhauled and recoded search wrapper &#x26; portfolio from scratch. Made my own design. This complete redesign focuses on clean code, modern aesthetics, and improved performance. The new design emphasizes my skills in both frontend and backend development.</p>]]></content:encoded>
     <pubDate>Mon, 03 Nov 2025 06:00:00 GMT</pubDate>
@@ -737,7 +782,7 @@ it's now just a loop of ai-generated slop being consumed by ai-generated scraper
 
   <item>
     <title>Project Update 2025-10-20</title>
-    <link>https://virex.lol/blog/project-update-2025-10-20</link>
+    <link>https://stabbed.wtf/blog/project-update-2025-10-20</link>
     <description><![CDATA[Changed fonts &amp; added transparency/glassy effects across the site.]]></description>
     <content:encoded><![CDATA[<p>Changed fonts &#x26; added transparency/glassy effects across the site. Typography plays a crucial role in user experience, and these changes make the content more readable and visually appealing. The glassy effects add a modern touch to the interface.</p>]]></content:encoded>
     <pubDate>Mon, 20 Oct 2025 05:00:00 GMT</pubDate>
@@ -745,7 +790,7 @@ it's now just a loop of ai-generated slop being consumed by ai-generated scraper
 
   <item>
     <title>Project Update 2025-10-19</title>
-    <link>https://virex.lol/blog/project-update-2025-10-19</link>
+    <link>https://stabbed.wtf/blog/project-update-2025-10-19</link>
     <description><![CDATA[Fixed and revamped various parts of the UI]]></description>
     <content:encoded><![CDATA[<p>Fixed and revamped various parts of the UI. User interface design is iterative, and these improvements address usability issues and enhance the overall user experience. Every detail matters when creating a professional portfolio.</p>]]></content:encoded>
     <pubDate>Sun, 19 Oct 2025 05:00:00 GMT</pubDate>
@@ -753,7 +798,7 @@ it's now just a loop of ai-generated slop being consumed by ai-generated scraper
 
   <item>
     <title>Project Inception 2025-6-12</title>
-    <link>https://virex.lol/blog/project-update-2025-6-12</link>
+    <link>https://stabbed.wtf/blog/project-update-2025-6-12</link>
     <description><![CDATA[Started with the idea of creating a Material Design testing playground as a hobby.]]></description>
     <content:encoded><![CDATA[<p>Started with the idea of creating a Material Design testing playground as a hobby. The initial project sparked my passion for web development and led to the creation of my current portfolio. It's amazing how a simple hobby project can evolve into something meaningful.</p>]]></content:encoded>
     <pubDate>Thu, 12 Jun 2025 05:00:00 GMT</pubDate>

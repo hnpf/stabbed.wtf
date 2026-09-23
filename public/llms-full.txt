@@ -1,4 +1,4 @@
-# virex.lol; full context for LLMs
+# stabbed.wtf; full context for LLMs
 
 ## about
 
@@ -30,5 +30,5 @@ areas: hardware/systems programming, UI/UX architecture (Material Design 3, LibA
 
 ## links
 
-- site: https://virex.lol
+- site: https://stabbed.wtf
 - github: https://github.com/hnpf
