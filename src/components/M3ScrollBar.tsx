@@ -222,7 +222,7 @@ export const M3ScrollBar = forwardRef<HTMLDivElement, M3ScrollBarProps>(
       <div
         ref={hostRef}
         className={className}
-        style={{ position: "absolute", top: 0, right: 0, bottom: 0, width: thinOnly ? BAR_WIDTH + 6 : BAR_WIDE + 6, display: "flex", justifyContent: "flex-end", alignItems: "stretch", zIndex: 10 }}
+        style={{ position: "absolute", top: 0, right: 0, bottom: 0, width: thinOnly ? BAR_WIDTH + 6 : BAR_WIDE + 6, display: "flex", justifyContent: "flex-end", alignItems: "stretch", zIndex: 10, touchAction: "none" }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => { if (!dragging) setHovered(false); }}
         onPointerMove={onPointerMove}

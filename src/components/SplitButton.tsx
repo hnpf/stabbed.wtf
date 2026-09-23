@@ -109,6 +109,7 @@ export const SplitButton: React.FC<SplitButtonProps> = ({
                   ref={scrollRef}
                   onClick={() => setIsOpen(false)}
                   className="flex h-full min-h-0 flex-col gap-1 overflow-y-auto overscroll-contain pr-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                  style={{ touchAction: "pan-y", WebkitOverflowScrolling: "touch" }}
                 >
                   {menu}
                 </div>
