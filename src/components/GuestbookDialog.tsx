@@ -373,7 +373,7 @@ export const GuestbookDialog = ({
                   </div>
                   
                   {/* share button at bottom left */}
-                  <div className="p-4 mb-2 border-t-3 border-[var(--outline-variant)]/20 bg-[var(--surface-variant)]/5 flex justify-between items-center shrink-0">
+                  <div className="p-4 mb-2 border-t-3 hidden sm:flex border-[var(--outline-variant)]/20 bg-[var(--surface-variant)]/5 flex justify-between items-center shrink-0">
                     <span className="text-[10px] mt-1 font-bold tracking-[0.05em] ml-3 uppercase opacity-45">
                       Share the guestbook!
                     </span>
