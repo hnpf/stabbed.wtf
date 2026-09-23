@@ -444,14 +444,14 @@ const PhotoItem = memo(({ photo, i, onClick, settings }: any) => {
           />
         )}
       </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8 z-20">
-        <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-300 w-full flex justify-between items-end gap-4">
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8 z-20">
+        <div className="translate-y-0 sm:translate-y-4 sm:group-hover:translate-y-0 transition-transform duration-300 w-full flex justify-between items-end gap-4">
           <div className="flex flex-col gap-1">
-            <p className="text-white text-lg font-bold leading-tight drop-shadow-md">
+            <p className="text-white md:text-lg font-bold leading-tight drop-shadow-md">
               {photo.description}
             </p>
             {photo.date && (
-              <p className="text-white/80 text-sm font-medium drop-shadow-md">
+              <p className="text-white/80 md:text-sm text-xs font-medium drop-shadow-md">
                 {photo.date}
               </p>
             )}

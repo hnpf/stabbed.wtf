@@ -206,10 +206,10 @@ export const SettingsDialog = memo(({
   }, [activePage]);
 
   const MAIN_PAGES = [
-    { id: "appearance", title: "Appearance", desc: "Theme mode, colors, palettes & lens", icon: Palette },
-    { id: "interface", title: "Interface & Layout", desc: "Typography, sidebar dock, zen & layout", icon: Layers },
+    { id: "appearance", title: "Appearance", desc: "Theme mode, colors, etc.", icon: Palette },
+    { id: "interface", title: "Interface & Layout", desc: "Typography, navigation, focus & layout", icon: Layers },
     { id: "motion", title: "Motion & Extras", desc: "Hero animation, 3D tilt & widgets", icon: Sparkles },
-    { id: "commandPalette", title: "Command Palette", desc: "Palette activation, search scope, and results", icon: Monitor },
+    { id: "commandPalette", title: "Command Palette", desc: "Custom hotkeys, search scoping, and results settings", icon: Monitor },
   ] as const;
 
   const visibleMainPages = is_mobile
@@ -217,7 +217,7 @@ export const SettingsDialog = memo(({
     : MAIN_PAGES;
 
   const BOTTOM_PAGES = [
-    { id: "system", title: "Backup & System", desc: "Config backup, changelog, diagnostics & bugs", icon: Fingerprint },
+    { id: "system", title: "Backup & System", desc: "Config backup, changelog, feedback & bugs", icon: Fingerprint },
   ] as const;
 
   const PAGES = [...MAIN_PAGES, ...BOTTOM_PAGES] as const;
