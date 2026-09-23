@@ -106,7 +106,7 @@ const NavPillItem = React.memo(
         transition={pressed ? { duration: 0.08 } : spring}
         className={cn(
           "relative flex items-center justify-center outline-none cursor-pointer shrink-0 select-none overflow-hidden",
-          isActive ? "gap-2 px-4 py-2.5 rounded-full" : "w-10 h-10 rounded-full",
+          isActive ? "gap-2 px-4 py-3 rounded-full" : "w-10 h-10 rounded-full",
         )}
         aria-label={item.label}
         aria-pressed={isActive}
@@ -159,7 +159,7 @@ const NavPillItem = React.memo(
             x: isActive ? 0 : -8,
           }}
           transition={{ ...LABEL_SPRING, duration: 0.24 }}
-          className="relative z-[1] inline-block text-[11px] font-expressive font-black uppercase tracking-widest italic whitespace-nowrap overflow-hidden"
+          className="relative z-[1] inline-block text-[11px] pr-1 font-expressive font-black uppercase tracking-widest italic whitespace-nowrap overflow-hidden"
           style={{
             color: "var(--on-primary)",
           }}
@@ -211,7 +211,7 @@ const SettingsSquircle = React.memo(
         animate={
           pressed
             ? { scale: 0.88, rotate: 5 }
-            : { scale: 1, rotate: hovered ? 45 : 0 }
+            : { scale: 1, rotate: 0 }
         }
         transition={spring}
         aria-label="Settings"
@@ -252,7 +252,7 @@ export const MobileFloatingNav = React.memo(
     const highHz = settings.highHz;
 
     /* pill height driving squircle size */
-    const PILL_H = 60;
+    const PILL_H = 64;
     const SQUIRCLE_SIZE = Math.round(PILL_H * 0.88);
     const SIDE_PAD = Math.round(PILL_H * 0.5);
 

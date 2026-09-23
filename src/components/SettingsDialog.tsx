@@ -705,7 +705,7 @@ export const SettingsDialog = memo(({
             </div>
 
             {/* Navigation & Sidebar */}
-            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-3">
+            <div className="hidden sm:block bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-3">
               <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
                 Navigation & Sidebar
               </div>
