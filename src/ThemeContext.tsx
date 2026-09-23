@@ -21,6 +21,8 @@ interface ThemeSettings {
   debugMode: boolean;
   helloAnimation: boolean;
   disableAnimations: boolean;
+  hapticsEnabled: boolean;
+  ripplesEnabled: boolean;
   highHz: boolean;
   amoledMode: boolean;
   bentoTilt: boolean;
@@ -63,6 +65,8 @@ const DEFAULT_SETTINGS: ThemeSettings = {
   debugMode: false,
   helloAnimation: true,
   disableAnimations: false,
+  hapticsEnabled: true,
+  ripplesEnabled: true,
   highHz: true,
   amoledMode: false,
   bentoTilt: false,

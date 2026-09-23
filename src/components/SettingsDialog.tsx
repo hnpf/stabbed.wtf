@@ -889,6 +889,50 @@ export const SettingsDialog = memo(({
               </div>
             </div>
 
+            {/* Touch feedback */}
+            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-3">
+              <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
+                Touch Feedback
+              </div>
+              <div className="flex flex-col gap-2">
+                {[
+                  ...(is_mobile
+                    ? [{
+                        key: "hapticsEnabled",
+                        label: "Haptics",
+                        desc: "Vibration feedback for mobile interactions",
+                      }]
+                    : []),
+                  {
+                    key: "ripplesEnabled",
+                    label: "Ripple Effects",
+                    desc: "Material-style touch and click feedback",
+                  },
+                ].map((tweak) => (
+                  <label
+                    key={tweak.key}
+                    className={cn(
+                      "flex items-center justify-between p-4.5 rounded-2xl transition-all text-left cursor-pointer border-0",
+                      settings[tweak.key as keyof typeof settings]
+                        ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
+                        : "bg-[var(--surface-variant)] hover:bg-[var(--on-primary-container)]/10 text-[var(--on-surface)]",
+                    )}
+                  >
+                    <div>
+                      <div className="font-bold text-[15px]">{tweak.label}</div>
+                      <div className="text-xs opacity-60 font-medium">
+                        {tweak.desc}
+                      </div>
+                    </div>
+                    <Switch
+                      checked={settings[tweak.key as keyof typeof settings] as boolean}
+                      onChange={(checked) => updateSettings({ [tweak.key]: checked })}
+                    />
+                  </label>
+                ))}
+              </div>
+            </div>
+
             {/* Widgets & Preferences */}
             <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-3">
               <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
@@ -1483,6 +1527,7 @@ export const SettingsDialog = memo(({
 
     const handleTouchStartRaw = (e: TouchEvent) => {
       const touch = e.touches[0];
+      y.stop();
       dragStartY.current = touch.clientY;
       dragStartModalY.current = y.get();
       isDraggingSheet.current = false;

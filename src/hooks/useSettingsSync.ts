@@ -17,7 +17,7 @@ export const useSettingsSync = (onCapsuleDetected: (settings: any) => void) => {
           "mode", "accent", "hue", "saturation", "sidebarFlipped",
           "sidebarCollapsed", "profileContainer", "brutalistMode",
           "developerFont", "focusMode", "floatingSidebar", "debugMode",
-          "helloAnimation", "disableAnimations", "highHz", "amoledMode",
+          "helloAnimation", "disableAnimations", "hapticsEnabled", "ripplesEnabled", "highHz", "amoledMode",
           "bentoTilt", "lensDynamicTheming", "metricUnits", "dynamicWeatherLocation",
           "fontScale"
         ];

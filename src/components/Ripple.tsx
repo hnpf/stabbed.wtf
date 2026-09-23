@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { haptic } from "../haptics";
+import { useTheme } from "../ThemeContext";
 
 export interface RippleProps {
   target?: HTMLElement;
@@ -36,6 +37,8 @@ export const Ripple: React.FC<RippleProps> = ({
   enableHover = true,
   enableHaptics = true,
 }) => {
+  const { settings } = useTheme();
+  const isEnabled = settings.ripplesEnabled;
   const containerRef = useRef<HTMLDivElement>(null);
   const [ripples, setRipples] = useState<RippleWave[]>([]);
   const nextId = useRef(0);
@@ -90,6 +93,7 @@ export const Ripple: React.FC<RippleProps> = ({
   }, []);
 
   useEffect(() => {
+    if (!isEnabled) return;
     const owner = target ?? containerRef.current?.parentElement;
     if (!owner) return;
 
@@ -140,11 +144,13 @@ export const Ripple: React.FC<RippleProps> = ({
       owner.removeEventListener("keydown", handleKeyDown);
       owner.removeEventListener("keyup", handleKeyUp);
     };
-  }, [createRipple, releaseRipples, target]);
+  }, [createRipple, releaseRipples, target, isEnabled]);
 
   const removeRipple = (id: number) => {
     setRipples((prev) => prev.filter((r) => r.id !== id));
   };
+
+  if (!isEnabled) return null;
 
   return (
     <div

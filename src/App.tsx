@@ -44,6 +44,7 @@ import { M3WindowScrollBar, M3ScrollBar } from "./components/M3ScrollBar";
 import { materialIcon } from "./components/MaterialIcon";
 import { BLOG_POSTS } from "./constants";
 import { RippleScope } from "./components/RippleScope";
+import { haptic } from "./haptics";
 
 const M3Home = materialIcon("home");
 const M3Info = materialIcon("fingerprint");
@@ -307,6 +308,10 @@ export default function App() {
   const isExpanded = is_mobile && scrollDirection === "up" && !settings.focusMode;
   const show_pfp_container = settings.profileContainer && viewport.h > 720;
 
+  useEffect(() => {
+    haptic.setEnabled(!is_mobile || settings.hapticsEnabled);
+  }, [is_mobile, settings.hapticsEnabled]);
+
   const paletteHotkeyLabel = settings.paletteHotkey === "cmd-k"
     ? "⌘K"
     : settings.paletteHotkey === "ctrl-shift-p"
@@ -328,7 +333,7 @@ export default function App() {
   };
 
   return (
-    <RippleScope>
+    <RippleScope enabled={settings.ripplesEnabled}>
     <div
       className={cn(
         "min-h-screen flex font-sans relative",

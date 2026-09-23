@@ -2,6 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Ripple } from "./Ripple";
 
+interface RippleScopeProps {
+  children: React.ReactNode;
+  enabled: boolean;
+}
+
 /**
  * Opt-in-at-the-app-level M3 state layers for ordinary interactive controls.
  *
@@ -9,7 +14,7 @@ import { Ripple } from "./Ripple";
  * group. This is important for animated navigation: every pill keeps its own
  * shape and stacking context.
  */
-export function RippleScope({ children }: { children: React.ReactNode }) {
+export function RippleScope({ children, enabled }: RippleScopeProps) {
   const scopeRef = useRef<HTMLDivElement>(null);
   const [targets, setTargets] = useState<HTMLElement[]>([]);
   const targetKeys = useRef(new WeakMap<HTMLElement, string>());
@@ -25,6 +30,7 @@ export function RippleScope({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
+    if (!enabled) return;
     const scope = scopeRef.current;
     if (!scope) return;
 
@@ -79,12 +85,12 @@ export function RippleScope({ children }: { children: React.ReactNode }) {
         target.removeAttribute("data-m3-ripple-positioned");
       });
     };
-  }, []);
+  }, [enabled]);
 
   return (
     <div ref={scopeRef} className="contents">
       {children}
-      {targets.map((target) =>
+      {enabled && targets.map((target) =>
         createPortal(<Ripple target={target} enableHaptics={false} />, target, getTargetKey(target)),
       )}
     </div>
