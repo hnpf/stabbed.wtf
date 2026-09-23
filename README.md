@@ -106,7 +106,7 @@ npm run build      # output to dist/
 
 ---
 
-## Site Layout Snippet (updated ~v2.9.8-stable)
+## Site Layout Snippet (updated ~v3.5.2-stable)
 
 ```
 api/
@@ -115,10 +115,11 @@ api/
   guestbook_db.ts       guestbook backend, features banned_roots and leet map
 
 public/
+  albums/				all album covers stored here
   fonts/                all locally stored and self-hosted material 3 symbols
   photography/          webp archive (compressed via sharp)
-  _routes.json
-  favicon.svg                 site favicon
+  _routes.json			deprecated
+  favicon.svg           site favicon
   llms-full.txt
   llms.txt
   manifest.json
@@ -128,11 +129,13 @@ public/
 
 src/
   components/           site components such as cards, copylinkcapsule, wavyprogress, etc.
+  data/					placeholder
   hooks/                site hooks such as useAprilFools, useViewport, and useSettingsSync.
-  navigation/           nav components such as NavigationRail (and NavigationRailItem), and FAB
+  navigation/           deprecated
   pages/                site pages like blog, changelog, dash, home, lens, 404, /now, and readme.
-  wavy.ts               wavy progress logic helper
-  app.ts                core/root application class
+  utils/ 				contains searchUtils.ts / used for extracting and organizing searchable content across the site
+  _wavy.ts              wavy progress logic helper
+  App.tsx               core/root application class
   constants.ts          static info such as bug reports, projects, blog posts, and changelogs.
   haptics.ts            haptics for mobile; self explanatory
   index.css             also quite self-explanatory, holds some core styling logic and font data.
