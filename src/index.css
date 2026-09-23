@@ -441,7 +441,7 @@ body, .gsf-global {
     }
 
     .markdown-body table {
-        @apply w-full my-8 overflow-hidden rounded-[2rem] border-2 border-[var(--outline-variant)];
+        @apply w-full my-8 overflow-hidden -ml-7 md:ml-0 rounded-[2rem] border-2 border-[var(--outline-variant)];
         border-collapse: separate;
         border-spacing: 0;
     }
