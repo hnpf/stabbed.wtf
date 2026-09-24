@@ -2718,6 +2718,7 @@ export const MUSIC_RELEASES: MusicRelease[] = [
     links: {
       spotify: "https://open.spotify.com/album/4igWVMnc4K292BEFdvkdVl?si=Q3ochhl8SW2NpHfCbUMC_g",
       bandcamp: "https://rxvirex.bandcamp.com/track/hateware",
+      youtubeMusic: "https://music.youtube.com/watch?v=54tDMgTe1xY&si=EIsjlKhiKTxgOlTZ",
       tiktok: "https://www.tiktok.com/@hahavrx",
     },
   },
