@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState, useEffect, memo, createContext, useContext } from "react";
+import React, { useState, useEffect, useLayoutEffect, memo, createContext, useContext } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronLeft, ChevronRight, Calendar, CheckCircle2, ArrowUpRight, Filter } from "../components/MaterialIcon";
 import ReactMarkdown from "react-markdown";
@@ -17,7 +17,7 @@ import { haptic } from "../haptics";
 // context to pass nesting depth into list items
 const ListDepthContext = createContext(0);
 
-export const BlogPage = memo(({ targetId, navigateTo }: any) => {
+export const BlogPage = memo(({ targetId, navigateTo, onFeedReady }: any) => {
   const [active_cat, setActiveCat] = useState<string | null>(null);
   const [readingProgress, setReadingProgress] = useState(0);
   const [showReadingProgress, setShowReadingProgress] = useState(false);
@@ -30,6 +30,14 @@ export const BlogPage = memo(({ targetId, navigateTo }: any) => {
     return saved ? JSON.parse(saved) : [];
   });
   const post = BLOG_POSTS.find((p) => p.id === targetId || p.link === targetId);
+
+  useLayoutEffect(() => {
+    if (post) {
+      window.scrollTo(0, 0);
+    } else {
+      onFeedReady?.();
+    }
+  }, [post, onFeedReady]);
 
   useEffect(() => {
     if (!targetId || !post) {
@@ -201,7 +209,7 @@ export const BlogPage = memo(({ targetId, navigateTo }: any) => {
             {post.snippet}
           </div>
         </header>
-        <div className="markdown-body py-12">
+        <div className="markdown-body py-12" data-ripple-skip>
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             rehypePlugins={[rehypeHighlight]}

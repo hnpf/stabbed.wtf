@@ -82,6 +82,7 @@ export default function App() {
   const [scrollDirection, setScrollDirection] = useState<"up" | "down">("up");
   const [commandOpen, setCommandOpen] = useState(false);
   const lastScrollY = useRef(0);
+  const blogFeedScrollY = useRef<number | null>(null);
   const [scrolled, set_scrolled] = useState(false);
   const [navHoverSide, setNavHoverSide] = useState<"top" | "bottom" | null>(null);
   const [canScrollUp, setCanScrollUp] = useState(false);
@@ -291,13 +292,28 @@ export default function App() {
   const goto = React.useCallback((newPage: string, postId: string | null = null) => {
     setSettingsOpen(false);
     setGuestbookOpen(false);
+    if (newPage === "blog" && postId) {
+      blogFeedScrollY.current = window.scrollY;
+    } else if (newPage !== "blog") {
+      blogFeedScrollY.current = null;
+    }
+    if (newPage === "blog" && !postId) {
+      if (blogFeedScrollY.current === null) window.scrollTo(0, 0);
+    } else if (!(newPage === "blog" && postId)) {
+      window.scrollTo(0, 0);
+    }
     const url = newPage === "home" ? "/" : postId ? `/blog/${postId}` : `/${newPage}`;
     window.history.pushState({}, "", url);
     React.startTransition(() => {
       setPage(newPage);
       setBlogPostId(postId);
     });
-    window.scrollTo(0, 0);
+  }, []);
+
+  const restoreBlogFeedScroll = React.useCallback(() => {
+    if (blogFeedScrollY.current === null) return;
+    window.scrollTo(0, blogFeedScrollY.current);
+    blogFeedScrollY.current = null;
   }, []);
 
   const is_short = viewport.h < 720;
@@ -612,7 +628,7 @@ export default function App() {
         <AnimatePresence mode="wait" initial={false}>
           <motion.div key={page + (blogPostId || "")} initial={settings.disableAnimations ? false : { opacity: 0, y: 15, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -15, scale: 0.98 }} transition={{ duration: settings.disableAnimations ? 0 : (settings.highHz ? 0.25 : 0.4), ease: [0.22, 1, 0.36, 1], scale: { type: "spring", stiffness: settings.highHz ? 600 : 300, damping: settings.highHz ? 35 : 25 } }}>
             {page === "home" && <HomePage setPage={goto} settings={settings} onOpenGuestbook={handleOpenGuestbook} />}
-            {page === "blog" && <BlogPage targetId={blogPostId} navigateTo={goto} />}
+            {page === "blog" && <BlogPage targetId={blogPostId} navigateTo={goto} onFeedReady={restoreBlogFeedScroll} />}
             {page === "lens" && <LensPage viewport={viewport} />}
             {page === "now" && <NowPage />}
             {page === "music" && <MusicPage setPage={goto} />}
