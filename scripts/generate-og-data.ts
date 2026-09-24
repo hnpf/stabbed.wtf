@@ -98,7 +98,7 @@ fs.writeFileSync(outputPath, output, "utf-8");
 fs.writeFileSync(terminalOutputPath, terminalOutput, "utf-8");
 
 // log resolved covers so you can spot missing art at a glance.
-console.log(`Generated OG data: ${blogData.length} blog post(s), ${musicData.length} music release(s) → ${outputPath}`);
+console.log(`Generated OG data: ${blogData.length} blog post(s), ${musicData.length} music releases → ${outputPath}`);
 console.log(`Generated Terminal data → ${terminalOutputPath}`);
 for (const r of musicData) {
   console.log(`  🎵 ${r.id} → ${r.ogImage}`);

@@ -281,7 +281,7 @@ export const MusicPage = memo(({ setPage }: { setPage: (p: string) => void }) =>
             Releases and Tracks
           </h2>
           <span className="text-xs sm:text-md font-black tracking-widest opacity-40">
-            {MUSIC_RELEASES.length} Release(s)
+            {MUSIC_RELEASES.length} Releases
           </span>
         </div>
 
