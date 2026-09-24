@@ -444,23 +444,27 @@ const LastFmNowPlayingCard = () => {
               </>
             ) : (
               <div className="relative flex flex-col items-center justify-center w-full h-full p-4 sm:p-8 text-center shadow-inner overflow-hidden">
-                {/* disc, needs reworked. */}
-                <div className="relative w-28 h-28 sm:w-44 sm:h-44 md:w-56 md:h-56 rounded-full shadow-[0_15px_35px_rgba(0,0,0,0.5)]">
+                <div
+                  role="img"
+                  aria-label="Optical disc"
+                  className={`relative w-28 h-28 sm:w-44 sm:h-44 md:w-56 md:h-56 drop-shadow-[0_15px_20px_rgba(0,0,0,0.28)] ${isCurrentlyPlaying ? "animate-[spin_10s_linear_infinite]" : ""}`}
+                >
                   <div
-                    className={`w-full h-full rounded-full bg-neutral-950 border-3 sm:border-4 border-neutral-800/80 flex items-center justify-center transition-transform duration-1000 ${
-                      isCurrentlyPlaying ? "animate-[spin_10s_linear_infinite]" : ""
-                    }`}
-                  >
-                    <div className="absolute inset-0 rounded-full pointer-events-none" />
-                    <div className="absolute inset-2 sm:inset-3 rounded-full border border-white/10" />
-                    <div className="absolute inset-4 sm:inset-6 rounded-full border border-white/5" />
-                    <div className="absolute inset-6 sm:inset-9 rounded-full border border-white/10" />
-                    <div className="absolute inset-8 sm:inset-12 rounded-full border border-white/5" />
-
-                    <div className="relative w-10 h-10 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full bg-[var(--primary)]/60 border-2 sm:border-4 border-neutral-950 flex flex-col items-center justify-center shadow-md">
-                      <MusicIcon size={16} fill className="text-[var(--on-primary-container)] opacity-90 sm:w-5 sm:h-5" />
-                      <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-neutral-950 border border-white/30 shadow-inner mt-0.5 sm:mt-1" />
-                    </div>
+                    className="absolute inset-0 rounded-full border-[6px] border-[var(--on-primary)]/25 shadow-[0_18px_28px_rgba(0,0,0,0.32)] sm:border-8"
+                    style={{
+                      background: "radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--primary) 42%, white) 0%, transparent 24%), repeating-radial-gradient(circle at center, transparent 0 13%, color-mix(in srgb, var(--on-primary) 13%, transparent) 13.5% 14%, transparent 14.5% 20%), conic-gradient(from 215deg, color-mix(in srgb, var(--primary) 68%, black), color-mix(in srgb, var(--primary) 88%, white) 18%, color-mix(in srgb, var(--primary) 72%, black) 42%, color-mix(in srgb, var(--primary) 94%, white) 68%, color-mix(in srgb, var(--primary) 68%, black))",
+                      maskImage: "url('/media-optical.svg')",
+                      maskPosition: "center",
+                      maskRepeat: "no-repeat",
+                      maskSize: "contain",
+                      WebkitMaskImage: "url('/media-optical.svg')",
+                      WebkitMaskPosition: "center",
+                      WebkitMaskRepeat: "no-repeat",
+                      WebkitMaskSize: "contain",
+                    }}
+                  />
+                  <div className="absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-[var(--on-primary)]/35 bg-[var(--surface)] shadow-inner sm:h-16 sm:w-16 md:h-20 md:w-20">
+                    <div className="absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--primary)] sm:h-3 sm:w-3" />
                   </div>
                 </div>
 
