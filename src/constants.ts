@@ -1062,6 +1062,68 @@ it's literally just people helping people for learning (and overall better code 
 
 export const CHANGELOGS: ChangelogEntry[] = [
   {
+    id: "stabbedwtf-mobile-update",
+    version: "2026.09.23",
+    title: "stabbed.wtf + mobile update",
+    date: "Sep 23, 2026",
+    changes: [
+      {
+        category: "New 🫪🫪",
+        items: [
+          "🫪🫪🫪🫪🫪",
+          "66 69 6e 64 20 69 74 20 69 6e 20 73 65 74 74 69 6e 67 73 20 28 64 6f 6e 74 20 70 72 65 73 73 20 68 65 6c 6c 6f 20 61 6e 69 6d 61 74 69 6f 6e 20 74 6f 67 67 6c 65 20 36 20 74 69 6d 65 73 21 29",
+        ],
+      },
+      {
+        category: "New settings options",
+        items: [
+          "Toggle for ripple",
+          "Toggle for haptics",
+        ],
+      },
+      {
+        category: "New for mobile",
+        items: [
+          "visible title + desc and pin preview for /lens page on mobile",
+          "accurate M3E Mobile navbar proportions (PILL_H, isActive py-3)",
+        ],
+      },
+      {
+        category: "/info Page changes",
+        items: [
+          "added shared InfoCardHeading for readmepage title consistency + rephrase texts and some titles",
+          "spaned 'explore releases' button across whole card for mobile",
+        ],
+      },
+      {
+        category: "Polishing and other fixes",
+        items: [
+          "made separator in home page thicker and rounded + reused it in /info",
+          "centered mini-blog preview title + date not being aligned",
+          "rephrased settings menu page descriptions",
+          "hid 'share' button on guestbook page in mobile",
+          "added a gap at the bottom of the signing guestbook footer on mobile devices",
+          "renamed the majority of the site to go along with stabbed.wtf rather than now deprecated virex.lol",
+          "fixed refresh icon in /now for mobile mode",
+          "centered GFM tables on mobile",
+          "centered 'To Top' button for mobile",
+          "fixed spacing for /music and made <a> tag undraggable as it was before",
+          "symmetrical rounding for /music page",
+        ],
+      },
+      {
+        category: "Bug fixes",
+        items: [
+          "fixed text-cutoff mobile navbar bug",
+          "fix haptic ripple bug",
+          "(MOBILE) fixed mobile scrollbar interaction (blog filters)",
+          "fixed ripple scrolling issue (fix: timed touch press)",
+          "fixed border for curl terminal",
+        ],
+      },
+    ],
+  },
+  {
     id: "saverestore-touches-and-bug-fixes",
     version: "2026.09.20",
     title: "Save/restore touches and bug fixes",
