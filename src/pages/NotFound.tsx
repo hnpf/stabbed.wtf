@@ -35,7 +35,7 @@ const NotFound = ({ go }: { go?: (page: string) => void }) => {
         >
           <div className="inline-flex items-center gap-6 px-8 py-4 rounded-full bg-[var(--surface-variant)]/60 backdrop-blur-xl text-[var(--primary)] shadow-2xl border-4 border-[var(--outline-variant)]/50 group cursor-default">
             <AlertTriangle className="w-6 h-6 md:w-10 md:h-10 shrink-0 opacity-80 transition-transform duration-500" strokeWidth={1.5} />
-            <span className="text-[11px] md:text-xl font-expressive font-black tracking-[0.2em] opacity-80 border-l-4 border-[var(--outline-variant)] pl-6 italic">
+            <span className="text-[14px] md:text-xl font-expressive font-black tracking-[0.2em] opacity-80 border-l-4 border-[var(--outline-variant)] pl-6 italic">
               how did we get here?
             </span>
           </div>
