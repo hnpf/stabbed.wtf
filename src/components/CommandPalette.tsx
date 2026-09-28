@@ -2,7 +2,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { cn } from "../constants";
-import { Headphones } from "lucide-react";
 import { 
   Search, 
   Home, 
@@ -23,6 +22,7 @@ import {
   ViewList,
   ChevronRight,
   CornerDownLeft,
+  Headphones,
 } from "./MaterialIcon";
 import { M3ScrollBar } from "./M3ScrollBar";
 import M3Switch from "./M3Switch";

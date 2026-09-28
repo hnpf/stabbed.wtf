@@ -66,6 +66,7 @@ export function materialIcon(name: string, defaults?: Omit<MaterialIconProps, "n
 
 // familiar component names make the remaining UI changes ez. still not a breeze to setup, however.
 export const X = materialIcon("close");
+export const Minus = materialIcon("remove");
 export const Settings = materialIcon("settings");
 export const Palette = materialIcon("palette");
 export const Sun = materialIcon("light_mode");
@@ -136,3 +137,9 @@ export const Trash2 = materialIcon("delete");
 export const RefreshCw = materialIcon("refresh");
 export const Sparkles = materialIcon("auto_awesome");
 export const Ghost = materialIcon("ghost");
+export const Headphones = materialIcon("headphones");
+export const Album = materialIcon("album");
+export const PlayArrow = materialIcon("play_arrow");
+export const FileText = materialIcon("description");
+export const Boxes = materialIcon("widgets");
+export const MusicNote = materialIcon("music_note");

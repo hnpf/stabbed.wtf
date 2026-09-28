@@ -1,8 +1,7 @@
 // @ts-nocheck
 import React, { useState, useEffect, memo } from "react";
 import { motion } from "motion/react";
-import { Activity, MapPin, History, Target, SquareTerminal, Code2, Archive, MessageSquare, Home } from "../components/MaterialIcon";
-import { Github, Headphones, Disc, Music } from "lucide-react";
+import { Activity, MapPin, History, Target, SquareTerminal, Code2, Archive, MessageSquare, Home, Headphones, Album, MusicNote } from "../components/MaterialIcon";
 import { GitHubCalendar } from 'react-github-calendar';
 import { cn, TECH_STACK } from "../constants";
 import { useTheme } from "../ThemeContext";
@@ -206,7 +205,7 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
             innerClassName={cn("rounded-[3.5rem] border-4 border-[var(--outline-variant)]/40 bg-[var(--surface-variant)]/60 relative overflow-hidden group transition-colors duration-300 hover:border-[var(--primary)]/50", glass_class)}
           >
             <div className="absolute -right-10 -bottom-10 opacity-[0.07] group-hover:opacity-[0.12] group-hover:scale-110 group-hover:rotate-6 transition-all duration-700 pointer-events-none text-[var(--primary)]">
-              <Disc size={240} />
+              <Album size={240} />
             </div>
 
             <div className="relative z-10 px-6 py-8 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
@@ -222,7 +221,7 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
                 </p>
               </div>
               <BounceButton
-                icon={Music}
+                icon={MusicNote}
                 label="Explore Releases"
                 onClick={() => { setPage("music"); haptic.light(); }}
                 className="m3-button-filled w-full shrink-0 justify-center md:w-auto h-14 px-8 rounded-4xl font-black italic ring-6 ring-[var(--outline-variant)]/70 text-sm uppercase tracking-wider"
@@ -315,7 +314,7 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
             className="col-span-2 md:col-span-12"
             innerClassName={cn("px-6 py-8 md:p-12 bg-[var(--surface-variant)]/60 rounded-[3.5rem] border-6 border-[var(--outline-variant)]/40 flex flex-col gap-8 group transition-colors duration-200 overflow-hidden", glass_class)}
           >
-            <InfoCardHeading className="group-hover:text-[var(--primary)]" icon={Github}>
+            <InfoCardHeading className="group-hover:text-[var(--primary)]" icon={Code2}>
               GitHub activity
             </InfoCardHeading>
             <div className="w-full font-display text-sm opacity-80 mt-2">
@@ -359,7 +358,7 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
             className="grid w-full max-w-[460px] grid-cols-2 gap-6 md:gap-8 mx-auto"
           > { /* ok ok no parent delegation jank shortcuts, found out the hard way */ }
             <BounceButton
-              icon={Github}
+              icon={Code2}
               label="GitHub"
               url="https://github.com/hnpf"
               className="m3-button-tonal ring-8 ring-[var(--outline-variant)]/30 w-full max-w-[220px] h-16 rounded-3xl font-black tracking-[0.01em] text-md active:scale-95 uppercase italic"

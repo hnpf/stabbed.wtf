@@ -6,14 +6,14 @@ import { MUSIC_RELEASES, type MusicRelease } from "../constants";
 import { useTheme } from "../ThemeContext";
 import { haptic } from "../haptics";
 import { Ripple } from "../components/Ripple";
-import { 
-  Disc, 
-  Play, 
+import {
+  Album,
+  PlayArrow,
   X, 
   Share2, 
   Check,
   ExternalLink
-} from "lucide-react";
+} from "../components/MaterialIcon";
 
 /* platofrm icons modded for our m3e */
 const SpotifyIcon = ({ size = 20, className = "" }) => (
@@ -69,7 +69,7 @@ const AlbumCover = ({ release, className = "", iconSize = 40 }: { release: Music
   if (!imgSrc) {
     return (
       <div className={`bg-[var(--surface-variant)] text-[var(--on-surface-variant)] border-4 border-[var(--outline-variant)]/60 flex items-center justify-center shrink-0 relative overflow-hidden ${className}`}>
-        <Disc size={iconSize} className="text-[var(--primary)] opacity-80" />
+        <Album size={iconSize} className="text-[var(--primary)] opacity-80" />
       </div>
     );
   }
@@ -136,7 +136,7 @@ const ReleaseModal = ({ release, onClose }: { release: MusicRelease | null; onCl
               haptic.light();
               onClose();
             }}
-            className="group absolute top-3.5 right-3.5 sm:top-6 sm:right-6 p-2 sm:p-3 rounded-full bg-[var(--surface-variant)] text-[var(--on-surface-variant)] hover:bg-[var(--primary)] hover:text-[var(--on-primary)] transition-colors cursor-pointer shadow-md z-20 overflow-hidden"
+            className="group absolute top-6 right-7 w-10 h-10  rounded-full bg-[var(--surface-variant)]/60 hover:bg-[var(--surface-variant)] border-0 flex items-center justify-center transition-all cursor-pointer text-[var(--on-surface)] active:scale-95 shrink-0 shadow-none"
             aria-label="Close"
           >
             <Ripple enableHaptics={false} />
@@ -201,7 +201,7 @@ const ReleaseModal = ({ release, onClose }: { release: MusicRelease | null; onCl
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                 {Object.entries(release.links).map(([key, url]) => {
                   if (!url) return null;
-                  const platform = PLATFORM_CONFIG[key] || { label: key, icon: Disc };
+                  const platform = PLATFORM_CONFIG[key] || { label: key, icon: Album };
                   const IconComp = platform.icon;
 
                   return (
@@ -311,7 +311,7 @@ export const MusicPage = memo(({ setPage }: { setPage: (p: string) => void }) =>
 
                   {/* m3 play Container */}
                   <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[var(--primary)] text-[var(--on-primary)] flex items-center justify-center shadow-lg group-hover:scale-110 active:scale-95 transition-all shrink-0">
-                    <Play size={16} fill="currentColor" className="translate-x-0.5 sm:w-5 sm:h-5" />
+                    <PlayArrow size={20} fill className="translate-x-0.5 pr-1.5" />
                   </div>
                 </div>
 

@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, ChevronUp, ChevronDown, Search } from "lucide-react";
+import { X, ChevronUp, ChevronDown, Search } from "./MaterialIcon";
 import { cn } from "../constants";
 
 export function TextSearchBar({
@@ -66,7 +66,7 @@ export function TextSearchBar({
               className="p-1.5 hover:bg-[var(--surface-variant)] rounded-lg transition-colors"
               title="Previous match (Shift+Enter)"
             >
-              <ChevronUp size={16} className="text-[var(--on-surface-variant)]" />
+              <ChevronUp size={16} className="text-[var(--on-surface-variant)] pt-1.5" />
             </motion.button>
 
             <motion.button
@@ -76,7 +76,7 @@ export function TextSearchBar({
               className="p-1.5 hover:bg-[var(--surface-variant)] rounded-lg transition-colors"
               title="Next match (Enter)"
             >
-              <ChevronDown size={16} className="text-[var(--on-surface-variant)]" />
+              <ChevronDown size={16} className="text-[var(--on-surface-variant)] pt-1.5" />
             </motion.button>
 
             <motion.button
@@ -86,7 +86,7 @@ export function TextSearchBar({
               className="p-1.5 hover:bg-[var(--surface-variant)] rounded-lg transition-colors"
               title="Close (Escape)"
             >
-              <X size={16} className="text-[var(--on-surface-variant)]" />
+              <X size={16} className="text-[var(--on-surface-variant)] pt-1.5" />
             </motion.button>
           </div>
         </div>

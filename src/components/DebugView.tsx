@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useDragControls } from "motion/react";
 import {
   Terminal,
   X,
+  Minus,
   Palette,
   Zap,
   Trash2,
@@ -13,7 +14,6 @@ import {
   Wifi,
   CornerDownRight,
 } from "./MaterialIcon";
-import { X as LucideX, Minus as LucideMinus } from "lucide-react";
 import { useTheme } from "../ThemeContext";
 import { cn } from "../constants";
 import Switch from "./M3Switch";
@@ -558,14 +558,14 @@ export const DebugView = ({ page, blogPostId, viewport }: any) => {
                   title="Collapse to badge"
                   className="w-7 h-7 rounded-full flex items-center justify-center bg-[var(--surface-variant)]/60 hover:bg-[var(--surface-variant)] text-[var(--on-surface-variant)] border-3 border-[var(--outline-variant)]/40 transition-all cursor-pointer shrink-0"
                 >
-                  <LucideMinus size={13} className="shrink-0" />
+                    <Minus size={13} className="shrink-0" />
                 </button>
                 <button
                   onClick={() => updateSettings({ debugMode: false })}
                   title="Close and disable debug mode"
                   className="w-7 h-7 rounded-full flex items-center justify-center bg-red-500/10 hover:bg-red-500/10 text-red-500 border-3 border-red-500/20 transition-all cursor-pointer shrink-0"
                 >
-                  <LucideX size={13} className="shrink-0" />
+                    <X size={13} className="shrink-0" />
                 </button>
               </div>
             </div>

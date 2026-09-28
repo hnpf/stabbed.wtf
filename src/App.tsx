@@ -1,7 +1,6 @@
 // @ts-nocheck
 import React, { useState, useEffect, useRef, memo, lazy, Suspense } from "react";
 import { motion, AnimatePresence, MotionConfig } from "motion/react";
-import { Github } from "lucide-react";
 
 import { useTheme } from "./ThemeContext";
 import { ScrollToTopButton } from "./components/ScrollToTopButton";
@@ -41,7 +40,7 @@ import { FoolsPopup } from "./components/FoolsPopup";
 import { BounceButton } from "./components/TechStack";
 import { ExpressiveTooltip } from "./components/ExpressiveTooltip";
 import { M3WindowScrollBar, M3ScrollBar } from "./components/M3ScrollBar";
-import { materialIcon } from "./components/MaterialIcon";
+import { Code2, materialIcon } from "./components/MaterialIcon";
 import { BLOG_POSTS } from "./constants";
 import { RippleScope } from "./components/RippleScope";
 import { haptic } from "./haptics";
@@ -517,7 +516,7 @@ export default function App() {
                       layout="position"
                       transition={springConfig}
                       isMini={settings.sidebarCollapsed}
-                      icon={Github}
+                      icon={Code2}
                       label="GitHub"
                       url="https://github.com/hnpf"
                       className={cn(
