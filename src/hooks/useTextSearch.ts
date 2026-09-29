@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 export interface TextSearchState {
   query: string;
@@ -15,8 +15,6 @@ export function useTextSearch() {
     matchCount: 0,
     currentMatch: 0,
   });
-
-  const activeMatchRef = useRef<HTMLElement | null>(null);
 
   const getMatchElements = () => {
     const mainContent = document.querySelector("main") || document.body;
@@ -45,7 +43,6 @@ export function useTextSearch() {
     target.style.boxShadow = "0 0 0 2px #ec4899";
     target.style.padding = "2px 4px";
     target.scrollIntoView({ block: "nearest", inline: "nearest" });
-    activeMatchRef.current = target;
   }, []);
 
   // remove all highlights from the page
@@ -57,8 +54,9 @@ export function useTextSearch() {
         parent.normalize();
       }
     });
-    activeMatchRef.current = null;
   }, []);
+
+  useEffect(() => () => clearHighlights(), [clearHighlights]);
 
   // highlight all matches of the search query
   const highlightMatches = useCallback((query: string) => {
