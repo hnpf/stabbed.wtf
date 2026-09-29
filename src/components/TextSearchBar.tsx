@@ -31,7 +31,7 @@ export function TextSearchBar({
         exit={{ opacity: 0, y: -4, scale: 0.99 }}
         transition={{ duration: 0.18, ease: "easeOut" }}
         style={{ transformOrigin: "top right" }}
-        className="fixed top-4 right-4 z-[9999] bg-[var(--surface)] border-3 border-[var(--outline-variant)]/50 rounded-[2rem] shadow-lg backdrop-blur-md"
+        className="fixed top-4 right-4 z-[9999] bg-[var(--surface)] border-3 border-[var(--outline-variant)]/50 focus-within:border-[var(--primary)]/50 rounded-[2rem] shadow-lg backdrop-blur-md transition-colors duration-150"
       >
         <div className="flex items-center gap-3 p-4">
           <Search size={18} className="text-[var(--on-surface-variant)]" />
@@ -59,8 +59,8 @@ export function TextSearchBar({
 
           <div className="flex items-center gap-1 border-l-2 border-[var(--outline-variant)]/20 pl-2">
             <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
               onClick={onPrevMatch}
               className="p-1.5 hover:bg-[var(--surface-variant)] rounded-lg transition-colors"
               title="Previous match (Shift+Enter)"
@@ -69,8 +69,8 @@ export function TextSearchBar({
             </motion.button>
 
             <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
               onClick={onNextMatch}
               className="p-1.5 hover:bg-[var(--surface-variant)] rounded-lg transition-colors"
               title="Next match (Enter)"
@@ -79,8 +79,8 @@ export function TextSearchBar({
             </motion.button>
 
             <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
               onClick={onClose}
               className="p-1.5 hover:bg-[var(--surface-variant)] rounded-lg transition-colors"
               title="Close (Escape)"
