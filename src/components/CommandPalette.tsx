@@ -477,9 +477,9 @@ export function CommandPalette({
 
               <div
                 className={cn(
-                  "flex h-15 flex-1 items-center rounded-full bg-[var(--surface)] pl-5 pr-1.5 transition-all duration-200 border-3",
+                    "flex h-15 flex-1 items-center rounded-full bg-[var(--surface)] pl-5 pr-1.5 transition-[border-color,box-shadow] duration-200 border-3",
                   searchFocus
-                    ? "border-[var(--outline-variant)]/80 shadow-sm"
+                      ? "border-[var(--primary)]/50 shadow-sm"
                     : "border-[var(--outline-variant)]/40 hover:border-[var(--outline-variant)]/70"
                 )}
               >
@@ -493,7 +493,7 @@ export function CommandPalette({
                   onFocus={() => setSearchFocus(true)}
                   onBlur={() => setSearchFocus(false)}
                   placeholder="Search commands, pages, blog posts, settings..."
-                  className="min-w-0 flex-1 bg-transparent text-[15px] font-bold text-[var(--on-surface)] outline-none placeholder:text-[var(--on-surface-variant)] placeholder:opacity-50 pr-2"
+                  className="min-w-0 flex-1 bg-transparent text-[15px] font-bold text-[var(--on-surface)] placeholder:text-[var(--on-surface-variant)] placeholder:opacity-50 pr-2 focus-visible:outline-none focus-visible:shadow-none"
                   aria-label="Search command palette"
                 />
                 <motion.button

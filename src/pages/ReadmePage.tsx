@@ -29,7 +29,7 @@ const InfoCardHeading = ({ icon: Icon, children, className }: any) => (
   </div>
 );
 
-const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; setPage: (p: string) => void, is_mobile: boolean }) => {
+const LetterMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; setPage: (p: string) => void, is_mobile: boolean }) => {
   const letters = "virex".split("");
   const [flickering, setFlick] = useState<number[]>([]);
   const [swoopDone, setSwoopDone] = useState(false);
@@ -407,7 +407,7 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
 
 export const ReadmePage = memo(({ setPage, is_mobile }: { setPage: (page: string) => void, is_mobile: boolean }) => {
   return (
-    <BullshitMatrix
+    <LetterMatrix
       onBack={() => setPage("home")}
       setPage={setPage}
       is_mobile={is_mobile}

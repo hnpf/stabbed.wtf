@@ -164,7 +164,7 @@ export const BounceButton = ({
   );
 };
 
-export const TechChip = ({ label, key }: { label: string; key?: any }) => { // yes this is a required key prop, don't ask :(
+export const TechChip = ({ label }: { label: string; key?: any }) => {
   const ref = useRef<HTMLSpanElement>(null);
   const [pos, set_pos] = useState({ x: 50, y: 50 });
   const [hovered, set_hovered] = useState(false);

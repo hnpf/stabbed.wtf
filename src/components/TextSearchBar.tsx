@@ -23,15 +23,14 @@ export function TextSearchBar({
   matchCount: number;
   currentMatch: number;
 }) {
-  if (!isOpen) return null;
-
   return (
     <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -10 }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      {isOpen && <motion.div
+        initial={{ opacity: 0, y: -6, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: -4, scale: 0.99 }}
+        transition={{ duration: 0.18, ease: "easeOut" }}
+        style={{ transformOrigin: "top right" }}
         className="fixed top-4 right-4 z-[9999] bg-[var(--surface)] border-3 border-[var(--outline-variant)]/50 rounded-[2rem] shadow-lg backdrop-blur-md"
       >
         <div className="flex items-center gap-3 p-4">
@@ -43,7 +42,7 @@ export function TextSearchBar({
             value={query}
             onChange={(e) => onQueryChange(e.target.value)}
             placeholder="Find on page..."
-            className="w-48 outline-none bg-transparent text-sm font-medium text-[var(--on-surface)] placeholder:text-[var(--on-surface-variant)]/50"
+            className="w-48 bg-transparent text-sm font-medium text-[var(--on-surface)] placeholder:text-[var(--on-surface-variant)]/50 focus-visible:outline-none focus-visible:shadow-none"
           />
 
           {query && matchCount > 0 && (
@@ -66,7 +65,7 @@ export function TextSearchBar({
               className="p-1.5 hover:bg-[var(--surface-variant)] rounded-lg transition-colors"
               title="Previous match (Shift+Enter)"
             >
-              <ChevronUp size={16} className="text-[var(--on-surface-variant)] pt-1.5" />
+              <ChevronUp size={16} className="text-[var(--on-surface-variant)]" />
             </motion.button>
 
             <motion.button
@@ -76,7 +75,7 @@ export function TextSearchBar({
               className="p-1.5 hover:bg-[var(--surface-variant)] rounded-lg transition-colors"
               title="Next match (Enter)"
             >
-              <ChevronDown size={16} className="text-[var(--on-surface-variant)] pt-1.5" />
+              <ChevronDown size={16} className="text-[var(--on-surface-variant)]" />
             </motion.button>
 
             <motion.button
@@ -86,11 +85,11 @@ export function TextSearchBar({
               className="p-1.5 hover:bg-[var(--surface-variant)] rounded-lg transition-colors"
               title="Close (Escape)"
             >
-              <X size={16} className="text-[var(--on-surface-variant)] pt-1.5" />
+              <X size={16} className="text-[var(--on-surface-variant)]" />
             </motion.button>
           </div>
         </div>
-      </motion.div>
+      </motion.div>}
     </AnimatePresence>
   );
 }
