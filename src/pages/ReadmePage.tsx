@@ -202,7 +202,7 @@ const BullshitMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; se
           <Card noDefaultStyles
             delay={1.25}
             className="col-span-2 md:col-span-12"
-            innerClassName={cn("rounded-[3.5rem] border-4 border-[var(--outline-variant)]/40 bg-[var(--surface-variant)]/60 relative overflow-hidden group transition-colors duration-300 hover:border-[var(--primary)]/50", glass_class)}
+            innerClassName={cn("rounded-[3.5rem] border-4 border-[var(--outline-variant)]/40 bg-[var(--surface-variant)]/60 relative overflow-hidden group transition-colors duration-300", glass_class)}
           >
             <div className="absolute -right-10 -bottom-10 opacity-[0.07] group-hover:opacity-[0.12] group-hover:scale-110 group-hover:rotate-6 transition-all duration-700 pointer-events-none text-[var(--primary)]">
               <Album size={240} />
