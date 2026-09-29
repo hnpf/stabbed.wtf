@@ -16,9 +16,6 @@ export function useTextSearch() {
     currentMatch: 0,
   });
 
-  const highlightedNodesRef = useRef<
-    Array<{ node: Node; originalHTML: string }>
-  >([]);
   const activeMatchRef = useRef<HTMLElement | null>(null);
 
   const getMatchElements = () => {
@@ -53,12 +50,13 @@ export function useTextSearch() {
 
   // remove all highlights from the page
   const clearHighlights = useCallback(() => {
-    highlightedNodesRef.current.forEach(({ node, originalHTML }: { node: Node; originalHTML: string }) => {
-      if (node.parentElement) {
-        node.parentElement.innerHTML = originalHTML;
+    getMatchElements().forEach((mark) => {
+      const parent = mark.parentNode;
+      if (parent) {
+        mark.replaceWith(document.createTextNode(mark.textContent || ""));
+        parent.normalize();
       }
     });
-    highlightedNodesRef.current = [];
     activeMatchRef.current = null;
   }, []);
 
@@ -71,42 +69,41 @@ export function useTextSearch() {
       return;
     }
 
-    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
-    let matchCount = 0;
+    const regex = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
     const mainContent = document.querySelector("main") || document.body;
-
-    const walk = (node: Node) => {
-      if (node.nodeType === Node.TEXT_NODE) {
-        const text = node.textContent || "";
-        if (regex.test(text)) {
-          const span = document.createElement("span");
-          span.innerHTML = text.replace(
-            regex,
-            `<mark data-search-match style="background-color: rgba(245, 158, 11, 0.4); color: #000000; border-radius: 4px; padding: 2px 4px;">$1</mark>`
-          );
-
-          if (node.parentElement) {
-            const originalHTML = node.parentElement.innerHTML;
-            node.parentElement.replaceChild(span, node);
-            highlightedNodesRef.current.push({
-              node: span,
-              originalHTML,
-            });
-          }
-
-          matchCount += (text.match(regex) || []).length;
-          regex.lastIndex = 0;
+    const walker = document.createTreeWalker(mainContent, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        const parent = node.parentElement;
+        if (!parent || parent.closest("script, style, code, input, textarea, select, [contenteditable='true']")) {
+          return NodeFilter.FILTER_REJECT;
         }
-      } else if (node.nodeType === Node.ELEMENT_NODE) {
-        const element = node as Element;
-        // skip script, style, and code highlight elements
-        if (!["SCRIPT", "STYLE", "CODE"].includes(element.tagName)) {
-          Array.from(node.childNodes).forEach(walk);
-        }
-      }
-    };
+        return NodeFilter.FILTER_ACCEPT;
+      },
+    });
+    const textNodes: Text[] = [];
+    while (walker.nextNode()) textNodes.push(walker.currentNode as Text);
 
-    walk(mainContent);
+    textNodes.forEach((textNode) => {
+      const text = textNode.textContent || "";
+      const matches = Array.from(text.matchAll(regex));
+      if (matches.length === 0 || !textNode.parentNode) return;
+
+      const fragment = document.createDocumentFragment();
+      let offset = 0;
+      matches.forEach((match) => {
+        const start = match.index ?? offset;
+        if (start > offset) fragment.append(document.createTextNode(text.slice(offset, start)));
+        const mark = document.createElement("mark");
+        mark.dataset.searchMatch = "true";
+        mark.textContent = match[0];
+        mark.style.cssText = "background-color: rgba(245, 158, 11, 0.4); color: #000000; border-radius: 4px; padding: 2px 4px;";
+        fragment.append(mark);
+        offset = start + match[0].length;
+      });
+      if (offset < text.length) fragment.append(document.createTextNode(text.slice(offset)));
+      textNode.replaceWith(fragment);
+    });
+
     const effectiveCount = getMatchElements().length;
     setSearchState((prev: TextSearchState) => ({
       ...prev,
