@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence, useMotionValue, useTransform, animate } from "motion/react";
-import { MessageSquare, X, Loader2, CheckCircle, Send, Calendar, Share2 } from "./MaterialIcon";
+import { group, X, Loader2, CheckCircle, Send, Calendar, Share2 } from "./MaterialIcon";
 import { cn } from "../constants";
 
 interface GuestbookDialogProps {
@@ -309,7 +309,7 @@ export const GuestbookDialog = ({
               )}>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-[var(--primary-container)]/60 border-3 border-[var(--primary)]/20 flex items-center justify-center shrink-0 text-[var(--primary)] shadow-sm">
-                    <MessageSquare size={20} />
+                    <group size={20} />
                   </div>
                   <h2 className="font-black text-xl md:text-2xl font-expressive uppercase tracking-tight">
                     Guestbook

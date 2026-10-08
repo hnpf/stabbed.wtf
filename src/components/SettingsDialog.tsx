@@ -14,6 +14,7 @@ import {
   Layers,
   Cpu,
   Fingerprint,
+  Tune,
   ExternalLink,
   Download,
   Upload,
@@ -229,7 +230,7 @@ export const SettingsDialog = memo(({
     : MAIN_PAGES;
 
   const BOTTOM_PAGES = [
-    { id: "system", title: "Backup & System", desc: "Config backup, changelog, feedback & bugs", icon: Fingerprint },
+    { id: "system", title: "Backup & System", desc: "Config backup, changelog, feedback & bugs", icon: Tune },
   ] as const;
 
   const PAGES = [...MAIN_PAGES, ...BOTTOM_PAGES] as const;
@@ -1282,7 +1283,7 @@ export const SettingsDialog = memo(({
         return (
           <section className="space-y-6">
             <div className="flex items-center gap-3 mb-6">
-              <Fingerprint size={20} className="text-[var(--primary)]" />
+              <Tune size={20} className="text-[var(--primary)]" />
               <h3 className="text-[17px] font-black tracking-[0.1em] text-[var(--on-surface-variant)] font-display">
                 Backup & System
               </h3>
@@ -1915,7 +1916,7 @@ export const SettingsDialog = memo(({
                             whileTap={{ scale: 0.98 }}
                             transition={{ type: "spring", stiffness: 400, damping: 25 }}
                             className={cn(
-                              "flex items-center w-full px-3 py-3 gap-3 transition-colors duration-200 border-0 outline-none select-none cursor-pointer group",
+                              "flex items-center w-full px-3 py-3 gap-3 transition-colors duration-200 border-0 outline-none select-none cursor-pointer group shrink-0",
                               roundedClass,
                               isActive
                                 ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
@@ -1932,8 +1933,8 @@ export const SettingsDialog = memo(({
                                     : "bg-[var(--surface)] text-[var(--primary)]"
                               )}
                             >
-                              <div className="flex items-center justify-center transition-transform duration-200 ease-out group-hover:scale-105">
-                                <PageIcon size={18} fill={false} weight={isActive ? 600 : 450} />
+                              <div className="flex items-center justify-center">
+                                <PageIcon size={18} fill={isActive} weight={isActive ? 400 : 350} />
                               </div>
                             </div>
 
@@ -1990,7 +1991,7 @@ export const SettingsDialog = memo(({
                               whileTap={{ scale: 0.98 }}
                               transition={{ type: "spring", stiffness: 400, damping: 25 }}
                               className={cn(
-                                "flex items-center w-full px-3 py-3 gap-3 transition-colors duration-200 border-0 outline-none select-none cursor-pointer group",
+                                "flex items-center w-full px-3 py-3 gap-3 transition-colors duration-200 border-0 outline-none select-none cursor-pointer group shrink-0",
                                 roundedClass,
                                 isActive
                                   ? "bg-[var(--primary-container)] text-[var(--on-primary-container)]"
@@ -2005,8 +2006,8 @@ export const SettingsDialog = memo(({
                                     : "bg-[var(--surface)] text-[var(--primary)]"
                                 )}
                               >
-                                <div className="flex items-center justify-center transition-transform duration-200 ease-out group-hover:scale-105">
-                                  <PageIcon size={18} fill={false} weight={isActive ? 600 : 450} />
+                                <div className="flex items-center justify-center">
+                                  <PageIcon size={18} fill={isActive} weight={isActive ? 400 : 350} />
                                 </div>
                               </div>
                               <span className={cn(

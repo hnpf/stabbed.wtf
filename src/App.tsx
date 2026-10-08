@@ -40,22 +40,22 @@ import { FoolsPopup } from "./components/FoolsPopup";
 import { BounceButton } from "./components/TechStack";
 import { ExpressiveTooltip } from "./components/ExpressiveTooltip";
 import { M3WindowScrollBar, M3ScrollBar } from "./components/M3ScrollBar";
-import { Code2, materialIcon } from "./components/MaterialIcon";
+import { deployed_code, materialIcon } from "./components/MaterialIcon";
 import { BLOG_POSTS } from "./constants";
 import { RippleScope } from "./components/RippleScope";
 import { haptic } from "./haptics";
 
-const M3Home = materialIcon("home");
-const M3Info = materialIcon("fingerprint");
-const M3Blog = materialIcon("menu_book");
-const M3Lens = materialIcon("photo_camera");
-const M3Now = materialIcon("monitor_heart");
-const M3Music = materialIcon("headphones");
+const M3Home = materialIcon("cottage");
+const M3Info = materialIcon("person");
+const M3Blog = materialIcon("article");
+const M3Lens = materialIcon("photo_library");
+const M3Now = materialIcon("celebration");
+const M3Music = materialIcon("album");
 const M3Settings = materialIcon("settings");
 const M3ChevronLeft = materialIcon("chevron_left");
 const M3ChevronRight = materialIcon("chevron_right");
 const M3FocusOff = materialIcon("visibility_off");
-const M3Chat = materialIcon("forum");
+const group = materialIcon("group");
 
 export default function App() {
   const { settings, updateSettings, actualTheme, cycleTheme } = useTheme();
@@ -516,7 +516,7 @@ export default function App() {
                       layout="position"
                       transition={springConfig}
                       isMini={settings.sidebarCollapsed}
-                      icon={Code2}
+                      icon={deployed_code}
                       label="GitHub"
                       url="https://github.com/hnpf"
                       className={cn(
@@ -530,7 +530,7 @@ export default function App() {
                       layout="position"
                       transition={springConfig}
                       isMini={settings.sidebarCollapsed}
-                      icon={M3Chat}
+                      icon={group}
                       label="Discord"
                       url="https://discord.gg/TSZNYbjzF7"
                       className={cn(

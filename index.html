@@ -60,7 +60,7 @@
       @font-face {
         font-family: 'Material Symbols Rounded';
         font-style: normal;
-        font-weight: 100 700;
+        font-weight: 1 1000;
         font-display: block;
         src: url('/fonts/MaterialSymbolsRounded.woff2') format('woff2');
       }
@@ -72,8 +72,16 @@
       }
       .material-symbols-rounded {
         font-family: 'Material Symbols Rounded', sans-serif !important;
+        font-weight: normal !important;
         font-stretch: 100% !important;
         font-style: normal !important;
+        letter-spacing: normal !important;
+        text-transform: none !important;
+        font-feature-settings: 'liga' 1 !important;
+        -webkit-font-feature-settings: 'liga' 1 !important;
+        font-variant-ligatures: normal !important;
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
       }
     </style>
   </head>

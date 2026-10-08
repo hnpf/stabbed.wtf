@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useState, useEffect, memo } from "react";
 import { motion } from "motion/react";
-import { Activity, MapPin, History, Target, SquareTerminal, Code2, Archive, MessageSquare, Home, Headphones, Album, MusicNote } from "../components/MaterialIcon";
+import { Activity, MapPin, History, Target, SquareTerminal, deployed_code, tech_stack, Archive, group, Home, Album, MusicNote, Science, Face } from "../components/MaterialIcon";
 import { GitHubCalendar } from 'react-github-calendar';
 import { cn, TECH_STACK } from "../constants";
 import { useTheme } from "../ThemeContext";
@@ -12,10 +12,10 @@ import { Ripple } from "../components/Ripple";
 
 const Badge = ({ icon: Icon, children, className }: any) => (
   <span className={cn(
-    "px-4 sm:px-6 py-2 sm:py-3 bg-[var(--surface-variant)]/40 text-[var(--on-surface-variant)] rounded-2xl text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] flex items-center gap-2 sm:gap-3 border-4 border-[var(--outline-variant)]/40 italic whitespace-nowrap",
+    "px-4 sm:px-5 py-2 sm:py-2.5 bg-[var(--surface-variant)]/50 text-[var(--on-surface)] rounded-full text-[11px] sm:text-[12px] font-bold tracking-wider flex items-center gap-2 sm:gap-2.5 border-2 border-[var(--outline-variant)]/50 transition-colors shadow-xs select-none whitespace-nowrap",
     className
   )}>
-    {Icon && <Icon size={14} />}
+    {Icon && <Icon size={18} className="shrink-0 text-[var(--primary)]" />}
     {children}
   </span>
 );
@@ -100,14 +100,14 @@ const LetterMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; setP
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
-            className="flex flex-col items-center gap-3 mt-12 md:mt-4"
+            className="flex flex-col items-center gap-3 mt-10 md:mt-3"
           >
-            <Badge icon={Activity} className="bg-[var(--primary-container)]/60 text-[var(--on-primary-container)] border-[var(--primary)]/20 shadow-lg">
+            <Badge icon={Science} className="bg-[var(--primary-container)]/70 text-[var(--on-primary-container)] border-[var(--primary)]/30 font-black uppercase tracking-widest shadow-md">
               Researching
             </Badge>
-            <div className="flex flex-row gap-3 justify-center">
+            <div className="flex flex-row gap-3 justify-center flex-wrap">
               <Badge icon={MapPin}>Nederland</Badge>
-              <Badge>He / They</Badge>
+              <Badge icon={Face}>He / They</Badge>
             </div>
           </motion.div>
         </div>
@@ -172,7 +172,7 @@ const LetterMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; setP
               </p>
             </div>
             <div className="absolute -right-8 -bottom-8 opacity-[0.03] group-hover:scale-110 group-hover:opacity-[0.05] transition-all duration-700">
-              <Activity size={240} />
+              <History size={240} />
             </div>
           </Card>
 
@@ -210,7 +210,7 @@ const LetterMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; setP
 
             <div className="relative z-10 px-6 py-8 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
               <div className="space-y-4 flex-1 min-w-0">
-                <InfoCardHeading className="group-hover:text-[var(--primary)]" icon={Headphones}>
+                <InfoCardHeading className="group-hover:text-[var(--primary)]" icon={Album}>
                   Music Production
                 </InfoCardHeading>
                 <h4 className="text-3xl md:text-4xl font-display font-black tracking-tight italic leading-tight">
@@ -235,6 +235,9 @@ const LetterMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; setP
             className="col-span-2 md:col-span-12 lg:col-span-6"
             innerClassName="bg-[#0a0a0a] text-white/90 px-5 py-8 md:p-10 rounded-[3.5rem] border-6 border-white/5 font-mono relative group overflow-hidden transition-colors duration-200 flex flex-col gap-6"
           >
+            <div className="absolute -right-10 -bottom-10 opacity-[0.07] group-hover:opacity-[0.12] group-hover:scale-110 group-hover:rotate-6 transition-all duration-700 pointer-events-none text-[var(--primary)]">
+              <SquareTerminal size={240} />
+            </div>
             <div className="flex items-center ml-2 gap-3 transition-opacity group-hover:opacity-100 mb-4">
               <SquareTerminal className="text-[var(--primary)] w-5 h-5 md:w-6 md:h-6" />
               <span className="text-sm md:text-base font-mono font-bold tracking-[0.1em] opacity-80"><span className="text-[var(--primary)]">virex</span>@<span className="text-[var(--primary)]">virex-arch-linux</span></span>
@@ -263,7 +266,7 @@ const LetterMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; setP
             className="col-span-2 md:col-span-12 lg:col-span-6"
             innerClassName={cn("px-6 py-8 md:p-12 bg-[var(--surface-variant)]/60 rounded-[3.5rem] border-6 border-[var(--outline-variant)]/40 transition-colors duration-200 group flex flex-col gap-8", glass_class)}
           >
-            <InfoCardHeading className="group-hover:text-[var(--primary)]" icon={Code2}>
+            <InfoCardHeading className="group-hover:text-[var(--primary)]" icon={tech_stack}>
               Tech stack
             </InfoCardHeading>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
@@ -314,7 +317,7 @@ const LetterMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; setP
             className="col-span-2 md:col-span-12"
             innerClassName={cn("px-6 py-8 md:p-12 bg-[var(--surface-variant)]/60 rounded-[3.5rem] border-6 border-[var(--outline-variant)]/40 flex flex-col gap-8 group transition-colors duration-200 overflow-hidden", glass_class)}
           >
-            <InfoCardHeading className="group-hover:text-[var(--primary)]" icon={Code2}>
+            <InfoCardHeading className="group-hover:text-[var(--primary)]" icon={deployed_code}>
               GitHub activity
             </InfoCardHeading>
             <div className="w-full font-display text-sm opacity-80 mt-2">
@@ -358,13 +361,13 @@ const LetterMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; setP
             className="grid w-full max-w-[460px] grid-cols-2 gap-6 md:gap-8 mx-auto"
           > { /* ok ok no parent delegation jank shortcuts, found out the hard way */ }
             <BounceButton
-              icon={Code2}
+              icon={deployed_code}
               label="GitHub"
               url="https://github.com/hnpf"
               className="m3-button-tonal ring-8 ring-[var(--outline-variant)]/30 w-full max-w-[220px] h-16 rounded-3xl font-black tracking-[0.01em] text-md active:scale-95 uppercase italic"
             />
             <BounceButton
-              icon={MessageSquare} 
+              icon={group} 
               label="Discord"
               url="https://discord.gg/TSZNYbjzF7"
               className="m3-button-tonal ring-8 ring-[var(--outline-variant)]/30 w-full max-w-[220px] h-16 rounded-3xl font-black tracking-[0.01em] text-md active:scale-95 uppercase italic"

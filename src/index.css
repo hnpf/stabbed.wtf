@@ -4,7 +4,7 @@
 @font-face {
     font-family: 'Material Symbols Rounded';
     font-style: normal;
-    font-weight: 100 700;
+    font-weight: 1 1000;
     font-display: block;
     src: url('/fonts/MaterialSymbolsRounded.woff2') format('woff2');
 }
@@ -104,12 +104,12 @@ body, .gsf-global {
         white-space: nowrap;
         word-wrap: normal;
         direction: ltr;
-        -webkit-font-feature-settings: "liga" 1;
-        font-feature-settings: "liga" 1;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-rendering: optimizeLegibility;
-        font-variation-settings: "FILL" 0, "wght" 450, "GRAD" 0, "opsz" 24;
+        -webkit-font-feature-settings: "liga" 1 !important;
+        font-feature-settings: "liga" 1 !important;
+        font-variant-ligatures: normal !important;
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
+        text-rendering: optimizeLegibility !important;
         user-select: none;
     }
 

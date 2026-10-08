@@ -5,7 +5,7 @@ export const BLOG_POSTS = [
   {
     "id": "internet-useless-info",
     "title": "THE INTERNET IS MAKING ME ODDLY GOOD AT KNOWING RANDOM USELESS THINGS",
-    "snippet": "how random yt videos and bullshit geography studying can quite literally build a highway of hyper specific trivia",
+    "snippet": "how random yt videos and bs geography studying can quite literally build a highway of hyper specific trivia",
     "link": "internet-useless-info",
     "date": "Sep 20, 2026",
     "category": "reflecting"

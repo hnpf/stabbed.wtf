@@ -26,7 +26,7 @@ export function MaterialIcon({
   const sizePx = typeof size === "number" ? `${size}px` : size;
   const numericSize = typeof size === "number" ? size : parseInt(String(size), 10) || 24;
   const isFilled = fill === true || fill === 1 || fill === "1" || fill === "true";
-  const resolvedWeight = weight ?? (strokeWidth ? (strokeWidth >= 2.5 ? 600 : 450) : 450);
+  const resolvedWeight = weight ?? (strokeWidth ? (strokeWidth >= 2.5 ? 500 : strokeWidth >= 2 ? 400 : 300) : 300);
   const resolvedOpsz = opsz ?? Math.min(48, Math.max(20, Math.round(numericSize)));
 
   const iconStyle: CSSProperties = {
@@ -35,11 +35,12 @@ export function MaterialIcon({
     width: sizePx,
     height: sizePx,
     lineHeight: 1,
-    fontWeight: resolvedWeight,
+    fontWeight: "normal",
     fontStretch: "100%",
     fontStyle: "normal",
     letterSpacing: "normal",
     textTransform: "none",
+    fontFeatureSettings: '"liga" 1',
     fontVariationSettings: `'FILL' ${isFilled ? 1 : 0}, 'wght' ${resolvedWeight}, 'GRAD' ${grade}, 'opsz' ${resolvedOpsz}`,
     WebkitFontSmoothing: "antialiased",
     MozOsxFontSmoothing: "grayscale",
@@ -94,16 +95,18 @@ export const Activity = materialIcon("monitor_heart");
 export const Link = materialIcon("link");
 export const Link2 = materialIcon("link");
 export const Compass = materialIcon("explore");
-export const MessageSquare = materialIcon("chat_bubble");
+export const group = materialIcon("group");
+export const cottage = materialIcon("cottage");
 export const Loader2 = materialIcon("progress_activity");
 export const Send = materialIcon("send");
 export const Calendar = materialIcon("calendar_month");
 export const Share2 = materialIcon("share");
 export const MapPin = materialIcon("location_on");
 export const History = materialIcon("history");
-export const Target = materialIcon("my_location");
+export const Target = materialIcon("strategy");
 export const SquareTerminal = materialIcon("terminal");
-export const Code2 = materialIcon("code");
+export const deployed_code = materialIcon("deployed_code");
+export const tech_stack = materialIcon("stacks");
 export const Archive = materialIcon("archive");
 export const ArrowUpRight = materialIcon("north_east");
 export const ArrowRight = materialIcon("arrow_forward");
@@ -116,9 +119,20 @@ export const Copy = materialIcon("content_copy");
 export const Hash = materialIcon("tag");
 export const Globe = materialIcon("language");
 export const Construction = materialIcon("construction");
+export const Science = materialIcon("science");
+export const TravelExplore = materialIcon("travel_explore");
+export const Psychology = materialIcon("psychology");
+export const Face = materialIcon("face");
+export const BadgeIcon = materialIcon("badge");
 export const Info = materialIcon("info");
+export const Person = materialIcon("person");
+export const AccountCircle = materialIcon("account_circle");
 export const Zap = materialIcon("bolt");
+export const Bolt = materialIcon("bolt");
 export const Database = materialIcon("database");
+export const Tune = materialIcon("tune");
+export const Article = materialIcon("article");
+export const PhotoLibrary = materialIcon("photo_library");
 export const Search = materialIcon("search");
 export const MousePointer = materialIcon("ads_click");
 export const HelpCircle = materialIcon("help");
@@ -130,7 +144,7 @@ export const Tag = materialIcon("sell");
 export const Folder = materialIcon("folder");
 export const ViewModule = materialIcon("view_module");
 export const ViewList = materialIcon("view_list");
-export const Home = materialIcon("home");
+export const Home = materialIcon("cottage");
 export const Cloud = materialIcon("cloud");
 export const ImageIcon = materialIcon("image");
 export const Trash2 = materialIcon("delete");

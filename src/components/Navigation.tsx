@@ -61,7 +61,7 @@ export const SideItem = memo(
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           className={cn(
-            "relative group outline-none cursor-pointer select-none flex flex-col justify-center items-center w-full shadow-none bg-transparent gap-0 sidebar-item rounded-2xl",
+            "relative group outline-none cursor-pointer select-none flex flex-col justify-center items-center w-full shadow-none bg-transparent gap-0 sidebar-item rounded-2xl shrink-0",
             isShort ? "h-12" : "h-16",
             isSelected && "active",
           )}
@@ -93,17 +93,15 @@ export const SideItem = memo(
 
             <div
               className={cn(
-                "relative z-10 flex items-center justify-center transition-transform duration-200 ease-out",
+                "relative z-10 flex items-center justify-center transition-colors duration-200",
                 isSelected
-                  ? "text-[var(--on-primary-container)] scale-110 -rotate-6"
+                  ? "text-[var(--on-primary-container)]"
                   : isHovered
-                    ? text === "Settings"
-                      ? "text-[var(--primary)] scale-105 rotate-45"
-                      : "text-[var(--primary)] scale-105 -rotate-3"
-                    : "text-[var(--on-surface-variant)] scale-100 rotate-0"
+                    ? "text-[var(--primary)]"
+                    : "text-[var(--on-surface-variant)]"
               )}
             >
-              <Icon size={24} weight={isSelected ? 600 : 450} fill={false} />
+              <Icon size={24} weight={isSelected ? 400 : 350} fill={isSelected} />
             </div>
           </div>
 
@@ -134,7 +132,7 @@ export const SideItem = memo(
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className={cn(
-          "relative group outline-none cursor-pointer flex items-center w-full px-3.5 gap-3.5 transition-colors duration-200 sidebar-item select-none border-0 shadow-none ring-0 overflow-hidden",
+          "relative group outline-none cursor-pointer flex items-center w-full px-3.5 gap-3.5 transition-colors duration-200 sidebar-item select-none border-0 shadow-none ring-0 overflow-hidden shrink-0",
           isFloating ? "py-4" : isShort ? "py-2.5" : "py-3.5",
           rd,
           isSelected
@@ -148,23 +146,12 @@ export const SideItem = memo(
           className={cn(
             "relative z-10 shrink-0 flex items-center justify-center w-11 h-11 rounded-full transition-colors duration-200 border-0 shadow-none outline-none ring-0",
             isSelected
-              ? "bg-[var(--primary)] text-[var(--on-primary)]"
+              ? "bg-[var(--primary)] text-[var(--on-primary)] shadow-sm"
               : "bg-[var(--surface)] text-[var(--primary)]"
           )}
         >
-          <div
-            className={cn(
-              "flex items-center justify-center transition-transform duration-200 ease-out",
-              isSelected
-                ? "scale-105 -rotate-6"
-                : isHovered
-                  ? text === "Settings"
-                    ? "scale-105 rotate-45"
-                    : "scale-105 -rotate-3"
-                  : "scale-100 rotate-0"
-            )}
-          >
-            <Icon size={24} weight={isSelected ? 600 : 450} fill={false} />
+          <div className="flex items-center justify-center">
+            <Icon size={24} weight={isSelected ? 400 : 350} fill={isSelected} />
           </div>
         </div>
 
