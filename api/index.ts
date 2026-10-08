@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import { vxaddguestbook, vxlistguestbook, validateGuestbookMessage } from './guestbook_db.js';
+import { vxaddguestbook, vxlistguestbook, vxreactguestbook, validateGuestbookMessage } from './guestbook_db.js';
 
 dotenv.config();
 
@@ -17,7 +17,17 @@ app.get('/api/guestbook', (req, res) => {
 
 app.post('/api/guestbook', (req, res) => {
   try {
-    let { name, message } = req.body;
+    const { action, id, emoji, delta, name, message, sticker } = req.body;
+    
+    // handle action
+    if (action === 'react') {
+      if (!id || !emoji || typeof emoji !== 'string') {
+        return res.status(400).json({ error: 'id and emoji are required for reaction' });
+      }
+      const updated = vxreactguestbook(id, emoji, typeof delta === 'number' ? delta : 1);
+      return res.json(updated || { success: true });
+    }
+
     if (!message || typeof message !== 'string') {
       return res.status(400).json({ error: 'message is required and must be a string!' });
     }
@@ -31,8 +41,22 @@ app.post('/api/guestbook', (req, res) => {
     if (!validateGuestbookMessage(cleanName)) {
       return res.status(400).json({ error: 'your alias contains flagged content. please keep it clean! :(' });
     }
-    const entry = vxaddguestbook(cleanName, cleanMessage);
+    const cleanSticker = typeof sticker === 'string' && sticker.trim() ? sticker.trim().slice(0, 30) : undefined;
+    const entry = vxaddguestbook(cleanName, cleanMessage, cleanSticker);
     res.status(201).json(entry);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/api/guestbook/react', (req, res) => {
+  try {
+    const { id, emoji, delta } = req.body;
+    if (!id || !emoji || typeof emoji !== 'string') {
+      return res.status(400).json({ error: 'id and emoji are required' });
+    }
+    const updated = vxreactguestbook(id, emoji, typeof delta === 'number' ? delta : 1);
+    res.json(updated || { success: true });
   } catch (err: any) {
     res.status(500).json({ error: err.message });
   }

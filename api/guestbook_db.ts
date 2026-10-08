@@ -6,6 +6,8 @@ export interface GuestbookEntry {
   name: string;
   message: string;
   created_at: string;
+  sticker?: string;
+  reactions?: Record<string, number>;
 }
 
 const DB_PATH = process.env.VERCEL ? '/tmp/guestbook_db.json' : join(process.cwd(), 'guestbook_db.json');
@@ -94,7 +96,7 @@ function write_db(data: GuestbookEntry[]) {
   }
 }
 
-export function vxaddguestbook(name: string, message: string) {
+export function vxaddguestbook(name: string, message: string, sticker?: string) {
   if (!validateGuestbookMessage(message)) {
     throw new Error('Your message contains flagged content. Keep it clean!');
   }
@@ -108,10 +110,36 @@ export function vxaddguestbook(name: string, message: string) {
     id: Date.now(),
     name: name.trim().slice(0, 30) || 'anonymous',
     message: message.trim().slice(0, 200), // max 200 chars
-    created_at: new Date().toISOString()
+    created_at: new Date().toISOString(),
+    ...(sticker && typeof sticker === 'string' ? { sticker: sticker.trim().slice(0, 30) } : {}),
+    reactions: {}
   };
   
   db.push(entry);
+  write_db(db);
+  return entry;
+}
+
+export function vxreactguestbook(id: number | string, emoji: string, delta = 1) {
+  const db = read_db();
+  const entryId = Number(id);
+  const entry = db.find(e => Number(e.id) === entryId);
+  if (!entry) return null;
+
+  if (!entry.reactions || typeof entry.reactions !== 'object') {
+    entry.reactions = {};
+  }
+
+  const cleanEmoji = emoji.slice(0, 16);
+  const current = Number(entry.reactions[cleanEmoji]) || 0;
+  const next = Math.max(0, current + delta);
+
+  if (next === 0) {
+    delete entry.reactions[cleanEmoji];
+  } else {
+    entry.reactions[cleanEmoji] = next;
+  }
+
   write_db(db);
   return entry;
 }

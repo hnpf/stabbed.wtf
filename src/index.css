@@ -472,7 +472,7 @@ body, .gsf-global {
         @apply bg-[var(--primary-container)]/10;
     }
 
-    /* ── code block shell — fully theme-aware ── */
+    /* ── code block shell + fully theme-aware ── */
     .code-block-wrapper {
         background-color: var(--surface-variant);
         color: var(--on-surface);

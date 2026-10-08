@@ -42,3 +42,43 @@ export const haptic = {
     } catch (e) {}
   },
 };
+
+export function triggerReactionFeedback(reaction: string, isRemoving = false) {
+  if (isRemoving) {
+    haptic.light();
+    return;
+  }
+
+  switch (reaction) {
+    case "🔥":
+    case "🔥 Fire":
+      haptic.medium();
+      break;
+    case "✨":
+    case "✨ Spark":
+    case "💖":
+    case "⭐":
+    case "💫":
+      haptic.light();
+      break;
+    case "💀":
+    case "💀 Skull":
+    case "🔪":
+    case "🔪 Stabbed":
+    case "🩸":
+    case "🩸 Blood":
+      haptic.heavy();
+      break;
+    case "🎧":
+    case "🎧 Music":
+    case "⚡":
+    case "⚡ Blood":
+    case "👾":
+      haptic.ripple();
+      break;
+    default:
+      haptic.light();
+      break;
+  }
+}
+

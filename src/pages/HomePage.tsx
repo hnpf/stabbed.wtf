@@ -985,7 +985,14 @@ export const HomePage = memo(({ setPage, settings, onOpenGuestbook }: any) => {
             </p>
             {latestEntry && (
               <div className="inline-flex flex-col sm:flex-row sm:items-center gap-2 mt-2 p-3 bg-[var(--surface-variant)]/40 rounded-2xl border-4 border-[var(--outline-variant)]/40 text-sm w-full text-left overflow-hidden">
-                <span className="font-black text-[var(--primary)] shrink-0">@{latestEntry.name}:</span>
+                <div className="flex items-center gap-2 min-w-0 max-w-full overflow-hidden">
+                  <span className="font-black text-[var(--primary)] truncate min-w-0">@{latestEntry.name}:</span>
+                  {latestEntry.sticker && (
+                    <span className="shrink-0 whitespace-nowrap text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md border-2 bg-[var(--primary)]/15 text-[var(--primary)] border-[var(--primary)]/40 shadow-xs select-none">
+                      {latestEntry.sticker}
+                    </span>
+                  )}
+                </div>
                 <span className="opacity-85 truncate flex-1 font-medium italic min-w-0">"{latestEntry.message}"</span>
               </div>
             )}

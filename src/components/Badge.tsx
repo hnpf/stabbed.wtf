@@ -2,6 +2,7 @@ import React, { HTMLAttributes } from "react";
 import { cn } from "../constants";
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
+  key?: React.Key;
   icon?: any;
   iconSize?: number;
   children: React.ReactNode;
