@@ -7,9 +7,10 @@ import { cn } from "../constants";
 import { haptic, triggerReactionFeedback } from "../haptics";
 
 const BLOG_EMOJIS = [
-  "🔥", "❤️", "🔪", "💀", "✨", "🎧", "⚡", "🩸",
-  "👾", "💖", "🐐", "⭐", "🫧", "🦇", "🍙", "🤯",
-  "💯", "🎉", "👏", "😭",
+  "👍", "👎", "🔥", "😭", "💯",
+  "🎉", "👏", "♥️", "✨", "⚡",
+  "🤯", "🎧", "👾", "🦇", "⭐",
+  "🐐", "🫪", "🩸", "🔪", "💀",
 ];
 
 const LS_KEY = "stabbed_blog_reactions";
