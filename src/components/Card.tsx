@@ -3,7 +3,7 @@ import { cn } from "../constants";
 import { useTheme } from "../ThemeContext";
 import { TiltContainer } from "./TiltContainer";
 
-export const Card = memo(({ children, className, innerClassName, delay = 0, onClick, whileHover, whileTap, noDefaultStyles = false }: any) => {
+export const Card = memo(({ children, className, innerClassName, delay = 0, onClick, whileHover, whileTap, noDefaultStyles = false, style, ...props }: any) => {
   const { settings } = useTheme();
   const [shouldAnimate, setShouldAnimate] = useState(false);
 
@@ -35,6 +35,8 @@ export const Card = memo(({ children, className, innerClassName, delay = 0, onCl
       settings={settings}
       onClick={onClick}
       className={className}
+      style={style}
+      {...props}
       innerClassName={cn(
         !noDefaultStyles && "m3-card readme-card overflow-hidden cursor-default relative border border-[var(--outline-variant)]",
         onClick && "cursor-pointer",
