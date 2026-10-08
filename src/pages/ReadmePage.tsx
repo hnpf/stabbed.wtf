@@ -130,19 +130,25 @@ const LetterMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; setP
           <p className="text-xl md:text-2xl opacity-60 font-medium max-w-4xl mx-auto leading-relaxed">
             Running on Arch + GNOME (or Hyprland + Quickshell), and lots of caffeine! <br></br>
 
-            <span className="relative inline-block mt-4 md:mt-0">
+            <span className="relative inline-block mt-4 md:mt-0 px-2 py-0.5 mx-0.5 group/hl select-text">
               <span className="text-[var(--primary)] font-bold relative z-10">
                 writing code today,
               </span>
-              <span className="absolute bottom-1 left-0 w-full h-1.5 bg-[var(--primary)]/20 -rotate-1" />
+              <span
+                className="absolute inset-x-0 bottom-0.5 md:bottom-1 h-3 md:h-3.5 bg-[var(--primary)]/25 dark:bg-[var(--primary)]/35 rounded-md -rotate-1 pointer-events-none transition-all duration-300 group-hover/hl:h-4.5 group-hover/hl:bg-[var(--primary)]/40"
+                aria-hidden="true"
+              />
             </span>{" "}
-            <span className="relative inline-block">
+            <span className="relative inline-block px-2 py-0.5 mx-0.5 group/hl select-text">
               <span className="text-[var(--primary)] font-bold relative z-10">
                 to rewrite it all tomorrow.
               </span>
-              <span className="absolute bottom-1 left-0 w-full h-1.5 bg-[var(--primary)]/20 rotate-1" />
+              <span
+                className="absolute inset-x-0 bottom-0.5 md:bottom-1 h-3 md:h-3.5 bg-[var(--primary)]/25 dark:bg-[var(--primary)]/35 rounded-md rotate-1 pointer-events-none transition-all duration-300 group-hover/hl:h-4.5 group-hover/hl:bg-[var(--primary)]/40"
+                aria-hidden="true"
+              />
             </span>{" "}
-            &lt;3
+            <span className="text-[var(--primary)] font-bold opacity-80">&lt;3</span>
           </p>
         </motion.section>
 

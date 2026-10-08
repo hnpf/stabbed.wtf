@@ -1,6 +1,6 @@
 import React, { useState, useEffect, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Activity, ChevronRight, ExternalLink, ArrowUpRight, Tag, MaterialIcon } from "../components/MaterialIcon";
+import { Activity, ChevronRight, ExternalLink, ArrowUpRight, Tag, Person, MaterialIcon } from "../components/MaterialIcon";
 import { cn, PROJECTS, BLOG_POSTS } from "../constants";
 import { useTheme } from "../ThemeContext";
 import { Card } from "../components/Card";
@@ -815,11 +815,12 @@ export const HomePage = memo(({ setPage, settings, onOpenGuestbook }: any) => {
               "
             </div>
             <div className="flex flex-col gap-2 relative z-10">
-              <h2 className="text-5xl sm:text-7xl md:text-[7rem] mt-5 md:mt-2 opacity-82 italic font-expressive-bold leading-[0.8] tracking-[-0.08em] pr-2">
-                Software should <br /> be readable,
-              </h2>
-              <h2 className="text-3xl sm:text-4xl md:text-6xl italic font-expressive-bold md:ml-12 ml-2 leading-none tracking-[-0.05em] mt-4 sm:mt-6 opacity-40">
-                period.
+              <h2 className="text-5xl sm:text-7xl md:text-[6.8rem] lg:text-[7.2rem] mt-5 md:mt-2 opacity-90 italic font-expressive-bold leading-[0.84] tracking-[-0.08em] pr-2">
+                Software should <br />
+                be readable,{" "}
+                <span className="text-3xl sm:text-5xl md:text-[5.2rem] italic font-expressive-bold tracking-[-0.06em] opacity-40 group-hover:opacity-65 transition-opacity duration-300 inline-block align-baseline">
+                  period.
+                </span>
               </h2>
             </div>
           </div>
@@ -845,16 +846,17 @@ export const HomePage = memo(({ setPage, settings, onOpenGuestbook }: any) => {
                 mass: 0.5,
               }}
               onClick={() => {
-                setPage("readme")
+                setPage("readme");
                 haptic.light();
               }}
               className="m3-button-filled ring-6 ring-[var(--on-primary-container)] !transition-none bg-white text-black text-[18px] sm:text-[20px] font-expressive-bold italic font-black tracking-tight h-16 sm:h-18 px-8 sm:px-12 rounded-[24px] flex items-center gap-3 group shrink-0 w-full md:w-auto justify-center whitespace-nowrap relative overflow-hidden"
             >
               <Ripple color="var(--primary)" />
+              <Person size={24} className="relative z-[1] shrink-0 opacity-90" />
               <span className="relative z-[1]">Read more!</span>
               <ChevronRight
                 size={28}
-                className="group-hover:translate-x-1 transition-transform relative z-[1]"
+                className="group-hover:translate-x-1.5 transition-transform relative z-[1] shrink-0"
               />
             </motion.button>
           </div>
