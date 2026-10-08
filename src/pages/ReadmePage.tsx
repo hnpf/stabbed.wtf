@@ -9,16 +9,7 @@ import { Card } from "../components/Card";
 import { BounceButton, TechChip } from "../components/TechStack";
 import { haptic } from "../haptics";
 import { Ripple } from "../components/Ripple";
-
-const Badge = ({ icon: Icon, children, className }: any) => (
-  <span className={cn(
-    "px-4 sm:px-5 py-2 sm:py-2.5 bg-[var(--surface-variant)]/50 text-[var(--on-surface)] rounded-full text-[11px] sm:text-[12px] font-bold tracking-wider flex items-center gap-2 sm:gap-2.5 border-2 border-[var(--outline-variant)]/50 transition-colors shadow-xs select-none whitespace-nowrap",
-    className
-  )}>
-    {Icon && <Icon size={18} className="shrink-0 text-[var(--primary)]" />}
-    {children}
-  </span>
-);
+import { Badge } from "../components/Badge";
 
 const InfoCardHeading = ({ icon: Icon, children, className }: any) => (
   <div className={cn("flex items-center gap-3", className)}>

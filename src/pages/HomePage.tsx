@@ -1,6 +1,6 @@
 import React, { useState, useEffect, memo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Activity, ChevronRight, ExternalLink, ArrowUpRight, Tag, Person, MaterialIcon } from "../components/MaterialIcon";
+import { Activity, ChevronRight, ExternalLink, ArrowUpRight, Tag, Person, MaterialIcon, Pin } from "../components/MaterialIcon";
 import { cn, PROJECTS, BLOG_POSTS } from "../constants";
 import { useTheme } from "../ThemeContext";
 import { Card } from "../components/Card";
@@ -8,6 +8,7 @@ import { BounceButton } from "../components/TechStack";
 import WavyProgress from "../components/WavyProgress";
 import { haptic } from "../haptics";
 import { Ripple } from "../components/Ripple";
+import { Badge } from "../components/Badge";
 
 const IS_APR = (() => {
   const now = new Date();
@@ -698,18 +699,17 @@ const AncBar = ({ setPage, settings }: { setPage: (page: string, postId: string 
       {/* left: badges, title, + snippet filling desktop wid */}
       <div className="flex-1 min-w-0 flex flex-col justify-between space-y-2">
         <div className="flex flex-wrap items-center gap-2 min-w-0">
-          <span className="px-3 py-1 bg-[var(--primary-container)] text-[var(--on-primary-container)] rounded-full text-[11px] font-expressive italic font-bold tracking-widest border-3 border-[var(--primary)]/30 shadow-xs flex items-center gap-1.5 shrink-0">
-            <span className="w-2 h-2 rounded-full bg-[var(--primary)]" />
+          <Badge size="sm" variant="primary">
+            <span className="w-2 h-2 rounded-full bg-[var(--primary)] shrink-0" />
             New Post!
-          </span>
+          </Badge>
           {latestPost.category && (
-            <span className="px-2.5 py-1 bg-[var(--surface)]/80 text-[var(--on-surface-variant)] rounded-full text-[11px] font-expressive italic font-bold border-3 border-[var(--outline-variant)]/60 shadow-2xs flex items-center gap-1.5 shrink-0 tracking-wider">
-              <Tag size={11} className="text-[var(--primary)] shrink-0 opacity-80" />
+            <Badge size="sm" icon={Tag} variant="surface" className="font-bold">
               <span className="capitalize">{latestPost.category}</span>
-            </span>
+            </Badge>
           )}
           {latestPost.readTime && (
-            <span className="text-[13px] font-display font-black opacity-50 shrink-0 hidden md:inline-block ml-2">
+            <span className="text-[12px] sm:text-[13px] font-display font-black opacity-60 shrink-0 hidden md:inline-block ml-1">
               • {latestPost.readTime}
             </span>
           )}
@@ -917,24 +917,29 @@ export const HomePage = memo(({ setPage, settings, onOpenGuestbook }: any) => {
                 className=""
                 innerClassName="flex border-6 border-[var(--outline-variant)]/40 flex-col justify-between p-8 sm:p-10 min-h-[350px] transition-colors"
               >
-              <div>
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 mb-6">
-                  <h4 className="text-[28px] sm:text-[36px] font-bold font-black tracking-[0.04em] leading-tight italic flex-1 min-w-0 break-words">
-                    {project.title}
-                  </h4>
-                  <div className="flex flex-wrap gap-2 sm:justify-end shrink-0">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="m3-chip uppercase italic tracking-widest font-black text-[10px] shrink-0">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+              <div className="space-y-4">
+                <div className="flex flex-wrap items-center gap-2">
+                  {project.tags.map((tag) => (
+                    <Badge
+                      key={tag}
+                      size="md"
+                      icon={Tag}
+                      className="font-black uppercase tracking-wider italic"
+                    >
+                      {tag}
+                    </Badge>
+                  ))}
                 </div>
-                <p className="opacity-50 mt-3 sm:mt-13 mb-8 text-lg sm:text-xl font-medium italic leading-snug">
+
+                <h4 className="text-[28px] sm:text-[36px] font-bold font-black tracking-[0.04em] leading-tight italic">
+                  {project.title}
+                </h4>
+
+                <p className="opacity-50 mb-6 text-lg sm:text-xl font-medium italic leading-snug">
                   {project.description}
                 </p>
               </div>
-              <div className="w-full">
+              <div className="w-full pt-2">
                 {project.link.startsWith("/") ? (
                   <BounceButton
                     icon={ChevronRight}

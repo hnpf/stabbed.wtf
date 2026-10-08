@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useState, useEffect, useLayoutEffect, memo, createContext, useContext } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronLeft, ChevronRight, Calendar, CheckCircle2, ArrowUpRight, Filter } from "../components/MaterialIcon";
+import { ChevronLeft, ChevronRight, Calendar, CheckCircle2, ArrowUpRight, Filter, Tag } from "../components/MaterialIcon";
 import ReactMarkdown from "react-markdown";
 import { createPortal } from "react-dom";
 import remarkGfm from "remark-gfm";
@@ -13,6 +13,7 @@ import { Code } from "../components/Code";
 import { SplitButton } from "../components/SplitButton";
 import WavyProgress from "../components/WavyProgress";
 import { haptic } from "../haptics";
+import { Badge } from "../components/Badge";
 
 // context to pass nesting depth into list items
 const ListDepthContext = createContext(0);
@@ -187,18 +188,17 @@ export const BlogPage = memo(({ targetId, navigateTo, onFeedReady }: any) => {
           </div>
         <header className="mb-16 space-y-8 pt-8">
           <div className="space-y-4">
-            <div className="flex items-center gap-4">
-              <span className="px-5 py-2 bg-[var(--primary-container)] border-3 border-[var(--primary)]/10 text-[var(--on-primary-container)] rounded-3xl capitalize text-md font-black tracking-widest shadow-sm">
+            <div className="flex flex-wrap items-center gap-3">
+              <Badge size="md" icon={Tag} variant="primary">
                 {post.category}
-              </span>
-              <div className="flex gap-2 opacity-50 text-sm font-bold">
-                <Calendar size={14} />
-                <span>{post.date}</span>
-              </div>
+              </Badge>
+              <Badge size="md" icon={Calendar}>
+                {post.date}
+              </Badge>
               {read.includes(post.id) && (
-                <div className="flex items-center gap-2 text-green-500 text-xs font-black uppercase tracking-widest bg-green-500/10 px-3 py-1 rounded-full border-3 border-green-500/20">
-                  <CheckCircle2 size={12} /> Read
-                </div>
+                <Badge size="md" icon={CheckCircle2} iconClassName="text-emerald-500" className="bg-emerald-500/10 text-emerald-500 border-emerald-500/20">
+                  Read
+                </Badge>
               )}
             </div>
             <h1 className="page-title !text-6xl !md:text-8xl leading-[0.9] text-balance font-expressive italic">
@@ -410,7 +410,7 @@ export const BlogPage = memo(({ targetId, navigateTo, onFeedReady }: any) => {
     <div className="max-w-6xl mx-auto space-y-10 px-4 md:px-0 pb-32">
       <header className="page-header space-y-12">
         <h2 className="page-title !text-6xl md:!text-[110px] font-expressive-bold italic">Virex blog</h2>
-          <p className="text-xl md:text-2xl font-display font-medium text-[var(--on-surface-variant)] opacity-60 max-w-2xl leading-tight">
+          <p className="text-xl ml-4 md:text-2xl font-display font-medium text-[var(--on-surface-variant)] opacity-60 max-w-2xl leading-tight">
             A page for my unsolicited thoughts, updates, and opinions.
           </p>
       </header>
@@ -424,7 +424,7 @@ export const BlogPage = memo(({ targetId, navigateTo, onFeedReady }: any) => {
             setActiveCat(null);
           }}
           className={cn(
-            "h-11 px-8 text-[13px] font-expressive font-black tracking-[0.3em] border-4 shadow-sm transition-none duration-200 block pt-0.5",
+            "h-11 ml-4 px-8 text-[13px] font-expressive font-black tracking-[0.3em] border-4 shadow-sm transition-none duration-200 block pt-0.5",
             !active_cat
               ? "bg-[var(--primary)]  italic text-[var(--on-primary)] border-[var(--primary)]/30 rounded-full shadow-lg"
               : "bg-[var(--surface-variant)] italic text-[var(--on-surface-variant)] border-[var(--outline-variant)]/40 rounded-[1.5rem] opacity-60 hover:opacity-100",
@@ -482,18 +482,17 @@ export const BlogPage = memo(({ targetId, navigateTo, onFeedReady }: any) => {
               }}
             >
               <div className="p-8 md:p-16 space-y-8 relative z-10">
-                <div className="flex items-center gap-4 flex-nowrap">
-                  <span className="shrink-0 px-4 py-1.5 bg-[var(--primary)] text-[var(--on-primary)] rounded-[3.5rem] text-[12px] font-black tracking-widest shadow-lg">
+                <div className="flex flex-wrap items-center gap-3">
+                  <Badge size="md" variant="default" className="bg-[var(--primary)] text-[var(--on-primary)] border-transparent font-black uppercase tracking-widest shadow-md">
                     Featured post!
-                  </span>
-                  <span className="min-w-0 text-sm font-bold opacity-60 flex gap-2">
-                    <Calendar size={14} /> <span className="truncate">{featured.date}</span>
-                  </span>
+                  </Badge>
+                  <Badge size="md" icon={Calendar} className="bg-[var(--on-primary-container)]/10 text-[var(--on-primary-container)] border-[var(--on-primary-container)]/20">
+                    {featured.date}
+                  </Badge>
                   {read.includes(featured.id) && (
-                    <CheckCircle2
-                      size={20}
-                      className="text-green-500 shadow-xl shrink-0"
-                    />
+                    <Badge size="md" icon={CheckCircle2} iconClassName="text-emerald-400" className="bg-emerald-500/15 text-emerald-300 border-emerald-500/30">
+                      Read
+                    </Badge>
                   )}
                 </div>
                 <div className="space-y-4 max-w-4xl">
@@ -578,15 +577,17 @@ export const BlogPage = memo(({ targetId, navigateTo, onFeedReady }: any) => {
                 <div className="space-y-6 h-full flex flex-col justify-between">
                   <div className="space-y-6">
                     <div className="flex justify-between items-start gap-3">
-                      <div className="flex items-center pt-1.5 gap-2 min-w-0 flex-1">
-                        <span className="text-[10px] pl-2.5 font-black uppercase tracking-widest text-[var(--primary)] px-2 py-1 bg-[var(--primary-container)]/30 rounded-[2rem] border-3 border-[var(--primary)]/20 whitespace-nowrap shrink-0">
+                      <div className="flex flex-wrap items-center gap-2 min-w-0 flex-1">
+                        <Badge size="sm" icon={Tag} variant="primary" className="font-black uppercase tracking-wider italic">
                           {p.category}
-                        </span>
-                        <span className="ml-2 text-[12px] font-bold opacity-40 tracking-widest whitespace-nowrap">
+                        </Badge>
+                        <Badge size="sm" icon={Calendar} variant="surface" className="font-bold tracking-wider">
                           {p.date}
-                        </span>
+                        </Badge>
                         {read.includes(p.id) && (
-                          <CheckCircle2 size={16} className="text-green-500 shrink-0" />
+                          <Badge size="sm" icon={CheckCircle2} iconClassName="text-emerald-500" className="px-3 py-1 text-[10px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-500 border-emerald-500/20">
+                            Read
+                          </Badge>
                         )}
                       </div>
                       <div className="w-11 h-11 rounded-[2rem] bg-[var(--surface)] border-3 border-[var(--outline-variant)] flex items-center justify-center group-hover:bg-[var(--primary)] group-hover:text-[var(--on-primary)] transition-all duration-500 shrink-0">

@@ -4,6 +4,7 @@ import { Card } from "../components/Card";
 import WavyProgress from "../components/WavyProgress";
 import { materialIcon } from "../components/MaterialIcon";
 import { BounceButton } from "../components/TechStack";
+import { Badge } from "../components/Badge";
 
 const BuildIcon = materialIcon("terminal");
 const LearnIcon = materialIcon("school");
@@ -505,18 +506,23 @@ const LastFmNowPlayingCard = () => {
                 {/* status */}
                 <div className="flex items-center justify-between gap-3">
                   {isCurrentlyPlaying ? (
-                    <div className="inline-flex items-center gap-2 sm:gap-2.5 rounded-full border-2 sm:border-3 border-[var(--on-primary)]/20 bg-[var(--on-primary)]/10 px-3 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm font-extrabold tracking-widest text-[var(--on-primary)]/90">
-                      <span className="relative flex h-2 w-2">
+                    <Badge
+                      className="bg-[var(--on-primary)]/15 text-[var(--on-primary)] border-2 sm:border-3 border-[var(--on-primary)]/20 font-extrabold uppercase tracking-widest shadow-xs"
+                    >
+                      <span className="relative flex h-2.5 w-2.5 mr-0.5">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />
                       </span>
                       <span>Now playing</span>
-                    </div>
+                    </Badge>
                   ) : (
-                    <div className="inline-flex items-center gap-2 rounded-full border-2 sm:border-3 border-[var(--on-primary)]/20 bg-[var(--on-primary)]/10 px-3 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm font-bold tracking-widest text-[var(--on-primary)]/80">
-                      <ScheduleIcon size={14} fill className="shrink-0 opacity-75" />
+                    <Badge
+                      icon={ScheduleIcon}
+                      iconClassName="text-[var(--on-primary)] opacity-90"
+                      className="bg-[var(--on-primary)]/15 text-[var(--on-primary)] border-2 sm:border-3 border-[var(--on-primary)]/20 font-bold tracking-wider shadow-xs"
+                    >
                       <span>Recently played - {getRelativeTime(track.timestamp)}</span>
-                    </div>
+                    </Badge>
                   )}
                 </div>
 

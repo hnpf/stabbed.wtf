@@ -6,13 +6,18 @@ import { MUSIC_RELEASES, type MusicRelease } from "../constants";
 import { useTheme } from "../ThemeContext";
 import { haptic } from "../haptics";
 import { Ripple } from "../components/Ripple";
+import { Badge } from "../components/Badge";
 import {
   Album,
   PlayArrow,
   X, 
   Share2, 
   Check,
-  ExternalLink
+  ExternalLink,
+  MusicNote,
+  Calendar,
+  History,
+  Tag
 } from "../components/MaterialIcon";
 
 /* platofrm icons modded for our m3e */
@@ -150,27 +155,29 @@ const ReleaseModal = ({ release, onClose }: { release: MusicRelease | null; onCl
               <AlbumCover release={release} className="w-24 h-24 sm:w-36 sm:h-36 rounded-2xl sm:rounded-3xl shadow-xl shrink-0" iconSize={44} />
 
               <div className="flex-1 text-center sm:text-left space-y-2 min-w-0 pr-0 sm:pr-8">
-                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 sm:gap-2">
-                  <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 bg-[var(--primary-container)] text-[var(--on-primary-container)] text-[10px] sm:text-xs font-black uppercase tracking-widest rounded-full italic border border-[var(--primary)]/30">
-                    {release.type}
-                  </span>
-                  <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 bg-[var(--surface-variant)] text-[var(--on-surface-variant)] text-[10px] sm:text-xs font-black uppercase tracking-widest rounded-full italic border border-[var(--outline-variant)]">
+                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2.5">
+                  <Badge size="md" icon={MusicNote} variant="primary">
+                    {release.genre}
+                  </Badge>
+                  <Badge size="md" icon={Calendar}>
                     {release.releaseDate}
-                  </span>
-                  {release.duration && (
-                    <span className="text-[11px] sm:text-xs font-display font-black opacity-50">
-                      • {release.duration}
-                    </span>
-                  )}
+                  </Badge>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-display font-black italic tracking-tight leading-tight">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-display font-black italic tracking-tight leading-tight pt-1">
                   {release.title}
                 </h3>
 
-                <p className="text-xs sm:text-sm font-expressive font-bold italic text-[var(--primary)]">
-                  {release.genre}
-                </p>
+                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 pt-1">
+                  <Badge size="sm" icon={Album} variant="primary">
+                    {release.type}
+                  </Badge>
+                  {release.duration && (
+                    <Badge size="sm" icon={History}>
+                      {release.duration}
+                    </Badge>
+                  )}
+                </div>
 
                 <p className="text-xs sm:text-sm opacity-70 font-sans leading-relaxed pt-0.5">
                   {release.description}
@@ -280,7 +287,7 @@ export const MusicPage = memo(({ setPage }: { setPage: (p: string) => void }) =>
           <h2 className="text-2xl sm:text-4xl font-expressive-bold italic font-black tracking-tight">
             Releases and Tracks
           </h2>
-          <span className="text-xs sm:text-md font-black tracking-widest opacity-40">
+          <span className="text-md sm:text-md font-black tracking-widest opacity-40">
             {MUSIC_RELEASES.length} Releases
           </span>
         </div>
@@ -300,13 +307,13 @@ export const MusicPage = memo(({ setPage }: { setPage: (p: string) => void }) =>
               <div className="space-y-4 sm:space-y-6 relative z-10">
                 {/* header info pills */}
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 bg-[var(--primary-container)] text-[var(--on-primary-container)] text-[10px] sm:text-xs font-black uppercase tracking-widest rounded-full italic border-2 border-[var(--primary)]/30">
-                      {release.type}
-                    </span>
-                    <span className="text-[11px] sm:text-xs font-display font-black opacity-50">
+                  <div className="flex items-center gap-2.5">
+                    <Badge size="md" icon={MusicNote} variant="primary">
+                      {release.genre}
+                    </Badge>
+                    <Badge size="md" icon={Calendar}>
                       {release.releaseDate}
-                    </span>
+                    </Badge>
                   </div>
 
                   {/* m3 play Container */}
@@ -319,13 +326,20 @@ export const MusicPage = memo(({ setPage }: { setPage: (p: string) => void }) =>
                 <div className="flex items-start gap-3.5 sm:gap-5">
                   <AlbumCover release={release} className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl sm:rounded-2xl shadow-md group-hover:scale-105 transition-transform duration-300 shrink-0" iconSize={32} />
 
-                  <div className="space-y-1 sm:space-y-1.5 min-w-0 flex-1">
+                  <div className="space-y-2 min-w-0 flex-1">
                     <h3 className="text-xl sm:text-3xl font-display font-black italic tracking-tight group-hover:text-[var(--primary)] transition-colors leading-tight">
                       {release.title}
                     </h3>
-                    <p className="text-xs font-expressive font-bold italic text-[var(--primary)]">
-                      {release.genre} {release.duration && `• ${release.duration}`}
-                    </p>
+                    <div className="flex flex-wrap items-center gap-2 pt-0.5">
+                      <Badge size="sm" icon={Album} variant="primary">
+                        {release.type}
+                      </Badge>
+                      {release.duration && (
+                        <Badge size="sm" icon={History}>
+                          {release.duration}
+                        </Badge>
+                      )}
+                    </div>
                   </div>
                 </div>
 
