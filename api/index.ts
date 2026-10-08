@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { vxaddguestbook, vxlistguestbook, vxreactguestbook, validateGuestbookMessage } from './guestbook_db.js';
+import { vxgetblogreactions, vxgetallblogreactions, vxreactblogpost } from './blog_reactions_db.js';
 
 dotenv.config();
 
@@ -240,6 +241,34 @@ app.post('/api/report-bug', async (req, res) => {
     res.status(200).json({ message: 'Bug successfully reported!' });
   } catch (err: any) {
     console.error('Report bug error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /api/blog-reactions?slug=... OR /api/blog-reactions (all)
+app.get('/api/blog-reactions', (req, res) => {
+  try {
+    const slug = typeof req.query.slug === 'string' ? req.query.slug : null;
+    if (slug) {
+      res.json({ slug, reactions: vxgetblogreactions(slug) });
+    } else {
+      res.json(vxgetallblogreactions());
+    }
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /api/blog-reactions { slug, emoji, delta }
+app.post('/api/blog-reactions', (req, res) => {
+  try {
+    const { slug, emoji, delta } = req.body;
+    if (!slug || typeof slug !== 'string' || !emoji || typeof emoji !== 'string') {
+      return res.status(400).json({ error: 'slug and emoji are required' });
+    }
+    const reactions = vxreactblogpost(slug, emoji, typeof delta === 'number' ? delta : 1);
+    res.json({ slug, reactions });
+  } catch (err: any) {
     res.status(500).json({ error: err.message });
   }
 });

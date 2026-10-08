@@ -14,6 +14,7 @@ import { SplitButton } from "../components/SplitButton";
 import WavyProgress from "../components/WavyProgress";
 import { haptic } from "../haptics";
 import { Badge } from "../components/Badge";
+import { BlogReactions } from "../components/BlogReactions";
 
 // context to pass nesting depth into list items
 const ListDepthContext = createContext(0);
@@ -30,7 +31,19 @@ export const BlogPage = memo(({ targetId, navigateTo, onFeedReady }: any) => {
     const saved = localStorage.getItem("virex-read-posts");
     return saved ? JSON.parse(saved) : [];
   });
+  const [allReactions, setAllReactions] = useState<Record<string, Record<string, number>>>({});
   const post = BLOG_POSTS.find((p) => p.id === targetId || p.link === targetId);
+
+  // fetch all blog reactions once when on the list view
+  useEffect(() => {
+    if (post) return;
+    fetch("/api/blog-reactions")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data && typeof data === "object" && !data.error) setAllReactions(data);
+      })
+      .catch(() => {});
+  }, [post]);
 
   useLayoutEffect(() => {
     if (post) {
@@ -200,6 +213,9 @@ export const BlogPage = memo(({ targetId, navigateTo, onFeedReady }: any) => {
                   Read
                 </Badge>
               )}
+            </div>
+            <div className="pt-1">
+              <BlogReactions slug={post.id} />
             </div>
             <h1 className="page-title !text-6xl !md:text-8xl leading-[0.9] text-balance font-expressive italic">
               {post.title}
@@ -381,7 +397,19 @@ export const BlogPage = memo(({ targetId, navigateTo, onFeedReady }: any) => {
           </ReactMarkdown>
         </div>
 
-        <footer className="relative pt-16 pb-24 flex flex-col items-center gap-8 before:absolute before:top-0 before:left-0 before:w-full before:h-[6px] before:bg-[var(--outline-variant)] before:rounded-full">
+        <footer className="relative pt-16 pb-24 flex flex-col items-center gap-10 before:absolute before:top-0 before:left-0 before:w-full before:h-[6px] before:bg-[var(--outline-variant)] before:rounded-full">
+          {/* reactions */}
+          <div className="w-full space-y-4">
+            <p className="text-[12px] font-black tracking-[0.2em] opacity-40 text-center">
+              How did this post make you feel?
+            </p>
+            <div className="flex justify-center">
+              <BlogReactions slug={post.id} />
+            </div>
+          </div>
+
+          <div className="relative w-[700px] h-0 before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] opacity-40 before:bg-[var(--outline-variant)] before:rounded-full" />
+
           <div className="text-center space-y-2">
             <h4 className="text-3xl font-display font-black">
               Enjoyed this blog post?
@@ -503,7 +531,15 @@ export const BlogPage = memo(({ targetId, navigateTo, onFeedReady }: any) => {
                     {featured.snippet}
                   </p>
                 </div>
-                <div className="flex w-full items-center justify-between gap-6 pt-4">
+                {/* mobile */}
+                <div onClick={(e) => e.stopPropagation()} className="pt-4 md:hidden">
+                  <BlogReactions
+                    slug={featured.id}
+                    initialReactions={allReactions[featured.id]}
+                    compact
+                  />
+                </div>
+                <div className="flex w-full items-center gap-4 pt-4 flex-wrap">
                   <motion.div
                     whileHover={{
                       scale: 1.02,
@@ -541,7 +577,15 @@ export const BlogPage = memo(({ targetId, navigateTo, onFeedReady }: any) => {
                       />
                     </motion.span>
                   </motion.div>
-                  <span className="text-xs md:text-[16px] font-expressive-bold uppercase tracking-widest opacity-40 italic">
+                  {/* desktop */}
+                  <div onClick={(e) => e.stopPropagation()} className="flex-1 hidden md:block">
+                    <BlogReactions
+                      slug={featured.id}
+                      initialReactions={allReactions[featured.id]}
+                      compact
+                    />
+                  </div>
+                  <span className="text-xs md:text-[16px] font-expressive-bold uppercase tracking-widest opacity-40 italic whitespace-nowrap">
                     {featured.readTime}
                   </span>
                 </div>
@@ -602,6 +646,13 @@ export const BlogPage = memo(({ targetId, navigateTo, onFeedReady }: any) => {
                         {p.snippet}
                       </p>
                     </div>
+                  </div>
+                  <div onClick={(e) => e.stopPropagation()} className="pt-2">
+                    <BlogReactions
+                      slug={p.id}
+                      initialReactions={allReactions[p.id]}
+                      compact
+                    />
                   </div>
                   <div className="pt-4 flex items-center justify-between border-t-3 border-[var(--outline-variant)] opacity-40 text-[12px] font-black tracking-widest">
                     <span>
