@@ -287,8 +287,8 @@ export const MusicPage = memo(({ setPage }: { setPage: (p: string) => void }) =>
           <h2 className="text-2xl sm:text-4xl font-expressive-bold italic font-black tracking-tight">
             Releases and Tracks
           </h2>
-          <span className="text-md sm:text-md font-black tracking-widest opacity-40">
-            {MUSIC_RELEASES.length} Releases
+          <span className="text-[14px] sm:text-md font-black tracking-widest opacity-40">
+            There are currently {MUSIC_RELEASES.length} releases.
           </span>
         </div>
 
