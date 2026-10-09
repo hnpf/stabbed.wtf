@@ -2706,6 +2706,23 @@ export interface MusicRelease {
 
 export const MUSIC_RELEASES: MusicRelease[] = [
   {
+    id: "XANXIETY",
+    title: "XANXIETY",
+    type: "Single",
+    releaseDate: "2026",
+    description: "XANXIETY as an experimental rage track, which focuses primarily on 808's and oddly enough, hihats. it focuses mostly on layered effects and 'bell' effects. written, produced, and mixed by rxvirex",
+    genre: "Rage/Trap",
+    duration: "2 min 4 sec",
+    tags: ["rage", "experimental"],
+    featured: true,
+    links: {
+      spotify: "https://open.spotify.com/track/5CeLL3fvM8RmSPiVUycxws?si=fa9030ef05a3482f",
+      bandcamp: "https://rxvirex.bandcamp.com/track/xanxiety",
+      youtubeMusic: "https://music.youtube.com/watch?v=eEg5H-pj5yI&si=pAXkRSnanDei0NtW",
+      tiktok: "https://www.tiktok.com/@hahavrx",
+    },
+  },
+  {
     id: "HATEWARE",
     title: "HATEWARE",
     type: "Single",
