@@ -209,9 +209,14 @@ export const BlogPage = memo(({ targetId, navigateTo, onFeedReady }: any) => {
                 {post.date}
               </Badge>
               {read.includes(post.id) && (
-                <Badge size="md" icon={CheckCircle2} iconClassName="text-emerald-500" className="bg-emerald-500/10 text-emerald-500 border-emerald-500/20">
-                  Read
-                </Badge>
+                <span
+                  title="Read"
+                  role="img"
+                  aria-label="Read post"
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-emerald-500/20 bg-emerald-500/10 text-emerald-500"
+                >
+                  <CheckCircle2 size={18} />
+                </span>
               )}
             </div>
             <div className="pt-1">
