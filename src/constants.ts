@@ -343,7 +343,7 @@ this is \`inline code\`, this is **bold**, this is *italic*, and this is [a link
 ok thats it bye
     `,
     date: 'Jul 7, 2026',
-    category: 'devlog',
+    category: 'dev',
     readTime: '2 min read',
     link: 'markdown-test',
   },
@@ -608,7 +608,7 @@ the hardware tab got a visual overhaul.
 small changes, big difference in how you interact with the site.
     `,
     date: 'Feb 11, 2026',
-    category: 'devlog',
+    category: 'dev',
     readTime: '3 min read',
     link: 'more-hardware-updates-feb-2026',
   },
@@ -650,7 +650,7 @@ i've massively expanded the **customizer** to give *you* more control.
 stay tuned for more unsolicited opinions!
     `,
     date: 'Feb 11, 2026',
-    category: 'devlog',
+    category: 'dev',
     readTime: '3 min read',
     link: 'feb-11-update',
   },
@@ -707,7 +707,7 @@ every protocol and tool now has structured sections for purpose, key features, a
 check the repo: [ultimate-networking-wiki](https://github.com/hnpf/untimate-networking-wiki)
     `,
     date: 'Feb 03, 2026',
-    category: 'devlog',
+    category: 'dev',
     readTime: '4 min read',
     link: 'unw-upw-is-a-bible-lol',
   },
@@ -745,7 +745,7 @@ if you're using password123, you aren't being targeted. you're just being harves
 ---
     `,
     date: 'Jul 07, 2026',
-    category: 'cybersecurity',
+    category: 'cybersec',
     readTime: '1 min read',
     link: 'cybersec-101',
   },
@@ -968,7 +968,7 @@ it's literally just people helping people for learning (and overall better code 
     date: "Nov 6, 2025",
     snippet: "understanding cybersecurity is a no brainer",
     content: "As a developer, understanding cybersecurity is a no brainer. Having secure authentication or protecting user data, security should be a MUST have consideration in every single project, especially on the web. My search engine project emphasizes privacy and security at its core.",
-    category: "security",
+    category: "cybersec",
     readTime: "2 min read",
     link: "importance-of-cybersecurity",
   },
@@ -1038,7 +1038,7 @@ it's literally just people helping people for learning (and overall better code 
     date: "Jun 12, 2025",
     snippet: "Started with the idea of creating a Material Design testing playground as a hobby.",
     content: "Started with the idea of creating a Material Design testing playground as a hobby. The initial project sparked my passion for web development and led to the creation of my current portfolio. It's amazing how a simple hobby project can evolve into something meaningful.",
-    category: "beginning",
+    category: "inception",
     readTime: "2 min read",
     link: "project-update-2025-6-12",
   },
@@ -1952,7 +1952,7 @@ export const CHANGELOGS: ChangelogEntry[] = [
         ],
       },
       {
-        category: "security",
+        category: "cybersec",
         items: [
           "routed all bug reports through a server sided proxy endpoint, keeping the webhook url's safely hidden to stop spam.",
         ]
