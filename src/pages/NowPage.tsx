@@ -495,7 +495,7 @@ const LastFmNowPlayingCard = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_0.9fr] items-stretch gap-5 sm:gap-6 md:gap-10 border-t-2 sm:border-t-3 border-[var(--outline-variant)] pt-5 sm:pt-6 md:pt-8">
           {track && (
-            <div className="order-first lg:order-last relative overflow-hidden rounded-2xl sm:rounded-[2.5rem] lg:rounded-[3rem] border-3 sm:border-6 border-[var(--outline-variant)] hover:border-[var(--primary)] bg-[var(--surface-variant)]/50 shadow-xl group/cover w-full max-w-[200px] sm:max-w-[280px] lg:max-w-none mx-auto lg:mx-0 aspect-square lg:aspect-auto min-h-[180px] sm:min-h-[260px] lg:min-h-[320px] max-h-[220px] sm:max-h-[320px] lg:max-h-[440px] flex items-center justify-center transition-colors duration-300">
+                <div className="order-first lg:order-last relative overflow-hidden rounded-2xl sm:rounded-[2.5rem] lg:rounded-[3rem] border-3 sm:border-6 border-[var(--outline-variant)] hover:border-[var(--primary)] bg-[var(--surface-variant)]/50 shadow-xl group/cover w-full max-w-[200px] sm:max-w-[280px] lg:max-w-none mx-auto lg:mx-0 aspect-square lg:aspect-auto min-h-[180px] sm:min-h-[260px] lg:min-h-[320px] max-h-[220px] sm:max-h-[320px] lg:max-h-[440px] flex items-center justify-center transition-colors duration-300">
               {track.image && !imageError ? (
                 <>
                   <img
@@ -513,29 +513,51 @@ const LastFmNowPlayingCard = () => {
                 </>
               ) : (
                 <div className="relative flex flex-col items-center justify-center w-full h-full p-4 sm:p-8 text-center shadow-inner overflow-hidden">
-                  <div
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"
+                    fill="none"
                     role="img"
-                    aria-label="Optical disc"
-                    className={`relative w-28 h-28 sm:w-44 sm:h-44 md:w-56 md:h-56 drop-shadow-[0_15px_20px_rgba(0,0,0,0.28)] ${isCurrentlyPlaying ? "animate-[spin_10s_linear_infinite]" : ""}`}
+                    aria-label="vinyl record"
+                    className={`w-28 h-28 sm:w-44 sm:h-44 md:w-56 md:h-56 drop-shadow-[0_15px_20px_rgba(0,0,0,0.28)] ${isCurrentlyPlaying ? "animate-[spin_10s_linear_infinite]" : ""}`}
+                    style={{ color: "var(--primary)" }}
                   >
-                    <div
-                      className="absolute inset-0 rounded-full border-[6px] border-[var(--outline-variant)]/40 shadow-[0_18px_28px_rgba(0,0,0,0.32)] sm:border-8"
-                      style={{
-                        background: "radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--primary) 42%, white) 0%, transparent 24%), repeating-radial-gradient(circle at center, transparent 0 13%, color-mix(in srgb, var(--on-surface) 13%, transparent) 13.5% 14%, transparent 14.5% 20%), conic-gradient(from 215deg, color-mix(in srgb, var(--primary) 68%, black), color-mix(in srgb, var(--primary) 88%, white) 18%, color-mix(in srgb, var(--primary) 72%, black) 42%, color-mix(in srgb, var(--primary) 94%, white) 68%, color-mix(in srgb, var(--primary) 68%, black))",
-                        maskImage: "url('/media-optical.svg')",
-                        maskPosition: "center",
-                        maskRepeat: "no-repeat",
-                        maskSize: "contain",
-                        WebkitMaskImage: "url('/media-optical.svg')",
-                        WebkitMaskPosition: "center",
-                        WebkitMaskRepeat: "no-repeat",
-                        WebkitMaskSize: "contain",
-                      }}
-                    />
-                    <div className="absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-[var(--outline-variant)] bg-[var(--surface)] shadow-inner sm:h-16 sm:w-16 md:h-20 md:w-20">
-                      <div className="absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--primary)] sm:h-3 sm:w-3" />
-                    </div>
-                  </div>
+                    <defs>
+                      <clipPath id="vx-disc"><circle cx="256" cy="256" r="212"/></clipPath>
+                      <mask id="vx-label">
+                        <circle cx="256" cy="256" r="96" fill="#fff"/>
+                        <circle cx="256" cy="256" r="48" fill="none" stroke="#000" strokeWidth="2"/>
+                        <circle cx="256" cy="256" r="9" fill="#000"/>
+                        <path id="vx-ring" d="M256 256m-64 0a64 64 0 1 1 128 0a64 64 0 1 1-128 0" fill="none"/>
+                        <text fontFamily="ui-monospace,Menlo,Consolas,monospace" fontWeight="700" fontSize="20" fill="#000" textLength="396" lengthAdjust="spacing">
+                          <textPath href="#vx-ring" textLength="396" lengthAdjust="spacing">STABBED.WTF • NOW PLAYING • STABBED.WTF • NOW PLAYING •</textPath>
+                        </text>
+                      </mask>
+                    </defs>
+                    {/* body */}
+                    <circle cx="256" cy="256" r="212" fill="currentColor" fillOpacity=".14"/>
+                    {/* grooves */}
+                    <g stroke="currentColor" strokeWidth="1.5" fill="none">
+                      <circle cx="256" cy="256" r="202" strokeOpacity=".22"/>
+                      <circle cx="256" cy="256" r="190" strokeOpacity=".16"/>
+                      <circle cx="256" cy="256" r="178" strokeOpacity=".4" strokeWidth="3"/>
+                      <circle cx="256" cy="256" r="166" strokeOpacity=".16"/>
+                      <circle cx="256" cy="256" r="154" strokeOpacity=".22"/>
+                      <circle cx="256" cy="256" r="142" strokeOpacity=".4" strokeWidth="3"/>
+                      <circle cx="256" cy="256" r="130" strokeOpacity=".16"/>
+                      <circle cx="256" cy="256" r="118" strokeOpacity=".22"/>
+                      <circle cx="256" cy="256" r="108" strokeOpacity=".5" strokeWidth="2"/>
+                    </g>
+                    {/* sheen */}
+                    <g clipPath="url(#vx-disc)" fill="currentColor">
+                      <path d="M256 256L366 65.5A220 220 0 0 1 446.5 146Z" fillOpacity=".2"/>
+                      <path d="M256 256L146 446.5A220 220 0 0 1 65.5 366Z" fillOpacity=".1"/>
+                    </g>
+                    {/* rim */}
+                    <circle cx="256" cy="256" r="211" stroke="currentColor" strokeWidth="5"/>
+                    {/* label */}
+                    <circle cx="256" cy="256" r="96" fill="currentColor" mask="url(#vx-label)"/>
+                  </svg>
 
                   <div className="mt-4 sm:mt-6 space-y-1 hidden lg:block">
                     <h4 className="text-xl font-display font-black tracking-tight text-[var(--on-surface)] drop-shadow-sm">{track.name}</h4>

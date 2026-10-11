@@ -302,6 +302,15 @@ export const BLOG_POSTS = [
 
 export const MUSIC_RELEASES = [
   {
+    "id": "XANXIETY",
+    "title": "XANXIETY",
+    "type": "Single",
+    "description": "XANXIETY as an experimental rage track, which focuses primarily on 808's and oddly enough, hihats. it focuses mostly on layered effects and 'bell' effects. written, produced, and mixed by rxvirex",
+    "genre": "Rage/Trap",
+    "releaseDate": "2026",
+    "ogImage": "https://stabbed.wtf/albums/XANXIETY.png"
+  },
+  {
     "id": "HATEWARE",
     "title": "HATEWARE",
     "type": "Single",

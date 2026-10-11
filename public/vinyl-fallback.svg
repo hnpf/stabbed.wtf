@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none" role="img" aria-label="vinyl record">
+  <defs>
+    <clipPath id="vx-disc"><circle cx="256" cy="256" r="212"/></clipPath>
+    <mask id="vx-label">
+      <circle cx="256" cy="256" r="96" fill="#fff"/>
+      <circle cx="256" cy="256" r="48" fill="none" stroke="#000" stroke-width="2"/>
+      <circle cx="256" cy="256" r="9" fill="#000"/>
+      <path id="vx-ring" d="M256 256m-64 0a64 64 0 1 1 128 0a64 64 0 1 1-128 0" fill="none"/>
+      <text font-family="ui-monospace,Menlo,Consolas,monospace" font-weight="700" font-size="16" fill="#000" textLength="396" lengthAdjust="spacing">
+        <textPath href="#vx-ring" textLength="396" lengthAdjust="spacing">VIREX • NOW PLAYING • VIREX • NOW PLAYING •</textPath>
+      </text>
+    </mask>
+  </defs>
+
+  <!-- body -->
+  <circle cx="256" cy="256" r="212" fill="currentColor" fill-opacity=".14"/>
+
+  <!-- grooves -->
+  <g stroke="currentColor" stroke-width="1.5" fill="none">
+    <circle cx="256" cy="256" r="202" stroke-opacity=".22"/>
+    <circle cx="256" cy="256" r="190" stroke-opacity=".16"/>
+    <circle cx="256" cy="256" r="178" stroke-opacity=".4" stroke-width="3"/>
+    <circle cx="256" cy="256" r="166" stroke-opacity=".16"/>
+    <circle cx="256" cy="256" r="154" stroke-opacity=".22"/>
+    <circle cx="256" cy="256" r="142" stroke-opacity=".4" stroke-width="3"/>
+    <circle cx="256" cy="256" r="130" stroke-opacity=".16"/>
+    <circle cx="256" cy="256" r="118" stroke-opacity=".22"/>
+    <circle cx="256" cy="256" r="108" stroke-opacity=".5" stroke-width="2"/>
+  </g>
+
+  <!-- sheen -->
+  <g clip-path="url(#vx-disc)" fill="currentColor">
+    <path d="M256 256L366 65.5A220 220 0 0 1 446.5 146Z" fill-opacity=".2"/>
+    <path d="M256 256L146 446.5A220 220 0 0 1 65.5 366Z" fill-opacity=".1"/>
+  </g>
+
+  <!-- rim -->
+  <circle cx="256" cy="256" r="211" stroke="currentColor" stroke-width="5"/>
+
+  <!-- label with knocked out text -->
+  <circle cx="256" cy="256" r="96" fill="currentColor" mask="url(#vx-label)"/>
+</svg>
