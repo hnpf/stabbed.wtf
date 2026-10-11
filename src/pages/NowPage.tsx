@@ -12,6 +12,7 @@ const BuildIcon = materialIcon("terminal");
 const LearnIcon = materialIcon("school");
 const ListenIcon = materialIcon("headphones");
 const MusicIcon = materialIcon("music_note");
+const SearchIcon = materialIcon("search");
 const ListIcon = materialIcon("chevron_right");
 const RefreshIcon = materialIcon("refresh");
 const ScheduleIcon = materialIcon("schedule");
@@ -657,16 +658,23 @@ const LastFmNowPlayingCard = () => {
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-2.5 sm:gap-4 pt-1">
+                  <div className="flex items-center justify-center sm:justify-start gap-2.5 sm:gap-4 pt-1">
                     {track.url && (
                       <BounceButton
                         url={track.url}
                         icon={MusicIcon}
                         iconClassName="text-[var(--primary)]"
-                        label="View on Last.fm"
-                        className="inline-flex items-center gap-2 rounded-full border-2 sm:border-4 border-[var(--outline-variant)] bg-[var(--surface-variant)]/60 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] hover:border-[var(--primary)] px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm font-bold text-[var(--on-surface)] transition-all duration-300 cursor-pointer"
+                        label="Last.fm"
+                        className="inline-flex min-h-14 flex-1 sm:flex-none items-center justify-center gap-2 rounded-full border-2 sm:border-4 border-[var(--primary)] bg-[var(--primary-container)] hover:bg-[var(--primary)] hover:text-[var(--on-primary-container)] px-4 sm:px-6 py-2 sm:py-3 text-sm font-bold text-[var(--on-primary-container)] transition-all duration-300 cursor-pointer"
                       />
                     )}
+                    <BounceButton
+                      url={`https://open.spotify.com/search/${encodeURIComponent(`${track.artist} ${track.name}`)}`}
+                      icon={SearchIcon}
+                      iconClassName="text-[var(--primary)]"
+                      label="Search Spotify"
+                      className="inline-flex min-h-14 flex-1 sm:flex-none items-center justify-center gap-2 rounded-full border-2 sm:border-4 border-[var(--outline-variant)] bg-[var(--surface-variant)]/60 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] hover:border-[var(--primary)] px-4 sm:px-6 py-2 sm:py-3 text-sm font-bold text-[var(--on-surface)] transition-all duration-300 cursor-pointer"
+                      />
                   </div>
                 </div>
               </div>
