@@ -668,7 +668,7 @@ const LastFmNowPlayingCard = () => {
                         iconClassName="text-[var(--primary)]"
                         label={<><span className="sm:hidden">Last.fm</span><span className="hidden sm:inline">View on Last.fm</span></>}
                         transition={musicActionTransition}
-                        className="inline-flex min-h-14 flex-1 sm:flex-none items-center justify-center gap-2 rounded-tl-[1.75rem] rounded-bl-[1.75rem] rounded-tr-xl rounded-br-xl border-4 border-[var(--primary)] bg-[var(--primary-container)] hover:bg-[var(--primary)] hover:text-[var(--on-primary-container)] px-4 sm:px-6 py-2 sm:py-3 text-sm font-bold text-[var(--on-primary-container)] transition-colors duration-100 cursor-pointer"
+                        className="inline-flex min-h-14 flex-1 sm:flex-none items-center justify-center gap-2 rounded-tl-[1.75rem] rounded-bl-[1.75rem] rounded-tr-xl rounded-br-xl border-4 border-[var(--primary)] bg-[var(--primary-container)] hover:bg-[var(--primary)] hover:text-[var(--on-primary-container)] px-4 sm:px-6 py-2 sm:py-3 text-[12px] font-bold text-[var(--on-primary-container)] transition-colors duration-100 cursor-pointer"
                       />
                     )}
                     <BounceButton
@@ -677,7 +677,7 @@ const LastFmNowPlayingCard = () => {
                       iconClassName="text-[var(--primary)]"
                       label="Search Spotify"
                       transition={musicActionTransition}
-                      className={`inline-flex min-h-14 flex-1 sm:flex-none items-center justify-center gap-2 border-4 border-[var(--outline-variant)] bg-[var(--surface-variant)]/60 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] hover:border-[var(--primary)] px-4 sm:px-6 py-2 sm:py-3 text-sm font-bold text-[var(--on-surface)] transition-colors duration-100 cursor-pointer ${track.url ? "rounded-tl-xl rounded-bl-xl rounded-tr-[1.75rem] rounded-br-[1.75rem]" : "rounded-full"}`}
+                      className={`inline-flex min-h-14 flex-1 sm:flex-none items-center justify-center gap-2 border-4 border-[var(--outline-variant)] bg-[var(--surface-variant)]/60 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] hover:border-[var(--primary)] px-4 sm:px-6 py-2 sm:py-3 text-[12px] font-bold text-[var(--on-surface)] transition-colors duration-100 cursor-pointer ${track.url ? "rounded-tl-xl rounded-bl-xl rounded-tr-[1.75rem] rounded-br-[1.75rem]" : "rounded-full"}`}
                       />
                   </div>
                 </div>
