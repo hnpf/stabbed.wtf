@@ -17,6 +17,7 @@ const ListIcon = materialIcon("chevron_right");
 const RefreshIcon = materialIcon("refresh");
 const ScheduleIcon = materialIcon("schedule");
 const RadioIcon = materialIcon("radio");
+const musicActionTransition = { type: "spring", stiffness: 700, damping: 32, mass: 0.35 };
 
 interface TrackData {
   artist: string;
@@ -489,8 +490,9 @@ const LastFmNowPlayingCard = () => {
             title="Refresh Last.fm status"
             icon={RefreshIcon}
             iconClassName={isRefreshing ? "animate-spin" : ""}
+            hideLabelOnMobile
             label={<span className="hidden sm:inline sm:ml-2">Force sync</span>}
-            className="inline-flex items-center justify-center rounded-full border-2 sm:border-4 border-[var(--outline-variant)] bg-[var(--surface-variant)]/60 text-[var(--on-surface)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] hover:border-[var(--primary)] p-2 sm:px-4 sm:py-2 text-xs sm:text-sm pl-3 font-bold tracking-wider shrink-0 cursor-pointer transition-all duration-300"
+            className="inline-flex items-center justify-center rounded-full border-2 sm:border-4 border-[var(--outline-variant)] bg-[var(--surface-variant)]/60 text-[var(--on-surface)] hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] hover:border-[var(--primary)] p-2 sm:px-4 sm:py-2 text-xs sm:text-sm font-bold tracking-wider shrink-0 cursor-pointer transition-all duration-150"
           />
         </div>
 
@@ -595,7 +597,7 @@ const LastFmNowPlayingCard = () => {
               <div className="flex h-full flex-col justify-between space-y-4 sm:space-y-6">
                 <div className="space-y-3 sm:space-y-6">
                   {/* status badge */}
-                  <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center justify-center sm:justify-start gap-3">
                     {isCurrentlyPlaying ? (
                       <Badge
                         className="bg-[var(--primary-container)] text-[var(--on-primary-container)] border-2 sm:border-3 border-[var(--primary)]/40 font-extrabold uppercase tracking-widest shadow-xs"
@@ -658,14 +660,15 @@ const LastFmNowPlayingCard = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-center sm:justify-start gap-2.5 sm:gap-4 pt-1">
+                  <div className="flex items-center justify-center gap-1 sm:gap-1.5 pt-1">
                     {track.url && (
                       <BounceButton
                         url={track.url}
                         icon={MusicIcon}
                         iconClassName="text-[var(--primary)]"
-                        label="Last.fm"
-                        className="inline-flex min-h-14 flex-1 sm:flex-none items-center justify-center gap-2 rounded-full border-2 sm:border-4 border-[var(--primary)] bg-[var(--primary-container)] hover:bg-[var(--primary)] hover:text-[var(--on-primary-container)] px-4 sm:px-6 py-2 sm:py-3 text-sm font-bold text-[var(--on-primary-container)] transition-all duration-300 cursor-pointer"
+                        label={<><span className="sm:hidden">Last.fm</span><span className="hidden sm:inline">View on Last.fm</span></>}
+                        transition={musicActionTransition}
+                        className="inline-flex min-h-14 flex-1 sm:flex-none items-center justify-center gap-2 rounded-tl-[1.75rem] rounded-bl-[1.75rem] rounded-tr-xl rounded-br-xl border-4 border-[var(--primary)] bg-[var(--primary-container)] hover:bg-[var(--primary)] hover:text-[var(--on-primary-container)] px-4 sm:px-6 py-2 sm:py-3 text-sm font-bold text-[var(--on-primary-container)] transition-all duration-150 cursor-pointer"
                       />
                     )}
                     <BounceButton
@@ -673,7 +676,8 @@ const LastFmNowPlayingCard = () => {
                       icon={SearchIcon}
                       iconClassName="text-[var(--primary)]"
                       label="Search Spotify"
-                      className="inline-flex min-h-14 flex-1 sm:flex-none items-center justify-center gap-2 rounded-full border-2 sm:border-4 border-[var(--outline-variant)] bg-[var(--surface-variant)]/60 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] hover:border-[var(--primary)] px-4 sm:px-6 py-2 sm:py-3 text-sm font-bold text-[var(--on-surface)] transition-all duration-300 cursor-pointer"
+                      transition={musicActionTransition}
+                      className={`inline-flex min-h-14 flex-1 sm:flex-none items-center justify-center gap-2 border-4 border-[var(--outline-variant)] bg-[var(--surface-variant)]/60 hover:bg-[var(--primary-container)] hover:text-[var(--on-primary-container)] hover:border-[var(--primary)] px-4 sm:px-6 py-2 sm:py-3 text-sm font-bold text-[var(--on-surface)] transition-all duration-150 cursor-pointer ${track.url ? "rounded-tl-xl rounded-bl-xl rounded-tr-[1.75rem] rounded-br-[1.75rem]" : "rounded-full"}`}
                       />
                   </div>
                 </div>

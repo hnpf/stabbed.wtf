@@ -21,6 +21,7 @@ export const BounceButton = ({
   layoutId,
   isMini = false,
   isFlipped,
+  hideLabelOnMobile = false,
   transition,
 }: {
   icon?: any;
@@ -37,6 +38,7 @@ export const BounceButton = ({
   layoutId?: string;
   isMini?: boolean;
   isFlipped?: boolean;
+  hideLabelOnMobile?: boolean;
   transition?: any;
 }) => {
   const [internalLoading, set_loading] = useState(false);
@@ -146,7 +148,7 @@ export const BounceButton = ({
                     mass: 0.6,
                   },
                 }}
-                className="whitespace-nowrap overflow-hidden inline-flex items-center"
+                className={cn("whitespace-nowrap overflow-hidden inline-flex items-center", hideLabelOnMobile && "hidden sm:inline-flex")}
                 style={{ pointerEvents: isMini ? "none" : "auto" }}
               >
                 {typeof label === "string" ? <span className="font-bold">{label}</span> : label}
