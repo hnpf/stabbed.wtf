@@ -1820,10 +1820,10 @@ export const SettingsDialog = memo(({
                         </div>
 
                         {/* divider + bottom pages wrapped together so they stay anchored */}
-                        <div className="flex flex-col gap-1 mt-4">
+                        <div className="flex flex-col gap-1 mt-4 mb-6">
                           <div className="flex items-center gap-4 px-1 pt-1 pb-1">
                             <div className="flex-1 h-px bg-[var(--outline-variant)]/30" />
-                            <span className="text-[12px] font-black tracking-[0.1em] uppercase opacity-40 font-expressive">System & Support</span>
+                            <span className="text-[12px] font-black tracking-[0.1em] opacity-40 font-expressive">System & Support</span>
                             <div className="flex-1 h-px bg-[var(--outline-variant)]/30" />
                           </div>
                           {BOTTOM_PAGES.map((page, index, arr) => {

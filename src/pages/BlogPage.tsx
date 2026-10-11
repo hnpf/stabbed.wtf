@@ -400,7 +400,7 @@ export const BlogPage = memo(({ targetId, navigateTo, onFeedReady }: any) => {
         <footer className="relative pt-16 pb-24 flex flex-col items-center gap-10 before:absolute before:top-0 before:left-0 before:w-full before:h-[6px] before:bg-[var(--outline-variant)] before:rounded-full">
           {/* reactions */}
           <div className="w-full space-y-4">
-            <p className="text-[12px] font-black tracking-[0.2em] opacity-40 text-center">
+            <p className="text-[12px] font-black tracking-[0.1em] opacity-40 text-center">
               How did this post make you feel?
             </p>
             <div className="flex justify-center">
@@ -510,18 +510,19 @@ export const BlogPage = memo(({ targetId, navigateTo, onFeedReady }: any) => {
               }}
             >
               <div className="p-8 md:p-16 space-y-8 relative z-10">
-                <div className="flex flex-wrap items-center gap-3">
-                  <Badge size="md" variant="default" className="bg-[var(--primary)] text-[var(--on-primary)] border-transparent font-black uppercase tracking-widest shadow-md">
-                    Featured post!
-                  </Badge>
-                  <Badge size="md" icon={Calendar} className="bg-[var(--on-primary-container)]/10 text-[var(--on-primary-container)] border-[var(--on-primary-container)]/20">
-                    {featured.date}
-                  </Badge>
-                  {read.includes(featured.id) && (
-                    <Badge size="md" icon={CheckCircle2} iconClassName="text-emerald-400" className="bg-emerald-500/15 text-emerald-300 border-emerald-500/30">
-                      Read
+                <div className="flex flex-wrap items-center justify-center gap-3 md:justify-start">
+                  <div className="flex items-center gap-3">
+                    <Badge size="md" variant="default" className="bg-[var(--primary)] text-[var(--on-primary)] border-transparent font-black uppercase tracking-widest shadow-md">
+                      Featured post!
                     </Badge>
-                  )}
+                    <Badge
+                      size="md"
+                      icon={Calendar}
+                      className="bg-[var(--on-primary-container)]/10 text-[var(--on-primary-container)] border-[var(--on-primary-container)]/20"
+                    >
+                      {featured.date}
+                    </Badge>
+                  </div>
                 </div>
                 <div className="space-y-4 max-w-4xl">
                   <h3 className="text-4xl md:text-7xl font-expressive font-black tracking-tighter leading-[0.95] group-hover:translate-x-2 transition-transform duration-500 italic">
@@ -539,7 +540,7 @@ export const BlogPage = memo(({ targetId, navigateTo, onFeedReady }: any) => {
                     compact
                   />
                 </div>
-                <div className="flex w-full items-center gap-4 pt-4 flex-wrap">
+                <div className="flex w-full flex-col items-center gap-2 md:flex-row md:gap-4 md:pt-4">
                   <motion.div
                     whileHover={{
                       scale: 1.02,
@@ -585,9 +586,16 @@ export const BlogPage = memo(({ targetId, navigateTo, onFeedReady }: any) => {
                       compact
                     />
                   </div>
-                  <span className="text-xs md:text-[16px] font-expressive-bold uppercase tracking-widest opacity-40 italic whitespace-nowrap">
-                    {featured.readTime}
-                  </span>
+                  <div className="flex shrink-0 items-center gap-2 mt-4 md:ml-auto">
+                    {read.includes(featured.id) && (
+                      <span title="Read" role="img" aria-label="Read post" className="inline-flex items-center text-emerald-400">
+                        <CheckCircle2 size={14} />
+                      </span>
+                    )}
+                    <span className="text-xs md:text-[16px] font-expressive-bold uppercase tracking-widest opacity-40 italic whitespace-nowrap">
+                      {featured.readTime}
+                    </span>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -620,21 +628,23 @@ export const BlogPage = memo(({ targetId, navigateTo, onFeedReady }: any) => {
               >
                 <div className="space-y-6 h-full flex flex-col justify-between">
                   <div className="space-y-6">
-                    <div className="flex justify-between items-start gap-3">
-                      <div className="flex flex-wrap items-center gap-2 min-w-0 flex-1">
-                        <Badge size="sm" icon={Tag} variant="primary" className="font-black uppercase tracking-wider italic">
-                          {p.category}
-                        </Badge>
-                        <Badge size="sm" icon={Calendar} variant="surface" className="font-bold tracking-wider">
-                          {p.date}
-                        </Badge>
-                        {read.includes(p.id) && (
-                          <Badge size="sm" icon={CheckCircle2} iconClassName="text-emerald-500" className="px-3 py-1 text-[10px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-500 border-emerald-500/20">
-                            Read
+                    <div className="flex justify-between items-center gap-3">
+                      <div className="flex min-w-0 flex-1 flex-wrap items-center gap-2">
+                        <div className="flex min-w-0 flex-wrap items-center gap-2">
+                          <Badge size="sm" icon={Tag} variant="primary" className="font-black uppercase tracking-wider italic">
+                            {p.category}
                           </Badge>
-                        )}
+                          <Badge
+                            size="sm"
+                            icon={Calendar}
+                            variant="surface"
+                            className="font-bold tracking-wider"
+                          >
+                            {p.date}
+                          </Badge>
+                        </div>
                       </div>
-                      <div className="w-11 h-11 rounded-[2rem] bg-[var(--surface)] border-3 border-[var(--outline-variant)] flex items-center justify-center group-hover:bg-[var(--primary)] group-hover:text-[var(--on-primary)] transition-all duration-500 shrink-0">
+                      <div className="relative w-11 h-11 rounded-[2rem] bg-[var(--surface)] border-3 border-[var(--outline-variant)] flex items-center justify-center group-hover:bg-[var(--primary)] group-hover:text-[var(--on-primary)] transition-all duration-500 shrink-0">
                         <ChevronRight size={20} />
                       </div>
                     </div>
@@ -658,7 +668,14 @@ export const BlogPage = memo(({ targetId, navigateTo, onFeedReady }: any) => {
                     <span>
                       Post No. {BLOG_POSTS.length - BLOG_POSTS.indexOf(p)}
                     </span>
-                    <span>{p.readTime}</span>
+                    <span className="inline-flex shrink-0 items-center gap-2">
+                      {read.includes(p.id) && (
+                        <span title="Read" role="img" aria-label="Read post" className="inline-flex items-center text-emerald-500">
+                          <CheckCircle2 size={14} />
+                        </span>
+                      )}
+                      {p.readTime}
+                    </span>
                   </div>
                 </div>
               </Card>
