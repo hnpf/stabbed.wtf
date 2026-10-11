@@ -62,7 +62,7 @@ export const GuestbookDialog = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [openPickerId, setOpenPickerId] = useState<string | number | null>(null);
-  const [pickerPos, setPickerPos] = useState<{ top: number; left: number; align: "left" | "right" } | null>(null);
+  const [pickerPos, setPickerPos] = useState<{ top: number; left: number } | null>(null);
   const [stickerDropdownOpen, setStickerDropdownOpen] = useState(false);
   const [bursts, setBursts] = useState<BurstParticle[]>([]);
 
@@ -638,12 +638,11 @@ export const GuestbookDialog = ({
                                     } else {
                                       const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
                                       const PICKER_W = 256;
-                                      const spaceRight = window.innerWidth - rect.left;
-                                      const align = spaceRight >= PICKER_W + 8 ? "left" : "right";
+                                      const maxLeft = Math.max(8, window.innerWidth - PICKER_W - 8);
+                                      const left = Math.min(Math.max(8, rect.left), maxLeft);
                                       setPickerPos({
-                                        top: rect.top - 8, // will use transform to flip above
-                                        left: align === "left" ? rect.left : rect.right,
-                                        align,
+                                        top: rect.bottom + 8,
+                                        left,
                                       });
                                       setOpenPickerId(entry.id);
                                     }
@@ -893,14 +892,8 @@ export const GuestbookDialog = ({
             position: "fixed",
             zIndex: 9999,
             top: pickerPos.top,
-            ...(pickerPos.align === "left"
-              ? { left: pickerPos.left }
-              : { left: pickerPos.left, transform: "translateX(-100%)" }),
-            // flip above the button
-            transform: [
-              pickerPos.align === "right" ? "translateX(-100%)" : "",
-              "translateY(calc(-100% - 8px))",
-            ].filter(Boolean).join(" ") || "translateY(calc(-100% - 8px))",
+            left: pickerPos.left,
+            maxWidth: "calc(100vw - 16px)",
           };
 
           return (

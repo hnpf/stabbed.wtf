@@ -53,7 +53,7 @@ export function BlogReactions({ slug, initialReactions, compact, className }: Bl
   const [reactions, setReactions] = useState<Record<string, number>>(initialReactions || {});
   const [userReacted, setUserReacted] = useState<string[]>([]);
   const [pickerOpen, setPickerOpen] = useState(false);
-  const [pickerPos, setPickerPos] = useState<{ top: number; left: number; align: "left" | "right" } | null>(null);
+  const [pickerPos, setPickerPos] = useState<{ top: number; left: number } | null>(null);
   const [bursts, setBursts] = useState<BurstParticle[]>([]);
   const [loading, setLoading] = useState(!initialReactions);
   const hasLiveData = useRef(false);
@@ -209,10 +209,7 @@ export function BlogReactions({ slug, initialReactions, compact, className }: Bl
                 zIndex: 9998,
                 top: pickerPos.top,
                 left: pickerPos.left,
-                transform: [
-                  pickerPos.align === "right" ? "translateX(-100%)" : "",
-                  "translateY(calc(-100% - 10px))",
-                ].filter(Boolean).join(" ") || "translateY(calc(-100% - 10px))",
+                maxWidth: "calc(100vw - 16px)",
               }}
               className="bg-[var(--surface)] border-3 border-[var(--outline-variant)] rounded-2xl p-3 shadow-2xl w-72 backdrop-blur-md select-none"
             >
@@ -297,12 +294,11 @@ export function BlogReactions({ slug, initialReactions, compact, className }: Bl
             } else {
               const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
               const PICKER_W = 288;
-              const spaceRight = window.innerWidth - rect.left;
-              const align = spaceRight >= PICKER_W + 8 ? "left" : "right";
+              const maxLeft = Math.max(8, window.innerWidth - PICKER_W - 8);
+              const left = Math.min(Math.max(8, rect.left), maxLeft);
               setPickerPos({
-                top: rect.top,
-                left: align === "left" ? rect.left : rect.right,
-                align,
+                top: rect.bottom + 10,
+                left,
               });
               setPickerOpen(true);
             }
