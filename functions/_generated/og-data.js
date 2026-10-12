@@ -32,7 +32,7 @@ export const BLOG_POSTS = [
     "snippet": "checking if the new react-markdown setup can handle me.",
     "link": "markdown-test",
     "date": "Jul 7, 2026",
-    "category": "devlog"
+    "category": "dev"
   },
   {
     "id": "return-of-the-old-blogs",
@@ -96,7 +96,7 @@ export const BLOG_POSTS = [
     "snippet": "the new mobile \"more\" menu and the revamped hardware section.",
     "link": "more-hardware-updates-feb-2026",
     "date": "Feb 11, 2026",
-    "category": "devlog"
+    "category": "dev"
   },
   {
     "id": "site-overhaul-feb-2026",
@@ -104,7 +104,7 @@ export const BLOG_POSTS = [
     "snippet": "a deep dive into why i gutted the old design, added new tweaks, and gave you keys to customization.",
     "link": "feb-11-update",
     "date": "Feb 11, 2026",
-    "category": "devlog"
+    "category": "dev"
   },
   {
     "id": "search-is-mid",
@@ -120,7 +120,7 @@ export const BLOG_POSTS = [
     "snippet": "after a whole year of rotting, the wiki is finally a 300k character monster.",
     "link": "unw-upw-is-a-bible-lol",
     "date": "Feb 03, 2026",
-    "category": "devlog"
+    "category": "dev"
   },
   {
     "id": "cybersec-101",
@@ -128,7 +128,7 @@ export const BLOG_POSTS = [
     "snippet": "the absolute bare minimum to not get wiped out online.",
     "link": "cybersec-101",
     "date": "Jul 07, 2026",
-    "category": "cybersecurity"
+    "category": "cybersec"
   },
   {
     "id": "sysdupd",
@@ -240,7 +240,7 @@ export const BLOG_POSTS = [
     "snippet": "understanding cybersecurity is a no brainer",
     "link": "importance-of-cybersecurity",
     "date": "Nov 6, 2025",
-    "category": "security"
+    "category": "cybersec"
   },
   {
     "id": "why-i-love-open-source-og",
@@ -296,7 +296,7 @@ export const BLOG_POSTS = [
     "snippet": "Started with the idea of creating a Material Design testing playground as a hobby.",
     "link": "project-update-2025-6-12",
     "date": "Jun 12, 2025",
-    "category": "beginning"
+    "category": "inception"
   }
 ];
 
