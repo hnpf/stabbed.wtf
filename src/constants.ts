@@ -2804,7 +2804,7 @@ export const MUSIC_RELEASES: MusicRelease[] = [
     duration: "2 min 5 sec",
     tags: ["rage", "experimental"],
     featured: true,
-    tracks: [{ id: "hateware", title: "HATEWARE", audioUrl: "/localreleases/HATEWARE/HATEWARE/HATEWARE.wav", duration: "2:05", ...LOCAL_WAV_METADATA }],
+    tracks: [{ id: "hateware", title: "HATEWARE", audioUrl: "/localreleases/HATEWARE/HATEWARE/HATEWARE.mp3", duration: "2:05", ...LOCAL_WAV_METADATA }],
     links: {
       spotify: "https://open.spotify.com/album/4igWVMnc4K292BEFdvkdVl?si=Q3ochhl8SW2NpHfCbUMC_g",
       bandcamp: "https://rxvirex.bandcamp.com/track/hateware",
