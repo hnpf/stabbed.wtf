@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import { linear, trackOpacity } from "../_wavy";
 import { useTheme } from "../ThemeContext";
 
@@ -9,6 +9,7 @@ interface WavyProgressProps {
   percent: number;
   className?: string;
   pride?: boolean;
+  animated?: boolean;
 }
 
 const PRIDE_PALETTES: Record<string, string[]> = {
@@ -29,8 +30,10 @@ export default function WavyProgress({
   percent,
   className,
   pride = false,
+  animated = true,
 }: WavyProgressProps) {
   const { settings } = useTheme();
+  const svgRef = useRef<SVGSVGElement>(null);
   const [paletteIndex, setPaletteIndex] = useState(0);
   const isPrideActive = pride || IS_JUNE;
 
@@ -38,12 +41,19 @@ export default function WavyProgress({
   const currentPalette = palettes[paletteIndex];
 
   useEffect(() => {
-    if (!isPrideActive) return;
+    if (!isPrideActive || !animated || settings.disableAnimations) return;
     const interval = setInterval(() => {
       setPaletteIndex((prev) => (prev + 1) % palettes.length);
     }, 4000); // cycle every 4 seconds
     return () => clearInterval(interval);
-  }, [isPrideActive, palettes.length]);
+  }, [isPrideActive, animated, settings.disableAnimations, palettes.length]);
+
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    if (animated && !settings.disableAnimations) svg.unpauseAnimations();
+    else svg.pauseAnimations();
+  }, [animated, settings.disableAnimations]);
 
   const safePercent = Math.min(100, Math.max(0, Number.isNaN(Number(percent)) ? 0 : Number(percent)));
   const left = thickness * 0.5;
@@ -66,6 +76,7 @@ export default function WavyProgress({
 
   return (
     <svg
+      ref={svgRef}
       viewBox={`0 0 ${width} ${height}`}
       role="progressbar"
       className={className}

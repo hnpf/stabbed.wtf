@@ -106,6 +106,7 @@ export const Share2 = materialIcon("share");
 export const MapPin = materialIcon("location_on");
 export const History = materialIcon("history");
 export const Target = materialIcon("strategy");
+export const QMark = materialIcon("question_mark");
 export const SquareTerminal = materialIcon("terminal");
 export const deployed_code = materialIcon("deployed_code");
 export const tech_stack = materialIcon("stacks");

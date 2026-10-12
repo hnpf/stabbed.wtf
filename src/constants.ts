@@ -2683,6 +2683,18 @@ export const TECH_STACK = {
   audio: ["FL Studio", "PipeWire / ALSA", "Sound Design", "Mixing & Mastering"],
 };
 
+export interface MusicTrack {
+  id: string;
+  title: string;
+  audioUrl: string;
+  duration?: string;
+  sampleRate?: number;
+  bitrate?: number;
+  format?: string;
+}
+
+const LOCAL_WAV_METADATA = { sampleRate: 44100, bitrate: 1411200, format: "WAV · 16-bit PCM" };
+
 export interface MusicRelease {
   id: string;
   title: string;
@@ -2694,6 +2706,7 @@ export interface MusicRelease {
   duration?: string;
   tags: string[];
   featured?: boolean;
+  tracks?: MusicTrack[];
   links: {
     spotify?: string;
     bandcamp?: string;
@@ -2715,6 +2728,7 @@ export const MUSIC_RELEASES: MusicRelease[] = [
     duration: "2 min 4 sec",
     tags: ["rage", "experimental"],
     featured: true,
+    tracks: [{ id: "xanxiety", title: "XANXIETY", audioUrl: "/localreleases/XANXIETY/XANXIETY/XANXIETY.wav", duration: "2:03", ...LOCAL_WAV_METADATA }],
     links: {
       spotify: "https://open.spotify.com/track/5CeLL3fvM8RmSPiVUycxws?si=fa9030ef05a3482f",
       bandcamp: "https://rxvirex.bandcamp.com/track/xanxiety",
@@ -2732,6 +2746,7 @@ export const MUSIC_RELEASES: MusicRelease[] = [
     duration: "2 min 5 sec",
     tags: ["rage", "experimental"],
     featured: true,
+    tracks: [{ id: "hateware", title: "HATEWARE", audioUrl: "/localreleases/HATEWARE/HATEWARE/HATEWARE.wav", duration: "2:05", ...LOCAL_WAV_METADATA }],
     links: {
       spotify: "https://open.spotify.com/album/4igWVMnc4K292BEFdvkdVl?si=Q3ochhl8SW2NpHfCbUMC_g",
       bandcamp: "https://rxvirex.bandcamp.com/track/hateware",
@@ -2749,6 +2764,20 @@ export const MUSIC_RELEASES: MusicRelease[] = [
     duration: "26 min 2 sec",
     tags: ["Debut", "Experimental", "Rage"],
     featured: true,
+    tracks: [
+      { id: "six-missed-calls", title: "SIX MISSED CALLS", audioUrl: "/localreleases/FIRSTATTEMPT/SIX MISSED CALLS/SIX MISSED CALLS.wav", duration: "2:08", ...LOCAL_WAV_METADATA },
+      { id: "halfawakeforever", title: "HALFAWAKEFOREVER", audioUrl: "/localreleases/FIRSTATTEMPT/HALFAWAKEFOREVER/HALFAWAKEFOREVER.wav", duration: "2:05", ...LOCAL_WAV_METADATA },
+      { id: "back2back", title: "back2back", audioUrl: "/localreleases/FIRSTATTEMPT/back2back/back2back.wav", duration: "3:00", ...LOCAL_WAV_METADATA },
+      { id: "glass-in-my-throat", title: "GLASS IN MY THROAT", audioUrl: "/localreleases/FIRSTATTEMPT/GLASS IN MY THROAT/GLASS IN MY THROAT.wav", duration: "2:43", ...LOCAL_WAV_METADATA },
+      { id: "icy-is-my-bitch", title: "ICY IS MY BITCH!", audioUrl: "/localreleases/FIRSTATTEMPT/ICY IS MY BITCH!/ICY IS MY BITCH!.wav", duration: "2:24", ...LOCAL_WAV_METADATA },
+      { id: "i-cant-sing-for-shit", title: "I CANT SING FOR SHIT!!", audioUrl: "/localreleases/FIRSTATTEMPT/I CANT SING FOR SHIT!!/I CANT SING FOR SHIT!!.wav", duration: "1:42", ...LOCAL_WAV_METADATA },
+      { id: "bone-density", title: "BONE DENSITY", audioUrl: "/localreleases/FIRSTATTEMPT/BONE DENSITY/BONE DENSITY.wav", duration: "2:20", ...LOCAL_WAV_METADATA },
+      { id: "sick", title: "SICK", audioUrl: "/localreleases/FIRSTATTEMPT/SICK/SICK.wav", duration: "1:33", ...LOCAL_WAV_METADATA },
+      { id: "zero-or-sum-shit", title: "ZERO OR SUM SHIT", audioUrl: "/localreleases/FIRSTATTEMPT/ZERO OR SUM SHIT/ZERO OR SUM SHIT.wav", duration: "1:56", ...LOCAL_WAV_METADATA },
+      { id: "da-leak", title: "DA LEAK", audioUrl: "/localreleases/FIRSTATTEMPT/DA LEAK/DA LEAK.wav", duration: "1:49", ...LOCAL_WAV_METADATA },
+      { id: "church", title: "CHURCH", audioUrl: "/localreleases/FIRSTATTEMPT/CHURCH/CHURCH.wav", duration: "2:14", ...LOCAL_WAV_METADATA },
+      { id: "deadline", title: "DEADLINE", audioUrl: "/localreleases/FIRSTATTEMPT/DEADLINE/DEADLINE.wav", duration: "2:03", ...LOCAL_WAV_METADATA },
+    ],
     links: {
       spotify: "https://open.spotify.com/album/1UHT94oL84kULqpRq2Gr30?si=eLP2rfnbSSmOHjz2Y-d-FAom",
       bandcamp: "https://rxvirex.bandcamp.com/album/first-attempt",

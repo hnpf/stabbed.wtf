@@ -2,11 +2,41 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { vxaddguestbook, vxlistguestbook, vxreactguestbook, validateGuestbookMessage } from './guestbook_db.js';
 import { vxgetblogreactions, vxgetallblogreactions, vxreactblogpost } from './blog_reactions_db.js';
+import { vxgetallmusicanalytics, vxupdatemusicanalytics } from './music_analytics_db.js';
 
 dotenv.config();
 
 const app = express();
 app.use(express.json({ limit: '10mb' }));
+
+app.get('/api/music-analytics', (_req, res) => {
+  try {
+    res.set('Cache-Control', 'no-store').json(vxgetallmusicanalytics());
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/api/music-analytics', (req, res) => {
+  const { trackId, action, delta = 1, emoji } = req.body || {};
+  if (typeof trackId !== 'string' || !/^[a-z0-9-]{1,80}$/.test(trackId)) {
+    return res.status(400).json({ error: 'Invalid trackId' });
+  }
+  if (!['listen', 'skip', 'like', 'dislike', 'reaction'].includes(action)) {
+    return res.status(400).json({ error: 'Invalid action' });
+  }
+  if (![1, -1].includes(delta)) return res.status(400).json({ error: 'Invalid delta' });
+  if (action === 'reaction' && (typeof emoji !== 'string' || !emoji || emoji.length > 16)) {
+    return res.status(400).json({ error: 'Invalid reaction' });
+  }
+
+  try {
+    const analytics = vxupdatemusicanalytics(trackId, action, delta, emoji);
+    res.set('Cache-Control', 'no-store').json({ trackId, ...analytics });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 app.get('/api/guestbook', (req, res) => {
   try {

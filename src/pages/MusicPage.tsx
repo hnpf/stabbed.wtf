@@ -9,7 +9,7 @@ import { Ripple } from "../components/Ripple";
 import { Badge } from "../components/Badge";
 import {
   Album,
-  PlayArrow,
+  QMark,
   X, 
   Share2, 
   Check,
@@ -238,8 +238,13 @@ const ReleaseModal = ({ release, onClose }: { release: MusicRelease | null; onCl
   );
 };
 
-export const MusicPage = memo(({ setPage }: { setPage: (p: string) => void }) => {
+export const MusicPage = memo(({ setPage, onListenViewChange, onListenCatalogHostChange }: { setPage: (p: string) => void; onListenViewChange: (active: boolean) => void; onListenCatalogHostChange: (host: HTMLDivElement | null) => void }) => {
   const [selectedRelease, setSelectedRelease] = useState<MusicRelease | null>(null);
+  const [viewMode, setViewMode] = useState<"releases" | "listen">(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("view") === "releases" || params.has("release") || window.location.hash) return "releases";
+    return "listen";
+  });
 
   // check url query param ?release=id on mount to support deep linking
   useEffect(() => {
@@ -252,6 +257,10 @@ export const MusicPage = memo(({ setPage }: { setPage: (p: string) => void }) =>
       }
     }
   }, []);
+
+  useEffect(() => {
+    onListenViewChange(viewMode === "listen");
+  }, [onListenViewChange, viewMode]);
 
   const openReleaseModal = (release: MusicRelease) => {
     setSelectedRelease(release);
@@ -281,18 +290,33 @@ export const MusicPage = memo(({ setPage }: { setPage: (p: string) => void }) =>
         </div>
       </header>
 
+      <div className="flex justify-center">
+        <div data-ripple-skip role="tablist" aria-label="Music views" className="flex w-full max-w-md rounded-full border border-[var(--outline-variant)]/50 bg-[var(--surface-variant)]/60 p-1">
+          <button role="tab" aria-selected={viewMode === "listen"} onClick={() => setViewMode("listen")} className={`relative isolate flex h-12 flex-1 items-center justify-center rounded-full px-4 text-sm font-black transition-colors ${viewMode === "listen" ? "text-[var(--on-primary)]" : "opacity-65 hover:opacity-100"}`}>
+            {viewMode === "listen" && <motion.div layoutId="music-view-active-pill" transition={{ type: "spring", stiffness: 520, damping: 34, mass: 0.55 }} className="absolute inset-0 z-0 rounded-full bg-[var(--primary)]" />}
+            <span className="relative z-10">Listen here</span>
+          </button>
+          <button role="tab" aria-selected={viewMode === "releases"} onClick={() => setViewMode("releases")} className={`relative isolate flex h-12 flex-1 items-center justify-center rounded-full px-4 text-sm font-black transition-colors ${viewMode === "releases" ? "text-[var(--on-primary)]" : "opacity-65 hover:opacity-100"}`}>
+            {viewMode === "releases" && <motion.div layoutId="music-view-active-pill" transition={{ type: "spring", stiffness: 520, damping: 34, mass: 0.55 }} className="absolute inset-0 z-0 rounded-full bg-[var(--primary)]" />}
+            <span className="relative z-10">Streaming</span>
+          </button>
+        </div>
+      </div>
+      <div ref={onListenCatalogHostChange} />
+
       {/* tracked release section */}
+      {viewMode === "releases" && <>
       <section className="space-y-4 sm:space-y-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 className="text-2xl sm:text-4xl font-expressive-bold italic font-black tracking-tight">
-            Releases and Tracks
+            Releases & Tracks
           </h2>
           <span className="text-[14px] sm:text-md font-black tracking-widest opacity-40">
-            There are currently {MUSIC_RELEASES.length} releases.
+            There are {MUSIC_RELEASES.length} releases.
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8">
+        <div className="grid grid-cols-1 gap-5 sm:gap-8 md:grid-cols-2">
           {MUSIC_RELEASES.map((release, i) => (
             <Card
               key={release.id}
@@ -302,7 +326,7 @@ export const MusicPage = memo(({ setPage }: { setPage: (p: string) => void }) =>
                 openReleaseModal(release);
               }}
               className="cursor-pointer group"
-              innerClassName="p-5 sm:p-8 border-4 sm:border-6 border-[var(--outline-variant)]/60 hover:border-[var(--primary)] hover:shadow-2xl transition-[border-color,box-shadow] duration-200 flex flex-col justify-between min-h-[260px] sm:min-h-[320px] rounded-[2rem] sm:rounded-[2.5rem] relative overflow-hidden"
+              innerClassName="p-5 sm:p-8 min-h-[260px] sm:min-h-[320px] rounded-[1.5rem] sm:rounded-[2rem] border-2 sm:border-3 border-[var(--outline-variant)]/60 hover:border-[var(--primary)] hover:shadow-2xl transition-[border-color,box-shadow] duration-200 flex flex-col justify-between relative overflow-hidden"
             >
               <div className="space-y-4 sm:space-y-6 relative z-10">
                 {/* header info pills */}
@@ -318,7 +342,7 @@ export const MusicPage = memo(({ setPage }: { setPage: (p: string) => void }) =>
 
                   {/* m3 play Container */}
                   <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[var(--primary)] text-[var(--on-primary)] flex items-center justify-center shadow-lg group-hover:scale-110 active:scale-95 transition-all shrink-0">
-                    <PlayArrow size={20} fill className="translate-x-0.5 pr-1.5" />
+                    <QMark size={20} fill className="translate-x-0.5 pr-1.5" />
                   </div>
                 </div>
 
@@ -438,6 +462,7 @@ export const MusicPage = memo(({ setPage }: { setPage: (p: string) => void }) =>
           })}
         </div>
       </section>
+      </>}
 
       {/* release popup */}
       {selectedRelease && (

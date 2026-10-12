@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState, useEffect, useRef, memo, lazy, Suspense } from "react";
+import React, { useState, useEffect, useRef, useCallback, memo, lazy, Suspense } from "react";
 import { motion, AnimatePresence, MotionConfig } from "motion/react";
 
 import { useTheme } from "./ThemeContext";
@@ -28,6 +28,7 @@ import { BugReportDialog } from "./components/BugReportDialog";
 import { KnownIssuesDialog } from "./components/KnownIssuesDialog";
 import { DebugView } from "./components/DebugView";
 import { CommandPalette } from "./components/CommandPalette";
+import { MusicListeningRoom } from "./components/MusicListeningRoom";
 
 // lighter components: kept eager (small, used immediately)
 import { SideItem } from "./components/Navigation";
@@ -118,6 +119,10 @@ export default function App() {
   };
 
   const [page, setPage] = useState(() => getPageFromPath(window.location.pathname));
+  const [musicListenActive, setMusicListenActive] = useState(false);
+  const [musicCatalogHost, setMusicCatalogHost] = useState<HTMLDivElement | null>(null);
+  const handleMusicListenViewChange = useCallback((active: boolean) => setMusicListenActive(active), []);
+  const handleMusicCatalogHostChange = useCallback((host: HTMLDivElement | null) => setMusicCatalogHost(host), []);
 
   const [blogPostId, setBlogPostId] = useState<string | null>(() => {
     const loc = window.location.pathname;
@@ -387,14 +392,16 @@ export default function App() {
       </AnimatePresence>
 
 
-      <ScrollToTopButton
-        showTop={show_top}
-        isMobile={is_mobile}
-        showBottomNav={showBottomNav}
-        scrollDirection={scrollDirection}
-        settings={settings}
-        updateSettings={updateSettings}
-      />
+      {page !== "music" && (
+        <ScrollToTopButton
+          showTop={show_top}
+          isMobile={is_mobile}
+          showBottomNav={showBottomNav}
+          scrollDirection={scrollDirection}
+          settings={settings}
+          updateSettings={updateSettings}
+        />
+      )}
 
       <AnimatePresence>
         {settings.focusMode && (
@@ -614,7 +621,7 @@ export default function App() {
       </AnimatePresence>
 
       <motion.main
-        layout
+        layout={page !== "music"}
         transition={springConfig}
         id="primary-content"
         className={cn("flex-1 overflow-x-hidden page-container transition-[max-width,margin] duration-300 ease-out", (page === "readme" && settings.infoFullscreen) ? "p-0" : "p-6 md:p-12 lg:p-16", settings.forceDesktop || viewport.w >= 768 ? "pb-16" : "pb-40")}
@@ -630,7 +637,7 @@ export default function App() {
             {page === "blog" && <BlogPage targetId={blogPostId} navigateTo={goto} onFeedReady={restoreBlogFeedScroll} />}
             {page === "lens" && <LensPage viewport={viewport} />}
             {page === "now" && <NowPage />}
-            {page === "music" && <MusicPage setPage={goto} />}
+            {page === "music" && <MusicPage setPage={goto} onListenViewChange={handleMusicListenViewChange} onListenCatalogHostChange={handleMusicCatalogHostChange} />}
             {page === "readme" && <ReadmePage setPage={goto} is_mobile={is_mobile} />}
             {page === "changelog" && <ChangelogPage />}
             {![ "home", "blog", "lens", "now", "music", "readme", "changelog" ].includes(page) && <NotFound go={goto} />}
@@ -661,6 +668,12 @@ export default function App() {
           )}
         </AnimatePresence>
       </motion.main>
+
+      <MusicListeningRoom
+        active={page === "music" && musicListenActive}
+        catalogHost={musicCatalogHost}
+        hideMiniPlayer={settingsOpen || bugReportOpen || KnownIssuessOpen || guestbookOpen || showDebugConfirm || showRefreshConfirm || Boolean(pendingCapsule) || commandOpen || Boolean(popup)}
+      />
 
       <AnimatePresence>
         {!settings.focusMode && (page !== "readme" || !settings.infoFullscreen) && is_mobile && (
