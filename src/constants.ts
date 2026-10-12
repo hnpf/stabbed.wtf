@@ -1062,6 +1062,64 @@ it's literally just people helping people for learning (and overall better code 
 
 export const CHANGELOGS: ChangelogEntry[] = [
   {
+    id: "huge-ui-and-fixes-update",
+    version: "2026.10.11",
+    title: "huge ui and fixes update",
+    date: "Oct 11, 2026",
+    changes: [
+      {
+        category: "now page",
+        items: [
+          "feat: dynamic album art theming & full mobile UI redesign",
+          "feat: made last.fm primary action & added segmented dual-action buttons",
+          "ui: redesigned vinyl fallback card & centered progress bar buttons on desktop",
+          "ui: centered playback badge on mobile & fixed dual bouncebutton hover states",
+          "fix: resolved misaligned refresh icon",
+          "QOL: added spotify search option & tuned mobile button sizing",
+        ],
+      },
+      {
+        category: "music page",
+        items: [
+          "feat: built local music player & polished listening room",
+          "feat: added xanxiety release",
+          "tweak: normalized label wording to 'releases'",
+        ],
+      },
+      {
+        category: "blog page",
+        items: [
+          "feat: added post reactions",
+          "QOL: preserved scroll position when navigating away from posts",
+          "ui: updated filter icon, post sizing, & read checkmarks",
+          "fix: fixed link hover states & deduplicated filter categories",
+        ],
+      },
+      {
+        category: "info page",
+        items: [
+          "ui: reworked text layout & lettermatrix",
+          "style: removed remaining hover borders & native text selection highlights",
+        ],
+      },
+      {
+        category: "guestbook page",
+        items: [
+          "feat: added post reactions",
+        ],
+      },
+      {
+        category: "global QOL & UI",
+        items: [
+          "QOL: replaced leftover Lucide icons with Material Icons",
+          "QOL: upgraded /info bio highlighter & software readability card with tilt & expansion hovers",
+          "ui: updated project card tags & category icons",
+          "fix: resolved buggy icon renders, top badge styling, & reaction picker clipping on mobile",
+        ],
+      },
+    ],
+  },
+  {
     id: "stabbedwtf-mobile-update",
     version: "2026.09.23",
     title: "stabbed.wtf + mobile update",
