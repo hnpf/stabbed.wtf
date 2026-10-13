@@ -52,6 +52,7 @@ export function triggerReactionFeedback(reaction: string, isRemoving = false) {
   switch (reaction) {
     case "🔥":
     case "🔥 Fire":
+    case "😭":
       haptic.medium();
       break;
     case "✨":

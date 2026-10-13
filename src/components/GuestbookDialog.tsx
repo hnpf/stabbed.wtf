@@ -18,7 +18,10 @@ const STICKER_PRESETS = [
 ];
 
 const EMOJI_REACTIONS = [
-  "🔥", "♥️", "🔪", "💀", "✨", "🎧", "⚡", "🩸", "👾", "💖", "🐐", "⭐", "🫧", "🦇", "🍙"
+  "👍", "👎", "🔥", "😭", "💀",
+  "🎉", "👏", "♥️", "🫪", "⚡",
+  "🤯", "🎧", "👾", "🦇", "⭐",
+  "🐐", "✨", "🩸", "🔪", "💯",
 ];
 
 function getStickerBadgeStyle(stickerName: string) {
