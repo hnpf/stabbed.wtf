@@ -1,5 +1,5 @@
 import React, { useState, memo } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { cn } from "../constants";
 import { haptic } from "../haptics";
 import { ChevronRight } from "./MaterialIcon";
@@ -158,7 +158,7 @@ export const SideItem = memo(
         {/* centered text */}
         <span
           className={cn(
-            "flex-1 text-center font-bold tracking-[1.6px] text-[18px] relative z-10 transition-colors duration-200 leading-none",
+            "flex-1 text-center font-bold tracking-[0.5px] text-[16px] min-w-0 relative z-10 transition-colors duration-200 leading-none",
             isSelected
               ? "text-[var(--on-primary-container)] font-black"
               : "text-[var(--on-surface)] font-bold opacity-90 group-hover:opacity-100"
@@ -167,17 +167,26 @@ export const SideItem = memo(
           {text}
         </span>
 
-        {/* small semi-opaque chevron right on right with no container */}
-        <div className="shrink-0 flex items-center justify-center w-5 relative z-10">
-          <ChevronRight
-            size={20}
+        {/* right icon container/s */}
+        <div className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center">
+          <div
             className={cn(
-              "transition-all duration-200",
+              "flex h-7 w-7 items-center justify-center rounded-full transition-colors duration-200",
               isSelected
-                ? "text-[var(--on-primary-container)] opacity-60"
-                : "text-[var(--on-surface-variant)] opacity-35 group-hover:opacity-80 group-hover:translate-x-0.5"
+                ? "bg-[var(--primary)]/10 text-[var(--on-primary-container)]"
+                : "bg-[var(--surface)]/50 text-[var(--on-surface-variant)] group-hover:bg-[var(--primary)]/10 group-hover:text-[var(--primary)]"
             )}
-          />
+          >
+            <ChevronRight
+              size={18}
+              className={cn(
+                "transition-transform duration-200",
+                isSelected
+                  ? "opacity-80"
+                  : "opacity-50 group-hover:translate-x-0.5 group-hover:opacity-100"
+              )}
+            />
+          </div>
         </div>
       </motion.button>
     );

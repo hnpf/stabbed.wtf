@@ -427,9 +427,16 @@ export function CommandPalette({
             {/* search input row */}
             <motion.div
               className="flex items-center gap-3.5"
-              animate={searchFocus ? { y: -2, scale: 1.008 } : { y: 0, scale: 1 }}
-              whileHover={{ y: -1, scale: 1.004 }}
-              transition={{ type: "spring", stiffness: 400, damping: 24, mass: 0.8 }}
+              animate={{
+                y: searchFocus ? -3 : 0,
+                scale: searchFocus ? 1.012 : 1,
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 280,
+                damping: 16,
+                mass: 0.85,
+              }}
             >
               <motion.button
                 key={wobbleKey}
@@ -471,18 +478,32 @@ export function CommandPalette({
                   className="relative z-10 text-[var(--on-primary)] flex items-center justify-center"
                   transition={{ type: "spring", stiffness: 400, damping: 18 }}
                 >
-                  {query ? <X size={18} /> : <Search size={18} />}
+                  {query ? <X size={22} /> : <Search size={22} />}
                 </motion.div>
               </motion.button>
 
-              <div
-                className={cn(
-                    "flex h-15 flex-1 items-center rounded-full bg-[var(--surface)] pl-5 pr-1.5 transition-[border-color,box-shadow] duration-200 border-3",
-                  searchFocus
-                      ? "border-[var(--primary)]/50 shadow-sm"
-                    : "border-[var(--outline-variant)]/40 hover:border-[var(--outline-variant)]/70"
-                )}
-              >
+              
+                <motion.div
+                  className={cn(
+                    "flex h-[60px] min-w-0 flex-1 items-center rounded-full",
+                    "border-2 pl-5 pr-1.5",
+                    "bg-[var(--surface)]",
+                    "transition-colors duration-200",
+                    searchFocus
+                      ? "border-[var(--primary)]"
+                      : "border-[var(--outline-variant)]/50 hover:border-[var(--outline-variant)]"
+                  )}
+                  animate={{
+                    boxShadow: searchFocus
+                      ? "0 0 0 3px color-mix(in srgb, var(--primary) 12%, transparent)"
+                      : "0 0 0 0px transparent",
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 400,
+                    damping: 30,
+                  }}
+                >
                 <input
                   autoFocus
                   value={query}
@@ -517,7 +538,7 @@ export function CommandPalette({
                 >
                   <ArrowRight size={18} />
                 </motion.button>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
 

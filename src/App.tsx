@@ -469,11 +469,16 @@ export default function App() {
                 </motion.div>
               </div>
               {!settings.sidebarCollapsed && !is_tiny && !is_short && (
-                <div className="flex flex-col mb-6 px-4 gap-3">
-                  <div className="flex flex-col gap-2">
-                    <h3 className="text-2xl font-expressive italic font-black mb-2 tracking-[0.03em] text-[var(--on-surface-variant)] ml-3 leading-none">Routing</h3>
-                    <div className="text-[11px] ml-3 font-bold tracking-[0.15em] text-[var(--on-surface-variant)] opacity-70">
-                      <kbd className="bg-[var(--surface-variant)] px-1.5 py-0.5 rounded-md border border-[var(--outline-variant)]/40 font-mono text-[10px]">{paletteHotkeyLabel}</kbd> to search
+                <div className="mb-5 flex flex-col gap-2 px-4">
+                  <div className="ml-3 flex flex-col gap-2">
+                    <h3 className="text-3xl mb-2 font-expressive font-black italic tracking-tight leading-none text-[var(--on-surface)]">
+                      Explore
+                    </h3>
+                    <div className="flex items-center gap-2 text-[12px] font-semibold tracking-wide text-[var(--on-surface-variant)] opacity-75">
+                      <kbd className="rounded-md bg-[var(--surface-variant)] px-1.5 py-1 font-mono text-[10px]">
+                        {paletteHotkeyLabel}
+                      </kbd>
+                      <span>to jump anywhere</span>
                     </div>
                   </div>
                 </div>
