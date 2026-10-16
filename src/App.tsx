@@ -451,7 +451,7 @@ export default function App() {
                   <div className="absolute inset-0 rounded-[inherit] overflow-hidden">
                     <div className={cn("absolute inset-0 z-20 rounded-[inherit] ring-inset overflow-hidden transition-colors duration-250 pointer-events-none", show_pfp_container ? "ring-6 ring-[var(--outline-variant)] group-hover/pfp:ring-[var(--primary)]" : "ring-6 ring-[var(--outline-variant)] group-hover/pfp:ring-[var(--primary)]", settings.sidebarCollapsed && "ring-6")} />
                     <div className="absolute inset-0 bg-[var(--surface-variant)]/50 -z-10" />
-                    <img src="/photography/pfp/main.webp" alt="virex" className="w-full h-full object-cover rounded-[inherit] group-hover/pfp:scale-105 backface-hidden transform-3d transition-transform duration-250 group-hover/pfp:scale-105" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const svg = document.createElement("img"); svg.src = "/favicon.svg"; svg.className = "w-10 h-10 p-1 transition-transform group-hover/pfp:scale-110"; svg.style.color = "var(--on-primary)"; (e.target as HTMLImageElement).parentElement!.appendChild(svg); }} referrerPolicy="no-referrer" />
+                    <img src="/photography/pfp/main.jpg" alt="virex" className="w-full h-full object-cover rounded-[inherit] group-hover/pfp:scale-105 backface-hidden transform-3d transition-transform duration-250 group-hover/pfp:scale-105" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const svg = document.createElement("img"); svg.src = "/favicon.svg"; svg.className = "w-10 h-10 p-1 transition-transform group-hover/pfp:scale-110"; svg.style.color = "var(--on-primary)"; (e.target as HTMLImageElement).parentElement!.appendChild(svg); }} referrerPolicy="no-referrer" />
                   </div>
                 </motion.div>
                 <motion.div
@@ -464,14 +464,14 @@ export default function App() {
                   className="overflow-hidden whitespace-nowrap"
                   style={{ pointerEvents: settings.sidebarCollapsed ? "none" : "auto" }}
                 >
-                  <div className="font-black font-expressive text-2xl tracking-tight italic uppercase leading-none">virex.</div>
-                  <div className="text-[12px] capitalize tracking-[0.03em] opacity-60 font-black mt-1">independent dev</div>
+                  <div className="font-black font-expressive text-3xl tracking-tight italic text-center mr-4 capitalize leading-none">virex.</div>
+                  <div className="text-md capitalize tracking-[0.03em] opacity-55 font-black mt-1">independent dev</div>
                 </motion.div>
               </div>
               {!settings.sidebarCollapsed && !is_tiny && !is_short && (
                 <div className="flex flex-col mb-6 px-4 gap-3">
                   <div className="flex flex-col gap-2">
-                    <h3 className="text-2xl font-expressive italic font-black mb-2 tracking-[0.03em] text-[var(--on-surface-variant)] uppercase leading-none">Navigation</h3>
+                    <h3 className="text-2xl font-expressive italic font-black mb-2 tracking-[0.03em] text-[var(--on-surface-variant)] ml-3 leading-none">Routing</h3>
                     <div className="text-[11px] ml-3 font-bold tracking-[0.15em] text-[var(--on-surface-variant)] opacity-70">
                       <kbd className="bg-[var(--surface-variant)] px-1.5 py-0.5 rounded-md border border-[var(--outline-variant)]/40 font-mono text-[10px]">{paletteHotkeyLabel}</kbd> to search
                     </div>
