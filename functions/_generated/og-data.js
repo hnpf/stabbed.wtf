@@ -329,3 +329,5 @@ export const MUSIC_RELEASES = [
     "ogImage": "https://stabbed.wtf/albums/FIRSTATTEMPT.png"
   }
 ];
+
+export const DEFAULT_PFP_URL = "https://stabbed.wtf/photography/pfp/main.jpg";

@@ -1,7 +1,24 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
+import fs from 'fs';
 import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
+
+function getGlobalPfpUrl(): string {
+  const pfpDir = path.resolve(__dirname, 'public/photography/pfp');
+  const exts = ['webp', 'png', 'jpg', 'jpeg', 'avif', 'svg'];
+  try {
+    if (fs.existsSync(pfpDir)) {
+      const files = fs.readdirSync(pfpDir);
+      for (const ext of exts) {
+        if (files.includes(`main.${ext}`)) {
+          return `/photography/pfp/main.${ext}`;
+        }
+      }
+    }
+  } catch {}
+  return '/photography/pfp/main.jpg';
+}
 
 function terminalCliPlugin(env: Record<string, string>) {
   return {
@@ -102,6 +119,8 @@ export default defineConfig(({ mode }) => {
     plugins: [react(), tailwindcss(), terminalCliPlugin(env)],
     envPrefix: ['VITE_', 'LASTFM_'],
     define: {
+      '__GLOBAL_PFP__': JSON.stringify(getGlobalPfpUrl()),
+      'import.meta.env.VITE_GLOBAL_PFP': JSON.stringify(getGlobalPfpUrl()),
       'import.meta.env.VITE_LASTFM_API_KEY': JSON.stringify(env.VITE_LASTFM_API_KEY || env.LASTFM_API_KEY || ''),
       'import.meta.env.VITE_LASTFM_USERNAME': JSON.stringify(env.VITE_LASTFM_USERNAME || env.LASTFM_USERNAME || ''),
       'import.meta.env.LASTFM_API_KEY': JSON.stringify(env.LASTFM_API_KEY || env.VITE_LASTFM_API_KEY || ''),

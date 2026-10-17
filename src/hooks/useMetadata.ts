@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BLOG_POSTS, MUSIC_RELEASES } from '../constants';
+import { BLOG_POSTS, MUSIC_RELEASES, GLOBAL_PFP } from '../constants';
 
 /** reads current ?release= query param from URL */
 function getMusicReleaseId(page: string): string | null {
@@ -43,7 +43,7 @@ export const useMetadata = (page: string, blogPostId: string | null, isApr: bool
         ? "virex portfolio: an independent software developer and systems researcher showcasing projects, UI/UX, security research, and photography."
         : "virex software researcher and problem solver, who explores systems and programming, UI/UX, and security research.";
     let og_title = title;
-    let og_img = "https://stabbed.wtf/photography/pfp/main.png";
+    let og_img = `https://stabbed.wtf${GLOBAL_PFP}`;
     const pageUrl =
       page === "home"
         ? "https://stabbed.wtf"

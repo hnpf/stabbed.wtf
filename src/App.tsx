@@ -32,6 +32,7 @@ import { MusicListeningRoom } from "./components/MusicListeningRoom";
 
 // lighter components: kept eager (small, used immediately)
 import { SideItem } from "./components/Navigation";
+import { PfpImage } from "./components/PfpImage";
 import { MobileFloatingNav } from "./components/MobileFloatingNav";
 import { TextSearchBar } from "./components/TextSearchBar";
 import { DebugConfirmDialog } from "./components/DebugConfirmDialog";
@@ -459,7 +460,7 @@ export default function App() {
                   <div className="absolute inset-0 rounded-[inherit] overflow-hidden">
                     <div className={cn("absolute inset-0 z-20 rounded-[inherit] ring-inset overflow-hidden transition-colors duration-250 pointer-events-none", show_pfp_container ? "ring-6 ring-[var(--outline-variant)] group-hover/pfp:ring-[var(--primary)]" : "ring-6 ring-[var(--outline-variant)] group-hover/pfp:ring-[var(--primary)]", settings.sidebarCollapsed && "ring-6")} />
                     <div className="absolute inset-0 bg-[var(--surface-variant)]/50 -z-10" />
-                    <img src="/photography/pfp/main.jpg" alt="virex" className="w-full h-full object-cover rounded-[inherit] group-hover/pfp:scale-105 backface-hidden transform-3d transition-transform duration-250 group-hover/pfp:scale-105" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; const svg = document.createElement("img"); svg.src = "/favicon.svg"; svg.className = "w-10 h-10 p-1 transition-transform group-hover/pfp:scale-110"; svg.style.color = "var(--on-primary)"; (e.target as HTMLImageElement).parentElement!.appendChild(svg); }} referrerPolicy="no-referrer" />
+                    <PfpImage alt="virex" className="w-full h-full object-cover rounded-[inherit] group-hover/pfp:scale-105 backface-hidden transform-3d transition-transform duration-250" />
                   </div>
                 </motion.div>
                 <motion.div

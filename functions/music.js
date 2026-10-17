@@ -1,10 +1,10 @@
 
-import { MUSIC_RELEASES } from "./_generated/og-data.js";
+import { MUSIC_RELEASES, DEFAULT_PFP_URL } from "./_generated/og-data.js";
 
 const DEFAULT_TITLE = "rxvirex";
 const DEFAULT_DESC =
   "music by virex (rxvirex) - producer, software dev, linux enthusiast. releases, music, and sound design.";
-const DEFAULT_IMAGE = "https://stabbed.wtf/photography/pfp/main.png";
+const DEFAULT_IMAGE = DEFAULT_PFP_URL || "https://stabbed.wtf/photography/pfp/main.jpg";
 
 const BOT_AGENTS = [
   "Twitterbot",

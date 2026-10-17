@@ -41,7 +41,23 @@ export interface Photo {
   description?: string;
 }
 
+/** Supported profile picture candidate extensions ordered by preference */
+export const PFP_CANDIDATES = [
+  "/photography/pfp/main.webp",
+  "/photography/pfp/main.png",
+  "/photography/pfp/main.jpg",
+  "/photography/pfp/main.jpeg",
+  "/photography/pfp/main.avif",
+  "/photography/pfp/main.svg",
+];
 
+/** Global profile picture path resolved dynamically at build/dev time */
+export const GLOBAL_PFP: string =
+  (typeof __GLOBAL_PFP__ !== "undefined" && __GLOBAL_PFP__)
+    ? __GLOBAL_PFP__
+    : (typeof import.meta !== "undefined" && (import.meta as any).env?.VITE_GLOBAL_PFP)
+      ? (import.meta as any).env.VITE_GLOBAL_PFP
+      : "/photography/pfp/main.jpg";
 
 export const PROJECTS: Project[] = [
   {

@@ -1,10 +1,10 @@
 
-import { BLOG_POSTS } from "../_generated/og-data.js";
+import { BLOG_POSTS, DEFAULT_PFP_URL } from "../_generated/og-data.js";
 
 const DEFAULT_TITLE = "Virex | Blog";
 const DEFAULT_DESC =
   "thoughts on code, systems, music production, and whatever else is on my mind.";
-const DEFAULT_IMAGE = "https://stabbed.wtf/photography/pfp/main.png";
+const DEFAULT_IMAGE = DEFAULT_PFP_URL || "https://stabbed.wtf/photography/pfp/main.jpg";
 
 const BOT_AGENTS = [
   "Twitterbot",
