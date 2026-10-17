@@ -2,7 +2,7 @@ import React, { useRef, useEffect, memo } from "react";
 import { motion, useSpring } from "motion/react";
 import { cn } from "../constants";
 
-export const TiltContainer = memo(({ children, className, innerClassName, onClick, settings, whileHover, whileTap, ...props }: any) => {
+export const TiltContainer = memo(({ children, className, innerClassName, onClick, settings, whileHover, whileTap, containerRef, ...props }: any) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const rectRef = useRef<DOMRect | null>(null);
@@ -80,7 +80,13 @@ export const TiltContainer = memo(({ children, className, innerClassName, onClic
 
   return (
     <div 
-      ref={wrapperRef}
+      ref={(el) => {
+        (wrapperRef as any).current = el;
+        if (containerRef) {
+          if (typeof containerRef === "function") containerRef(el);
+          else containerRef.current = el;
+        }
+      }}
       className={cn("h-full group/tilt", className, useTilt && "hover:tilt-active")} 
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
