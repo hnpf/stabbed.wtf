@@ -158,7 +158,7 @@ export const SideItem = memo(
         {/* centered text */}
         <span
           className={cn(
-            "flex-1 text-center font-bold tracking-[0.5px] text-[16px] min-w-0 relative z-10 transition-colors duration-200 leading-none",
+            "flex-1 text-center ml-3 font-bold tracking-[0.5px] text-[16px] min-w-0 relative z-10 transition-colors duration-200 leading-none",
             isSelected
               ? "text-[var(--on-primary-container)] font-black"
               : "text-[var(--on-surface)] font-bold opacity-90 group-hover:opacity-100"
