@@ -82,7 +82,7 @@ const NotFound = ({ go }: { go?: (page: string) => void }) => {
             className="w-full sm:w-80 py-6 md:py-10 rounded-[2.5rem] font-expressive font-black text-xl md:text-3xl bg-[var(--primary)] text-[var(--on-primary)] flex items-center justify-center gap-4 group"
           >
             <span className="italic tracking-tighter">Go Home</span>
-            <Home className="w-6 h-6 md:w-10 md:h-10 group-hover:scale-125 transition-transform duration-500" />
+            <Home className="w-8 h-8 ml-2 md:w-10 md:h-10 group-hover:scale-125 transition-transform duration-500" />
           </motion.button>
         </motion.div>
       </div>

@@ -329,7 +329,7 @@ app.get('*', async (req, res, next) => {
       res.setHeader('Content-Type', 'text/plain; charset=utf-8');
       return res.send(terminal.renderHelp());
     }
-    if (pathname === '/about') {
+    if (pathname === '/about' || pathname === '/info' || pathname === '/readme') {
       res.setHeader('Content-Type', 'text/plain; charset=utf-8');
       return res.send(terminal.renderAbout());
     }

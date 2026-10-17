@@ -14,7 +14,7 @@ import { useTextSearch } from "./hooks/useTextSearch";
 // pages: keep route-level code splitting only for heavy/media-rich pages
 import { HomePage } from "./pages/HomePage";
 import { ChangelogPage } from "./pages/ChangelogPage";
-import { ReadmePage } from "./pages/ReadmePage";
+import { InfoPage } from "./pages/InfoPage";
 import { NowPage } from "./pages/NowPage";
 import { MusicPage } from "./pages/MusicPage";
 import NotFound from "./pages/NotFound";
@@ -113,8 +113,12 @@ export default function App() {
     if (path === "guestbook") return "home";
     if (loc === "/" || loc === "") return "home";
     if (loc.startsWith("/blog/")) return "blog";
+    if (path === "readme") {
+      window.history.replaceState({}, "", "/info");
+      return "info";
+    }
 
-    const ALLOWED = ["home", "blog", "lens", "now", "readme", "changelog", "music"];
+    const ALLOWED = ["home", "blog", "lens", "now", "info", "changelog", "music"];
     return ALLOWED.includes(path) ? path : "404";
   };
 
@@ -237,8 +241,12 @@ export default function App() {
           setPage("home"); setBlogPostId(null);
         } else if (loc.startsWith("/blog/")) {
           setPage("blog"); setBlogPostId(loc.split("/")[2]);
+        } else if (path === "readme") {
+          window.history.replaceState({}, "", "/info");
+          setPage("info");
+          setBlogPostId(null);
         } else {
-          const ALLOWED = ["home", "blog", "lens", "now", "readme", "changelog", "music"];
+          const ALLOWED = ["home", "blog", "lens", "now", "info", "changelog", "music"];
           setPage(ALLOWED.includes(path) ? path : "404");
           setBlogPostId(null);
         }
@@ -324,7 +332,7 @@ export default function App() {
   const is_tiny = viewport.h < 550;
   const is_mobile = viewport.w < 768 && !settings.forceDesktop;
   const is_tablet = viewport.w >= 768 && viewport.w < 1024 && !settings.forceDesktop;
-  const showBottomNav = !settings.focusMode && (page !== "readme" || !settings.infoFullscreen) && is_mobile;
+  const showBottomNav = !settings.focusMode && (page !== "info" || !settings.infoFullscreen) && is_mobile;
   const isExpanded = is_mobile && scrollDirection === "up" && !settings.focusMode;
   const show_pfp_container = settings.profileContainer && viewport.h > 720;
 
@@ -413,7 +421,7 @@ export default function App() {
       </AnimatePresence>
 
       <AnimatePresence>
-        {!settings.focusMode && (page !== "readme" || !settings.infoFullscreen) && !is_mobile && (
+        {!settings.focusMode && (page !== "info" || !settings.infoFullscreen) && !is_mobile && (
           <motion.aside
             initial={{ x: settings.sidebarFlipped ? 60 : -60, opacity: 0, width: 0, paddingLeft: 0, paddingRight: 0 }}
             animate={{ x: 0, opacity: 1, width: settings.sidebarCollapsed ? (settings.floatingSidebar ? 144 : 96) : (settings.floatingSidebar ? (is_tablet ? 280 : 350) : (is_tablet ? 260 : 320)), paddingTop: settings.floatingSidebar ? "1.5rem" : "12px", paddingBottom: settings.floatingSidebar ? "1.5rem" : "12px", paddingLeft: settings.sidebarFlipped ? (settings.floatingSidebar ? "1.5rem" : "12px") : (settings.floatingSidebar ? "1.5rem" : "0px"), paddingRight: settings.sidebarFlipped ? (settings.floatingSidebar ? "1.5rem" : "0px") : (settings.floatingSidebar ? "1.5rem" : "12px"), borderTopLeftRadius: settings.floatingSidebar || settings.sidebarFlipped ? "3rem" : "0rem", borderBottomLeftRadius: settings.floatingSidebar || settings.sidebarFlipped ? "3rem" : "0rem", borderTopRightRadius: settings.floatingSidebar || !settings.sidebarFlipped ? "3rem" : "0rem", borderBottomRightRadius: settings.floatingSidebar || !settings.sidebarFlipped ? "3rem" : "0rem" }}
@@ -436,14 +444,14 @@ export default function App() {
                   whileTap={{ scale: 0.92, rotate: 5 }}
                   animate={{ rotate: do_wiggle ? [0, -10, 10, -10, 10, 0] : 0 }}
                   transition={{ type: "spring", stiffness: 400, damping: 22, mass: 0.6 }}
-                  onClick={() => goto("readme")}
+                  onClick={() => goto("info")}
                   tabIndex={0}
                   role="button"
                   aria-label="Go to info"
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") {
                       e.preventDefault();
-                      goto("readme");
+                      goto("info");
                     }
                   }}
                   className={cn("flex items-center justify-center shrink-0 relative group/pfp cursor-pointer isolate", show_pfp_container ? "w-24 h-24 rounded-[40px] shadow-xl" : cn("w-24 h-24 rounded-[40px] shadow-none", !settings.sidebarCollapsed && "-ml-5"), settings.sidebarCollapsed && "w-16 h-16 rounded-[24px]")}
@@ -487,7 +495,7 @@ export default function App() {
                 <nav id="sidebar-nav" className={cn("flex-1 flex flex-col overflow-y-auto min-h-0 py-2 scrollbar-hide", canScrollUp && canScrollDown ? "mask-both" : (canScrollUp ? "mask-top" : (canScrollDown ? "mask-bottom" : "")), "gap-1", settings.sidebarCollapsed ? "items-center px-2" : "items-stretch px-2")} data-rail-state={settings.sidebarCollapsed ? "default" : "open"}>
                   <M3ScrollBar className="ml-3" scrollEl={navRef} colorful thinOnly />
                   <SideItem highHz={settings.highHz} isFirst glyph={M3Home} text="Home" isSelected={page === "home"} onSelect={() => goto("home")} isMini={settings.sidebarCollapsed} isFloating={settings.floatingSidebar} isShort={is_short} />
-                  <SideItem highHz={settings.highHz} glyph={M3Info} text="Info" isSelected={page === "readme"} onSelect={() => goto("readme")} isMini={settings.sidebarCollapsed} isFloating={settings.floatingSidebar} isShort={is_short} />
+                  <SideItem highHz={settings.highHz} glyph={M3Info} text="Info" isSelected={page === "info"} onSelect={() => goto("info")} isMini={settings.sidebarCollapsed} isFloating={settings.floatingSidebar} isShort={is_short} />
                   <SideItem highHz={settings.highHz} glyph={M3Blog} text="Blog" isSelected={page === "blog"} onSelect={() => goto("blog")} isMini={settings.sidebarCollapsed} isFloating={settings.floatingSidebar} isShort={is_short} />
                   <SideItem highHz={settings.highHz} glyph={M3Music} text="Music" isSelected={page === "music"} onSelect={() => goto("music")} isMini={settings.sidebarCollapsed} isFloating={settings.floatingSidebar} isShort={is_short} />
                   <SideItem highHz={settings.highHz} glyph={M3Lens} text="Lens" isSelected={page === "lens"} onSelect={() => goto("lens")} isMini={settings.sidebarCollapsed} isFloating={settings.floatingSidebar} isShort={is_short} />
@@ -629,7 +637,7 @@ export default function App() {
         layout={page !== "music"}
         transition={springConfig}
         id="primary-content"
-        className={cn("flex-1 overflow-x-hidden page-container transition-[max-width,margin] duration-300 ease-out", (page === "readme" && settings.infoFullscreen) ? "p-0" : "p-6 md:p-12 lg:p-16", settings.forceDesktop || viewport.w >= 768 ? "pb-16" : "pb-40")}
+        className={cn("flex-1 overflow-x-hidden page-container transition-[max-width,margin] duration-300 ease-out", (page === "info" && settings.infoFullscreen) ? "p-0" : "p-6 md:p-12 lg:p-16", settings.forceDesktop || viewport.w >= 768 ? "pb-16" : "pb-40")}
         style={
           !settings.forceDesktop && viewport.w < 768
             ? { paddingBottom: `calc(env(safe-area-inset-bottom, 12px) + 10rem)` }
@@ -643,9 +651,9 @@ export default function App() {
             {page === "lens" && <LensPage viewport={viewport} />}
             {page === "now" && <NowPage />}
             {page === "music" && <MusicPage setPage={goto} onListenViewChange={handleMusicListenViewChange} onListenCatalogHostChange={handleMusicCatalogHostChange} />}
-            {page === "readme" && <ReadmePage setPage={goto} is_mobile={is_mobile} />}
+            {page === "info" && <InfoPage setPage={goto} is_mobile={is_mobile} />}
             {page === "changelog" && <ChangelogPage />}
-            {![ "home", "blog", "lens", "now", "music", "readme", "changelog" ].includes(page) && <NotFound go={goto} />}
+            {![ "home", "blog", "lens", "now", "music", "info", "changelog" ].includes(page) && <NotFound go={goto} />}
           </motion.div>
         </AnimatePresence>
         <AnimatePresence>
@@ -681,11 +689,11 @@ export default function App() {
       />
 
       <AnimatePresence>
-        {!settings.focusMode && (page !== "readme" || !settings.infoFullscreen) && is_mobile && (
+        {!settings.focusMode && (page !== "info" || !settings.infoFullscreen) && is_mobile && (
           <MobileFloatingNav
             items={[
               { key: "home",     glyph: M3Home, label: "Home" },
-              { key: "readme",   glyph: M3Info, label: "Info" },
+              { key: "info",     glyph: M3Info, label: "Info" },
               { key: "blog",     glyph: M3Blog, label: "Blog" },
               { key: "music",    glyph: M3Music, label: "Music" },
               { key: "lens",     glyph: M3Lens, label: "Lens" },

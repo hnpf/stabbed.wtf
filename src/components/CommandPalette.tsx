@@ -73,7 +73,7 @@ export function CommandPalette({
         description: "Visit the about / info page",
         category: "Navigation",
         icon: Info,
-        action: () => goto("readme"),
+        action: () => goto("info"),
         tags: ["info", "about", "readme"],
       },
       {

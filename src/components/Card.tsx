@@ -38,7 +38,7 @@ export const Card = memo(({ children, className, innerClassName, delay = 0, onCl
       style={style}
       {...props}
       innerClassName={cn(
-        !noDefaultStyles && "m3-card readme-card overflow-hidden cursor-default relative border border-[var(--outline-variant)]",
+        !noDefaultStyles && "m3-card info-card readme-card overflow-hidden cursor-default relative border border-[var(--outline-variant)]",
         onClick && "cursor-pointer",
         innerClassName,
       )}

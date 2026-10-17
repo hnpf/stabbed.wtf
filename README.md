@@ -79,7 +79,7 @@ My personal website. Uses a Material 3 Expressive styled shell, photo gallery, b
 
 > **blog** — Updates, Devlogs, Cybersec, and more. Read-tracking + RSS at `/rss.xml` (not always updated!)
 
-> **readme** — Clean bio and lore with animations with dedicated settings options.
+> **info** — My biography/lore social links, music information, and its own settings options.
 
 > **now** — What I'm actively building, reading, and learning right now.
 
@@ -132,7 +132,7 @@ src/
   data/					placeholder
   hooks/                site hooks such as useAprilFools, useViewport, and useSettingsSync.
   navigation/           deprecated
-  pages/                site pages like blog, changelog, dash, home, lens, 404, /now, and readme.
+  pages/                site pages like blog, changelog, dash, home, lens, 404, /now, and info.
   utils/ 				contains searchUtils.ts / used for extracting and organizing searchable content across the site
   _wavy.ts              wavy progress logic helper
   App.tsx               core/root application class

@@ -405,7 +405,7 @@ const LetterMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; setP
   );
 };
 
-export const ReadmePage = memo(({ setPage, is_mobile }: { setPage: (page: string) => void, is_mobile: boolean }) => {
+export const InfoPage = memo(({ setPage, is_mobile }: { setPage: (page: string) => void, is_mobile: boolean }) => {
   return (
     <LetterMatrix
       onBack={() => setPage("home")}
@@ -414,3 +414,5 @@ export const ReadmePage = memo(({ setPage, is_mobile }: { setPage: (page: string
     />
   );
 });
+
+export const ReadmePage = InfoPage;

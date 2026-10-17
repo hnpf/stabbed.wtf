@@ -62,7 +62,7 @@ export async function onRequest(context) {
       });
     }
 
-    if (pathname === '/about') {
+    if (pathname === '/about' || pathname === '/info' || pathname === '/readme') {
       return new Response(renderAbout(), {
         headers: { 'Content-Type': 'text/plain; charset=utf-8' },
       });

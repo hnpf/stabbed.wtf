@@ -27,7 +27,7 @@ export const useMetadata = (page: string, blogPostId: string | null, isApr: bool
     if (isApr) return;
 
     const name =
-      page === "readme" ? "Info" : page.charAt(0).toUpperCase() + page.slice(1);
+      page === "info" || page === "readme" ? "Info" : page.charAt(0).toUpperCase() + page.slice(1);
     const title =
       page === "blog" && blogPostId
         ? `Virex | ${BLOG_POSTS.find((p) => p.id === blogPostId || p.link === blogPostId)?.title || "Post"}`
@@ -74,9 +74,9 @@ export const useMetadata = (page: string, blogPostId: string | null, isApr: bool
           ? `https://stabbed.wtf${r.coverUrl.startsWith('/') ? '' : '/'}${r.coverUrl}`
           : `https://stabbed.wtf/albums/${r.id}.png`;
       }
-    } else if (page === "readme") {
+    } else if (page === "info" || page === "readme") {
       desc =
-        "README: my personal biography, a quick summary about my mission, and identity.";
+        "info: my own biography: a quick summary about my philosophy and identity.";
     } else if (page === "lens") {
       desc = "lens: my photography collection, all done with a literal phone.";
     } else if (page === "music") {

@@ -281,6 +281,7 @@ body, .gsf-global {
     }
 
     .m3-card:focus-visible,
+    .info-card:focus-visible,
     .readme-card:focus-visible,
     .lens-item:focus-visible,
     .cursor-pointer:focus-visible,
@@ -730,6 +731,7 @@ body, .gsf-global {
         to { transform: rotate(360deg); }
     }
     .debug-vinyl-mode-active .m3-card:hover,
+    .debug-vinyl-mode-active .info-card:hover,
     .debug-vinyl-mode-active .readme-card:hover {
         animation: debug-vinyl-spin 4s linear infinite !important;
     }
