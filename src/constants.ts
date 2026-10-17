@@ -2791,7 +2791,7 @@ export const MUSIC_RELEASES: MusicRelease[] = [
       spotify: "https://open.spotify.com/track/5CeLL3fvM8RmSPiVUycxws?si=fa9030ef05a3482f",
       bandcamp: "https://rxvirex.bandcamp.com/track/xanxiety",
       youtubeMusic: "https://music.youtube.com/watch?v=eEg5H-pj5yI&si=pAXkRSnanDei0NtW",
-      tiktok: "https://www.tiktok.com/@hahavrx",
+      tiktok: "https://www.tiktok.com/@rxvirex",
     },
   },
   {
@@ -2809,7 +2809,7 @@ export const MUSIC_RELEASES: MusicRelease[] = [
       spotify: "https://open.spotify.com/album/4igWVMnc4K292BEFdvkdVl?si=Q3ochhl8SW2NpHfCbUMC_g",
       bandcamp: "https://rxvirex.bandcamp.com/track/hateware",
       youtubeMusic: "https://music.youtube.com/watch?v=54tDMgTe1xY&si=EIsjlKhiKTxgOlTZ",
-      tiktok: "https://www.tiktok.com/@hahavrx",
+      tiktok: "https://www.tiktok.com/@rxvirex",
     },
   },
   {
@@ -2840,7 +2840,7 @@ export const MUSIC_RELEASES: MusicRelease[] = [
       spotify: "https://open.spotify.com/album/1UHT94oL84kULqpRq2Gr30?si=eLP2rfnbSSmOHjz2Y-d-FAom",
       bandcamp: "https://rxvirex.bandcamp.com/album/first-attempt",
       youtubeMusic: "https://music.youtube.com/playlist?list=OLAK5uy_mc83OEAbnl5vmiFUEsxl_iYmVeUHO9I9Y&si=cULZYKZynsn3FkHr",
-      tiktok: "https://www.tiktok.com/@hahavrx",
+      tiktok: "https://www.tiktok.com/@rxvirex",
     },
   },
 ];

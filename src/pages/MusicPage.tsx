@@ -416,7 +416,7 @@ export const MusicPage = memo(({ setPage, onListenViewChange, onListenCatalogHos
               name: "TikTok",
               tagline: "Official Music",
               desc: "Use official sound clips and use my released tracks directly in your videos/content.",
-              url: "https://tiktok.com/@hahavrx",
+              url: "https://tiktok.com/@rxvirex",
               icon: TikTokIcon,
               btnLabel: "View on Tiktok",
             },
