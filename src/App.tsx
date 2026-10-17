@@ -46,6 +46,8 @@ import { deployed_code, materialIcon } from "./components/MaterialIcon";
 import { BLOG_POSTS } from "./constants";
 import { RippleScope } from "./components/RippleScope";
 import { haptic } from "./haptics";
+import { useOverscroll } from "./hooks/useOverscroll";
+import { OverscrollContainer } from "./components/OverscrollWave";
 
 const M3Home = materialIcon("cottage");
 const M3Info = materialIcon("person");
@@ -360,12 +362,34 @@ export default function App() {
     damping: settings.highHz ? 28 : 25,
     mass: 0.8,
   };
+  const overscrollEnabled = !settings.disableAnimations && !settingsOpen && !bugReportOpen && !KnownIssuessOpen && !guestbookOpen && !commandOpen;
+  const { y: overscrollY, active: overscrollActive, edge: overscrollEdge } = useOverscroll(overscrollEnabled);
+
 
   return (
     <RippleScope enabled={settings.ripplesEnabled}>
-    <div
+    <OverscrollContainer
+      edge={overscrollEdge}
+      active={overscrollActive}
+      y={overscrollY}
+    />
+    {!is_mobile && !settings.focusMode && (
+      <M3WindowScrollBar
+        colorful
+        right={settings.sidebarFlipped ? 4 : 4}
+      />
+    )}
+
+    <motion.div
+      style={{
+        y: overscrollY,
+        transform: overscrollEdge ? undefined : "none",
+        backgroundColor: "var(--surface)",
+        position: "relative",
+        zIndex: 1,
+      }}
       className={cn(
-        "min-h-screen flex font-sans relative",
+        "min-h-screen flex font-sans",
         (settings.forceDesktop || !is_mobile) ? "flex-row" : "flex-col",
         settings.sidebarFlipped && (settings.forceDesktop || !is_mobile ? "flex-row-reverse" : "flex-col"),
         settings.debugMode && "debug-mode",
@@ -374,14 +398,6 @@ export default function App() {
       <a href="#primary-content" className="skip-link">Skip to main content</a>
       <MotionConfig reducedMotion={settings.disableAnimations ? "always" : "user"} transition={settings.disableAnimations ? { duration: 0 } : undefined}>
         {IS_APR && <div className="fsh-tiled-bg" />}
-
-        {/* m3 expressive window-level scrollbar. desktop only. */}
-        {!is_mobile && !settings.focusMode && (
-          <M3WindowScrollBar
-            colorful
-            right={settings.sidebarFlipped ? 4 : 4}
-          />
-        )}
         {popup && (
           <FoolsPopup content={popup} onResolve={() => setPopup(null)} />
         )}
@@ -771,7 +787,7 @@ export default function App() {
       <CapsuleConfirmDialog pendingCapsule={pendingCapsule} setPendingCapsule={setPendingCapsule} updateSettings={updateSettings} setToast={setToast} />
       <RefreshConfirmDialog showRefreshConfirm={showRefreshConfirm} setShowRefreshConfirm={setShowRefreshConfirm} />
       </MotionConfig>
-    </div>
+    </motion.div>
     </RippleScope>
   );
 }
