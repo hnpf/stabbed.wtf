@@ -638,7 +638,7 @@ export default function App() {
         layout={page !== "music"}
         transition={springConfig}
         id="primary-content"
-        className={cn("flex-1 overflow-x-hidden page-container transition-[max-width,margin] duration-300 ease-out", (page === "info" && settings.infoFullscreen) ? "p-0" : "p-6 md:p-12 lg:p-16", settings.forceDesktop || viewport.w >= 768 ? "pb-16" : "pb-40")}
+        className={cn("flex-1 overflow-x-hidden page-container transition-[max-width,margin] duration-300 ease-out", page === "info" ? "p-0" : "p-6 md:p-12 lg:p-16", settings.forceDesktop || viewport.w >= 768 ? "pb-16" : "pb-40")}
         style={
           !settings.forceDesktop && viewport.w < 768
             ? { paddingBottom: `calc(env(safe-area-inset-bottom, 12px) + 10rem)` }

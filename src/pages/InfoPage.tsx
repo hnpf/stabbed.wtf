@@ -6,10 +6,12 @@ import { GitHubCalendar } from 'react-github-calendar';
 import { cn, TECH_STACK } from "../constants";
 import { useTheme } from "../ThemeContext";
 import { Card } from "../components/Card";
+import { PfpImage } from "../components/PfpImage";
 import { BounceButton, TechChip } from "../components/TechStack";
 import { haptic } from "../haptics";
 import { Ripple } from "../components/Ripple";
 import { Badge } from "../components/Badge";
+import { LiquidGlassCard, LiquidGlassBadge, LiquidGlassChar, useLiquidGlass } from "../components/LiquidGlassCard";
 
 const InfoCardHeading = ({ icon: Icon, children, className }: any) => (
   <div className={cn("flex items-center gap-3", className)}>
@@ -20,13 +22,66 @@ const InfoCardHeading = ({ icon: Icon, children, className }: any) => (
   </div>
 );
 
+const DESKTOP_BLUR_LAYERS = [
+  { blur: 2,  mask: "linear-gradient(to bottom, transparent 20%, rgba(0,0,0,0.3) 28%, #000 38%, #000 100%)" },
+  { blur: 5,  mask: "linear-gradient(to bottom, transparent 32%, rgba(0,0,0,0.35) 40%, #000 50%, #000 100%)" },
+  { blur: 10, mask: "linear-gradient(to bottom, transparent 44%, rgba(0,0,0,0.4) 52%, #000 62%, #000 100%)" },
+  { blur: 18, mask: "linear-gradient(to bottom, transparent 56%, rgba(0,0,0,0.45) 64%, #000 74%, #000 100%)" },
+  { blur: 28, mask: "linear-gradient(to bottom, transparent 66%, rgba(0,0,0,0.5) 76%, #000 86%, #000 100%)" },
+  { blur: 40, mask: "linear-gradient(to bottom, transparent 76%, rgba(0,0,0,0.6) 86%, #000 95%, #000 100%)" },
+];
+
+const MOBILE_BLUR_LAYERS = [
+  { blur: 3,  mask: "linear-gradient(to bottom, transparent 16%, rgba(0,0,0,0.4) 26%, #000 38%, #000 100%)" },
+  { blur: 8,  mask: "linear-gradient(to bottom, transparent 28%, rgba(0,0,0,0.45) 40%, #000 52%, #000 100%)" },
+  { blur: 18, mask: "linear-gradient(to bottom, transparent 42%, rgba(0,0,0,0.5) 56%, #000 68%, #000 100%)" },
+  { blur: 30, mask: "linear-gradient(to bottom, transparent 56%, rgba(0,0,0,0.6) 70%, #000 84%, #000 100%)" },
+];
+
 const LetterMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; setPage: (p: string) => void, is_mobile: boolean }) => {
   const letters = "virex".split("");
   const [flickering, setFlick] = useState<number[]>([]);
   const [swoopDone, setSwoopDone] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const { settings, actualTheme } = useTheme();
 
   const glass_class = "backdrop-blur-sm md:backdrop-blur-md";
+  const blurLayers = is_mobile ? MOBILE_BLUR_LAYERS : DESKTOP_BLUR_LAYERS;
+
+  useEffect(() => {
+    let rafId: number;
+    let targetY = window.scrollY;
+    let currentY = window.scrollY;
+
+    const handleScroll = () => {
+      targetY = window.scrollY;
+      if (settings.disableAnimations) {
+        setScrollY(targetY);
+      }
+    };
+
+    const update = () => {
+      if (!settings.disableAnimations) {
+        const diff = targetY - currentY;
+        if (Math.abs(diff) > 0.2) {
+          currentY += diff * (settings.highHz ? 0.22 : 0.16);
+          setScrollY(Math.round(currentY * 10) / 10);
+        } else if (currentY !== targetY) {
+          currentY = targetY;
+          setScrollY(targetY);
+        }
+      }
+      rafId = requestAnimationFrame(update);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    rafId = requestAnimationFrame(update);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      cancelAnimationFrame(rafId);
+    };
+  }, [settings.disableAnimations, settings.highHz]);
 
   useEffect(() => {
     if (!swoopDone || is_mobile) return;
@@ -39,6 +94,11 @@ const LetterMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; setP
     }, 800 + Math.random() * 1000);
     return () => clearInterval(itv);
   }, [swoopDone, is_mobile, letters.length]);
+
+  const fadeDistance = is_mobile ? 320 : 460;
+  const scrollRatio = Math.min(1, Math.max(0, scrollY / fadeDistance));
+  const easedFade = scrollRatio * scrollRatio * (3 - 2 * scrollRatio);
+  const pfpOpacity = Math.max(0, 1 - easedFade);
 
   return (
     <motion.div
@@ -53,55 +113,227 @@ const LetterMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; setP
       )}
     >
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-      {/* for now removed bg blur - was pretty unpleasing to view on mobile */}
-
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0%,var(--surface)_92%)]" />
       </div>
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 py-20 flex flex-col items-center">
-        {/* hero */}
-        <div className="flex flex-col items-center mb-32 w-full">
-          <div className="flex gap-0.5 md:gap-2 mb-8 flex-wrap justify-center">
-            {letters.map((char, i) => (
+      {/* hero */}
+      <div className="relative isolate select-none w-full min-h-[420px] h-[58svh] max-h-[540px] md:h-[76vh] md:min-h-[620px] md:max-h-[820px] flex flex-col justify-end items-center overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="absolute -inset-8 sm:-inset-12 md:-inset-16 -z-30 pointer-events-none blur-3xl saturate-200 transform-gpu will-change-[transform,opacity]"
+          style={{
+            opacity: pfpOpacity * (is_mobile ? 0.45 : 0.55),
+            transform: `translate3d(0, ${Math.min(scrollY * 0.35, 120)}px, 0)`,
+          }}
+        >
+          <PfpImage alt="" className="size-full object-cover object-[50%_0%] sm:object-[50%_15%] md:object-[50%_25%] scale-110 sm:scale-105 md:scale-100 origin-top" />
+        </div>
+        <div
+          aria-hidden="true"
+          className="absolute -inset-x-4 -top-8 bottom-0 sm:-inset-x-6 sm:-top-8 md:-inset-x-10 md:-top-12 -z-20 pointer-events-none will-change-[transform,opacity]"
+          style={{
+            opacity: pfpOpacity,
+            transform: `translate3d(0, ${Math.min(scrollY * 0.4, 150)}px, 0)`,
+          }}
+        >
+          <PfpImage alt="" className="size-full object-cover object-[50%_0%] sm:object-[50%_15%] md:object-[50%_25%] scale-105 sm:scale-100 origin-top" />
+        </div>
+        {blurLayers.map((layer) => (
+          <div
+            key={layer.blur}
+            aria-hidden="true"
+            className="absolute inset-0 -z-15 pointer-events-none transform-gpu"
+            style={{
+              backdropFilter: `blur(${layer.blur}px)`,
+              WebkitBackdropFilter: `blur(${layer.blur}px)`,
+              maskImage: layer.mask,
+              WebkitMaskImage: layer.mask,
+            }}
+          />
+        ))}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 pointer-events-none"
+          style={{
+            backgroundImage: [
+              is_mobile
+                ? `linear-gradient(
+                    to bottom,
+                    color-mix(in oklch, var(--surface) 80%, transparent) 0%,
+                    color-mix(in oklch, var(--surface) 30%, transparent) 5%,
+                    color-mix(in oklch, var(--surface) 8%, transparent) 8%,
+                    transparent 12%
+                  )`
+                : `linear-gradient(
+                    to bottom,
+                    var(--surface) 0%,
+                    color-mix(in oklch, var(--surface) 90%, transparent) 4%,
+                    color-mix(in oklch, var(--surface) 60%, transparent) 9%,
+                    color-mix(in oklch, var(--surface) 30%, transparent) 15%,
+                    color-mix(in oklch, var(--surface) 8%, transparent) 22%,
+                    transparent 28%
+                  )`,
+              is_mobile
+                ? `linear-gradient(
+                    to right,
+                    color-mix(in oklch, var(--surface) 75%, transparent) 0%,
+                    color-mix(in oklch, var(--surface) 20%, transparent) 2.5%,
+                    transparent 5%,
+                    transparent 95%,
+                    color-mix(in oklch, var(--surface) 20%, transparent) 97.5%,
+                    color-mix(in oklch, var(--surface) 75%, transparent) 100%
+                  )`
+                : `linear-gradient(
+                    to right,
+                    var(--surface) 0%,
+                    color-mix(in oklch, var(--surface) 85%, transparent) 3%,
+                    color-mix(in oklch, var(--surface) 55%, transparent) 7%,
+                    color-mix(in oklch, var(--surface) 20%, transparent) 13%,
+                    transparent 20%,
+                    transparent 80%,
+                    color-mix(in oklch, var(--surface) 20%, transparent) 87%,
+                    color-mix(in oklch, var(--surface) 55%, transparent) 93%,
+                    color-mix(in oklch, var(--surface) 85%, transparent) 97%,
+                    var(--surface) 100%
+                  )`,
+              is_mobile
+                ? `radial-gradient(
+                    ellipse 98% 90% at 50% 20%,
+                    transparent 62%,
+                    color-mix(in oklch, var(--surface) 20%, transparent) 82%,
+                    color-mix(in oklch, var(--surface) 60%, transparent) 95%,
+                    var(--surface) 100%
+                  )`
+                : `radial-gradient(
+                    ellipse 92% 82% at 50% 30%,
+                    transparent 46%,
+                    color-mix(in oklch, var(--surface) 25%, transparent) 70%,
+                    color-mix(in oklch, var(--surface) 70%, transparent) 86%,
+                    var(--surface) 100%
+                  )`,
+              is_mobile
+                ? `linear-gradient(
+                    to bottom,
+                    transparent 0%,
+                    color-mix(in oklch, var(--surface) 0%, transparent) 16%,
+                    color-mix(in oklch, var(--surface) 4%, transparent) 26%,
+                    color-mix(in oklch, var(--surface) 10%, transparent) 36%,
+                    color-mix(in oklch, var(--surface) 22%, transparent) 46%,
+                    color-mix(in oklch, var(--surface) 40%, transparent) 56%,
+                    color-mix(in oklch, var(--surface) 60%, transparent) 66%,
+                    color-mix(in oklch, var(--surface) 78%, transparent) 76%,
+                    color-mix(in oklch, var(--surface) 91%, transparent) 86%,
+                    color-mix(in oklch, var(--surface) 97%, transparent) 94%,
+                    var(--surface) 100%
+                  )`
+                : `linear-gradient(
+                    to bottom,
+                    transparent 0%,
+                    color-mix(in oklch, var(--surface) 0%, transparent) 26%,
+                    color-mix(in oklch, var(--surface) 4%, transparent) 36%,
+                    color-mix(in oklch, var(--surface) 10%, transparent) 46%,
+                    color-mix(in oklch, var(--surface) 22%, transparent) 56%,
+                    color-mix(in oklch, var(--surface) 40%, transparent) 66%,
+                    color-mix(in oklch, var(--surface) 60%, transparent) 75%,
+                    color-mix(in oklch, var(--surface) 78%, transparent) 83%,
+                    color-mix(in oklch, var(--surface) 91%, transparent) 91%,
+                    color-mix(in oklch, var(--surface) 97%, transparent) 96%,
+                    var(--surface) 100%
+                  )`,
+            ].join(", "),
+          }}
+        />
+
+        {/* foreground */}
+        <div className="relative z-10 w-full flex flex-col items-center justify-end text-center px-3 sm:px-6 pb-5 sm:pb-8 md:pb-12">
+          <LiquidGlassCard
+            radius={is_mobile ? 32 : 44}
+            interactive={!is_mobile}
+            className="w-auto max-w-[92vw] sm:max-w-2xl md:max-w-3xl mx-auto select-none sm:select-auto"
+            innerClassName="px-4 py-4 sm:px-8 sm:py-6 md:px-12 md:py-7 flex flex-col items-center"
+          >
+            {/* letters */}
+            <div className="flex gap-0.5 sm:gap-1 md:gap-2 justify-center items-baseline flex-nowrap">
+              {letters.map((char, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ y: -150, opacity: 0, scale: 0.8, filter: "blur(12px)" }}
+                  animate={{ y: 0, opacity: 1, scale: 1, filter: "blur(0px)" }}
+                  onAnimationComplete={() => {
+                    if (i === letters.length - 1) setSwoopDone(true);
+                  }}
+                  transition={{
+                    delay: i * 0.1,
+                    type: "spring",
+                    stiffness: settings.highHz ? 180 : 150,
+                    damping: settings.highHz ? 25 : 22,
+                    mass: 0.8
+                  }}
+                  className={cn(
+                    "text-6xl sm:text-7xl md:text-9xl lg:text-[10.5rem] transition-all duration-150 select-none font-expressive font-black italic tracking-tighter leading-none",
+                    flickering.includes(i) ? "text-[var(--primary)] scale-105" : "text-[var(--on-surface)]",
+                  )}
+                >
+                  <LiquidGlassChar
+                    actualTheme={actualTheme}
+                    isFlickering={flickering.includes(i)}
+                  >
+                    {flickering.includes(i) ? String.fromCharCode(33 + Math.floor(Math.random() * 94)) : char}
+                  </LiquidGlassChar>
+                </motion.span>
+              ))}
               <motion.span
-                key={i}
                 initial={{ y: -150, opacity: 0, scale: 0.8, filter: "blur(12px)" }}
                 animate={{ y: 0, opacity: 1, scale: 1, filter: "blur(0px)" }}
-                onAnimationComplete={() => {
-                  if (i === letters.length - 1) setSwoopDone(true);
-                }}
                 transition={{
-                  delay: i * 0.1,
+                  delay: letters.length * 0.1,
                   type: "spring",
                   stiffness: settings.highHz ? 180 : 150,
                   damping: settings.highHz ? 25 : 22,
                   mass: 0.8
                 }}
-                className={cn(
-                  "text-8xl sm:text-8xl md:text-9xl lg:text-[11rem] transition-all duration-150 select-none font-expressive font-black",
-                  flickering.includes(i) ? "text-[var(--primary)] scale-105" : "text-[var(--on-surface)]",
-                )}
+                className="text-6xl sm:text-7xl md:text-9xl lg:text-[10.5rem] font-expressive font-black italic tracking-tighter leading-none text-[var(--primary)] select-none"
               >
-                {flickering.includes(i) ? String.fromCharCode(33 + Math.floor(Math.random() * 94)) : char}
+                <LiquidGlassChar
+                  actualTheme={actualTheme}
+                  isAccent
+                >
+                  .
+                </LiquidGlassChar>
               </motion.span>
-            ))}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            className="flex flex-col items-center gap-3 mt-10 md:mt-3"
-          >
-            <Badge icon={Science} className="bg-[var(--primary-container)]/70 text-[var(--on-primary-container)] border-[var(--primary)]/30 font-black uppercase tracking-widest shadow-md">
-              Researching
-            </Badge>
-            <div className="flex flex-row gap-3 justify-center flex-wrap">
-              <Badge icon={MapPin}>Nederland</Badge>
-              <Badge icon={Face}>He / They</Badge>
             </div>
-          </motion.div>
+
+            {/* badges */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="flex flex-row items-center gap-2.5 sm:gap-3 mt-6 sm:mt-8 flex-wrap justify-center"
+            >
+              <LiquidGlassBadge
+                icon={Science}
+                className="bg-[var(--primary-container)] text-[var(--on-primary-container)] border border-[var(--primary)]/30 font-black uppercase tracking-widest shadow-lg shadow-[var(--primary)]/10 backdrop-blur-xl"
+              >
+                Researching
+              </LiquidGlassBadge>
+              <LiquidGlassBadge
+                icon={MapPin}
+                className="backdrop-blur-xl shadow-md border border-[var(--outline-variant)]/60 bg-[var(--surface-container)]/80 text-[var(--on-surface)]"
+              >
+                Nederland
+              </LiquidGlassBadge>
+              <LiquidGlassBadge
+                icon={Face}
+                className="backdrop-blur-xl shadow-md border border-[var(--outline-variant)]/60 bg-[var(--surface-container)]/80 text-[var(--on-surface)]"
+              >
+                He / They
+              </LiquidGlassBadge>
+            </motion.div>
+          </LiquidGlassCard>
         </div>
+      </div>
+
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 py-12 md:py-16 flex flex-col items-center">
 
         {/* bio */}
         <motion.section

@@ -53,7 +53,7 @@ function terminalCliPlugin(env: Record<string, string>) {
             res.setHeader('Content-Type', 'text/plain; charset=utf-8');
             return res.end(terminal.renderHelp());
           }
-          if (pathname === '/about') {
+          if (pathname === '/about' || pathname === '/info' || pathname === '/readme') {
             res.setHeader('Content-Type', 'text/plain; charset=utf-8');
             return res.end(terminal.renderAbout());
           }

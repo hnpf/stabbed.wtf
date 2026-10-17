@@ -165,6 +165,10 @@ body, .gsf-global {
         --outline-variant: oklch(0.38 calc(var(--neutral-chroma) * 2.5) var(--neutral-hue));
     }
 
+    html {
+        scroll-behavior: smooth;
+    }
+
     body {
         @apply bg-[var(--surface)] text-[var(--on-surface)] transition-colors duration-300 select-none;
         font-feature-settings: "cv02", "cv03", "cv04", "ss01";
