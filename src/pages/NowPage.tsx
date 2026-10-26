@@ -157,6 +157,7 @@ const isSameTrack = (a: TrackData | null, b: TrackData | null) => {
 const LastFmNowPlayingCard = () => {
   const { settings, actualTheme } = useTheme();
   const isDark = actualTheme === "dark";
+  const [dots, setDots] = useState("")
 
   const [track, setTrack] = useState<TrackData | null>(null);
   const [albumSeed, setAlbumSeed] = useState<{ hue: number; saturation: number } | null>(null);
@@ -189,17 +190,6 @@ const LastFmNowPlayingCard = () => {
     setNow(Date.now());
   };
 
-  const handleProgressBarClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!track?.isNowPlaying || !track.durationMs) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const ratio = Math.min(1, Math.max(0, clickX / rect.width));
-    const targetElapsed = ratio * track.durationMs;
-    const newStart = Date.now() - targetElapsed;
-    const key = buildTrackKey(track);
-    updateSessionStart(newStart, key);
-  };
-
   const setTrackState = useCallback((newTrack: TrackData | null) => {
     if (!isSameTrack(trackRef.current, newTrack)) {
       trackRef.current = newTrack;
@@ -220,7 +210,6 @@ const LastFmNowPlayingCard = () => {
         setAlbumSeed(seed);
       }
     });
-
     return () => {
       isCancelled = true;
     };
@@ -303,6 +292,23 @@ const LastFmNowPlayingCard = () => {
       }
     } catch {}
 
+    if (!durationMs) {
+      try {
+        const itunesUrl = new URL("https://itunes.apple.com/search");
+        itunesUrl.searchParams.set("term", `${artist} ${name}`);
+        itunesUrl.searchParams.set("entity", "song");
+        itunesUrl.searchParams.set("limit", "1");
+        const itunesRes = await fetch(itunesUrl.toString());
+        if (itunesRes.ok) {
+          const itunesJson = await itunesRes.json();
+          const dur = Number(itunesJson?.results?.[0]?.trackTimeMillis);
+          if (!isNaN(dur) && dur > 0) {
+            durationMs = dur;
+          }
+        }
+      } catch {}
+    }
+
     return {
       artist,
       name,
@@ -349,10 +355,22 @@ const LastFmNowPlayingCard = () => {
     const key = buildTrackKey(fetchedTrack);
 
     if (fetchedTrack.isNowPlaying) {
+      const nowTs = Date.now();
+      const prevScrobble = fetchedTrack.prevScrobbleAt;
+      const dur = fetchedTrack.durationMs || 210000;
+
+      let estimatedStart = nowTs;
+      if (prevScrobble && nowTs - prevScrobble > 0 && nowTs - prevScrobble < dur) {
+        estimatedStart = prevScrobble;
+      }
+
       if (sessionRef.current && sessionRef.current.trackKey === key) {
-        // keep active track start timestamp untouched
+        const sessionAge = nowTs - sessionRef.current.startedAt;
+        if (sessionAge > dur || sessionAge < 0) {
+          updateSessionStart(estimatedStart, key);
+        }
       } else {
-        updateSessionStart(Date.now(), key);
+        updateSessionStart(estimatedStart, key);
       }
     } else {
       sessionRef.current = null;
@@ -405,6 +423,59 @@ const LastFmNowPlayingCard = () => {
     : (track?.fetchedAt || now);
 
   const isCurrentlyPlaying = track?.isNowPlaying ?? false;
+
+  useEffect(() => {
+    if (!isCurrentlyPlaying) {
+      setDots("");
+      return;
+    }
+
+    let timeoutId: any;
+    let isCancelled = false;
+
+    const runCycle = (count: number, forward: boolean) => {
+      if (isCancelled) return;
+
+      setDots(".".repeat(count));
+
+      let nextCount = count;
+      let nextForward = forward;
+      let delay = 300;
+
+      if (forward) {
+        if (count < 3) {
+          nextCount = count + 1;
+          delay = Math.floor(1200 + Math.random() * 500);
+        } else {
+          nextForward = false;
+          nextCount = 2;
+          delay = 700;
+        }
+      } else {
+        if (count > 0) {
+          nextCount = count - 1;
+          delay = 280;
+        } else {
+          nextForward = true;
+          nextCount = 1;
+          delay = Math.floor(600 + Math.random() * 300);
+        }
+      }
+
+      timeoutId = setTimeout(() => {
+        runCycle(nextCount, nextForward);
+      }, delay);
+    };
+
+    timeoutId = setTimeout(() => {
+      runCycle(1, true);
+    }, 1000);
+
+    return () => {
+      isCancelled = true;
+      clearTimeout(timeoutId);
+    };
+  }, [isCurrentlyPlaying]);
   const durationMs = track?.durationMs && track.durationMs > 0 ? track.durationMs : null;
 
   let elapsedMs = 0;
@@ -422,7 +493,8 @@ const LastFmNowPlayingCard = () => {
       }
     } else {
       elapsedMs = rawElapsed;
-      percent = 100;
+      const effectiveDuration = 210000;
+      percent = Math.min(95, Math.max(0, (elapsedMs / effectiveDuration) * 100));
     }
   } else {
     percent = 100;
@@ -600,13 +672,12 @@ const LastFmNowPlayingCard = () => {
                   <div className="flex items-center justify-center sm:justify-start gap-3">
                     {isCurrentlyPlaying ? (
                       <Badge
-                        className="bg-[var(--primary-container)] text-[var(--on-primary-container)] border-2 sm:border-3 border-[var(--primary)]/40 font-extrabold uppercase tracking-widest shadow-xs"
+                        className="bg-[var(--primary-container)] text-md text-[var(--on-primary-container)] border-2 sm:border-3 border-[var(--primary)]/40 font-extrabold tracking-widest shadow-xs"
                       >
-                        <span className="relative flex h-2.5 w-2.5 mr-0.5">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />
+                        <span className="ml-2 flex items-center">
+                          <span>Now playing</span>
+                          <span className="inline-block w-5 text-left">{dots}</span>
                         </span>
-                        <span>Now playing</span>
                       </Badge>
                     ) : (
                       <Badge
@@ -637,13 +708,9 @@ const LastFmNowPlayingCard = () => {
                 <div className="mt-3 sm:mt-6 space-y-4 sm:space-y-6">
                   <div className="space-y-2 sm:space-y-3">
                     <div
-                      onClick={handleProgressBarClick}
-                      className={`overflow-hidden rounded-2xl sm:rounded-[1.75rem] border-2 sm:border-4 border-[var(--outline-variant)] bg-[var(--surface-variant)]/50 p-2 sm:p-3 shadow-inner hover:border-[var(--primary)] transition-colors group/seek ${
-                        isCurrentlyPlaying ? "cursor-pointer" : "cursor-default"
-                      }`}
-                      title={isCurrentlyPlaying ? "Click anywhere to sync / seek track progress" : undefined}
+                      className="overflow-hidden rounded-2xl sm:rounded-[1.75rem] border-2 sm:border-4 border-[var(--outline-variant)] bg-[var(--surface-variant)]/50 p-2 sm:p-3 shadow-inner transition-colors"
                     >
-                      <WavyProgress percent={percent} className="h-6 sm:h-8 pointer-events-none text-[var(--primary)] transition-colors duration-500" />
+                      <WavyProgress percent={percent} showHandle={isCurrentlyPlaying && percent < 100} className="h-6 sm:h-8 pointer-events-none text-[var(--primary)] transition-colors duration-500" />
                     </div>
 
                     <div className="flex items-center justify-between text-[11px] sm:text-xs font-mono font-bold tracking-wider text-[var(--on-surface-variant)] px-1">

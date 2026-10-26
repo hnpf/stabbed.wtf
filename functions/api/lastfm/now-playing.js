@@ -112,6 +112,23 @@ export async function onRequestGet(context) {
       console.warn('Last.fm track info lookup failed', infoError);
     }
 
+    if (!durationMs) {
+      try {
+        const itunesUrl = new URL('https://itunes.apple.com/search');
+        itunesUrl.searchParams.set('term', `${artist} ${name}`);
+        itunesUrl.searchParams.set('entity', 'song');
+        itunesUrl.searchParams.set('limit', '1');
+        const itunesRes = await fetch(itunesUrl.toString());
+        if (itunesRes.ok) {
+          const itunesJson = await itunesRes.json();
+          const dur = Number(itunesJson?.results?.[0]?.trackTimeMillis);
+          if (!isNaN(dur) && dur > 0) {
+            durationMs = dur;
+          }
+        }
+      } catch {}
+    }
+
     return new Response(
       JSON.stringify({
         track: {

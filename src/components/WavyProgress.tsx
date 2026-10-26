@@ -10,6 +10,7 @@ interface WavyProgressProps {
   className?: string;
   pride?: boolean;
   animated?: boolean;
+  showHandle?: boolean;
 }
 
 const PRIDE_PALETTES: Record<string, string[]> = {
@@ -31,6 +32,7 @@ export default function WavyProgress({
   className,
   pride = false,
   animated = true,
+  showHandle = false,
 }: WavyProgressProps) {
   const { settings } = useTheme();
   const svgRef = useRef<SVGSVGElement>(null);
@@ -68,7 +70,9 @@ export default function WavyProgress({
     return paths;
   }, [height, left, right, thickness]);
 
-  const track_x1 = percentX + thickness + 4;
+  const gap = showHandle ? thickness + 2 : 0;
+  const clipWidth = showHandle ? (safePercent === 0 ? 0 : Math.max(0, percentX - gap)) : percentX;
+  const track_x1 = showHandle ? Math.min(right, percentX + gap) : (percentX + thickness + 4);
   const track_opacity = trackOpacity(right, track_x1);
 
   const gradientId = useMemo(() => `pride-grad-${Math.random().toString(36).substr(2, 9)}`, []);
@@ -108,7 +112,7 @@ export default function WavyProgress({
       )}
       <defs>
         <clipPath id={clipId}>
-          <rect x="0" y="0" width={percentX} height={height} />
+          <rect x="0" y="0" width={clipWidth} height={height} />
         </clipPath>
       </defs>
       <path
@@ -124,6 +128,18 @@ export default function WavyProgress({
           <animate attributeName="d" dur="1s" repeatCount="indefinite" values={smil_data.join(";")} />
         )}
       </path>
+      {showHandle && (
+        <line
+          fill="none"
+          stroke={isPrideActive ? `url(#${gradientId})` : "currentColor"}
+          strokeWidth={thickness}
+          strokeLinecap="round"
+          x1={percentX}
+          y1={height * -0.2}
+          x2={percentX}
+          y2={height * 1.2}
+        />
+      )}
       <line
         fill="none"
         stroke="currentColor"
