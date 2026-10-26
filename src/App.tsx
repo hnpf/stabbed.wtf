@@ -42,7 +42,7 @@ import { FoolsPopup } from "./components/FoolsPopup";
 import { BounceButton } from "./components/TechStack";
 import { ExpressiveTooltip } from "./components/ExpressiveTooltip";
 import { M3WindowScrollBar, M3ScrollBar } from "./components/M3ScrollBar";
-import { deployed_code, materialIcon } from "./components/MaterialIcon";
+import { deployed_code, materialIcon, Career } from "./components/MaterialIcon";
 import { BLOG_POSTS } from "./constants";
 import { RippleScope } from "./components/RippleScope";
 import { haptic } from "./haptics";
@@ -489,16 +489,17 @@ export default function App() {
                   className="overflow-hidden whitespace-nowrap"
                   style={{ pointerEvents: settings.sidebarCollapsed ? "none" : "auto" }}
                 >
-                  <div className="font-black font-expressive text-3xl tracking-tight italic text-center mr-4 capitalize leading-none">virex.</div>
-                  <div className="text-md capitalize tracking-[0.03em] opacity-55 font-black mt-1">independent dev</div>
+                  <div className="font-black font-expressive text-3xl tracking-tight italic text-center mr-4 capitalize leading-none">virex</div>
+                  <Career size={20 } className="absolute shrink-0 opacity-55" />
+                  <span className="text-md pl-7 text-center capitalize tracking-[0.03em] opacity-55 font-black mt-1">independence</span>
                 </motion.div>
               </div>
               {!settings.sidebarCollapsed && !is_tiny && !is_short && (
                 <div className="mb-5 flex flex-col gap-2 px-4">
                   <div className="ml-3 flex flex-col gap-2">
-                    <h3 className="text-3xl mb-2 font-expressive font-black italic tracking-tight leading-none text-[var(--on-surface)]">
+                    <span className="text-3xl mb-2 font-expressive font-black italic tracking-tight leading-none text-[var(--on-surface)]">
                       Explore
-                    </h3>
+                    </span>
                     <div className="flex items-center gap-2 text-[12px] font-semibold tracking-wide text-[var(--on-surface-variant)] opacity-75">
                       <kbd className="rounded-md bg-[var(--surface-variant)] px-1.5 py-1 font-mono text-[10px]">
                         {paletteHotkeyLabel}
