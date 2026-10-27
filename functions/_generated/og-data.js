@@ -310,6 +310,15 @@ export const BLOG_POSTS = [
 
 export const MUSIC_RELEASES = [
   {
+    "id": "RËFLËKT",
+    "title": "RËFLËKT",
+    "type": "Single",
+    "description": "pretend this says something - https://rxvirex.bandcamp.com/",
+    "genre": "Rage/Trap",
+    "releaseDate": "2026",
+    "ogImage": "https://stabbed.wtf/albums/RËFLËKT.png"
+  },
+  {
     "id": "XANXIETY",
     "title": "XANXIETY",
     "type": "Single",

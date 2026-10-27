@@ -583,7 +583,7 @@ export function MusicListeningRoom({ active, catalogHost, hideMiniPlayer = false
     const isFirst = index === 0;
     const isLast = index === total - 1;
     const rowRounding = total === 1
-      ? "rounded-xl"
+      ? "rounded-3xl"
       : isFirst
         ? "rounded-t-3xl rounded-b-[6px]"
         : isLast
@@ -679,7 +679,7 @@ export function MusicListeningRoom({ active, catalogHost, hideMiniPlayer = false
           } : undefined}
         >
           {MUSIC_RELEASES.filter((release) => release.tracks?.length).map((release, index) => (
-            <motion.button layout key={release.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ ...TRANSPORT_SPRING, delay: index * 0.07 }} onClick={() => setSelectedReleaseId(release.id)} className={`flex w-48 shrink-0 items-center gap-3 rounded-2xl border p-2 text-left transition-colors ${selectedRelease.id === release.id ? "border-[var(--primary)] bg-[var(--primary)]/10" : "border-[var(--outline-variant)]/45 bg-[var(--surface-variant)]/35 opacity-75 hover:opacity-100"}`}>
+            <motion.button layout key={release.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ ...TRANSPORT_SPRING, delay: index * 0.07 }} onClick={() => setSelectedReleaseId(release.id)} className={`flex w-48 shrink-0 items-center gap-3 rounded-3xl border-3 p-3 text-left transition-colors ${selectedRelease.id === release.id ? "border-[var(--primary)] bg-[var(--primary)]/10" : "border-[var(--outline-variant)]/45 bg-[var(--surface-variant)]/35 opacity-75 hover:opacity-100"}`}>
               <AlbumCover release={release} className="size-14 rounded-xl" iconSize={24} />
               <span className="min-w-0"><span className="block truncate text-sm font-black">{release.title}</span><span className="text-xs opacity-60">{release.tracks.length} {release.tracks.length === 1 ? "track" : "tracks"}</span></span>
             </motion.button>
@@ -713,7 +713,7 @@ export function MusicListeningRoom({ active, catalogHost, hideMiniPlayer = false
               </div>
             </div>
             {releasePickerOpen && <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} className="m-3 grid gap-2 rounded-3xl border border-[var(--outline-variant)]/55 bg-[var(--surface)] p-2 sm:grid-cols-2">{MUSIC_RELEASES.filter((release) => release.tracks?.length).map((release, index) => <motion.button layout key={release.id} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ ...TRANSPORT_SPRING, delay: index * 0.04 }} onClick={() => { setSelectedReleaseId(release.id); setReleasePickerOpen(false); }} className="flex items-center gap-3 rounded-3xl p-2 text-left hover:bg-[var(--surface-variant)]"><AlbumCover release={release} className="size-12 rounded-lg" iconSize={20} /><span className="text-sm font-bold">{release.title}</span><span className="ml-auto text-xs opacity-50">{release.tracks.length} tracks</span></motion.button>)}</motion.div>}
-            <div className={`p-3 ${trackLayout === "grid" ? "grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4" : "flex flex-col gap-1 overflow-hidden rounded-3xl border border-[var(--outline-variant)]/50 bg-[var(--surface-container)]"}`}>
+            <div className={`p-3 ${trackLayout === "grid" ? "grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4" : "flex flex-col gap-1 overflow-hidden rounded-[2rem] border border-[var(--outline-variant)]/50 bg-[var(--surface-container)]"}`}>
               {selectedRelease.tracks.map((track, index) => trackRow({ track, release: selectedRelease }, index, false, selectedRelease.tracks.length, trackLayout === "grid"))}
             </div>
           </motion.div>
