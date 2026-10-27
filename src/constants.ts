@@ -2880,6 +2880,24 @@ export interface MusicRelease {
 
 export const MUSIC_RELEASES: MusicRelease[] = [
   {
+    id: "RËFLËKT",
+    title: "RËFLËKT",
+    type: "Single",
+    releaseDate: "2026",
+    description: "pretend this says something - https://rxvirex.bandcamp.com/",
+    genre: "Rage/Trap",
+    duration: "2 min 45 sec",
+    tags: ["rage", "experimental"],
+    featured: true,
+    tracks: [{ id: "RËFLËKT", title: "RËFLËKT", audioUrl: "localreleases/RËFLËKT/RËFLËKT/RËFLËKT.wav", duration: "2:45",  ...LOCAL_WAV_METADATA }],
+    links: {
+      spotify: "https://open.spotify.com/track/1ekjawzcbAA2ONFzZEth5J?si=20b0b02a03484c8b",
+      bandcamp: "https://rxvirex.bandcamp.com/album/r-fl-kt",
+      youtubeMusic: "https://music.youtube.com/playlist?list=OLAK5uy_mN-b4Epl34KPxGCZ_O3Chok2CRHyTQ8ZE&si=5vh5JZuej_Eue1tO",
+      tiktok: "https://www.tiktok.com/@rxvirex",
+    },
+  },
+  {
     id: "XANXIETY",
     title: "XANXIETY",
     type: "Single",
