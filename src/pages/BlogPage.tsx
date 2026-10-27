@@ -67,7 +67,7 @@ const MARKDOWN_COMPONENTS: any = {
     </h1>
   ),
   h2: ({ children }: any) => (
-    <h2 className="group relative text-2xl md:text-3xl font-display font-black tracking-tight mt-12 mb-5 border-b border-[var(--outline-variant)]/40 pb-3 text-white opacity-90 transition-all duration-300 ease-in-out hover:text-[var(--primary)] hover:opacity-100">
+    <h2 className="group relative text-2xl md:text-3xl font-display font-black tracking-tight mt-12 mb-5 border-b border-[var(--outline-variant)]/40 pb-3 opacity-90 transition-all duration-300 ease-in-out hover:text-[var(--primary)] hover:opacity-100">
       <span className="absolute -left-8 opacity-0 transition-opacity duration-300 text-[24px] group-hover:opacity-55 text-slate-500 select-none">
         ¶
       </span>
