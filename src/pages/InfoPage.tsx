@@ -11,7 +11,6 @@ import { BounceButton, TechChip } from "../components/TechStack";
 import { haptic } from "../haptics";
 import { Ripple } from "../components/Ripple";
 import { Badge } from "../components/Badge";
-import { LiquidGlassCard, LiquidGlassBadge, LiquidGlassChar, useLiquidGlass } from "../components/LiquidGlassCard";
 
 const InfoCardHeading = ({ icon: Icon, children, className }: any) => (
   <div className={cn("flex items-center gap-3", className)}>
@@ -245,91 +244,74 @@ const LetterMatrix = ({ onBack, setPage, is_mobile }: { onBack: () => void; setP
         />
 
         {/* foreground */}
-        <div className="relative z-10 w-full flex flex-col items-center justify-end text-center px-3 sm:px-6 pb-5 sm:pb-8 md:pb-12">
-          <LiquidGlassCard
-            radius={is_mobile ? 32 : 44}
-            interactive={!is_mobile}
-            className="w-auto max-w-[92vw] sm:max-w-2xl md:max-w-3xl mx-auto select-none sm:select-auto"
-            innerClassName="px-4 py-4 sm:px-8 sm:py-6 md:px-12 md:py-7 flex flex-col items-center"
-          >
-            {/* letters */}
-            <div className="flex gap-0.5 sm:gap-1 md:gap-2 justify-center items-baseline flex-nowrap">
-              {letters.map((char, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ y: -150, opacity: 0, scale: 0.8, filter: "blur(12px)" }}
-                  animate={{ y: 0, opacity: 1, scale: 1, filter: "blur(0px)" }}
-                  onAnimationComplete={() => {
-                    if (i === letters.length - 1) setSwoopDone(true);
-                  }}
-                  transition={{
-                    delay: i * 0.1,
-                    type: "spring",
-                    stiffness: settings.highHz ? 180 : 150,
-                    damping: settings.highHz ? 25 : 22,
-                    mass: 0.8
-                  }}
-                  className={cn(
-                    "text-6xl sm:text-7xl md:text-9xl lg:text-[10.5rem] transition-all duration-150 select-none font-expressive font-black italic tracking-tighter leading-none",
-                    flickering.includes(i) ? "text-[var(--primary)] scale-105" : "text-[var(--on-surface)]",
-                  )}
-                >
-                  <LiquidGlassChar
-                    actualTheme={actualTheme}
-                    isFlickering={flickering.includes(i)}
-                  >
-                    {flickering.includes(i) ? String.fromCharCode(33 + Math.floor(Math.random() * 94)) : char}
-                  </LiquidGlassChar>
-                </motion.span>
-              ))}
+        <div className="relative z-10 w-full flex flex-col items-center justify-end text-center px-4 sm:px-6 pb-6 sm:pb-10 md:pb-12">
+          {/* letters */}
+          <div className="flex gap-0.5 sm:gap-1 md:gap-2 justify-center items-baseline flex-nowrap">
+            {letters.map((char, i) => (
               <motion.span
+                key={i}
                 initial={{ y: -150, opacity: 0, scale: 0.8, filter: "blur(12px)" }}
                 animate={{ y: 0, opacity: 1, scale: 1, filter: "blur(0px)" }}
+                onAnimationComplete={() => {
+                  if (i === letters.length - 1) setSwoopDone(true);
+                }}
                 transition={{
-                  delay: letters.length * 0.1,
+                  delay: i * 0.1,
                   type: "spring",
                   stiffness: settings.highHz ? 180 : 150,
                   damping: settings.highHz ? 25 : 22,
                   mass: 0.8
                 }}
-                className="text-6xl sm:text-7xl md:text-9xl lg:text-[10.5rem] font-expressive font-black italic tracking-tighter leading-none text-[var(--primary)] select-none"
+                className={cn(
+                  "text-6xl sm:text-7xl md:text-9xl lg:text-[10.5rem] transition-all duration-150 select-none font-expressive font-black italic tracking-tighter leading-none",
+                  flickering.includes(i) ? "text-[var(--primary)] scale-105" : "text-[var(--on-surface)]",
+                )}
               >
-                <LiquidGlassChar
-                  actualTheme={actualTheme}
-                  isAccent
-                >
-                  .
-                </LiquidGlassChar>
+                {flickering.includes(i) ? String.fromCharCode(33 + Math.floor(Math.random() * 94)) : char}
               </motion.span>
-            </div>
-
-            {/* badges */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 }}
-              className="flex flex-row items-center gap-2.5 sm:gap-3 mt-6 sm:mt-8 flex-wrap justify-center"
+            ))}
+            <motion.span
+              initial={{ y: -150, opacity: 0, scale: 0.8, filter: "blur(12px)" }}
+              animate={{ y: 0, opacity: 1, scale: 1, filter: "blur(0px)" }}
+              transition={{
+                delay: letters.length * 0.1,
+                type: "spring",
+                stiffness: settings.highHz ? 180 : 150,
+                damping: settings.highHz ? 25 : 22,
+                mass: 0.8
+              }}
+              className="text-6xl sm:text-7xl md:text-9xl lg:text-[10.5rem] font-expressive font-black italic tracking-tighter leading-none text-[var(--primary)] select-none"
             >
-              <LiquidGlassBadge
-                icon={Science}
-                className="bg-[var(--primary-container)] text-[var(--on-primary-container)] border border-[var(--primary)]/30 font-black uppercase tracking-widest shadow-lg shadow-[var(--primary)]/10 backdrop-blur-xl"
-              >
-                Researching
-              </LiquidGlassBadge>
-              <LiquidGlassBadge
-                icon={MapPin}
-                className="backdrop-blur-xl shadow-md border border-[var(--outline-variant)]/60 bg-[var(--surface-container)]/80 text-[var(--on-surface)]"
-              >
-                Nederland
-              </LiquidGlassBadge>
-              <LiquidGlassBadge
-                icon={Face}
-                className="backdrop-blur-xl shadow-md border border-[var(--outline-variant)]/60 bg-[var(--surface-container)]/80 text-[var(--on-surface)]"
-              >
-                He / They
-              </LiquidGlassBadge>
-            </motion.div>
-          </LiquidGlassCard>
+              .
+            </motion.span>
+          </div>
+
+          {/* badges */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+            className="flex flex-row items-center gap-2.5 sm:gap-3 mt-6 sm:mt-8 flex-wrap justify-center"
+          >
+            <Badge
+              icon={Science}
+              className="bg-[var(--primary-container)] text-[var(--on-primary-container)] border border-[var(--primary)]/30 font-black uppercase tracking-widest shadow-lg shadow-[var(--primary)]/10 backdrop-blur-xl"
+            >
+              Researching
+            </Badge>
+            <Badge
+              icon={MapPin}
+              className="backdrop-blur-xl shadow-md border border-[var(--outline-variant)]/60 bg-[var(--surface-container)]/80 text-[var(--on-surface)]"
+            >
+              Nederland
+            </Badge>
+            <Badge
+              icon={Face}
+              className="backdrop-blur-xl shadow-md border border-[var(--outline-variant)]/60 bg-[var(--surface-container)]/80 text-[var(--on-surface)]"
+            >
+              He / They
+            </Badge>
+          </motion.div>
         </div>
       </div>
 
