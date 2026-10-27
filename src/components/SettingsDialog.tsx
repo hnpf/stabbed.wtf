@@ -304,7 +304,7 @@ export const SettingsDialog = memo(({
             </div>
 
             {/* Theme Mode */}
-            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-4">
+            <div className="bg-[var(--surface-variant)]/40 rounded-[2rem] p-5 border-0 space-y-4">
               <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
                 Theme Mode
               </div>
@@ -407,7 +407,7 @@ export const SettingsDialog = memo(({
             </div>
 
             {/* Color & Palette */}
-            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-4">
+            <div className="bg-[var(--surface-variant)]/40 rounded-[2rem] p-5 border-0 space-y-4 space-y-4">
               <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
                 Color & Palette
               </div>
@@ -584,7 +584,7 @@ export const SettingsDialog = memo(({
             </div>
 
             {/* Dynamic Theming */}
-            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-3">
+            <div className="bg-[var(--surface-variant)]/40 rounded-[2rem] p-5 border-0 space-y-4 space-y-3">
               <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
                 Dynamic Theming
               </div>
@@ -624,7 +624,7 @@ export const SettingsDialog = memo(({
             </div>
 
             {/* Typography & Styling */}
-            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-3.5">
+            <div className="bg-[var(--surface-variant)]/40 rounded-[2rem] p-5 border-0 space-y-4 space-y-3.5">
               <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
                 Typography & Styling
               </div>
@@ -718,7 +718,7 @@ export const SettingsDialog = memo(({
             </div>
 
             {/* Navigation & Sidebar */}
-            <div className="hidden sm:block bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-3">
+            <div className="hidden sm:block bg-[var(--surface-variant)]/40 rounded-[2rem] p-5 border-0 space-y-4 space-y-3">
               <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
                 Navigation & Sidebar
               </div>
@@ -773,7 +773,7 @@ export const SettingsDialog = memo(({
             </div>
 
             {/* Layout Modes */}
-            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-3">
+            <div className="bg-[var(--surface-variant)]/40 rounded-[2rem] p-5 border-0 space-y-4 space-y-3">
               <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
                 Layout Modes
               </div>
@@ -843,7 +843,7 @@ export const SettingsDialog = memo(({
             </div>
 
             {/* Animations & Physics */}
-            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-3">
+            <div className="bg-[var(--surface-variant)]/40 rounded-[2rem] p-5 border-0 space-y-4 space-y-3">
               <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
                 Animations & Physics
               </div>
@@ -917,7 +917,7 @@ export const SettingsDialog = memo(({
             </div>
 
             {/* Touch feedback */}
-            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-3">
+            <div className="bg-[var(--surface-variant)]/40 rounded-[2rem] p-5 border-0 space-y-4 space-y-3">
               <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
                 Touch Feedback
               </div>
@@ -961,7 +961,7 @@ export const SettingsDialog = memo(({
             </div>
 
             {/* Widgets & Preferences */}
-            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-3">
+            <div className="bg-[var(--surface-variant)]/40 rounded-[2rem] p-5 border-0 space-y-4 space-y-3">
               <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
                 Widgets & Preferences
               </div>
@@ -1022,7 +1022,7 @@ export const SettingsDialog = memo(({
 
             <div className="space-y-4">
               {/* Shortcuts & Default View */}
-              <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0">
+              <div className="bg-[var(--surface-variant)]/40 rounded-[2rem] p-5 border-0 space-y-4">
                 <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)] mb-4">
                   Shortcuts & Default View
                 </div>
@@ -1119,7 +1119,7 @@ export const SettingsDialog = memo(({
               </div>
 
               {/* Search Scope & Limit */}
-              <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0">
+              <div className="bg-[var(--surface-variant)]/40 rounded-[2rem] p-5 border-0 space-y-4">
                 <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)] mb-4">
                   Search Scope & Limit
                 </div>
@@ -1201,7 +1201,7 @@ export const SettingsDialog = memo(({
               </div>
 
               {/* Interaction & Behavior */}
-              <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-4">
+              <div className="bg-[var(--surface-variant)]/40 rounded-[2rem] p-5 border-0 space-y-4 space-y-4">
                 <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)] mb-4">
                   Interaction & Behavior
                 </div>
@@ -1290,7 +1290,7 @@ export const SettingsDialog = memo(({
             </div>
             
             {/* Share & Backup */}
-            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-4">
+            <div className="bg-[var(--surface-variant)]/40 rounded-[2rem] p-5 border-0 space-y-4 space-y-4">
               <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
                 Share & Backup
               </div>
@@ -1450,7 +1450,7 @@ export const SettingsDialog = memo(({
             </div>
 
             {/* Support & Diagnostics */}
-            <div className="bg-[var(--surface-variant)]/40 rounded-2xl p-5 border-0 space-y-3">
+            <div className="bg-[var(--surface-variant)]/40 rounded-[2rem] p-5 border-0 space-y-4 space-y-3">
               <div className="text-[13px] font-black tracking-[0.05em] text-[var(--primary)]">
                 Support & Diagnostics
               </div>
