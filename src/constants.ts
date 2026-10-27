@@ -2977,8 +2977,24 @@ export interface KnownIssues {
 
 export const KNOWN_ISSUES: KnownIssues[] = [
   {
+    id: "microstutter-1",
+    title: "Microstutter on overscroll",
+    description: "Microstutter occurs when the overscroll easter egg occurs on mobile.",
+    status: "identified",
+    date: "2026-10-26",
+    severity: "medium",
+  },
+  {
+    id: "scroll-jumping",
+    title: "Music active playing scroll causes jumping",
+    description: "Scrolling with music listening room/listen here queue actively playing causes weird scrolling issues on mobile.",
+    status: "identified",
+    date: "2026-10-26",
+    severity: "medium",
+  },
+  {
     id: "desktop-photo-bento-lag",
-    title: "Desktop Photo Bento Lag",
+    title: "Desktop photo bento lags",
     description: "Scrolling down on the bento and hovering over other photos causes immense lag. Not sure how to exactly fix, but it's been an issue for about a month now.",
     status: "resolved",
     date: "2026-07-05",
