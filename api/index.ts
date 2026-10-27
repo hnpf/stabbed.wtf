@@ -402,6 +402,34 @@ app.get('*', async (req, res, next) => {
   }
 });
 
+app.get('/api/proxy-image', async (req, res) => {
+  const targetUrl = req.query.url;
+  if (typeof targetUrl !== 'string' || !/^https?:\/\//i.test(targetUrl)) {
+    return res.status(400).json({ error: 'Invalid URL' });
+  }
+
+  try {
+    const upstream = await fetch(targetUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+      },
+    });
+
+    if (!upstream.ok) {
+      return res.status(upstream.status).json({ error: 'Failed to fetch image' });
+    }
+
+    const contentType = upstream.headers.get('content-type') || 'image/jpeg';
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Content-Type', contentType);
+    res.set('Cache-Control', 'public, max-age=86400');
+    const buffer = Buffer.from(await upstream.arrayBuffer());
+    res.send(buffer);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 const PORT = process.env.PORT || 3001;
 
 if (process.env.NODE_ENV !== 'production' || process.mainModule?.filename === import.meta.filename) {

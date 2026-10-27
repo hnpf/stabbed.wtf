@@ -112,11 +112,53 @@ function terminalCliPlugin(env: Record<string, string>) {
   };
 }
 
+function imageProxyPlugin() {
+  return {
+    name: 'image-proxy-plugin',
+    configureServer(server: any) {
+      server.middlewares.use('/api/proxy-image', async (req: any, res: any) => {
+        try {
+          const url = new URL(req.url || '/', `http://${req.headers.host || 'localhost'}`);
+          const targetUrl = url.searchParams.get('url');
+          if (!targetUrl || !/^https?:\/\//i.test(targetUrl)) {
+            res.statusCode = 400;
+            res.setHeader('Content-Type', 'application/json');
+            return res.end(JSON.stringify({ error: 'Invalid URL' }));
+          }
+
+          const upstream = await fetch(targetUrl, {
+            headers: {
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+            },
+          });
+
+          if (!upstream.ok) {
+            res.statusCode = upstream.status;
+            res.setHeader('Content-Type', 'application/json');
+            return res.end(JSON.stringify({ error: 'Failed to fetch image' }));
+          }
+
+          const contentType = upstream.headers.get('content-type') || 'image/jpeg';
+          res.setHeader('Access-Control-Allow-Origin', '*');
+          res.setHeader('Content-Type', contentType);
+          res.setHeader('Cache-Control', 'public, max-age=86400');
+          const buffer = Buffer.from(await upstream.arrayBuffer());
+          return res.end(buffer);
+        } catch (err: any) {
+          res.statusCode = 500;
+          res.setHeader('Content-Type', 'application/json');
+          return res.end(JSON.stringify({ error: err.message }));
+        }
+      });
+    },
+  };
+}
+
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   
   return {
-    plugins: [react(), tailwindcss(), terminalCliPlugin(env)],
+    plugins: [react(), tailwindcss(), terminalCliPlugin(env), imageProxyPlugin()],
     envPrefix: ['VITE_', 'LASTFM_'],
     define: {
       '__GLOBAL_PFP__': JSON.stringify(getGlobalPfpUrl()),

@@ -166,7 +166,7 @@ export const BLOG_POSTS: BlogPost[] = [
     content: `
 # why are we afraid of things that can't hurt us?
 
-arachnophobia is one of the most common phobias, yet out of roughly 50,000 described spider species, less than 0.5% possess venom harmful to humans. in most regions, the statistical risk of a severe medical reaction from a spider bite is effectively non-existent compared to routine daily hazards.
+arachnophobia, the intense fear of spiders, is one of the most common specific phobias. yet despite the roughly 50,000 described spider species, only around 0.5% belong to genera classified as potentially dangerous to humans. according to a 2017 review published in Toxicon, the authors suggest the actual proportion of species posing a threat is likely **even lower**!
 
 the common explanation for arachnophobia comes from evolutionary biology. known as the **preparedness theory**, evolutionary biologists suggest that early humans who instinctively avoided crawling arthropods had a slight survival advantage. over generations, a generalized threat detector developed in the human visual cortex.
 
@@ -184,15 +184,63 @@ the fear is rarely just about venom. visual and perceptual triggers play a huge 
 
 ## the reality of it all
 
-medical data consistently proves that spider bites are hugely overdiagnosed and misdiagnosed. systemic staph infections and severe skin conditions, such as MRSA or severe cystic acne, are frequently misattributed to spider bites by both patients and clinicians.
+research & medical data consistently suggest that spider bites are hugely overdiagnosed and misdiagnosed. systemic staph infections and severe skin conditions, such as MRSA or severe cystic acne, are frequently misattributed to spider bites by both patients and clinicians.
 
 i experienced this medical bias firsthand. when dealing with severe cystic acne breakouts around a year ago, multiple urgent care clinicians insisted the lesions on my face were directly caused by spider bites. it took a consultation with a dermatologist to get the correct diagnosis. 
 
 in reality, house spiders have no biological incentive to bite non-prey organisms, and defensive bites are extremely rare unless the spider is actively crushed or pinched. venom is a metabolically expensive resource to produce. spiders rely on it to capture prey, so wasting it on a giant organism that cannot be eaten offers zero evolutionary benefit.
+
+## cute images of spiders
+not all spiders are terrifying. some are just little guys!
+
+![**IMAGE SOURCE: boredpanda.com** "So I Heard My Mom Screaming About A Spider In Her Room"](https://static.boredpanda.com/blog/wp-content/uploads/2022/04/cute-spiders-46-624af547927b7__700.jpg)
+![**IMAGE SOURCE: boredpanda.com** "Found This Little Jumping Spider Peeking Out From His House"](https://static.boredpanda.com/blog/wp-content/uploads/2022/04/cute-spiders-38-624adf1e75700__700.jpg)
+![**IMAGE SOURCE: boredpanda.com** "As Colorful As It Can Get"](https://static.boredpanda.com/blog/wp-content/uploads/2021/12/61c05a4416e64_odsodbjvg4t41__700.jpg)
+![**IMAGE SOURCE: boredpanda.com** "A True Spiderbro Knows How To Fistbump"](https://static.boredpanda.com/blog/wp-content/uploads/2022/04/cute-spiders-47-624af58ed94e2__700.jpg)
+![**IMAGE SOURCE: boredpanda.com** "Regina Showing Off Her Dinner!"](https://static.boredpanda.com/blog/wp-content/uploads/2021/12/61c1e8927ec2b_zgqe0k9r7vp41__700.jpg)
+![**IMAGE SOURCE: boredpanda.com** "Rescued A Little Jumping Spider"](https://static.boredpanda.com/blog/wp-content/uploads/2022/04/624ae3bc35784_nmgtchg3e1971__700.jpg)
+![**IMAGE SOURCE: boredpanda.com** "My Cute Jumper Betelgeuse... She Just Passed After Her Final Molt"](https://static.boredpanda.com/blog/wp-content/uploads/2022/04/cute-spiders-44-624ae352369c4__700.jpg)
+![**IMAGE SOURCE: boredpanda.com** "A Cute Little Spider Friend"](https://static.boredpanda.com/blog/wp-content/uploads/2022/03/cute-spiders-3-6242d68364b69__700.jpg)
+![**IMAGE SOURCE: Julian Schultz on Unsplash** "Stunning Purple Pinktoe Tarantula!"](https://images.unsplash.com/photo-1635171379225-e820401ad961?q=80&w=793&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D)
+![**IMAGE SOURCE: Stas Chekalin on Unsplash** "Cute Wolf spider"](https://images.unsplash.com/photo-1642662564820-d6f8fd22c3d3?q=80&w=736&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D)
+
+## sources used for this article & further reading
+
+1. **[biological preparedness and resistance to extinction of skin conductance responses conditioned to fear-relevant animal pictures: a systematic review](https://pubmed.ncbi.nlm.nih.gov/30381252/)**  
+   *2018 · systematic review*  
+   examines the evidence for preparedness theory and finds that most of the reviewed experiments did not support the prediction that conditioned fear responses to spiders and snakes are more resistant to extinction.
+
+2. **["spider bite" lesions are usually diagnosed as skin and soft-tissue infections](https://pubmed.ncbi.nlm.nih.gov/19939602/)**  
+   *journal of emergency medicine · 2011*  
+   reports findings from 182 emergency department patients who believed they had spider bites. only 3.8% received a clinical diagnosis of an actual spider bite, while 85.7% were diagnosed with infections.
+
+3. **[post-travel dermatologic conditions: CDC yellow book](https://www.cdc.gov/yellow-book/hcp/post-travel-evaluation/post-travel-dermatologic-conditions.html)**  
+   *centers for disease control and prevention*  
+   explains how skin infections are frequently mistaken for spider bites and discusses the importance of distinguishing suspected bites from other dermatological conditions.
+
+4. **[disgust and spider phobia](https://pubmed.ncbi.nlm.nih.gov/8772018/)**  
+   *journal of abnormal psychology · 1996*  
+   investigates the relationship between disgust sensitivity and spider phobia, providing evidence that disgust can be an important component of spider-related fear.
+
+5. **[the fear of spiders: perceptual features assessed in augmented reality](https://pubmed.ncbi.nlm.nih.gov/38450021/)**  
+   *frontiers in behavioral neuroscience · 2024*  
+   investigates how physical characteristics such as body proportions, hairiness, and movement influence people's perceptions of spiders, including differences associated with arachnophobia.
+
+6. **[locomotion and kinematics of arachnids](https://pmc.ncbi.nlm.nih.gov/articles/PMC8046687/)**  
+   *journal of comparative physiology A · 2021*  
+   reviews the mechanics and diversity of arachnid movement, including hydraulic leg extension and the biomechanics of running, climbing, and jumping.
+
+7. **[the role of fear and expectancies in capture of covert attention by spiders](https://pubmed.ncbi.nlm.nih.gov/21604868/)**  
+   *emotion · 2011*  
+   investigates how expectations about encountering spiders influence attention, offering insight into how fear can affect the way people monitor their surroundings.
+
+8. **[Dangerous arachnids: Fake news or reality?](https://pubmed.ncbi.nlm.nih.gov/28866287/)**   
+  *Hauke & Herzig · 2017 · Toxicon, 138, 173–183*   
+  reviews the medical risks associated with spider bites along with scorpion stings and estimates the proportion of spider species classified as potentially dangerous to humans.
     `,
     date: "Oct 26, 2026",
     category: "Psychology",
-    readTime: "5 min read",
+    readTime: "6 min read",
     link: "why-are-we-afraid-of-things-that-cant-hurt-us"
   },
 

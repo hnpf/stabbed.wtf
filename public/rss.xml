@@ -5,8 +5,86 @@
   <link>https://stabbed.wtf/blog</link>
   <description>Research, development, and systems exploration by Virex.</description>
   <language>en-us</language>
-  <lastBuildDate>Mon, 26 Oct 2026 23:57:20 GMT</lastBuildDate>
+  <lastBuildDate>Tue, 27 Oct 2026 02:12:57 GMT</lastBuildDate>
     <item>
+    <title>why are we afraid of things that can't hurt us?</title>
+    <link>https://stabbed.wtf/blog/why-are-we-afraid-of-things-that-cant-hurt-us</link>
+    <description><![CDATA[arachnophobia is an intriguing combination of human evolutionary traits and modern social constructs, here's literally everything about it...]]></description>
+    <content:encoded><![CDATA[<h1>why are we afraid of things that can't hurt us?</h1>
+<p>arachnophobia, the intense fear of spiders, is one of the most common specific phobias. yet despite the roughly 50,000 described spider species, only around 0.5% belong to genera classified as potentially dangerous to humans. according to a 2017 review published in Toxicon, the authors suggest the actual proportion of species posing a threat is likely <strong>even lower</strong>!</p>
+<p>the common explanation for arachnophobia comes from evolutionary biology. known as the <strong>preparedness theory</strong>, evolutionary biologists suggest that early humans who instinctively avoided crawling arthropods had a slight survival advantage. over generations, a generalized threat detector developed in the human visual cortex.</p>
+<h2>the main evolutionary flaw</h2>
+<p>this instinct is broad and imprecise. our brains prioritize a <strong>low false-negative rate</strong> over true accuracy. evolutionarily speaking, false alarms cost very little energy, while missing a genuine hazard carries a massive cost. as a result, our brains trigger the same fight-or-flight response for harmless house spiders as they do for dangerous species.</p>
+<h2>movement mechanics and triggers</h2>
+<p>the fear is rarely just about venom. visual and perceptual triggers play a huge role in how the human brain processes spiders:</p>
+<ul>
+<li><strong>hydraulic locomotion:</strong> spiders move using a hydraulic leg system rather than opposing muscle groups. fluid pressure shifts create high-speed, unpredictable movement patterns that human visual tracking struggles to keep up with.</li>
+<li><strong>morphological cues:</strong> eight eyes arranged in distinct pairs, eight jointed limbs, and dark silhouettes clash with human face-processing mechanisms in the fusiform face area, triggering an amplified disgust and threat response.</li>
+<li><strong>pathogen mapping:</strong> research shows arachnophobia is heavily tied to disgust rather than pure fear. disgust evolved to prevent pathogen exposure, and small, fast-moving organisms are often unconsciously mapped to contamination risk.</li>
+</ul>
+<h2>the reality of it all</h2>
+<p>research &#x26; medical data consistently suggest that spider bites are hugely overdiagnosed and misdiagnosed. systemic staph infections and severe skin conditions, such as MRSA or severe cystic acne, are frequently misattributed to spider bites by both patients and clinicians.</p>
+<p>i experienced this medical bias firsthand. when dealing with severe cystic acne breakouts around a year ago, multiple urgent care clinicians insisted the lesions on my face were directly caused by spider bites. it took a consultation with a dermatologist to get the correct diagnosis.</p>
+<p>in reality, house spiders have no biological incentive to bite non-prey organisms, and defensive bites are extremely rare unless the spider is actively crushed or pinched. venom is a metabolically expensive resource to produce. spiders rely on it to capture prey, so wasting it on a giant organism that cannot be eaten offers zero evolutionary benefit.</p>
+<h2>cute images of spiders</h2>
+<p>not all spiders are terrifying. some are just little guys!</p>
+<p><img src="https://static.boredpanda.com/blog/wp-content/uploads/2022/04/cute-spiders-46-624af547927b7__700.jpg" alt="IMAGE SOURCE: boredpanda.com &#x22;So I Heard My Mom Screaming About A Spider In Her Room&#x22;">
+<img src="https://static.boredpanda.com/blog/wp-content/uploads/2022/04/cute-spiders-38-624adf1e75700__700.jpg" alt="IMAGE SOURCE: boredpanda.com &#x22;Found This Little Jumping Spider Peeking Out From His House&#x22;">
+<img src="https://static.boredpanda.com/blog/wp-content/uploads/2021/12/61c05a4416e64_odsodbjvg4t41__700.jpg" alt="IMAGE SOURCE: boredpanda.com &#x22;As Colorful As It Can Get&#x22;">
+<img src="https://static.boredpanda.com/blog/wp-content/uploads/2022/04/cute-spiders-47-624af58ed94e2__700.jpg" alt="IMAGE SOURCE: boredpanda.com &#x22;A True Spiderbro Knows How To Fistbump&#x22;">
+<img src="https://static.boredpanda.com/blog/wp-content/uploads/2021/12/61c1e8927ec2b_zgqe0k9r7vp41__700.jpg" alt="IMAGE SOURCE: boredpanda.com &#x22;Regina Showing Off Her Dinner!&#x22;">
+<img src="https://static.boredpanda.com/blog/wp-content/uploads/2022/04/624ae3bc35784_nmgtchg3e1971__700.jpg" alt="IMAGE SOURCE: boredpanda.com &#x22;Rescued A Little Jumping Spider&#x22;">
+<img src="https://static.boredpanda.com/blog/wp-content/uploads/2022/04/cute-spiders-44-624ae352369c4__700.jpg" alt="IMAGE SOURCE: boredpanda.com &#x22;My Cute Jumper Betelgeuse... She Just Passed After Her Final Molt&#x22;">
+<img src="https://static.boredpanda.com/blog/wp-content/uploads/2022/03/cute-spiders-3-6242d68364b69__700.jpg" alt="IMAGE SOURCE: boredpanda.com &#x22;A Cute Little Spider Friend&#x22;">
+<img src="https://images.unsplash.com/photo-1635171379225-e820401ad961?q=80&#x26;w=793&#x26;auto=format&#x26;fit=crop&#x26;ixlib=rb-4.1.0&#x26;ixid=NHwxMjA3fDA%3D" alt="IMAGE SOURCE: Julian Schultz on Unsplash &#x22;Stunning Purple Pinktoe Tarantula!&#x22;">
+<img src="https://images.unsplash.com/photo-1642662564820-d6f8fd22c3d3?q=80&#x26;w=736&#x26;auto=format&#x26;fit=crop&#x26;ixlib=rb-4.1.0&#x26;ixid=NHwxMjA3fDA%3D" alt="IMAGE SOURCE: Stas Chekalin on Unsplash &#x22;Cute Wolf spider&#x22;"></p>
+<h2>sources used for this article &#x26; further reading</h2>
+<ol>
+<li>
+<p><strong><a href="https://pubmed.ncbi.nlm.nih.gov/30381252/">biological preparedness and resistance to extinction of skin conductance responses conditioned to fear-relevant animal pictures: a systematic review</a></strong><br>
+<em>2018 · systematic review</em><br>
+examines the evidence for preparedness theory and finds that most of the reviewed experiments did not support the prediction that conditioned fear responses to spiders and snakes are more resistant to extinction.</p>
+</li>
+<li>
+<p><strong><a href="https://pubmed.ncbi.nlm.nih.gov/19939602/">"spider bite" lesions are usually diagnosed as skin and soft-tissue infections</a></strong><br>
+<em>journal of emergency medicine · 2011</em><br>
+reports findings from 182 emergency department patients who believed they had spider bites. only 3.8% received a clinical diagnosis of an actual spider bite, while 85.7% were diagnosed with infections.</p>
+</li>
+<li>
+<p><strong><a href="https://www.cdc.gov/yellow-book/hcp/post-travel-evaluation/post-travel-dermatologic-conditions.html">post-travel dermatologic conditions: CDC yellow book</a></strong><br>
+<em>centers for disease control and prevention</em><br>
+explains how skin infections are frequently mistaken for spider bites and discusses the importance of distinguishing suspected bites from other dermatological conditions.</p>
+</li>
+<li>
+<p><strong><a href="https://pubmed.ncbi.nlm.nih.gov/8772018/">disgust and spider phobia</a></strong><br>
+<em>journal of abnormal psychology · 1996</em><br>
+investigates the relationship between disgust sensitivity and spider phobia, providing evidence that disgust can be an important component of spider-related fear.</p>
+</li>
+<li>
+<p><strong><a href="https://pubmed.ncbi.nlm.nih.gov/38450021/">the fear of spiders: perceptual features assessed in augmented reality</a></strong><br>
+<em>frontiers in behavioral neuroscience · 2024</em><br>
+investigates how physical characteristics such as body proportions, hairiness, and movement influence people's perceptions of spiders, including differences associated with arachnophobia.</p>
+</li>
+<li>
+<p><strong><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8046687/">locomotion and kinematics of arachnids</a></strong><br>
+<em>journal of comparative physiology A · 2021</em><br>
+reviews the mechanics and diversity of arachnid movement, including hydraulic leg extension and the biomechanics of running, climbing, and jumping.</p>
+</li>
+<li>
+<p><strong><a href="https://pubmed.ncbi.nlm.nih.gov/21604868/">the role of fear and expectancies in capture of covert attention by spiders</a></strong><br>
+<em>emotion · 2011</em><br>
+investigates how expectations about encountering spiders influence attention, offering insight into how fear can affect the way people monitor their surroundings.</p>
+</li>
+<li>
+<p><strong><a href="https://pubmed.ncbi.nlm.nih.gov/28866287/">Dangerous arachnids: Fake news or reality?</a></strong><br>
+<em>Hauke &#x26; Herzig · 2017 · Toxicon, 138, 173–183</em><br>
+reviews the medical risks associated with spider bites along with scorpion stings and estimates the proportion of spider species classified as potentially dangerous to humans.</p>
+</li>
+</ol>]]></content:encoded>
+    <pubDate>Mon, 26 Oct 2026 05:00:00 GMT</pubDate>
+  </item>
+
+  <item>
     <title>THE INTERNET IS MAKING ME ODDLY GOOD AT KNOWING RANDOM USELESS THINGS</title>
     <link>https://stabbed.wtf/blog/internet-useless-info</link>
     <description><![CDATA[how random yt videos and bs geography studying can quite literally build a highway of hyper specific trivia]]></description>
