@@ -5,7 +5,7 @@ export const BLOG_POSTS = [
   {
     "id": "why-are-we-afraid-of-things-that-cant-hurt-us",
     "title": "why are we afraid of things that can't hurt us?",
-    "snippet": "arachnophobia is an intriguing combination of human evolutionary traits and modern social constructs, here's literally everything about it...",
+    "snippet": "arachnophobia is an intriguing combination of human evolutionary traits and modern social constructs, here's why spiders frighten us...",
     "link": "why-are-we-afraid-of-things-that-cant-hurt-us",
     "date": "Oct 26, 2026",
     "category": "Psychology"
