@@ -2889,7 +2889,7 @@ export const MUSIC_RELEASES: MusicRelease[] = [
     duration: "2 min 45 sec",
     tags: ["rage", "experimental"],
     featured: true,
-    tracks: [{ id: "RËFLËKT", title: "RËFLËKT", audioUrl: "localreleases/RËFLËKT/RËFLËKT/RËFLËKT.wav", duration: "2:45",  ...LOCAL_WAV_METADATA }],
+    tracks: [{ id: "RËFLËKT", title: "RËFLËKT", audioUrl: "localreleases/RËFLËKT/RËFLËKT/RËFLËKT.mp3", duration: "2:45",  ...LOCAL_WAV_METADATA }],
     links: {
       spotify: "https://open.spotify.com/track/1ekjawzcbAA2ONFzZEth5J?si=20b0b02a03484c8b",
       bandcamp: "https://rxvirex.bandcamp.com/album/r-fl-kt",
