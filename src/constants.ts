@@ -142,6 +142,60 @@ export const PROJECTS: Project[] = [
 ];
 
 export const BLOG_POSTS: BlogPost[] = [
+
+
+  /*
+  
+  {
+    id: "",
+    title: "",
+    date: "",
+    snippet: "",
+    content: "",
+    category: "",
+    readTime: "",
+    link: "",
+  },
+
+  */
+
+  {
+    id: "why-are-we-afraid-of-things-that-cant-hurt-us",
+    title: "why are we afraid of things that can't hurt us?",
+    snippet: "arachnophobia is an intriguing combination of human evolutionary traits and modern social constructs, here's literally everything about it...",
+    content: `
+# why are we afraid of things that can't hurt us?
+
+arachnophobia is one of the most common phobias, yet out of roughly 50,000 described spider species, less than 0.5% possess venom harmful to humans. in most regions, the statistical risk of a severe medical reaction from a spider bite is effectively non-existent compared to routine daily hazards.
+
+the common explanation for arachnophobia comes from evolutionary biology. known as the **preparedness theory**, evolutionary biologists suggest that early humans who instinctively avoided crawling arthropods had a slight survival advantage. over generations, a generalized threat detector developed in the human visual cortex.
+
+## the main evolutionary flaw
+
+this instinct is broad and imprecise. our brains prioritize a **low false-negative rate** over true accuracy. evolutionarily speaking, false alarms cost very little energy, while missing a genuine hazard carries a massive cost. as a result, our brains trigger the same fight-or-flight response for harmless house spiders as they do for dangerous species.
+
+## movement mechanics and triggers
+
+the fear is rarely just about venom. visual and perceptual triggers play a huge role in how the human brain processes spiders:
+
+* **hydraulic locomotion:** spiders move using a hydraulic leg system rather than opposing muscle groups. fluid pressure shifts create high-speed, unpredictable movement patterns that human visual tracking struggles to keep up with.
+* **morphological cues:** eight eyes arranged in distinct pairs, eight jointed limbs, and dark silhouettes clash with human face-processing mechanisms in the fusiform face area, triggering an amplified disgust and threat response.
+* **pathogen mapping:** research shows arachnophobia is heavily tied to disgust rather than pure fear. disgust evolved to prevent pathogen exposure, and small, fast-moving organisms are often unconsciously mapped to contamination risk.
+
+## the reality of it all
+
+medical data consistently proves that spider bites are hugely overdiagnosed and misdiagnosed. systemic staph infections and severe skin conditions, such as MRSA or severe cystic acne, are frequently misattributed to spider bites by both patients and clinicians.
+
+i experienced this medical bias firsthand. when dealing with severe cystic acne breakouts around a year ago, multiple urgent care clinicians insisted the lesions on my face were directly caused by spider bites. it took a consultation with a dermatologist to get the correct diagnosis. 
+
+in reality, house spiders have no biological incentive to bite non-prey organisms, and defensive bites are extremely rare unless the spider is actively crushed or pinched. venom is a metabolically expensive resource to produce. spiders rely on it to capture prey, so wasting it on a giant organism that cannot be eaten offers zero evolutionary benefit.
+    `,
+    date: "Oct 26, 2026",
+    category: "Psychology",
+    readTime: "5 min read",
+    link: "why-are-we-afraid-of-things-that-cant-hurt-us"
+  },
+
   {
       id: 'internet-useless-info',
       title: 'THE INTERNET IS MAKING ME ODDLY GOOD AT KNOWING RANDOM USELESS THINGS',
@@ -1059,21 +1113,6 @@ it's literally just people helping people for learning (and overall better code 
     link: "project-update-2025-6-12",
   },
 
-
-  /*
-  
-  {
-    id: "",
-    title: "",
-    date: "",
-    snippet: "",
-    content: "",
-    category: "",
-    readTime: "",
-    link: "",
-  },
-
-  */
 ];
 
 export const CHANGELOGS: ChangelogEntry[] = [
