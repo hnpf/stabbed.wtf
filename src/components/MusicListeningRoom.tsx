@@ -67,7 +67,7 @@ export function MusicListeningRoom({ active, catalogHost, hideMiniPlayer = false
   const countedListenRef = useRef(null);
   const playerEntryY = useMotionValue(0);
   const playerEntryOpacity = useMotionValue(1);
-  const playerPointerStart = useRef<{ x: number; y: number; lastY: number; lastTime: number; velocityY: number } | null>(null);
+  const playerPointerStart = useRef<{ x: number; y: number; lastY: number; lastTime: number; velocityY: number; captured?: boolean } | null>(null);
   const miniProgress = useMotionValue(0);
   const wasPlayerDragged = useRef(false);
   const pointerStart = useRef<{ x: number; y: number } | null>(null);
@@ -106,7 +106,8 @@ export function MusicListeningRoom({ active, catalogHost, hideMiniPlayer = false
   const miniBottomOffset = 88 + safeBottomInset;
   const miniHeight = useTransform(miniProgress, (progress) => 64 + (window.innerHeight - 64) * progress);
   const miniInset = useTransform(miniProgress, (progress) => 16 * (1 - progress));
-  const miniTop = useTransform(miniProgress, (progress) => Math.max(0, window.innerHeight - miniBottomOffset - 64) * (1 - progress));
+  // Drop top-based positioning: use only bottom + height so the collapsed mini player
+  // stays anchored above the navbar even when the mobile browser chrome shows/hides.
   const miniBottom = useTransform(miniProgress, (progress) => miniBottomOffset * (1 - progress));
   const miniRadius = useTransform(miniProgress, (progress) => 28 + 971 * (1 - progress));
   const miniProgressOpacity = useTransform(miniProgress, (progress) => Math.max(0, 1 - progress / 0.2));
@@ -728,17 +729,24 @@ export function MusicListeningRoom({ active, catalogHost, hideMiniPlayer = false
             layout={!isMobile}
             drag={isMobile ? false : true}
             dragSnapToOrigin={false}
-            dragElastic={{ top: 0.16, bottom: 0.34 }}
+            dragElastic={{ top: 0.16, bottom: 0.08 }}
             dragListener={!isMobile && !expanded}
             dragControls={dragControls}
             dragMomentum={false}
             dragConstraints={rootRef}
             onDragEnd={(_event, info) => {
-              if (!isMobile && expanded && info.offset.y > 110) setExpanded(false);
+              if (!isMobile) {
+                // Mark that a drag happened so the next click is suppressed
+                wasPlayerDragged.current = true;
+                window.setTimeout(() => { wasPlayerDragged.current = false; }, 300);
+                if (expanded && info.offset.y > 110) {
+                  setExpanded(false);
+                }
+              }
             }}
             transition={{ ...TRANSPORT_SPRING, stiffness: 560, damping: 27, mass: 0.52, layout: { type: "spring", stiffness: 360, damping: 34, mass: 0.8 } }}
             className={`${isMobile && hideMiniPlayer && !expanded ? "pointer-events-none" : "pointer-events-auto"} ${isMobile ? "overflow-hidden" : "absolute right-4 top-[max(16px,env(safe-area-inset-top))] w-[min(420px,calc(100vw-2rem))]"}`}
-            style={isMobile ? { position: "fixed", left: miniInset, right: miniInset, top: miniTop, bottom: miniBottom, width: "auto", height: miniHeight, borderRadius: miniRadius, y: playerEntryY, opacity: hideMiniPlayer && !expanded ? 0 : playerEntryOpacity, visibility: hideMiniPlayer && !expanded ? "hidden" : "visible" } : { y: playerEntryY, opacity: playerEntryOpacity }}
+            style={isMobile ? { position: "fixed", left: miniInset, right: miniInset, bottom: miniBottom, width: "auto", height: miniHeight, borderRadius: miniRadius, y: playerEntryY, opacity: hideMiniPlayer && !expanded ? 0 : playerEntryOpacity, visibility: hideMiniPlayer && !expanded ? "hidden" : "visible" } : { y: playerEntryY, opacity: playerEntryOpacity }}
           >
             <AnimatePresence mode={isMobile ? "sync" : "wait"} initial={false}>
             <motion.div
@@ -842,35 +850,57 @@ export function MusicListeningRoom({ active, catalogHost, hideMiniPlayer = false
                         <button
                           onPointerDown={(event) => {
                             if (isMobile && event.pointerType === "touch") {
+                              // Store start but do NOT capture yet. We wait to confirm
+                              // this is a downward drag before stealing touch events.
                               playerPointerStart.current = { x: event.clientX, y: event.clientY, lastY: event.clientY, lastTime: event.timeStamp, velocityY: 0 };
-                              event.currentTarget.setPointerCapture(event.pointerId);
-                            } else if (!isMobile) {
-                              dragControls.start(event);
                             }
+                            // Desktop: no dragControls.start() here. The handle is a
+                            // click target only in expanded mode; dragging the whole
+                            // expanded panel causes an onClick/onDragEnd race.
+                          }}
+                          onClick={() => {
+                            // On desktop, clicking the drag handle collapses the player
+                            if (!isMobile) setExpanded(false);
                           }}
                           onPointerMove={(event) => {
                             if (!isMobile || event.pointerType !== "touch" || !playerPointerStart.current) return;
                             const start = playerPointerStart.current;
+                            const deltaX = event.clientX - start.x;
+                            const deltaY = event.clientY - start.y;
+                            if (!start.captured) {
+                              // Ignore tiny movements, abort on upward or horizontal scroll.
+                              if (Math.abs(deltaY) < 6 && Math.abs(deltaX) < 6) return;
+                              if (deltaY <= 0 || Math.abs(deltaX) > Math.abs(deltaY)) {
+                                playerPointerStart.current = null;
+                                return;
+                              }
+                              // Confirmed downward drag, now capture.
+                              start.captured = true;
+                              event.currentTarget.setPointerCapture(event.pointerId);
+                            }
                             const elapsed = Math.max(1, event.timeStamp - start.lastTime);
                             start.velocityY = (event.clientY - start.lastY) / elapsed;
                             start.lastY = event.clientY;
                             start.lastTime = event.timeStamp;
-                            const progress = Math.max(0, Math.min(1, 1 - (event.clientY - start.y) / Math.max(240, window.innerHeight * 0.68)));
+                            const progress = Math.max(0, Math.min(1, 1 - deltaY / Math.max(240, window.innerHeight * 0.68)));
                             miniProgress.set(progress);
                           }}
                           onPointerUp={(event) => {
                             if (!isMobile || event.pointerType !== "touch") return;
                             const start = playerPointerStart.current;
-                            if (start) {
+                            if (start && start.captured) {
                               const deltaY = event.clientY - start.y;
                               const shouldCollapse = deltaY > 48 || (deltaY > 12 && start.velocityY > 0.5);
                               settlePlayer(!shouldCollapse);
+                            } else if (!start) {
+                              // No drag started, treat as a tap.
+                              settlePlayer(true);
                             }
                             playerPointerStart.current = null;
                           }}
                           onPointerCancel={() => {
+                            if (playerPointerStart.current?.captured) settlePlayer(true);
                             playerPointerStart.current = null;
-                            settlePlayer(true);
                           }}
                           className="flex h-full flex-1 touch-none items-center justify-center md:justify-start"
                           aria-label="Drag down to collapse player"
@@ -880,7 +910,7 @@ export function MusicListeningRoom({ active, catalogHost, hideMiniPlayer = false
                         </button>
                         <button onClick={() => settlePlayer(false)} className="absolute right-3 top-2 grid size-11 place-items-center rounded-[18px] bg-[var(--surface-variant)] hover:bg-[var(--primary-container)] md:right-4 md:top-3" aria-label="Collapse player"><CloseFullscreen size={18} /></button>
                       </div>
-                      <div className="flex min-h-0 flex-1 flex-col items-center gap-5 overflow-y-auto px-5 pb-5 pt-2 md:justify-center md:gap-4 md:pt-0">
+                      <div className="flex min-h-0 flex-1 flex-col items-center gap-5 overflow-y-auto touch-pan-y px-5 pb-5 pt-2 md:justify-center md:gap-4 md:pt-0">
                         <div className="aspect-square w-full max-w-[min(78vw,360px)] overflow-hidden rounded-3xl shadow-xl md:max-w-[min(34vh,320px)]">{isMobile ? <motion.div className="h-full w-full" style={{ opacity: coverSlotOpacity }}><AlbumCover release={current.release} className="h-full w-full rounded-3xl" iconSize={44} /></motion.div> : <AlbumCover release={current.release} className="h-full w-full rounded-3xl" iconSize={44} />}</div>
                         <div className="w-full max-w-lg space-y-2">
                           <h2 className="truncate text-left text-xl font-black sm:text-2xl">{current.track.title}</h2>
@@ -923,7 +953,7 @@ export function MusicListeningRoom({ active, catalogHost, hideMiniPlayer = false
                         </button>
                         <button onClick={() => settlePlayer(false)} className="grid size-10 place-items-center rounded-full hover:bg-[var(--surface-variant)]" aria-label="Collapse player"><CloseFullscreen size={18} /></button>
                       </div>
-                      <div className="min-h-0 flex-1 overflow-y-auto">
+                      <div className="min-h-0 flex-1 overflow-y-auto touch-pan-y">
                         <div className="px-5 pb-4 pt-5">
                           <div
                             onTouchStart={(event) => { optionsTouchStart.current = event.touches[0]?.clientY ?? null; }}
@@ -1018,7 +1048,7 @@ export function MusicListeningRoom({ active, catalogHost, hideMiniPlayer = false
         {menuTrack && <motion.div key={menuTrack.track.id} data-ripple-skip initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} style={expanded && menuAnchor && !isMobile ? { paddingRight: menuAnchor.right, paddingBottom: menuAnchor.bottom } : undefined} className={`fixed inset-0 z-[130] flex items-end justify-center ${isMobile ? `${expanded ? "bg-transparent" : "bg-black/45"} px-2 pt-3` : expanded && menuAnchor ? "md:items-end md:justify-end md:bg-transparent" : "bg-black/45 md:items-start md:justify-end md:bg-transparent md:p-4"}`} onClick={() => setMenuTrack(null)}>
           <motion.div initial={isMobile ? { opacity: 0, y: 70, scale: 0.97 } : { opacity: 0, y: -12, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={isMobile ? { opacity: 0, y: 50, scale: 0.98 } : { opacity: 0, y: -8, scale: 0.97 }} transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.8 }} drag={isMobile ? "y" : false} dragConstraints={{ top: 0, bottom: 0 }} dragElastic={{ top: 0, bottom: 0.22 }} onDragEnd={(_event, info) => { if (info.offset.y > 100) setMenuTrack(null); }} className={`flex max-h-[calc(100dvh-12px)] w-full flex-col overflow-hidden border border-[var(--outline-variant)] bg-[var(--surface)] text-[var(--on-surface)] shadow-2xl ${isMobile ? "rounded-t-[28px] rounded-b-none" : "rounded-[28px] md:w-[420px] md:max-h-[min(820px,calc(100dvh-2rem))]"}`} onClick={(event) => event.stopPropagation()}>
             <div className="flex shrink-0 items-center gap-3 p-4"><AlbumCover release={menuTrack.release} className="size-14 rounded-xl" iconSize={22} /><div className="min-w-0 flex-1"><p className="truncate font-black">{menuTrack.track.title}</p><p className="truncate text-xs opacity-55">{menuTrack.release.title} · {ARTIST}</p></div><button onClick={() => setMenuTrack(null)} className="group relative isolate grid size-10 min-w-10 shrink-0 aspect-square place-items-center overflow-hidden rounded-[18px] bg-[var(--surface-variant)] hover:bg-[var(--primary-container)]" aria-label="Close track menu"><Ripple enableHaptics={false} /><span className="relative py-2"><X size={18} className="transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-180 group-hover:scale-110" /></span></button></div>
-            <div className="min-h-0 flex-1 overflow-y-auto">
+            <div className="min-h-0 flex-1 overflow-y-auto touch-pan-y">
             <AnimatePresence mode="wait" initial={false}>
             {menuTab === "options" ? <motion.div key="menu-options" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ type: "spring", stiffness: 420, damping: 32 }} className="px-4 pb-4">
               <div className="grid grid-cols-3 gap-2">

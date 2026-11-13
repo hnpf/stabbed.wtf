@@ -2880,6 +2880,24 @@ export interface MusicRelease {
 
 export const MUSIC_RELEASES: MusicRelease[] = [
   {
+    id: "666WAYS2DIE",
+    title: "666 WAYS 2 DIE",
+    type: "Single",
+    releaseDate: "2026",
+    description: "witch house, more coming soon. 11/19/26 👀 - https://rxvirex.bandcamp.com/",
+    genre: "Witch house",
+    duration: "3 min 56 sec",
+    tags: ["witch house", "experimental"],
+    featured: true,
+    tracks: [{ id: "666 WAYS 2 DIE", title: "666 WAYS 2 DIE", audioUrl: "localreleases/666WAYS2DIE/666WAYS2DIE/666WAYS2DIE.mp3", duration: "2:45",  ...LOCAL_WAV_METADATA }],
+    links: {
+      spotify: "https://open.spotify.com/track/36evla40kAKbeXYGXCIgez?si=15c000e300054778",
+      bandcamp: "https://rxvirex.bandcamp.com/album/666-ways-2-die",
+      youtubeMusic: "https://music.youtube.com/channel/UCNpo3bZgDV_mZEJW6kgSDfg",
+      tiktok: "https://www.tiktok.com/@rxvirex",
+    },
+  },
+  {
     id: "RËFLËKT",
     title: "RËFLËKT",
     type: "Single",
